@@ -2915,25 +2915,31 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .rmac-right { gap: 8px; margin-left: auto; }
   .rmac-bar { gap: 0; padding: 0 12px; }
 
-  /* Hero */
+  /* Hero — reset absolute positioning to flow layout */
   .rhero {
     flex-direction: column; align-items: flex-start;
-    padding: 48px 28px 48px; gap: 48px; min-height: auto;
+    padding: 36px 24px 48px; min-height: auto;
   }
-  .rhero-left { max-width: 100%; }
+  .rhero-left {
+    position: static;
+    top: auto; left: auto;
+    max-width: 100%;
+    padding-top: 16px;
+  }
   .rhero-right { display: none !important; }
   .rchat-hero { display: none; }
-  .rhero-title { font-size: clamp(2.4rem, 8vw, 4rem); }
-  .rhero-desc { font-size: 15px; margin-bottom: 36px; }
+  .rhero-title { font-size: clamp(2.2rem, 8vw, 3.8rem); }
+  .rhero-role { font-size: 18px; letter-spacing: 0.12em; }
+  .rhero-desc { font-size: 15px; margin-bottom: 32px; max-width: 100%; }
   .rhero-actions { flex-wrap: wrap; gap: 12px; }
+  .rhero-golden { display: none; }
 
   /* Sections padding */
   .rnotes-section, .rct-section, .rwork-section,
-  .rfooter, .rgfx-header { padding-left: 28px; padding-right: 28px; }
+  .rgfx-header { padding-left: 24px; padding-right: 24px; }
 
   /* Project tiles: single column */
   .rct-grid { grid-template-columns: 1fr; gap: 36px; }
-  .rct-img  { aspect-ratio: 16/9; }
 
   /* Notes: single column */
   .rnotes-grid { grid-template-columns: 1fr; gap: 16px; }
@@ -2942,19 +2948,29 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .rwork-grid { grid-template-columns: 1fr; gap: 24px; }
 
   /* GFX strip: touch scroll */
-  .rgfx-track { padding: 0 28px 8px; }
+  .rgfx-track { padding: 0 24px 8px; }
 
   /* Street montage: shorter */
-  .rstreet-section { height: 180px; }
+  .rstreet-section { height: 160px; }
 
   /* Right dock: hide */
   .rdock { display: none; }
 
-  /* Footer */
-  .rfooter { flex-direction: column; gap: 14px; text-align: center; padding: 32px 28px; }
+  /* Footer body: stack vertically */
+  .rfooter-body {
+    flex-direction: column; gap: 32px;
+    padding: 44px 24px 32px;
+  }
+  .rfooter-contacts { flex-direction: column; gap: 28px; }
+  .rfooter-heading { font-size: clamp(2rem, 10vw, 3rem); }
+  .rfooter-bar { padding: 16px 24px; flex-direction: column; gap: 8px; text-align: center; }
+  .rfooter-email-addr { font-size: clamp(0.95rem, 4vw, 1.2rem); }
 
   /* Marquee section */
   .rloc-track span { font-size: 0.6rem; }
+
+  /* Nav */
+  .rnav { padding: 10px 24px; }
 }
 
 @media (max-width: 600px) {
@@ -3204,7 +3220,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
     position: static; height: auto; min-height: unset;
     display: flex; flex-direction: column;
     align-items: center;
-    padding: 24px 18px 120px; gap: 24px;
+    padding: 24px 18px 160px; gap: 24px;
     overflow: visible;
   }
 
