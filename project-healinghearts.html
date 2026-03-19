@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healing Hearts - pri.anka</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="project.css" />
+</head>
+<body class="project-page">
+<div class="project-wrap">
+
+  <div class="menu-bar">
+    <div class="win-controls">
+      <span class="wc wc-red"></span>
+      <span class="wc wc-yellow"></span>
+      <span class="wc wc-green"></span>
+    </div>
+    <span class="menu-brand">pri.anka</span>
+    <nav class="menu-nav">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Work</a>
+      <a href="mailto:pri.anka256@gmail.com">Contact</a>
+    </nav>
+    <div class="menu-right">
+      <span class="menu-clock" id="projClock2">00:00</span>
+      <button class="menu-theme-btn" id="projThemeBtn2">moon</button>
+    </div>
+  </div>
+
+  <div class="ticker-bar">
+    <div class="ticker-track">
+      <span>Healing Hearts</span><span class="sep">/</span>
+      <span>Healthcare App Redesign</span><span class="sep">/</span>
+      <span>Mobile UX</span><span class="sep">/</span>
+      <span>Usability Testing</span><span class="sep">/</span>
+      <span>Information Architecture</span><span class="sep">/</span>
+      <span>Healing Hearts</span><span class="sep">/</span>
+      <span>Healthcare App Redesign</span><span class="sep">/</span>
+      <span>Mobile UX</span><span class="sep">/</span>
+      <span>Usability Testing</span><span class="sep">/</span>
+      <span>Information Architecture</span><span class="sep">/</span>
+    </div>
+  </div>
+
+  <div class="project-hero">
+    <img src="assets/project-healinghearts.png" alt="Healing Hearts" />
+    <div class="project-hero-overlay"></div>
+    <div class="project-hero-text">
+      <p class="project-hero-eyebrow">Healthcare / Mobile App</p>
+      <h1 class="project-hero-title">Healing Hearts</h1>
+    </div>
+  </div>
+
+  <div class="project-content">
+    <div class="project-nav-bar">
+      <a href="projects.html" class="project-back"></a>
+      <div class="project-tags-row">
+        <span>UX Research</span>
+        <span>Mobile</span>
+        <span>Prototyping</span>
+        <span>Healthcare</span>
+      </div>
+    </div>
+
+    <div class="project-intro">
+      <h1>Healing Hearts</h1>
+      <p>A healthcare mobile app focused on improving the appointment booking experience for patients managing chronic conditions. The existing flow caused anxiety and drop-offs - people were giving up before they could get help.</p>
+    </div>
+
+    <div class="project-stats">
+      <div class="stat-box">
+        <span class="stat-num">32%</span>
+        <span class="stat-label">Drop-off Reduction</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">12</span>
+        <span class="stat-label">Usability Test Participants</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Research Rounds</span>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <div class="project-section-label">Overview</div>
+      <h2>The Problem</h2>
+      <p>Patients weren't dropping off because the app was hard to use. They were dropping off because the language felt clinical and cold. The interface triggered anxiety at an already vulnerable moment.</p>
+      <p>I was brought in to redesign the entire booking flow - from the first tap to the confirmation screen - with a focus on reducing friction and emotional resistance.</p>
+    </div>
+
+    <div class="project-section">
+      <div class="project-section-label">Research</div>
+      <h2>What I Found</h2>
+      <p>After interviewing 12 patients across two research rounds, the key insight emerged: the copy was the interface. Visual hierarchy could be perfect, but if the words felt like a hospital form, users would abandon. I redesigned the language alongside the layout.</p>
+    </div>
+
+    <div class="project-image-row">
+      <img src="assets/project-healinghearts.png" alt="Healing Hearts screens" />
+      <img src="assets/project-sa.png" alt="Process screens" />
+    </div>
+
+    <div class="project-section">
+      <div class="project-section-label">Process</div>
+      <h2>How I Worked</h2>
+      <div class="project-process-row">
+        <span class="pp-step">Research</span><span class="pp-arr">-</span>
+        <span class="pp-step">Define</span><span class="pp-arr">-</span>
+        <span class="pp-step current">Design</span><span class="pp-arr">-</span>
+        <span class="pp-step">Test</span><span class="pp-arr">-</span>
+        <span class="pp-step">Ship</span>
+      </div>
+      <p>End-to-end UX design: discovery research, IA restructure, wireframing, high-fidelity prototyping in Figma, and usability testing with 12 participants across two rounds.</p>
+    </div>
+
+    <div class="project-section">
+      <div class="project-section-label">Outcome</div>
+      <h2>What Changed</h2>
+      <p>Appointment booking drop-off reduced significantly. Test participants described the redesigned flow as "reassuring" and "like talking to a human." The design is now live in production.</p>
+    </div>
+
+    <div class="project-nav-bottom">
+      <a href="projects.html">All projects</a>
+      <a href="project-walletgyde.html">Next: WalletGyde</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function tick() {
+    const n = new Date();
+    const el = document.getElementById('projClock2');
+    if (el) el.textContent = n.getHours().toString().padStart(2,'0') + ':' + n.getMinutes().toString().padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 30000);
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark') document.documentElement.setAttribute('data-theme','dark');
+  document.getElementById('projThemeBtn2')?.addEventListener('click', () => {
+    const d = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', d ? 'light' : 'dark');
+    localStorage.setItem('theme', d ? 'light' : 'dark');
+  });
+</script>
+</body>
+</html>

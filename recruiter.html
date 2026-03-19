@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Priyanka Uttarkar — UX Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #1a1a1a;
+      --surface: #242424;
+      --border:  rgba(255,255,255,0.08);
+      --text:    #ffffff;
+      --muted:   #888888;
+      --note-bg: #fefce8;
+      --note-bg2:#f0fdf4;
+      --note-bg3:#fdf4ff;
+      --serif:   'Instrument Serif', serif;
+      --sans:    'Poppins', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE (full screen fixed overlay) ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.055;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+      mix-blend-mode: screen;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 52px;
+      background: rgba(26,26,26,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.05rem; color: var(--text); text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-right { display: flex; align-items: center; gap: 28px; }
+    .nav-link {
+      font-size: 0.7rem; font-weight: 500; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.04em;
+      transition: color 0.18s;
+    }
+    .nav-link:hover { color: var(--text); }
+    .nav-cta {
+      font-family: var(--sans); font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.06em; color: var(--text);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      padding: 7px 18px; border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 88vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 80px 52px 60px;
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 24px;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
+    }
+    .hero-title {
+      font-size: clamp(2.4rem, 5.5vw, 5rem);
+      font-weight: 600; line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 20px;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp 0.75s cubic-bezier(0.16,1,0.3,1) 0.22s forwards;
+    }
+    .hero-title .name-paren {
+      font-size: 0.48em; font-weight: 400;
+      color: var(--muted); letter-spacing: 0.02em;
+      display: inline-block; vertical-align: middle; margin-left: 4px;
+    }
+    .hero-role {
+      font-size: clamp(0.65rem, 1.4vw, 0.82rem);
+      font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 32px;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.34s forwards;
+    }
+    .hero-desc {
+      max-width: 520px;
+      font-size: clamp(0.88rem, 1.4vw, 1rem);
+      font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.7);
+      margin-bottom: 48px;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.44s forwards;
+    }
+    .hero-actions {
+      display: flex; align-items: center; gap: 16px;
+      opacity: 0; transform: translateY(12px);
+      animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.54s forwards;
+    }
+    .btn-primary {
+      font-family: var(--sans); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.06em; padding: 13px 30px; border-radius: 6px;
+      background: #fff; color: #1a1a1a; text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+    .btn-outline {
+      font-family: var(--sans); font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.06em; padding: 12px 28px; border-radius: 6px;
+      border: 1.5px solid rgba(255,255,255,0.25); color: #fff;
+      text-decoration: none; transition: border-color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-2px); }
+    .hero-loc {
+      position: absolute; bottom: 40px;
+      font-size: 0.6rem; font-weight: 400; letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-section {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex; gap: 0;
+      white-space: nowrap;
+      animation: marqueeScroll 28s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-item {
+      font-size: 0.72rem; font-weight: 400; letter-spacing: 0.06em;
+      color: var(--muted); padding: 0 20px;
+      flex-shrink: 0;
+    }
+    .marquee-sep { color: rgba(255,255,255,0.2); }
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── STICKY NOTES SECTION ── */
+    .notes-section {
+      padding: 80px 52px;
+    }
+    .notes-heading {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 48px;
+    }
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .note {
+      background: var(--note-bg);
+      border-radius: 4px 4px 4px 4px;
+      padding: 28px 26px 32px;
+      color: #1a1a1a;
+      position: relative;
+      transform-origin: 50% 0%;
+      box-shadow: 4px 6px 20px rgba(0,0,0,0.35);
+      text-decoration: none;
+      display: block;
+      cursor: pointer;
+      animation: noteWiggle 4.2s ease-in-out infinite;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .note::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 6px; border-radius: 4px 4px 0 0;
+      background: rgba(0,0,0,0.08);
+    }
+    .note-1 {
+      background: #fefce8;
+      transform: rotate(-2.5deg);
+      animation-delay: 0s;
+    }
+    .note-2 {
+      background: #f0fdf4;
+      transform: rotate(1.8deg);
+      animation-delay: -1.4s;
+    }
+    .note-3 {
+      background: #fdf4ff;
+      transform: rotate(-1.2deg);
+      animation-delay: -2.8s;
+    }
+    .note:hover {
+      transform: rotate(0deg) scale(1.04) !important;
+      box-shadow: 8px 12px 32px rgba(0,0,0,0.45);
+      animation-play-state: paused;
+      z-index: 10;
+    }
+    @keyframes noteWiggle {
+      0%   { transform: rotate(var(--r0, -2.5deg)); }
+      25%  { transform: rotate(calc(var(--r0, -2.5deg) + 1.1deg)); }
+      75%  { transform: rotate(calc(var(--r0, -2.5deg) - 1.2deg)); }
+      100% { transform: rotate(var(--r0, -2.5deg)); }
+    }
+    .note-1 { --r0: -2.5deg; }
+    .note-2 { --r0: 1.8deg; }
+    .note-3 { --r0: -1.2deg; }
+
+    .note-label {
+      font-size: 0.52rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(0,0,0,0.35); margin-bottom: 14px;
+    }
+    .note-title {
+      font-size: 1.05rem; font-weight: 600; line-height: 1.3;
+      color: #111; margin-bottom: 12px;
+    }
+    .note-body {
+      font-size: 0.78rem; font-weight: 400; line-height: 1.65;
+      color: rgba(0,0,0,0.65);
+    }
+    .note-role-list { list-style: none; margin-top: 10px; }
+    .note-role-list li {
+      font-size: 0.72rem; font-weight: 400; color: rgba(0,0,0,0.6);
+      padding: 4px 0; border-bottom: 1px solid rgba(0,0,0,0.08);
+      line-height: 1.4;
+    }
+    .note-role-list li:last-child { border-bottom: none; }
+    .note-role-list li strong { color: rgba(0,0,0,0.8); font-weight: 600; }
+    .note-quote {
+      font-size: 0.88rem; font-style: italic; line-height: 1.6;
+      color: rgba(0,0,0,0.72); margin-bottom: 10px;
+    }
+    .note-quote-attr {
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.06em;
+      color: rgba(0,0,0,0.4);
+    }
+    .note-arrow {
+      position: absolute; bottom: 22px; right: 22px;
+      font-size: 1rem; color: rgba(0,0,0,0.25);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .note:hover .note-arrow { color: rgba(0,0,0,0.5); transform: translate(2px,-2px); }
+
+    /* ── WORK SECTION ── */
+    .work-section {
+      padding: 60px 52px 80px;
+      border-top: 1px solid var(--border);
+    }
+    .work-header { margin-bottom: 10px; }
+    .work-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 600; letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .work-title em {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+    }
+    .work-hint {
+      font-size: 0.65rem; font-weight: 400; color: var(--muted);
+      margin: 10px 0 44px;
+    }
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px 28px;
+    }
+    .work-tile {
+      text-decoration: none; color: var(--text);
+      display: flex; flex-direction: column;
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+    .work-tile:hover { transform: translateY(-4px); }
+    .work-tile-img {
+      width: 100%; aspect-ratio: 4/3;
+      border-radius: 16px; overflow: hidden;
+      position: relative;
+      background: var(--tile-bg, #2a2a2a);
+      border: 1px solid var(--border);
+    }
+    .work-tile-img img {
+      position: absolute; bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 84%; height: 90%;
+      object-fit: cover; object-position: top;
+      border-radius: 8px 8px 0 0;
+      box-shadow: 0 -16px 40px rgba(0,0,0,0.5);
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .work-tile:hover .work-tile-img img { transform: translateX(-50%) translateY(-6px); }
+    .work-tile-overlay {
+      position: absolute; inset: 0; border-radius: 16px;
+      background: rgba(0,0,0,0);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s; z-index: 5;
+    }
+    .work-tile:hover .work-tile-overlay { background: rgba(0,0,0,0.3); }
+    .work-tile-view {
+      width: 68px; height: 68px; border-radius: 50%;
+      background: #fff; color: #1a1a1a;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.04em;
+      opacity: 0; transform: scale(0.6);
+      transition: opacity 0.25s, transform 0.3s cubic-bezier(0.34,1.45,0.64,1);
+      pointer-events: none;
+    }
+    .work-tile:hover .work-tile-view { opacity: 1; transform: scale(1); }
+    .work-tile-label { padding: 16px 2px 0; }
+    .work-tile-meta {
+      font-size: 0.52rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 6px; display: flex; align-items: center; gap: 7px;
+    }
+    .work-tile-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+    .work-tile-name {
+      font-size: clamp(1.2rem, 2vw, 1.7rem);
+      font-weight: 600; letter-spacing: -0.03em; line-height: 1.1;
+      transition: color 0.2s;
+    }
+    .work-tile:hover .work-tile-name { color: rgba(255,255,255,0.65); }
+    .work-tile-wip .work-tile-name { color: var(--muted); }
+    .work-tile-soon {
+      position: absolute; inset: 0; border-radius: 16px;
+      background: rgba(26,26,26,0.55);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(2px); z-index: 4;
+    }
+    .work-tile-soon span {
+      font-size: 0.56rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+      background: rgba(26,26,26,0.9); padding: 6px 14px;
+      border-radius: 50px; border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* ── TAP GAME ── */
+    .game-section {
+      padding: 60px 52px 80px;
+      border-top: 1px solid var(--border);
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center;
+    }
+    .game-label {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 24px;
+    }
+    .game-title {
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 600; letter-spacing: -0.02em; margin-bottom: 8px;
+    }
+    .game-sub {
+      font-size: 0.75rem; color: var(--muted); margin-bottom: 36px; font-weight: 300;
+    }
+    .game-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+    }
+    .game-scores {
+      display: flex; gap: 40px;
+    }
+    .game-score-block { text-align: center; }
+    .game-score-val {
+      font-size: 2.5rem; font-weight: 700; letter-spacing: -0.04em;
+      line-height: 1; display: block;
+    }
+    .game-score-lbl {
+      font-size: 0.55rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-top: 4px;
+    }
+    .game-btn {
+      width: 100px; height: 100px; border-radius: 50%;
+      background: #fff; color: #1a1a1a; border: none; cursor: pointer;
+      font-family: var(--sans); font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      transition: transform 0.12s cubic-bezier(0.34,1.45,0.64,1), box-shadow 0.2s;
+      user-select: none; -webkit-user-select: none;
+    }
+    .game-btn:active { transform: scale(0.88); box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+    .game-btn.popped { transform: scale(1.18); }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 52px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-copy {
+      font-size: 0.58rem; font-weight: 400; color: var(--muted);
+    }
+    .footer-cta {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.1rem; color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-link {
+      font-size: 0.62rem; font-weight: 500; letter-spacing: 0.04em;
+      color: var(--muted); text-decoration: none; transition: color 0.18s;
+    }
+    .footer-link:hover { color: var(--text); }
+
+    /* ── SCROLL REVEAL ── */
+    .sr {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .sr.visible { opacity: 1; transform: none; }
+    .sr-d1 { transition-delay: 0.08s; }
+    .sr-d2 { transition-delay: 0.16s; }
+    .sr-d3 { transition-delay: 0.24s; }
+
+    /* ── KEYFRAMES ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      .nav, .hero, .notes-section, .work-section, .game-section, .footer {
+        padding-left: 20px; padding-right: 20px;
+      }
+      .notes-grid { grid-template-columns: 1fr; gap: 20px; }
+      .work-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero { min-height: 70vh; }
+      .note-2 { transform: rotate(0deg); }
+      .note-3 { transform: rotate(0deg); }
+      .footer { flex-direction: column; gap: 20px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="recruiter.html" class="nav-brand">pri.anka</a>
+  <div class="nav-right">
+    <a href="projects.html" class="nav-link">work</a>
+    <a href="#" class="nav-link">resume</a>
+    <a href="mailto:priyanka.uttarkar@gmail.com" class="nav-cta">[ Connect ]</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-eyebrow">UX &amp; Product Designer</span>
+  <h1 class="hero-title">
+    Hi, I'm Priyanka
+    <span class="name-paren">(pree-yun-ka)</span>
+  </h1>
+  <p class="hero-role">UX &amp; Product Designer</p>
+  <p class="hero-desc">
+    Dedicated to designing accessible and intuitive system-driven design
+    experiences that scale beautifully.
+  </p>
+  <div class="hero-actions">
+    <a href="projects.html" class="btn-primary">View Work</a>
+    <a href="#" class="btn-outline">Download Resume</a>
+  </div>
+  <span class="hero-loc" id="heroLoc"></span>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marqueeTrack">
+    <!-- items duplicated in JS -->
+  </div>
+</div>
+
+<!-- STICKY NOTES -->
+<section class="notes-section">
+  <p class="notes-heading sr">a little about me</p>
+  <div class="notes-grid">
+
+    <a href="#" class="note note-1 sr sr-d1">
+      <div class="note-label">Note 01</div>
+      <div class="note-title">About Me — a peek into my bubble 🪷</div>
+      <p class="note-body">
+        I'm a UX &amp; Product Designer passionate about building accessible,
+        system-driven experiences. I blend research, interaction design, and visual
+        craft to make products people actually love using.
+      </p>
+      <span class="note-arrow">↗</span>
+    </a>
+
+    <a href="#" target="_blank" class="note note-2 sr sr-d2">
+      <div class="note-label">Note 02</div>
+      <div class="note-title">Resume</div>
+      <ul class="note-role-list">
+        <li><strong>UX/UI Designer</strong> at WalletGyde</li>
+        <li><strong>Design Ambassador</strong> at Adobe</li>
+        <li><strong>Product Designer</strong> at Mayo Clinic</li>
+      </ul>
+      <span class="note-arrow">↗</span>
+    </a>
+
+    <div class="note note-3 sr sr-d3">
+      <div class="note-label">Note 03</div>
+      <p class="note-quote">"Design is so simple, that is why it is complicated."</p>
+      <p class="note-quote-attr">— Paul Rand</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work-section">
+  <div class="work-header sr">
+    <h2 class="work-title">Work I'm <em>proud of.</em></h2>
+    <p class="work-hint">psst… open this on your laptop so you can see the interactions 👀</p>
+  </div>
+  <div class="work-grid">
+
+    <a href="https://priyenka-dataextraction.framer.website/" target="_blank"
+       class="work-tile sr sr-d1" style="--tile-bg:#1c2a38;">
+      <div class="work-tile-img">
+        <img src="assets/project-dashboard.png" alt="Data Extraction System" />
+        <div class="work-tile-overlay"><div class="work-tile-view">View ↗</div></div>
+      </div>
+      <div class="work-tile-label">
+        <div class="work-tile-meta">Product Design <span class="work-tile-dot"></span> Mayo Clinic</div>
+        <div class="work-tile-name">Data Extraction System</div>
+      </div>
+    </a>
+
+    <a href="https://priyenka-walletgyde.framer.website/" target="_blank"
+       class="work-tile sr sr-d2" style="--tile-bg:#2a2718;">
+      <div class="work-tile-img">
+        <img src="assets/project-walletgyde.png" alt="WalletGyde" />
+        <div class="work-tile-overlay"><div class="work-tile-view">View ↗</div></div>
+      </div>
+      <div class="work-tile-label">
+        <div class="work-tile-meta">Product Design <span class="work-tile-dot"></span> Finance App</div>
+        <div class="work-tile-name">WalletGyde</div>
+      </div>
+    </a>
+
+    <a href="https://priyenka-moodticketing.framer.website/" target="_blank"
+       class="work-tile sr sr-d1" style="--tile-bg:#2a1a1c;">
+      <div class="work-tile-img">
+        <img src="assets/project-moodticketing.png" alt="Mood Ticketing" />
+        <div class="work-tile-overlay"><div class="work-tile-view">View ↗</div></div>
+      </div>
+      <div class="work-tile-label">
+        <div class="work-tile-meta">Product Design <span class="work-tile-dot"></span> Entertainment</div>
+        <div class="work-tile-name">Mood Ticketing</div>
+      </div>
+    </a>
+
+    <div class="work-tile work-tile-wip sr sr-d2" style="--tile-bg:#1e2a24;">
+      <div class="work-tile-img">
+        <img src="assets/project-healinghearts.png" alt="Healing Hearts" />
+        <div class="work-tile-soon"><span>Case study coming soon</span></div>
+      </div>
+      <div class="work-tile-label">
+        <div class="work-tile-meta">Product Design <span class="work-tile-dot"></span> Healthcare</div>
+        <div class="work-tile-name">Healing Hearts</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TAP GAME -->
+<section class="game-section">
+  <p class="game-label sr">just for fun</p>
+  <h3 class="game-title sr sr-d1">tiny tap game</h3>
+  <p class="game-sub sr sr-d2">how fast can you tap?</p>
+  <div class="game-wrap sr sr-d3">
+    <div class="game-scores">
+      <div class="game-score-block">
+        <span class="game-score-val" id="scoreVal">0</span>
+        <span class="game-score-lbl">Score</span>
+      </div>
+      <div class="game-score-block">
+        <span class="game-score-val" id="bestVal">0</span>
+        <span class="game-score-lbl">Best</span>
+      </div>
+    </div>
+    <button class="game-btn" id="tapBtn">Tap</button>
+    <p style="font-size:0.6rem;color:var(--muted);margin-top:4px;" id="gameStatus">tap to start — 10 seconds!</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span class="footer-copy">© 2026 Priyanka Uttarkar</span>
+  <span class="footer-cta">designed with intent!</span>
+  <div class="footer-links">
+    <a href="https://linkedin.com" target="_blank" class="footer-link">LinkedIn</a>
+    <a href="mailto:priyanka.uttarkar@gmail.com" class="footer-link">Email</a>
+    <a href="index.html" class="footer-link">Creative Portfolio</a>
+  </div>
+</footer>
+
+<script>
+  // ── Marquee items ──
+  const skills = [
+    'Figma','Adobe Illustrator','Photoshop','InDesign','XD','Framer',
+    'Notion','Miro','FigJam','UX Research','Maze','Optimal Workshop',
+    'HTML','CSS','Interaction Design','Prototyping','Usability Testing'
+  ];
+  const track = document.getElementById('marqueeTrack');
+  // Render twice for seamless loop
+  [0,1].forEach(() => {
+    skills.forEach((s, i) => {
+      const span = document.createElement('span');
+      span.className = 'marquee-item';
+      span.textContent = s;
+      track.appendChild(span);
+      if (i < skills.length - 1) {
+        const sep = document.createElement('span');
+        sep.className = 'marquee-item marquee-sep';
+        sep.textContent = '☻';
+        track.appendChild(sep);
+      }
+    });
+    const sepEnd = document.createElement('span');
+    sepEnd.className = 'marquee-item marquee-sep';
+    sepEnd.textContent = '☻';
+    track.appendChild(sepEnd);
+  });
+
+  // ── Location / time ──
+  const loc = document.getElementById('heroLoc');
+  function updateTime() {
+    const now = new Date();
+    const h = now.getHours(), m = now.getMinutes().toString().padStart(2,'0');
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const h12 = ((h % 12) || 12);
+    loc.textContent = `Tempe, AZ  •  ${h12}:${m} ${ampm}`;
+  }
+  updateTime();
+  setInterval(updateTime, 30000);
+
+  // ── Scroll reveal ──
+  const srObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); srObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.sr').forEach(el => srObs.observe(el));
+
+  // ── Tap game ──
+  let score = 0, best = 0, timer = null, active = false, timeLeft = 10;
+  const btn = document.getElementById('tapBtn');
+  const scoreEl = document.getElementById('scoreVal');
+  const bestEl  = document.getElementById('bestVal');
+  const status  = document.getElementById('gameStatus');
+
+  btn.addEventListener('click', () => {
+    if (!active) {
+      // Start
+      score = 0; timeLeft = 10; active = true;
+      scoreEl.textContent = 0;
+      status.textContent = `${timeLeft}s left!`;
+      btn.textContent = 'Tap!';
+      timer = setInterval(() => {
+        timeLeft--;
+        status.textContent = timeLeft > 0 ? `${timeLeft}s left!` : 'times up!';
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          active = false;
+          if (score > best) { best = score; bestEl.textContent = best; }
+          btn.textContent = 'Try Again';
+          status.textContent = `final score: ${score} ${score > 20 ? '🔥' : score > 10 ? '👏' : '💪'}`;
+        }
+      }, 1000);
+    }
+    if (active) {
+      score++;
+      scoreEl.textContent = score;
+      // Pop animation
+      btn.classList.remove('popped');
+      void btn.offsetWidth;
+      btn.classList.add('popped');
+      setTimeout(() => btn.classList.remove('popped'), 150);
+    }
+  });
+</script>
+</body>
+</html>

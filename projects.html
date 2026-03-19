@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — pri.anka</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:    #edeae2;
+      --dark:  #111110;
+      --pink:  #e85d9a;
+      --text:  #1a1a1a;
+      --muted: #888;
+      --sans:  'Space Grotesk', sans-serif;
+      --serif: 'Instrument Serif', serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── NAV ── */
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 52px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .nav-back {
+      font-size: 0.72rem; font-weight: 500; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--text); }
+    .nav-brand {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1rem; color: var(--text); text-decoration: none;
+    }
+
+    /* ── HEADER ── */
+    .pg-header {
+      padding: 64px 52px 20px;
+      display: flex; align-items: flex-end; justify-content: space-between;
+    }
+    .pg-title {
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1;
+    }
+    .pg-title em {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      color: var(--pink);
+    }
+    .pg-count {
+      font-size: 0.7rem; font-weight: 500; color: var(--muted);
+      letter-spacing: 0.04em; padding-bottom: 8px;
+    }
+
+    /* ── FILTER ── */
+    .filter-bar {
+      padding: 24px 52px 40px;
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-family: var(--sans); font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 7px 16px; border-radius: 50px;
+      border: 1.5px solid rgba(0,0,0,0.15);
+      background: none; color: var(--muted); cursor: pointer; transition: all 0.18s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--text); color: var(--bg); border-color: var(--text);
+    }
+
+    /* ── GRID ── */
+    .projects-grid {
+      padding: 0 52px 100px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px 32px;
+    }
+
+    /* ── TILE ── */
+    .tile {
+      display: flex; flex-direction: column; text-decoration: none; color: var(--text);
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+    .tile:not(.tile-wip):hover { transform: translateY(-4px); }
+
+    /* Image container */
+    .tile-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      background: var(--tile-bg, #ddd);
+    }
+
+    /* Screenshot floats inside the colored bg */
+    .tile-img img {
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 84%;
+      height: 90%;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 10px 10px 0 0;
+      box-shadow: 0 -20px 48px rgba(0,0,0,0.18);
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.25,1,0.5,1);
+    }
+    .tile:hover .tile-img img { transform: translateX(-50%) translateY(-6px); }
+
+    /* Color gradient fill tiles (no image) */
+    .tile-img-fill {
+      width: 100%; height: 100%;
+      background: var(--tile-fill);
+    }
+
+    /* Hover overlay + View button */
+    .tile-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 20px;
+      transition: background 0.3s;
+      z-index: 5;
+    }
+    .tile:hover .tile-overlay { background: rgba(0,0,0,0.28); }
+
+    .tile-view {
+      width: 76px; height: 76px; border-radius: 50%;
+      background: var(--tile-accent, var(--pink)); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: opacity 0.28s, transform 0.32s cubic-bezier(0.34,1.45,0.64,1);
+      pointer-events: none;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .tile:hover .tile-view { opacity: 1; transform: scale(1); }
+
+    /* WIP overlay */
+    .tile-soon {
+      position: absolute; inset: 0; border-radius: 20px;
+      background: rgba(237,234,226,0.6);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(2px);
+      z-index: 4;
+    }
+    .tile-soon span {
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+      background: rgba(237,234,226,0.9);
+      padding: 6px 14px; border-radius: 50px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* Label below image */
+    .tile-label { padding: 18px 4px 0; }
+    .tile-meta {
+      font-size: 0.55rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .tile-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+    .tile-name {
+      font-size: clamp(1.4rem, 2.4vw, 2rem);
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
+      transition: color 0.2s;
+    }
+    .tile:hover .tile-name { color: var(--tile-accent, var(--pink)); }
+    .tile-wip .tile-name { color: var(--muted); }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.12s; } .d2 { transition-delay: 0.24s; }
+    .d3 { transition-delay: 0.08s; } .d4 { transition-delay: 0.18s; }
+
+    /* ── PAGE LOAD ── */
+    .load-fade {
+      opacity: 0; transform: translateY(18px);
+      animation: loadUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .load-fade.ld1 { animation-delay: 0.05s; }
+    .load-fade.ld2 { animation-delay: 0.14s; }
+    .load-fade.ld3 { animation-delay: 0.22s; }
+    @keyframes loadUp {
+      to { opacity: 1; transform: none; }
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    .cursor-dot {
+      position: fixed; pointer-events: none; z-index: 9999;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--text);
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease, width 0.25s ease, height 0.25s ease, background 0.2s ease, opacity 0.2s ease;
+      mix-blend-mode: multiply;
+      opacity: 0;
+    }
+    .cursor-ring {
+      position: fixed; pointer-events: none; z-index: 9998;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1.5px solid rgba(0,0,0,0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.35s cubic-bezier(0.16,1,0.3,1), height 0.35s cubic-bezier(0.16,1,0.3,1),
+                  border-color 0.25s ease, opacity 0.2s ease;
+      opacity: 0;
+    }
+    body.cursor-active .cursor-dot,
+    body.cursor-active .cursor-ring { opacity: 1; }
+    body.tile-hover .cursor-dot { width: 60px; height: 60px; background: var(--cursor-accent, var(--pink)); opacity: 0.12; }
+    body.tile-hover .cursor-ring { width: 68px; height: 68px; border-color: var(--cursor-accent, var(--pink)); }
+
+    /* ── FOOTER ── */
+    .pg-footer {
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding: 28px 52px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .pg-footer-copy { font-size: 0.6rem; color: var(--muted); }
+    .pg-footer-link {
+      font-family: var(--serif); font-style: italic;
+      font-size: 0.82rem; color: var(--text); text-decoration: none; transition: color 0.2s;
+    }
+    .pg-footer-link:hover { color: var(--pink); }
+
+    @media (max-width: 760px) {
+      .nav, .pg-header, .filter-bar, .projects-grid { padding-left: 20px; padding-right: 20px; }
+      .projects-grid { grid-template-columns: 1fr; gap: 40px; }
+      .pg-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav class="nav load-fade ld1">
+  <a href="index.html" class="nav-back">← portfolio</a>
+  <a href="index.html" class="nav-brand">pri.anka</a>
+</nav>
+
+<!-- HEADER -->
+<div class="pg-header load-fade ld2">
+  <h1 class="pg-title">Selected <em>work.</em></h1>
+  <span class="pg-count">07 projects</span>
+</div>
+
+<!-- FILTER -->
+<div class="filter-bar load-fade ld3">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="product">Product & UX</button>
+  <button class="filter-btn" data-filter="graphic">Graphic Design</button>
+  <button class="filter-btn" data-filter="arch">Architecture</button>
+</div>
+
+<!-- GRID -->
+<div class="projects-grid">
+
+  <!-- row 1 -->
+  <a href="https://priyenka-dataextraction.framer.website/" target="_blank"
+     class="tile reveal d3" data-category="product" style="--tile-accent:#3a82c4;">
+    <div class="tile-img" style="--tile-bg:#c8dff0;">
+      <img src="assets/project-dashboard.png" alt="Data Extraction System" />
+      <div class="tile-overlay">
+        <div class="tile-view">View ↗</div>
+      </div>
+    </div>
+    <div class="tile-label">
+      <div class="tile-meta">Product Design <span class="tile-meta-dot"></span> Mayo Clinic</div>
+      <div class="tile-name">Data Extraction System</div>
+    </div>
+  </a>
+
+  <a href="https://priyenka-walletgyde.framer.website/" target="_blank"
+     class="tile reveal d4" data-category="product" style="--tile-accent:#a08a00;">
+    <div class="tile-img" style="--tile-bg:#f7f0a0;">
+      <img src="assets/project-walletgyde.png" alt="WalletGyde" />
+      <div class="tile-overlay">
+        <div class="tile-view">View ↗</div>
+      </div>
+    </div>
+    <div class="tile-label">
+      <div class="tile-meta">Product Design <span class="tile-meta-dot"></span> Finance App</div>
+      <div class="tile-name">WalletGyde</div>
+    </div>
+  </a>
+
+  <!-- row 2 -->
+  <a href="https://priyenka-moodticketing.framer.website/" target="_blank"
+     class="tile reveal d3" data-category="product" style="--tile-accent:#d41e2d;">
+    <div class="tile-img" style="--tile-bg:#f2c8c8;">
+      <img src="assets/project-moodticketing.png" alt="Mood Ticketing" />
+      <div class="tile-overlay">
+        <div class="tile-view">View ↗</div>
+      </div>
+    </div>
+    <div class="tile-label">
+      <div class="tile-meta">Product Design <span class="tile-meta-dot"></span> Entertainment</div>
+      <div class="tile-name">Mood Ticketing</div>
+    </div>
+  </a>
+
+  <div class="tile tile-wip reveal d4" data-category="product">
+    <div class="tile-img" style="--tile-bg:#f7c8dd;">
+      <img src="assets/project-healinghearts.png" alt="Healing Hearts" />
+      <div class="tile-soon"><span>Case study coming soon</span></div>
+    </div>
+    <div class="tile-label">
+      <div class="tile-meta">Product Design <span class="tile-meta-dot"></span> Healthcare</div>
+      <div class="tile-name">Healing Hearts</div>
+    </div>
+  </div>
+
+  <!-- row 3 -->
+  <div class="tile tile-wip reveal d3" data-category="product">
+    <div class="tile-img" style="--tile-bg:#c8e8df;">
+      <img src="assets/project-sa.png" alt="SA Platform" />
+      <div class="tile-soon"><span>Case study coming soon</span></div>
+    </div>
+    <div class="tile-label">
+      <div class="tile-meta">Product Design <span class="tile-meta-dot"></span> Social Good</div>
+      <div class="tile-name">SA Platform</div>
+    </div>
+  </div>
+
+  <div class="tile tile-wip reveal d4" data-category="graphic">
+    <div class="tile-img" style="--tile-bg:#d8c8f0; --tile-fill:linear-gradient(135deg,#7C3AED,#a855f7);">
+      <div class="tile-img-fill"></div>
+      <div class="tile-soon"><span>Coming soon</span></div>
+    </div>
+    <div class="tile-label">
+      <div class="tile-meta">Graphic Design <span class="tile-meta-dot"></span> Branding</div>
+      <div class="tile-name">Brand Identity & Type</div>
+    </div>
+  </div>
+
+  <!-- row 4 -->
+  <div class="tile tile-wip reveal d3" data-category="arch">
+    <div class="tile-img" style="--tile-bg:#d8cfc0; --tile-fill:linear-gradient(135deg,#8B7355,#AACFC2);">
+      <div class="tile-img-fill"></div>
+      <div class="tile-soon"><span>Coming soon</span></div>
+    </div>
+    <div class="tile-label">
+      <div class="tile-meta">Architecture <span class="tile-meta-dot"></span> Spatial Design</div>
+      <div class="tile-name">Architectural Work</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="pg-footer">
+  <span class="pg-footer-copy">© 2026 Priyanka Uttarkar</span>
+  <a href="index.html" class="pg-footer-link">← back to portfolio</a>
+</div>
+
+<script>
+  // ── Scroll reveal with row-based stagger ──
+  const revealObs = new IntersectionObserver(entries => {
+    // Group newly-intersecting .tile elements by their top offset (row detection)
+    const tiles = entries.filter(e => e.isIntersecting && e.target.classList.contains('tile'));
+    const rows = {};
+    tiles.forEach(e => {
+      const row = Math.round(e.target.getBoundingClientRect().top / 10) * 10;
+      if (!rows[row]) rows[row] = [];
+      rows[row].push(e.target);
+    });
+    Object.values(rows).forEach(rowTiles => {
+      rowTiles.forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 80);
+      });
+    });
+    // Non-tile reveals
+    entries.forEach(e => {
+      if (e.isIntersecting && !e.target.classList.contains('tile')) {
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+    tiles.forEach(e => revealObs.unobserve(e.target));
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  // ── Custom cursor ──
+  const dot  = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  let ringRaf;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    document.body.classList.add('cursor-active');
+  });
+  document.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+
+  // Ring lags behind with lerp
+  function lerpRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    ringRaf = requestAnimationFrame(lerpRing);
+  }
+  lerpRing();
+
+  // Tile hover state — read each tile's --tile-accent for the cursor
+  document.querySelectorAll('.tile:not(.tile-wip)').forEach(t => {
+    t.addEventListener('mouseenter', () => {
+      const accent = getComputedStyle(t).getPropertyValue('--tile-accent').trim();
+      document.body.style.setProperty('--cursor-accent', accent);
+      document.body.classList.add('tile-hover');
+    });
+    t.addEventListener('mouseleave', () => document.body.classList.remove('tile-hover'));
+  });
+
+  // ── Filter ──
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.tile').forEach(t => {
+        const show = f === 'all' || t.dataset.category === f;
+        t.style.display = show ? '' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>
