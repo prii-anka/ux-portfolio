@@ -1114,44 +1114,55 @@ document.getElementById('rSwitchCreative')?.addEventListener('click', e => {
   var ring = document.getElementById('cursorRing');
   if (!dot || !ring) return;
 
-  var mx = -100, my = -100;  // off-screen until mouse moves
-  var rx = -100, ry = -100;  // ring follows with lag
+  var mx = 0, my = 0;
+  var rx = 0, ry = 0;
+  var rSize = 32, rHalf = 16;
+  var shown = false;
 
-  // Track real mouse position
   document.addEventListener('mousemove', function (e) {
     mx = e.clientX; my = e.clientY;
     dot.style.left = mx + 'px';
     dot.style.top  = my + 'px';
-    dot.classList.remove('cursor-hidden');
-    ring.classList.remove('cursor-hidden');
+    if (!shown) {
+      shown = true;
+      dot.style.opacity  = '1';
+      ring.style.opacity = '1';
+    }
   });
 
-  // Ring follows with spring lag
   (function animateRing() {
-    rx += (mx - rx) * 0.22;
-    ry += (my - ry) * 0.22;
+    rx += (mx - rx) * 0.2;
+    ry += (my - ry) * 0.2;
     ring.style.left = rx + 'px';
     ring.style.top  = ry + 'px';
     requestAnimationFrame(animateRing);
   })();
 
-  // Hover expand
   var hoverTargets = 'a, button, [role="button"], .view-btn, .rgfx-thumb, .rproject-card, .rwtile, .rctile, label';
   document.addEventListener('mouseover', function (e) {
-    if (e.target.closest(hoverTargets)) ring.classList.add('cursor-hover');
+    if (e.target.closest(hoverTargets)) {
+      rSize = 46; rHalf = 23;
+      ring.style.width  = '46px';
+      ring.style.height = '46px';
+      ring.style.margin = '-23px 0 0 -23px';
+    }
   });
   document.addEventListener('mouseout', function (e) {
-    if (e.target.closest(hoverTargets)) ring.classList.remove('cursor-hover');
+    if (e.target.closest(hoverTargets)) {
+      rSize = 32; rHalf = 16;
+      ring.style.width  = '32px';
+      ring.style.height = '32px';
+      ring.style.margin = '-16px 0 0 -16px';
+    }
   });
 
-  // Click pulse
-  document.addEventListener('mousedown', function () { dot.classList.add('cursor-click'); });
-  document.addEventListener('mouseup',   function () { dot.classList.remove('cursor-click'); });
-
-  // Hide when mouse leaves window
+  document.addEventListener('mousedown', function () { dot.style.transform = 'scale(0.5)'; });
+  document.addEventListener('mouseup',   function () { dot.style.transform = 'scale(1)'; });
   document.addEventListener('mouseleave', function () {
-    dot.classList.add('cursor-hidden');
-    ring.classList.add('cursor-hidden');
+    dot.style.opacity = '0'; ring.style.opacity = '0'; shown = false;
+  });
+  document.addEventListener('mouseenter', function () {
+    if (shown) { dot.style.opacity = '1'; ring.style.opacity = '1'; }
   });
 })();
 

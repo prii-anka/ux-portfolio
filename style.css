@@ -44,31 +44,28 @@
 /* ── Custom Cursor ── */
 * { cursor: none !important; }
 #cursorDot {
-  position: fixed; top: -50px; left: -50px; z-index: 999999;
+  position: fixed; z-index: 999999;
   width: 8px; height: 8px; border-radius: 50%;
   background: #fff;
-  box-shadow: 0 0 0 1.5px rgba(0,0,0,0.65);
+  box-shadow: 0 0 0 1.5px rgba(0,0,0,0.7);
   pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: transform 0.08s ease, opacity 0.15s ease;
+  opacity: 0;
+  top: 0; left: 0;
+  margin: -4px 0 0 -4px;
 }
 #cursorRing {
-  position: fixed; top: -50px; left: -50px; z-index: 999998;
+  position: fixed; z-index: 999998;
   width: 32px; height: 32px; border-radius: 50%;
   border: 1.5px solid rgba(255,255,255,0.9);
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.5);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.55);
   pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: width 0.18s cubic-bezier(0.16,1,0.3,1),
-              height 0.18s cubic-bezier(0.16,1,0.3,1),
-              opacity 0.15s ease;
+  opacity: 0;
+  top: 0; left: 0;
+  margin: -16px 0 0 -16px;
+  transition: width 0.18s cubic-bezier(0.16,1,0.3,1), height 0.18s cubic-bezier(0.16,1,0.3,1), margin 0.18s cubic-bezier(0.16,1,0.3,1);
 }
-#cursorDot.cursor-hidden,
-#cursorRing.cursor-hidden { opacity: 0; }
-#cursorRing.cursor-hover { width: 46px; height: 46px; }
-#cursorDot.cursor-click { transform: translate(-50%,-50%) scale(0.5); }
 @media (hover: none) {
-  #cursorDot, #cursorRing { display: none; }
+  #cursorDot, #cursorRing { display: none !important; }
   * { cursor: auto !important; }
 }
 
