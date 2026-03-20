@@ -16,6 +16,10 @@
 </head>
 <body>
 
+<!-- ── CURSOR ── -->
+<div id="cursorDot"></div>
+<div id="cursorRing"></div>
+
 <!-- ── LOADER ── -->
 <div id="siteLoader">
 
@@ -713,31 +717,6 @@
     });
   })();
 
-  // ── GFX Lightbox ──
-  (function(){
-    var lb    = document.getElementById('rgfxLightbox');
-    var lbImg = document.getElementById('rgfxLbImg');
-    var lbClose = document.getElementById('rgfxLbClose');
-    function openLb(src) {
-      lbImg.src = src;
-      lb.setAttribute('aria-hidden','false');
-      lb.classList.add('rgfx-lb--open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLb() {
-      lb.classList.remove('rgfx-lb--open');
-      lb.setAttribute('aria-hidden','true');
-      document.body.style.overflow = '';
-    }
-    document.addEventListener('click', function(e){
-      var thumb = e.target.closest('.rgfx-thumb[data-img]');
-      if(thumb) { openLb(thumb.dataset.img); return; }
-      if(e.target === lb || e.target === lbClose || lbClose.contains(e.target)) closeLb();
-    });
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape') closeLb();
-    });
-  })();
   </script>
 
   <!-- LOCATION STRIP -->

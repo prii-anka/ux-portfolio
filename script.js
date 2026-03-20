@@ -3,15 +3,27 @@
    ═══════════════════════════════════════════════════ */
 
 // ── LOADER ─────────────────────────────────────────
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    const loader = document.getElementById('siteLoader');
+(function () {
+  var MAX_WAIT = 1200; // max ms before hiding loader
+  var started = Date.now();
+
+  function hideLoader() {
+    var loader = document.getElementById('siteLoader');
     if (loader) loader.classList.add('hidden');
     // start typewriter if landing on cv view
-    const saved = localStorage.getItem('pv') || 'recruiter';
-    if (saved === 'recruiter') setTimeout(() => { if (window.rLoopStart) window.rLoopStart(); }, 200);
-  }, 1800);
-});
+    var saved = localStorage.getItem('pv') || 'recruiter';
+    if (saved === 'recruiter') setTimeout(function () { if (window.rLoopStart) window.rLoopStart(); }, 200);
+  }
+
+  var fallback = setTimeout(hideLoader, MAX_WAIT);
+  window.addEventListener('load', function () {
+    var elapsed = Date.now() - started;
+    var remaining = MAX_WAIT - elapsed;
+    clearTimeout(fallback);
+    // hide after a minimum of 600ms so the entrance animation plays
+    setTimeout(hideLoader, Math.max(0, Math.min(remaining, 600)));
+  });
+})();
 
 // ── AI CONFIG ──────────────────────────────────────
 // For GitHub Pages, direct Anthropic API calls are blocked by CORS.
@@ -1059,4 +1071,87 @@ document.getElementById('rSwitchCreative')?.addEventListener('click', e => {
   document.getElementById('view-creative')?.classList.add('active');
   document.body.style.overflow = 'hidden';
 });
+
+// ── GFX LIGHTBOX ─────────────────────────────────────────────────────
+(function () {
+  var lb  = document.getElementById('rgfxLightbox');
+  var img = document.getElementById('rgfxLbImg');
+  var cls = document.getElementById('rgfxLbClose');
+  if (!lb || !img) return;
+
+  function open(src) {
+    img.src = src;
+    lb.classList.add('rgfx-lb--open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    lb.classList.remove('rgfx-lb--open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setTimeout(function () { img.src = ''; }, 300);
+  }
+
+  // Open on thumb click/tap
+  document.querySelectorAll('.rgfx-thumb[data-img]').forEach(function (thumb) {
+    thumb.addEventListener('click', function (e) {
+      e.stopPropagation();
+      open(thumb.getAttribute('data-img'));
+    });
+  });
+
+  // Close on backdrop, close button, or Escape
+  lb.addEventListener('click', close);
+  if (cls) cls.addEventListener('click', function (e) { e.stopPropagation(); close(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') close();
+  });
+})();
+
+// ── CUSTOM CURSOR ─────────────────────────────────────────────────────
+(function () {
+  var dot  = document.getElementById('cursorDot');
+  var ring = document.getElementById('cursorRing');
+  if (!dot || !ring) return;
+
+  var mx = -100, my = -100;  // off-screen until mouse moves
+  var rx = -100, ry = -100;  // ring follows with lag
+
+  // Track real mouse position
+  document.addEventListener('mousemove', function (e) {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+    dot.classList.remove('cursor-hidden');
+    ring.classList.remove('cursor-hidden');
+  });
+
+  // Ring follows with spring lag
+  (function animateRing() {
+    rx += (mx - rx) * 0.22;
+    ry += (my - ry) * 0.22;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animateRing);
+  })();
+
+  // Hover expand
+  var hoverTargets = 'a, button, [role="button"], .view-btn, .rgfx-thumb, .rproject-card, .rwtile, .rctile, label';
+  document.addEventListener('mouseover', function (e) {
+    if (e.target.closest(hoverTargets)) ring.classList.add('cursor-hover');
+  });
+  document.addEventListener('mouseout', function (e) {
+    if (e.target.closest(hoverTargets)) ring.classList.remove('cursor-hover');
+  });
+
+  // Click pulse
+  document.addEventListener('mousedown', function () { dot.classList.add('cursor-click'); });
+  document.addEventListener('mouseup',   function () { dot.classList.remove('cursor-click'); });
+
+  // Hide when mouse leaves window
+  document.addEventListener('mouseleave', function () {
+    dot.classList.add('cursor-hidden');
+    ring.classList.add('cursor-hidden');
+  });
+})();
 

@@ -41,11 +41,48 @@
   --dock-border:rgba(255,255,255,0.12);
 }
 
+/* ── Custom Cursor ── */
+* { cursor: none !important; }
+#cursorDot {
+  position: fixed; top: 0; left: 0; z-index: 999999;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #fff; pointer-events: none;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: transform 0.08s ease, opacity 0.2s ease;
+}
+#cursorRing {
+  position: fixed; top: 0; left: 0; z-index: 999998;
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.7);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: transform 0.18s cubic-bezier(0.16,1,0.3,1),
+              width 0.18s cubic-bezier(0.16,1,0.3,1),
+              height 0.18s cubic-bezier(0.16,1,0.3,1),
+              opacity 0.2s ease;
+}
+#cursorDot.cursor-hidden,
+#cursorRing.cursor-hidden { opacity: 0; }
+/* Expand ring on hoverable elements */
+#cursorRing.cursor-hover {
+  width: 44px; height: 44px;
+  border-color: rgba(255,255,255,0.45);
+}
+/* Shrink dot on click */
+#cursorDot.cursor-click { transform: translate(-50%,-50%) scale(0.5); }
+/* Touch: hide cursor */
+@media (hover: none) {
+  #cursorDot, #cursorRing { display: none; }
+  * { cursor: auto !important; }
+}
+
 /* ── Loader ── */
 #siteLoader {
   position: fixed; inset: 0; z-index: 99999;
   background: #0e0e0e;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
   overflow: hidden;
 }
 #siteLoader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
