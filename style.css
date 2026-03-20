@@ -44,25 +44,24 @@
 /* ── Custom Cursor ── */
 * { cursor: none !important; }
 #cursorDot {
-  position: fixed; z-index: 999999;
+  position: fixed; top: 0; left: 0;
   width: 8px; height: 8px; border-radius: 50%;
   background: #fff;
   box-shadow: 0 0 0 1.5px rgba(0,0,0,0.7);
   pointer-events: none;
   opacity: 0;
-  top: 0; left: 0;
-  margin: -4px 0 0 -4px;
+  z-index: 2147483647;
+  will-change: transform;
 }
 #cursorRing {
-  position: fixed; z-index: 999998;
+  position: fixed; top: 0; left: 0;
   width: 32px; height: 32px; border-radius: 50%;
-  border: 1.5px solid rgba(255,255,255,0.9);
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.55);
+  border: 2px solid rgba(255,255,255,0.9);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
   pointer-events: none;
   opacity: 0;
-  top: 0; left: 0;
-  margin: -16px 0 0 -16px;
-  transition: width 0.18s cubic-bezier(0.16,1,0.3,1), height 0.18s cubic-bezier(0.16,1,0.3,1), margin 0.18s cubic-bezier(0.16,1,0.3,1);
+  z-index: 2147483646;
+  will-change: transform;
 }
 @media (hover: none) {
   #cursorDot, #cursorRing { display: none !important; }

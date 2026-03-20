@@ -1114,55 +1114,22 @@ document.getElementById('rSwitchCreative')?.addEventListener('click', e => {
   var ring = document.getElementById('cursorRing');
   if (!dot || !ring) return;
 
-  var mx = 0, my = 0;
-  var rx = 0, ry = 0;
-  var rSize = 32, rHalf = 16;
-  var shown = false;
+  var mx = 0, my = 0, rx = 0, ry = 0, shown = false;
 
   document.addEventListener('mousemove', function (e) {
     mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + 'px';
-    dot.style.top  = my + 'px';
-    if (!shown) {
-      shown = true;
-      dot.style.opacity  = '1';
-      ring.style.opacity = '1';
-    }
+    dot.style.transform = 'translate3d(' + (mx - 4) + 'px,' + (my - 4) + 'px,0)';
+    if (!shown) { shown = true; dot.style.opacity = '1'; ring.style.opacity = '1'; }
   });
 
-  (function animateRing() {
+  (function loop() {
     rx += (mx - rx) * 0.2;
     ry += (my - ry) * 0.2;
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
-    requestAnimationFrame(animateRing);
+    ring.style.transform = 'translate3d(' + (rx - 16) + 'px,' + (ry - 16) + 'px,0)';
+    requestAnimationFrame(loop);
   })();
 
-  var hoverTargets = 'a, button, [role="button"], .view-btn, .rgfx-thumb, .rproject-card, .rwtile, .rctile, label';
-  document.addEventListener('mouseover', function (e) {
-    if (e.target.closest(hoverTargets)) {
-      rSize = 46; rHalf = 23;
-      ring.style.width  = '46px';
-      ring.style.height = '46px';
-      ring.style.margin = '-23px 0 0 -23px';
-    }
-  });
-  document.addEventListener('mouseout', function (e) {
-    if (e.target.closest(hoverTargets)) {
-      rSize = 32; rHalf = 16;
-      ring.style.width  = '32px';
-      ring.style.height = '32px';
-      ring.style.margin = '-16px 0 0 -16px';
-    }
-  });
-
-  document.addEventListener('mousedown', function () { dot.style.transform = 'scale(0.5)'; });
-  document.addEventListener('mouseup',   function () { dot.style.transform = 'scale(1)'; });
-  document.addEventListener('mouseleave', function () {
-    dot.style.opacity = '0'; ring.style.opacity = '0'; shown = false;
-  });
-  document.addEventListener('mouseenter', function () {
-    if (shown) { dot.style.opacity = '1'; ring.style.opacity = '1'; }
-  });
+  document.addEventListener('mouseleave', function () { dot.style.opacity = '0'; ring.style.opacity = '0'; shown = false; });
+  document.addEventListener('mouseenter', function () { if (shown) { dot.style.opacity = '1'; ring.style.opacity = '1'; } });
 })();
 
