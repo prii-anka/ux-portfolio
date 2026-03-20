@@ -2659,6 +2659,36 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .rfooter-link:hover { color: #fff; }
 
+/* ── GFX Lightbox ── */
+.rgfx-lightbox {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.92);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s ease;
+  cursor: zoom-out;
+  padding: 24px;
+}
+.rgfx-lightbox.rgfx-lb--open { opacity: 1; pointer-events: all; }
+.rgfx-lb-img {
+  max-width: 100%; max-height: 90vh;
+  object-fit: contain; border-radius: 8px;
+  transform: scale(0.94);
+  transition: transform 0.28s cubic-bezier(0.16,1,0.3,1);
+  pointer-events: none;
+}
+.rgfx-lightbox.rgfx-lb--open .rgfx-lb-img { transform: scale(1); }
+.rgfx-lb-close {
+  position: absolute; top: 18px; right: 18px;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  color: #fff; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.rgfx-lb-close:hover { background: rgba(255,255,255,0.2); }
+.rgfx-thumb { cursor: zoom-in; }
+
 /* ── Recruiter scroll reveal ── */
 .rsr { opacity: 1; transform: none; }
 

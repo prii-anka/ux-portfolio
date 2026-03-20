@@ -712,6 +712,32 @@
       icon.innerHTML = isLight ? SUN : MOON;
     });
   })();
+
+  // ── GFX Lightbox ──
+  (function(){
+    var lb    = document.getElementById('rgfxLightbox');
+    var lbImg = document.getElementById('rgfxLbImg');
+    var lbClose = document.getElementById('rgfxLbClose');
+    function openLb(src) {
+      lbImg.src = src;
+      lb.setAttribute('aria-hidden','false');
+      lb.classList.add('rgfx-lb--open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLb() {
+      lb.classList.remove('rgfx-lb--open');
+      lb.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('click', function(e){
+      var thumb = e.target.closest('.rgfx-thumb[data-img]');
+      if(thumb) { openLb(thumb.dataset.img); return; }
+      if(e.target === lb || e.target === lbClose || lbClose.contains(e.target)) closeLb();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeLb();
+    });
+  })();
   </script>
 
   <!-- LOCATION STRIP -->
@@ -919,7 +945,7 @@
     <div class="rgfx-header rsr">
       <div>
         <p class="rgfx-eyebrow">Graphic Design</p>
-        <h2 class="rgfx-title">Posters, type &amp; <em>visual play.</em></h2>
+        <h2 class="rgfx-title">Graphic Design <em>&amp; Branding.</em></h2>
       </div>
       <span class="rgfx-hint">scroll to explore</span>
     </div>
@@ -927,7 +953,7 @@
       <div class="rgfx-strip">
 
         <div class="rgfx-card rgfx-card--wide">
-          <div class="rgfx-thumb" style="background:linear-gradient(145deg,#1a0830 0%,#3d1060 60%,#6b21a8 100%);">
+          <div class="rgfx-thumb" data-img="assets/gfx-posters.png" style="background:linear-gradient(145deg,#1a0830 0%,#3d1060 60%,#6b21a8 100%);">
             <img src="assets/gfx-posters.png" alt="" class="rgfx-img" onerror="this.style.display='none'">
             <div class="rgfx-overlay">
               <span class="rgfx-arrow">↗</span>
@@ -940,7 +966,7 @@
         </div>
 
         <div class="rgfx-card rgfx-card--tall">
-          <div class="rgfx-thumb" style="background:linear-gradient(160deg,#0f1a0f 0%,#1a3a1a 50%,#2d5a2d 100%);">
+          <div class="rgfx-thumb" data-img="assets/gfx-brand.png" style="background:linear-gradient(160deg,#0f1a0f 0%,#1a3a1a 50%,#2d5a2d 100%);">
             <img src="assets/gfx-brand.png" alt="" class="rgfx-img" onerror="this.style.display='none'">
             <div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div>
           </div>
@@ -951,7 +977,7 @@
         </div>
 
         <div class="rgfx-card">
-          <div class="rgfx-thumb" style="background:linear-gradient(135deg,#1a0a00 0%,#3d1a00 50%,#7c3a00 100%);">
+          <div class="rgfx-thumb" data-img="assets/gfx-type.png" style="background:linear-gradient(135deg,#1a0a00 0%,#3d1a00 50%,#7c3a00 100%);">
             <img src="assets/gfx-type.png" alt="" class="rgfx-img" onerror="this.style.display='none'">
             <div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div>
           </div>
@@ -962,7 +988,7 @@
         </div>
 
         <div class="rgfx-card rgfx-card--wide">
-          <div class="rgfx-thumb" style="background:linear-gradient(120deg,#001a2e 0%,#003d6b 55%,#005fa3 100%);">
+          <div class="rgfx-thumb" data-img="assets/gfx-social.png" style="background:linear-gradient(120deg,#001a2e 0%,#003d6b 55%,#005fa3 100%);">
             <img src="assets/gfx-social.png" alt="" class="rgfx-img" onerror="this.style.display='none'">
             <div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div>
           </div>
@@ -973,7 +999,7 @@
         </div>
 
         <div class="rgfx-card rgfx-card--tall">
-          <div class="rgfx-thumb" style="background:linear-gradient(150deg,#1a001a 0%,#3d003d 50%,#700070 100%);">
+          <div class="rgfx-thumb" data-img="assets/gfx-editorial.png" style="background:linear-gradient(150deg,#1a001a 0%,#3d003d 50%,#700070 100%);">
             <img src="assets/gfx-editorial.png" alt="" class="rgfx-img" onerror="this.style.display='none'">
             <div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div>
           </div>
@@ -984,7 +1010,7 @@
         </div>
 
         <div class="rgfx-card">
-          <div class="rgfx-thumb" style="background:linear-gradient(140deg,#001a1a 0%,#003d3d 50%,#006666 100%);">
+          <div class="rgfx-thumb" data-img="assets/gfx-packaging.png" style="background:linear-gradient(140deg,#001a1a 0%,#003d3d 50%,#006666 100%);">
             <img src="assets/gfx-packaging.png" alt="" class="rgfx-img" onerror="this.style.display='none'">
             <div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div>
           </div>
@@ -995,7 +1021,7 @@
         </div>
 
         <div class="rgfx-card rgfx-card--wide">
-          <div class="rgfx-thumb" style="background:linear-gradient(130deg,#1a0a00 0%,#2e1500 40%,#c87941 100%);">
+          <div class="rgfx-thumb" data-img="assets/gfx-misc.png" style="background:linear-gradient(130deg,#1a0a00 0%,#2e1500 40%,#c87941 100%);">
             <img src="assets/gfx-misc.png" alt="" class="rgfx-img" onerror="this.style.display='none'">
             <div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div>
           </div>
@@ -1604,6 +1630,14 @@
         </button>
       </div>
     </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="rgfx-lightbox" id="rgfxLightbox" aria-hidden="true">
+    <button class="rgfx-lb-close" id="rgfxLbClose" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img class="rgfx-lb-img" id="rgfxLbImg" src="" alt="">
   </div>
 
 </div><!-- /view-recruiter -->
