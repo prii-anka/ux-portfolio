@@ -2458,13 +2458,12 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rgfx-card--tall  { width: 200px; }
 .rgfx-card:hover  { transform: translateY(-4px); }
 .rgfx-thumb {
-  position: relative; width: 100%; height: 300px;
+  position: relative; width: 100%;
   border-radius: 14px; overflow: hidden;
 }
-.rgfx-card--tall .rgfx-thumb  { height: 360px; }
-.rgfx-card--wide .rgfx-thumb  { height: 260px; }
 .rgfx-img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top;
+  width: 100%; height: auto; display: block;
+  object-fit: contain;
   transition: transform 0.5s cubic-bezier(0.25,1,0.5,1);
 }
 .rgfx-card:hover .rgfx-img { transform: scale(1.04); }
