@@ -1072,28 +1072,11 @@ document.getElementById('rSwitchCreative')?.addEventListener('click', e => {
   document.body.style.overflow = 'hidden';
 });
 
-// ── DOCK HIDE WHEN IN PROJECTS SECTION ──────────────────────────────
+
+// Spotlight moved to inline script in index.html (after DOM elements)
+// ── GFX PLACEHOLDER ──
 (function () {
-  var dock = document.querySelector('.rdock');
-  var projects = document.getElementById('rct-section');
-  if (!dock || !projects) return;
-
-  var obs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        dock.classList.add('rdock--hidden');
-      } else {
-        dock.classList.remove('rdock--hidden');
-      }
-    });
-  }, { threshold: 0.05 });
-
-  obs.observe(projects);
-})();
-
-// ── SPOTLIGHT / FINDER SEARCH ────────────────────────────────────────
-(function () {
-  var overlay   = document.getElementById('rSpotlight');
+  var overlay   = null; // removed - handled inline
   var input     = document.getElementById('rSpotlightInput');
   var results   = document.getElementById('rSpotlightResults');
   var finderBtn = document.getElementById('rdockFinderBtn');

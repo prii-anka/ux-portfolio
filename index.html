@@ -12,7 +12,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@300;400;500;600&family=Caveat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400;1,6..96,700&family=Italiana&family=Gilda+Display&family=Dancing+Script:wght@400;600;700&family=Satisfy&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Yeseva+One&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <link rel="stylesheet" href="style.css?v=10" />
 </head>
 <body>
 
@@ -1462,6 +1464,17 @@
         </a>
       </div>
 
+      <div class="rfooter-socials">
+        <a href="https://instagram.com/pri.anka" target="_blank" class="rfooter-social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          <span>Instagram</span>
+        </a>
+        <a href="https://linkedin.com/in/priyanka-uttarkar" target="_blank" class="rfooter-social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="4"/><path fill="#1a1a1a" d="M7 10h2v7H7zm1-3a1.1 1.1 0 110 2.2A1.1 1.1 0 018 7zm4 3h1.8v1h.03c.26-.48.9-1 1.87-1C17.6 10 18 11.37 18 13v4h-2v-3.5c0-.84-.02-1.9-1.17-1.9-1.17 0-1.35.91-1.35 1.85V17H12v-7z"/></svg>
+          <span>LinkedIn</span>
+        </a>
+      </div>
+
     </div>
     <div class="rfooter-bar">
       <span class="rfooter-copy">© 2026 Priyanka Uttarkar &nbsp;·&nbsp; built with too many tiny iterations (and a good playlist).</span>
@@ -1648,7 +1661,99 @@
 }());
 </script>
 
-<script src="script.js?v=9"></script>
+<script src="script.js?v=10"></script>
+<script>
+// dock hide on scroll into projects
+(function(){
+  var dock = document.querySelector('.rdock');
+  var view = document.getElementById('view-recruiter');
+  var proj = document.getElementById('rct-section');
+  if(!dock||!view||!proj) return;
+  view.addEventListener('scroll', function(){
+    dock.classList.toggle('rdock--hidden', view.scrollTop > proj.offsetTop - 200);
+  }, {passive:true});
+})();
+
+// finder / spotlight
+(function(){
+  var overlay = document.getElementById('rSpotlight');
+  var inp = document.getElementById('rSpotlightInput');
+  var res = document.getElementById('rSpotlightResults');
+  var btn = document.getElementById('rdockFinderBtn');
+  var view = document.getElementById('view-recruiter');
+  if(!overlay||!inp||!res) return;
+
+  var items = [
+    {l:'Introduction',s:'Hero · Hi, I\'m Priyanka',c:'Section',a:'top'},
+    {l:'Selected Work',s:'Projects & case studies',c:'Section',a:'rct-section'},
+    {l:'Graphic Design & Branding',s:'Visual & brand work',c:'Section',a:'rgfx-section'},
+    {l:'Say Hello',s:'Contact & footer',c:'Section',a:'rfooter'},
+    {l:'Healing Hearts',s:'Healthcare UX · mobile redesign',c:'Project',a:'rct-section'},
+    {l:'WalletGyde',s:'Finance app · +32% task completion',c:'Project',a:'rct-section'},
+    {l:'Dashboard Statistics',s:'Enterprise analytics redesign',c:'Project',a:'rct-section'},
+    {l:'Orion Design System',s:'200+ components · Figma tokens',c:'Project',a:'rct-section'},
+    {l:'Copy Email',s:'pri.anka256@gmail.com',c:'Action',a:'email'},
+    {l:'LinkedIn',s:'linkedin.com/in/priyanka-uttarkar',c:'Action',a:'linkedin'},
+    {l:'Chat with prianka.ai',s:'Ask me anything',c:'Action',a:'chat'},
+    {l:'Figma',s:'Design tool',c:'Skill',a:''},
+    {l:'UX Research',s:'User research & testing',c:'Skill',a:''},
+    {l:'Design Systems',s:'Components & tokens',c:'Skill',a:''},
+    {l:'Prototyping',s:'Interactive prototypes',c:'Skill',a:''},
+  ];
+  var filtered = items, activeIdx = -1;
+
+  function open(){
+    overlay.classList.add('rspotlight--open');
+    inp.value=''; render('');
+    setTimeout(function(){inp.focus();},60);
+  }
+  function close(){ overlay.classList.remove('rspotlight--open'); }
+
+  function render(q){
+    activeIdx=-1;
+    q=q.toLowerCase().trim();
+    filtered = q ? items.filter(function(i){return (i.l+i.s+i.c).toLowerCase().indexOf(q)>-1;}) : items;
+    if(!filtered.length){res.innerHTML='<div class="rspotlight-empty">No results</div>';return;}
+    var cats=[],seen={};
+    filtered.forEach(function(r){if(!seen[r.c]){cats.push(r.c);seen[r.c]=1;}});
+    var h='';
+    cats.forEach(function(cat){
+      h+='<div class="rspotlight-cat-label">'+cat+'</div>';
+      filtered.forEach(function(r,i){
+        if(r.c!==cat)return;
+        h+='<div class="rspotlight-result" data-i="'+i+'"><div class="rspotlight-result-text"><div class="rspotlight-result-label">'+r.l+'</div><div class="rspotlight-result-sub">'+r.s+'</div></div><span class="rspotlight-result-arrow">↵</span></div>';
+      });
+    });
+    res.innerHTML=h;
+    res.querySelectorAll('.rspotlight-result').forEach(function(el){
+      el.addEventListener('click',function(){go(parseInt(el.getAttribute('data-i')));});
+    });
+  }
+
+  function go(i){
+    var r=filtered[i]; if(!r)return; close();
+    if(r.a==='top'&&view) view.scrollTo({top:0,behavior:'smooth'});
+    else if(r.a==='email') document.querySelector('.copy-email-btn')&&document.querySelector('.copy-email-btn').click();
+    else if(r.a==='linkedin') window.open('https://linkedin.com/in/priyanka-uttarkar','_blank');
+    else if(r.a==='chat') document.getElementById('rdockChatBtn')&&document.getElementById('rdockChatBtn').click();
+    else if(r.a){var el=document.getElementById(r.a);if(el&&view)view.scrollTo({top:el.offsetTop-60,behavior:'smooth'});}
+  }
+
+  if(btn) btn.addEventListener('click',open);
+  overlay.addEventListener('click',function(e){if(e.target===overlay)close();});
+  document.addEventListener('keydown',function(e){
+    if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();open();return;}
+    if(!overlay.classList.contains('rspotlight--open'))return;
+    if(e.key==='Escape'){close();return;}
+    var els=res.querySelectorAll('.rspotlight-result');
+    if(e.key==='ArrowDown'){e.preventDefault();activeIdx=Math.min(activeIdx+1,els.length-1);setA(els);}
+    if(e.key==='ArrowUp'){e.preventDefault();activeIdx=Math.max(activeIdx-1,0);setA(els);}
+    if(e.key==='Enter'&&activeIdx>=0)go(activeIdx);
+  });
+  function setA(els){els.forEach(function(el,i){el.classList.toggle('rsl-active',i===activeIdx);});if(els[activeIdx])els[activeIdx].scrollIntoView({block:'nearest'});}
+  inp.addEventListener('input',function(){render(inp.value);});
+})();
+</script>
 
 </body>
 </html>
