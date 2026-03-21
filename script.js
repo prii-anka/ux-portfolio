@@ -1108,28 +1108,4 @@ document.getElementById('rSwitchCreative')?.addEventListener('click', e => {
   });
 })();
 
-// ── CUSTOM CURSOR ─────────────────────────────────────────────────────
-(function () {
-  var dot  = document.getElementById('cursorDot');
-  var ring = document.getElementById('cursorRing');
-  if (!dot || !ring) return;
-
-  var mx = 0, my = 0, rx = 0, ry = 0, shown = false;
-
-  document.addEventListener('mousemove', function (e) {
-    mx = e.clientX; my = e.clientY;
-    dot.style.transform = 'translate3d(' + (mx - 4) + 'px,' + (my - 4) + 'px,0)';
-    if (!shown) { shown = true; dot.style.opacity = '1'; ring.style.opacity = '1'; }
-  });
-
-  (function loop() {
-    rx += (mx - rx) * 0.2;
-    ry += (my - ry) * 0.2;
-    ring.style.transform = 'translate3d(' + (rx - 16) + 'px,' + (ry - 16) + 'px,0)';
-    requestAnimationFrame(loop);
-  })();
-
-  document.addEventListener('mouseleave', function () { dot.style.opacity = '0'; ring.style.opacity = '0'; shown = false; });
-  document.addEventListener('mouseenter', function () { if (shown) { dot.style.opacity = '1'; ring.style.opacity = '1'; } });
-})();
 
