@@ -3856,3 +3856,123 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 .hh-footer { padding: 48px; background: #111; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: center; }
 .hh-back-btn { background: none; border: 1px solid rgba(255,255,255,0.16); color: rgba(255,255,255,0.5); font-family: 'Space Grotesk', sans-serif; font-size: 0.86rem; padding: 11px 24px; border-radius: 24px; cursor: pointer; transition: all 0.25s; }
 .hh-back-btn:hover { background: rgba(255,255,255,0.05); color: #fff; }
+
+/* ══════════════════════════════════════════
+   404 / NOPE PAGE (creative view placeholder)
+══════════════════════════════════════════ */
+.desktop-404 {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 32px);
+  background: #1a1a1a;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ghost big 404 number */
+.e404-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(100px, 20vw, 260px);
+  font-weight: 700;
+  color: rgba(255,255,255,0.035);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* sticky note card */
+.e404-card {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  border-radius: 14px;
+  padding: 32px 38px;
+  max-width: 420px;
+  width: 88%;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.3);
+  transform: rotate(-1.5deg);
+}
+.e404-eyebrow {
+  font-family: 'Caveat', cursive;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e07d3f;
+  margin: 0 0 8px;
+}
+.e404-head {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(24px, 3.5vw, 34px);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 14px;
+  line-height: 1.1;
+}
+.e404-cursor {
+  display: inline-block;
+  color: #e07d3f;
+  animation: e404blink 1.1s step-end infinite;
+}
+@keyframes e404blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.e404-body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  color: #555;
+  line-height: 1.7;
+  margin: 0 0 22px;
+}
+.e404-back {
+  display: inline-block;
+  background: #1a1a1a;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.e404-back:hover { background: #e07d3f; transform: translateY(-2px); }
+
+/* stickers */
+.e404-sticker { position: absolute; pointer-events: none; }
+.e404-sticker img { width: 72px; height: auto; }
+.e404-stk-panipuri { bottom: 9%; left: 6%; transform: rotate(-6deg); }
+.e404-stk-tulips   { top: 7%;  right: 7%; transform: rotate(9deg); }
+.e404-stk-dog      { bottom: 8%; right: 5%; transform: rotate(4deg); }
+.e404-stk-dog img  { width: 64px; }
+.e404-stk-dog .woof-bubble {
+  font-family: 'Caveat', cursive;
+  font-size: 13px;
+  font-weight: 600;
+  background: #fff;
+  border-radius: 12px;
+  padding: 5px 10px;
+  margin-bottom: 6px;
+  color: #1a1a1a;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+/* handwritten notes */
+.e404-note {
+  position: absolute;
+  font-family: 'Caveat', cursive;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.28);
+  pointer-events: none;
+  line-height: 1.3;
+}
+.e404-n1 { top: 11%; left: 7%;   transform: rotate(-4deg); }
+.e404-n2 { top: 14%; right: 20%; transform: rotate(3deg); font-size: 17px; }
+.e404-n3 { bottom: 24%; left: 20%; transform: rotate(-2deg); }
