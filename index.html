@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@300;400;500;600&family=Caveat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400;1,6..96,700&family=Italiana&family=Gilda+Display&family=Dancing+Script:wght@400;600;700&family=Satisfy&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Yeseva+One&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
-  <link rel="stylesheet" href="style.css?v=13" />
+  <link rel="stylesheet" href="style.css?v=14" />
 </head>
 <body>
 
@@ -943,13 +943,13 @@
         </div>
 
         <div class="rgfx-card rgfx-card--wide">
-          <div class="rgfx-thumb" data-img="assets/gfx-social.png" style="background:linear-gradient(120deg,#001a2e 0%,#003d6b 55%,#005fa3 100%);">
-            <img src="assets/gfx-social.png" alt="" class="rgfx-img" onerror="this.style.display='none'">
+          <div class="rgfx-thumb" data-img="assets/gfx-social-1.png" data-slides='["assets/gfx-social-1.png","assets/gfx-social-2.png","assets/gfx-social-3.png","assets/gfx-social-4.png","assets/gfx-social-5.png","assets/gfx-social-6.png"]' style="background:linear-gradient(120deg,#001a2e 0%,#003d6b 55%,#005fa3 100%);">
+            <img src="assets/gfx-social-1.png" alt="" class="rgfx-img" onerror="this.style.display='none'">
             <div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div>
           </div>
           <div class="rgfx-foot">
             <span class="rgfx-cat">Social &amp; Digital</span>
-            <span class="rgfx-name">Social Media Kits</span>
+            <span class="rgfx-name">Social Media Carousel</span>
           </div>
         </div>
 
@@ -1696,27 +1696,69 @@
 </div>
 
 <!-- GFX Lightbox -->
-<div id="gfxLightbox" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;cursor:zoom-out;">
+<div id="gfxLightbox" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
   <button id="gfxLightboxClose" style="position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1;opacity:0.7;">×</button>
-  <img id="gfxLightboxImg" src="" alt="" style="max-width:90vw;max-height:90vh;object-fit:contain;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,0.6);">
+  <button id="gfxLightboxPrev" style="position:absolute;left:20px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.8rem;width:48px;height:48px;border-radius:50%;cursor:pointer;display:none;align-items:center;justify-content:center;">‹</button>
+  <img id="gfxLightboxImg" src="" alt="" style="max-width:82vw;max-height:90vh;object-fit:contain;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,0.6);">
+  <button id="gfxLightboxNext" style="position:absolute;right:20px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.8rem;width:48px;height:48px;border-radius:50%;cursor:pointer;display:none;align-items:center;justify-content:center;">›</button>
+  <div id="gfxLightboxDots" style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:8px;"></div>
 </div>
 <script>
 (function(){
   var lb = document.getElementById('gfxLightbox');
   var lbImg = document.getElementById('gfxLightboxImg');
+  var btnPrev = document.getElementById('gfxLightboxPrev');
+  var btnNext = document.getElementById('gfxLightboxNext');
+  var dotsEl = document.getElementById('gfxLightboxDots');
+  var slides = [], idx = 0;
+
+  function showSlide(i){
+    idx = (i + slides.length) % slides.length;
+    lbImg.src = slides[idx];
+    dotsEl.querySelectorAll('span').forEach(function(d,j){ d.style.opacity = j===idx?'1':'0.35'; });
+  }
+  function buildDots(){
+    dotsEl.innerHTML = '';
+    slides.forEach(function(_,i){
+      var d = document.createElement('span');
+      d.style.cssText = 'width:7px;height:7px;border-radius:50%;background:#fff;display:inline-block;cursor:pointer;opacity:0.35;transition:opacity 0.2s';
+      d.addEventListener('click', function(){ showSlide(i); });
+      dotsEl.appendChild(d);
+    });
+  }
+  function openLb(src, allSlides){
+    slides = allSlides || [src];
+    idx = 0;
+    var multi = slides.length > 1;
+    btnPrev.style.display = multi ? 'flex' : 'none';
+    btnNext.style.display = multi ? 'flex' : 'none';
+    dotsEl.style.display = multi ? 'flex' : 'none';
+    if(multi) buildDots();
+    showSlide(0);
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLb(){ lb.style.display = 'none'; lbImg.src = ''; slides = []; document.body.style.overflow = ''; }
+
   document.querySelectorAll('.rgfx-thumb').forEach(function(thumb){
     thumb.style.cursor = 'zoom-in';
     thumb.addEventListener('click', function(){
+      var raw = thumb.getAttribute('data-slides');
+      var allSlides = raw ? JSON.parse(raw) : null;
       var src = thumb.getAttribute('data-img') || thumb.querySelector('.rgfx-img').src;
-      lbImg.src = src;
-      lb.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
+      openLb(src, allSlides);
     });
   });
-  function closeLb(){ lb.style.display = 'none'; lbImg.src = ''; document.body.style.overflow = ''; }
+
+  btnPrev.addEventListener('click', function(e){ e.stopPropagation(); showSlide(idx-1); });
+  btnNext.addEventListener('click', function(e){ e.stopPropagation(); showSlide(idx+1); });
   document.getElementById('gfxLightboxClose').addEventListener('click', closeLb);
   lb.addEventListener('click', function(e){ if(e.target === lb) closeLb(); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLb(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeLb();
+    if(e.key === 'ArrowLeft' && slides.length>1) showSlide(idx-1);
+    if(e.key === 'ArrowRight' && slides.length>1) showSlide(idx+1);
+  });
 }());
 </script>
 
