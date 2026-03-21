@@ -1527,9 +1527,13 @@
     <!-- Divider -->
     <div class="rdock-sep"></div>
     <!-- UTILITIES GROUP -->
-    <div class="rdock-item" title="Photos">
+    <div class="rdock-item" title="Photos" id="rdockPhotosBtn">
       <div class="rdock-icon"><img src="assets/icon-photos.png" alt="Photos"/></div>
       <span class="rdock-label">Photos</span>
+      <div class="rdock-chat-hint" id="rdockPhotosHint">
+        <span>my photography!</span>
+        <svg viewBox="0 0 36 24" fill="none"><path d="M4,18 C12,16 22,10 32,6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M32,6 L26,8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M32,6 L30,12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </div>
     </div>
     <div class="rdock-item" id="rdockFinderBtn" title="Search portfolio">
       <div class="rdock-icon rdock-folder"><img src="assets/icon-finder.png" alt="Finder"/></div>
@@ -1693,18 +1697,29 @@
 
 <script src="script.js?v=10"></script>
 <script>
-// photos overlay
+// photos overlay + hint bubble
 (function(){
-  var overlay = document.getElementById('rphotosOverlay');
+  var overlay  = document.getElementById('rphotosOverlay');
   var closeBtn = document.getElementById('rphotosClose');
-  var photosBtn = document.querySelector('.rdock-item[title="Photos"]');
+  var btn      = document.getElementById('rdockPhotosBtn');
+  var hint     = document.getElementById('rdockPhotosHint');
   if(!overlay) return;
+
   function open(){ overlay.classList.add('rphotos--open'); overlay.setAttribute('aria-hidden','false'); }
   function close(){ overlay.classList.remove('rphotos--open'); overlay.setAttribute('aria-hidden','true'); }
-  if(photosBtn) photosBtn.addEventListener('click', open);
+  if(btn) btn.addEventListener('click', open);
   if(closeBtn) closeBtn.addEventListener('click', close);
   overlay.addEventListener('click', function(e){ if(e.target===overlay) close(); });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+
+  // hint bubble — show after 5s, hide after 3s, repeat every 14s
+  if(hint){
+    function showHint(){ hint.classList.add('rdock-chat-hint--visible'); }
+    function hideHint(){ hint.classList.remove('rdock-chat-hint--visible'); }
+    setTimeout(function(){ showHint(); setTimeout(hideHint, 3000); }, 5000);
+    setInterval(function(){ showHint(); setTimeout(hideHint, 3000); }, 14000);
+    if(btn) btn.addEventListener('click', hideHint);
+  }
 })();
 
 // dock hide on scroll into projects
