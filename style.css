@@ -3692,7 +3692,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 }
 .hh-back {
   background: none; border: 1px solid rgba(255,255,255,0.18);
-  color: rgba(255,255,255,0.6); font-family: 'Space Grotesk', sans-serif;
+  color: rgba(255,255,255,0.6); font-family: 'Poppins', sans-serif;
   font-size: 0.82rem; padding: 7px 14px; border-radius: 20px;
   cursor: pointer; transition: all 0.2s; white-space: nowrap;
 }
@@ -3703,7 +3703,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 }
 .hh-nav-tags { display: flex; gap: 8px; }
 .hh-tag {
-  font-family: 'Space Grotesk', sans-serif; font-size: 0.7rem;
+  font-family: 'Poppins', sans-serif; font-size: 0.7rem;
   padding: 4px 10px; border-radius: 20px;
   border: 1px solid rgba(224,125,63,0.4); color: #e07d3f;
 }
@@ -3765,7 +3765,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 .hh-strip-item { flex: 1; min-width: 130px; padding: 22px 28px; border-right: 1px solid rgba(255,255,255,0.07); }
 .hh-strip-item:last-child { border-right: none; }
 .hh-strip-label { display: block; font-family: 'Caveat', cursive; font-size: 0.95rem; color: rgba(255,255,255,0.3); margin-bottom: 4px; }
-.hh-strip-val { font-family: 'Space Grotesk', sans-serif; font-size: 0.86rem; color: rgba(255,255,255,0.7); }
+.hh-strip-val { font-family: 'Caveat', cursive; font-size: 1rem; color: rgba(255,255,255,0.7); }
 
 .hh-section { padding: 72px 48px; background: #1a1a1a; }
 .hh-section--dark { background: #111; }
@@ -3789,7 +3789,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 .hh-section--white .hh-section-eyebrow { color: #e07d3f; }
 .hh-title-xl { font-size: clamp(4rem, 10vw, 8rem); color: #e07d3f; }
 .hh-section-body {
-  font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif; font-size: 0.9rem;
   line-height: 1.65; color: rgba(255,255,255,0.42);
 }
 .hh-section--white .hh-section-body { color: rgba(0,0,0,0.5); }
@@ -3798,7 +3798,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 .hh-problem-list { display: flex; flex-direction: column; gap: 9px; margin-top: 20px; }
 .hh-problem-item {
   display: flex; align-items: flex-start; gap: 10px;
-  font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem;
+  font-family: 'Poppins', sans-serif; font-size: 0.85rem;
   color: rgba(255,255,255,0.48); line-height: 1.5;
 }
 .hh-problem-sev {
@@ -3824,14 +3824,14 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 }
 .hh-method { background: #fff; padding: 26px 22px; }
 .hh-method-num { font-family: 'Caveat', cursive; font-size: 1rem; color: #e07d3f; margin-bottom: 6px; display: block; }
-.hh-method h4 { font-family: 'Space Grotesk', sans-serif; font-size: 0.88rem; font-weight: 600; color: #1a1a1a; margin: 0 0 5px; }
-.hh-method p { font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; color: rgba(0,0,0,0.42); line-height: 1.5; margin: 0; }
+.hh-method h4 { font-family: 'Poppins', sans-serif; font-size: 0.88rem; font-weight: 600; color: #1a1a1a; margin: 0 0 5px; }
+.hh-method p { font-family: 'Poppins', sans-serif; font-size: 0.8rem; color: rgba(0,0,0,0.42); line-height: 1.5; margin: 0; }
 
 .hh-sev-pills { display: flex; gap: 8px; width: 100%; }
 .hh-sev-pill {
   flex: 1; height: 50px; border-radius: 100px;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Space Grotesk', sans-serif; font-size: 0.72rem; font-weight: 500;
+  font-family: 'Poppins', sans-serif; font-size: 0.72rem; font-weight: 500;
   color: #fff; text-align: center; padding: 0 8px;
 }
 .hh-sev-pill--0 { background: #52ac55; }
@@ -3849,7 +3849,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
   font-family: 'Cormorant Garamond', serif; font-size: 3rem;
   font-weight: 300; color: #e07d3f; line-height: 1; margin-bottom: 8px;
 }
-.hh-insight p { font-family: 'Space Grotesk', sans-serif; font-size: 0.81rem; color: rgba(255,255,255,0.42); line-height: 1.5; margin: 0; }
+.hh-insight p { font-family: 'Caveat', cursive; font-size: 0.95rem; color: rgba(255,255,255,0.42); line-height: 1.5; margin: 0; }
 .hh-insight-note {
   font-family: 'Caveat', cursive; font-size: 1.25rem; line-height: 1.5;
   color: rgba(255,255,255,0.42); max-width: 600px;
@@ -3859,31 +3859,31 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 .hh-personas { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; width: 100%; }
 .hh-persona-chat { background: #1e1e1e; border-radius: 16px; padding: 18px; }
 .hh-persona-chat-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.07); }
-.hh-persona-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 0.75rem; font-weight: 700; color: #fff; flex-shrink: 0; }
-.hh-persona-chat-name { font-family: 'Space Grotesk', sans-serif; font-size: 0.83rem; font-weight: 600; color: #fff; line-height: 1.2; }
+.hh-persona-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; font-size: 0.75rem; font-weight: 700; color: #fff; flex-shrink: 0; }
+.hh-persona-chat-name { font-family: 'Poppins', sans-serif; font-size: 0.83rem; font-weight: 600; color: #fff; line-height: 1.2; }
 .hh-persona-chat-role { font-family: 'Caveat', cursive; font-size: 0.88rem; color: rgba(255,255,255,0.32); }
 .hh-bubble-row { display: flex; margin-bottom: 6px; }
 .hh-bubble-row--right { justify-content: flex-end; }
 .hh-bubble {
   max-width: 80%; padding: 9px 13px; border-radius: 16px;
-  font-family: 'Space Grotesk', sans-serif; font-size: 0.79rem; line-height: 1.45;
+  font-family: 'Caveat', cursive; font-size: 1rem; line-height: 1.4;
 }
 .hh-bubble--gray { background: #3a3a3a; color: rgba(255,255,255,0.65); border-bottom-left-radius: 4px; }
 .hh-bubble--blue { background: #0b93f6; color: #fff; border-bottom-right-radius: 4px; }
 .hh-persona-needs { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
-.hh-persona-needs span { font-family: 'Space Grotesk', sans-serif; font-size: 0.66rem; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 20px; color: rgba(255,255,255,0.38); }
+.hh-persona-needs span { font-family: 'Poppins', sans-serif; font-size: 0.66rem; padding: 3px 8px; background: rgba(255,255,255,0.05); border-radius: 20px; color: rgba(255,255,255,0.38); }
 
 .hh-palette { display: flex; gap: 8px; flex-wrap: wrap; }
 .hh-swatch { flex: 1; min-width: 65px; min-height: 100px; border-radius: 10px; padding: 8px; display: flex; flex-direction: column; justify-content: flex-end; gap: 2px; }
 .hh-swatch--sm { min-height: 68px; }
-.hh-swatch-hex { font-family: 'Space Grotesk', sans-serif; font-size: 0.62rem; color: rgba(255,255,255,0.65); }
+.hh-swatch-hex { font-family: 'Poppins', sans-serif; font-size: 0.62rem; color: rgba(255,255,255,0.65); }
 .hh-swatch-name { font-family: 'Caveat', cursive; font-size: 0.82rem; color: rgba(255,255,255,0.55); }
 
 .hh-type-sample { display: flex; flex-direction: column; margin-top: 8px; }
 .hh-type-row { display: flex; align-items: center; gap: 14px; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
 .hh-type-name { font-family: 'Caveat', cursive; font-size: 0.9rem; color: rgba(255,255,255,0.28); width: 58px; flex-shrink: 0; }
-.hh-type-spec { font-family: 'Space Grotesk', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.18); width: 105px; flex-shrink: 0; }
-.hh-type-preview { font-family: 'Space Grotesk', sans-serif; color: #fff; }
+.hh-type-spec { font-family: 'Poppins', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.18); width: 105px; flex-shrink: 0; }
+.hh-type-preview { font-family: 'Poppins', sans-serif; color: #fff; }
 
 .hh-videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; width: 100%; }
 .hh-video-block { display: flex; flex-direction: column; align-items: center; gap: 10px; }
@@ -3898,7 +3898,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 .hh-outcome-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; width: 100%; max-width: 740px; }
 .hh-outcome-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 20px; }
 .hh-outcome-item h4 { font-family: 'Caveat', cursive; font-size: 1.1rem; color: #e07d3f; margin: 0 0 5px; }
-.hh-outcome-item p { font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,0.38); line-height: 1.5; margin: 0; }
+.hh-outcome-item p { font-family: 'Poppins', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,0.38); line-height: 1.5; margin: 0; }
 .hh-outcome-quote {
   font-family: 'Caveat', cursive; font-size: 1.45rem; line-height: 1.4;
   color: rgba(255,255,255,0.38); max-width: 600px;
@@ -3906,7 +3906,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 }
 
 .hh-footer { padding: 48px; background: #111; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: center; }
-.hh-back-btn { background: none; border: 1px solid rgba(255,255,255,0.16); color: rgba(255,255,255,0.5); font-family: 'Space Grotesk', sans-serif; font-size: 0.86rem; padding: 11px 24px; border-radius: 24px; cursor: pointer; transition: all 0.25s; }
+.hh-back-btn { background: none; border: 1px solid rgba(255,255,255,0.16); color: rgba(255,255,255,0.5); font-family: 'Poppins', sans-serif; font-size: 0.86rem; padding: 11px 24px; border-radius: 24px; cursor: pointer; transition: all 0.25s; }
 .hh-back-btn:hover { background: rgba(255,255,255,0.05); color: #fff; }
 
 /* ══════════════════════════════════════════
@@ -4028,6 +4028,16 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 .e404-n1 { top: 11%; left: 7%;   transform: rotate(-4deg); }
 .e404-n2 { top: 14%; right: 20%; transform: rotate(3deg); font-size: 17px; }
 .e404-n3 { bottom: 24%; left: 20%; transform: rotate(-2deg); }
+
+@media (max-width: 600px) {
+  .desktop-404 { padding: 0 16px; }
+  .e404-card { padding: 24px; transform: rotate(-0.5deg); width: 100%; max-width: 100%; }
+  .e404-head { font-size: 26px; }
+  .e404-num { font-size: 160px; }
+  .e404-stk-panipuri, .e404-stk-tulips { display: none; }
+  .e404-stk-dog { bottom: 4%; right: 3%; }
+  .e404-note { display: none; }
+}
 
 /* ══════════════════════════════════════════
    HEALING HEARTS — MOBILE RESPONSIVE
