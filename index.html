@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@300;400;500;600&family=Caveat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400;1,6..96,700&family=Italiana&family=Gilda+Display&family=Dancing+Script:wght@400;600;700&family=Satisfy&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Yeseva+One&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
-  <link rel="stylesheet" href="style.css?v=14" />
+  <link rel="stylesheet" href="style.css?v=15" />
 </head>
 <body>
 
@@ -858,13 +858,13 @@
         </div>
       </a>
 
-      <div class="rct rct-wip rsr rsr-d4" style="--rtb:#1e2a24;">
+      <div class="rct rsr rsr-d4" id="hhCard" style="--rtb:#1b2714; --rta:#8aad5a; cursor:pointer;" onclick="openHH()">
         <div class="rct-img">
           <img src="assets/project-healinghearts.png" alt="Healing Hearts" />
-          <div class="rct-soon"><span>Case study coming soon</span></div>
+          <div class="rct-overlay"><div class="rct-view">View ↗</div></div>
         </div>
         <div class="rct-label">
-          <div class="rct-meta">Product Design <span class="rct-dot"></span> Healthcare</div>
+          <div class="rct-meta">UX Research + Design <span class="rct-dot"></span> Social Good</div>
           <div class="rct-name">Healing Hearts</div>
         </div>
       </div>
@@ -1695,6 +1695,350 @@
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════
+     HEALING HEARTS CASE STUDY OVERLAY
+     ═══════════════════════════════════════════════ -->
+<div id="hhOverlay" aria-hidden="true">
+  <div id="hhPanel">
+
+    <!-- NAV BAR -->
+    <nav class="hh-nav">
+      <button class="hh-back" id="hhClose">← Back to work</button>
+      <span class="hh-nav-title">Healing Hearts</span>
+      <div class="hh-nav-tags">
+        <span class="hh-tag">Social Good</span>
+        <span class="hh-tag">UX Research</span>
+        <span class="hh-tag">UX/UI Design</span>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hh-hero">
+      <div class="hh-hero-bg"></div>
+      <div class="hh-hero-content">
+        <p class="hh-eyebrow hh-anim">GIT 540 · Fall 2024 · Grade A+</p>
+        <h1 class="hh-hero-title hh-anim hh-anim-d1">
+          Redesigning<br><em>Healing Hearts</em><br>Animal Rescue
+        </h1>
+        <p class="hh-hero-sub hh-anim hh-anim-d2">Website redesign for a nonprofit that rescues and rehomes abused and neglected animals — making it easier for people to adopt, donate, and volunteer.</p>
+        <div class="hh-hero-stats hh-anim hh-anim-d3">
+          <div class="hh-stat">
+            <span class="hh-stat-num" data-target="40">0</span><span class="hh-stat-unit">%</span>
+            <span class="hh-stat-label">adoption completion ↑</span>
+          </div>
+          <div class="hh-stat-div"></div>
+          <div class="hh-stat">
+            <span class="hh-stat-num" data-target="14">0</span>
+            <span class="hh-stat-label">weeks · project duration</span>
+          </div>
+          <div class="hh-stat-div"></div>
+          <div class="hh-stat">
+            <span class="hh-stat-num" data-target="4">0</span>
+            <span class="hh-stat-label">user personas built</span>
+          </div>
+        </div>
+      </div>
+      <div class="hh-hero-img hh-anim hh-anim-d2">
+        <img src="assets/hh-cover.png" alt="" onerror="this.parentElement.classList.add('hh-img-placeholder')">
+      </div>
+    </section>
+
+    <!-- OVERVIEW STRIP -->
+    <section class="hh-strip">
+      <div class="hh-strip-item hh-reveal">
+        <span class="hh-strip-label">My Role</span>
+        <span class="hh-strip-val">UX Research + UX/UI Design</span>
+      </div>
+      <div class="hh-strip-item hh-reveal hh-reveal-d1">
+        <span class="hh-strip-label">Platform</span>
+        <span class="hh-strip-val">Desktop Web</span>
+      </div>
+      <div class="hh-strip-item hh-reveal hh-reveal-d2">
+        <span class="hh-strip-label">Duration</span>
+        <span class="hh-strip-val">14 weeks</span>
+      </div>
+      <div class="hh-strip-item hh-reveal hh-reveal-d3">
+        <span class="hh-strip-label">Course</span>
+        <span class="hh-strip-val">GIT 540 — Usability & UX</span>
+      </div>
+      <div class="hh-strip-item hh-reveal hh-reveal-d4">
+        <span class="hh-strip-label">Outcome</span>
+        <span class="hh-strip-val">+40% task completion</span>
+      </div>
+    </section>
+
+    <!-- THE PROBLEM -->
+    <section class="hh-section hh-section--dark">
+      <div class="hh-section-inner">
+        <div class="hh-section-left hh-reveal">
+          <p class="hh-section-eyebrow">The Problem</p>
+          <h2 class="hh-section-title">A cause this good deserved a better website.</h2>
+          <p class="hh-section-body">Healing Hearts Animal Rescue and Refuge has a compassionate mission — but its website was letting it down. Confusing navigation, overwhelming content, outdated images, and unclear paths to key actions like adopting or donating were pushing potential supporters away.</p>
+          <div class="hh-problem-list hh-reveal hh-reveal-d1">
+            <div class="hh-problem-item"><span class="hh-problem-sev hh-sev-major">Major</span> Navigation & Visibility — key pages buried and hard to find</div>
+            <div class="hh-problem-item"><span class="hh-problem-sev hh-sev-major">Major</span> Donation form complexity — 40% of users couldn't complete it</div>
+            <div class="hh-problem-item"><span class="hh-problem-sev hh-sev-major">Major</span> Adoption info gaps — missing behavioral & medical details</div>
+            <div class="hh-problem-item"><span class="hh-problem-sev hh-sev-minor">Minor</span> Volunteer page clarity — sign-up process unclear</div>
+          </div>
+        </div>
+        <div class="hh-section-right hh-reveal hh-reveal-d2">
+          <div class="hh-img-frame">
+            <img src="assets/hh-before.png" alt="Original Healing Hearts website" onerror="this.parentElement.classList.add('hh-img-placeholder')">
+            <span class="hh-img-cap">Original site · before redesign</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH PROCESS -->
+    <section class="hh-section">
+      <div class="hh-section-inner hh-section-inner--col">
+        <div class="hh-reveal">
+          <p class="hh-section-eyebrow">UX Research Process</p>
+          <h2 class="hh-section-title">Listening before designing.</h2>
+          <p class="hh-section-body hh-body-narrow">I used a multi-method approach to understand not just what was broken — but why users were leaving without taking action.</p>
+        </div>
+        <div class="hh-methods-grid">
+          <div class="hh-method hh-reveal hh-reveal-d1">
+            <div class="hh-method-icon">🔍</div>
+            <h4>Heuristic Evaluation</h4>
+            <p>Assessed the site against Nielsen's 10 usability principles. Each issue severity rated from Minor to Catastrophe.</p>
+          </div>
+          <div class="hh-method hh-reveal hh-reveal-d2">
+            <div class="hh-method-icon">👥</div>
+            <h4>User Research</h4>
+            <p>Informal interviews and survey with students, professionals, and pet owners — 10 respondents total.</p>
+          </div>
+          <div class="hh-method hh-reveal hh-reveal-d3">
+            <div class="hh-method-icon">♿</div>
+            <h4>Accessibility Audit</h4>
+            <p>Evaluated against WCAG 2.1 — found low contrast, missing alt text, erratic navigation, and form label errors.</p>
+          </div>
+          <div class="hh-method hh-reveal hh-reveal-d4">
+            <div class="hh-method-icon">🗂</div>
+            <h4>Persona Creation</h4>
+            <p>Built 4 personas — donor, adopter, volunteer, and supporter — from real interaction data and survey insights.</p>
+          </div>
+          <div class="hh-method hh-reveal hh-reveal-d1">
+            <div class="hh-method-icon">📋</div>
+            <h4>User Stories</h4>
+            <p>Defined acceptance criteria for adopting, donating, and volunteering to guide design decisions.</p>
+          </div>
+          <div class="hh-method hh-reveal hh-reveal-d2">
+            <div class="hh-method-icon">🧪</div>
+            <h4>Usability Testing</h4>
+            <p>Task-based testing with 5–7 participants. Recorded time-on-task and success rates across 3 scenarios.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEVERITY SCALE -->
+    <section class="hh-section hh-section--olive">
+      <div class="hh-section-inner hh-section-inner--col">
+        <div class="hh-reveal">
+          <p class="hh-section-eyebrow">Heuristic Evaluation</p>
+          <h2 class="hh-section-title">Every issue was rated.</h2>
+        </div>
+        <div class="hh-sev-scale hh-reveal hh-reveal-d1">
+          <div class="hh-sev-item"><div class="hh-sev-dot hh-sev-dot--0"></div><span>No problem</span></div>
+          <div class="hh-sev-item"><div class="hh-sev-dot hh-sev-dot--1"></div><span>Minor</span></div>
+          <div class="hh-sev-item"><div class="hh-sev-dot hh-sev-dot--2"></div><span>Moderate</span></div>
+          <div class="hh-sev-item"><div class="hh-sev-dot hh-sev-dot--3"></div><span>Major</span></div>
+          <div class="hh-sev-item"><div class="hh-sev-dot hh-sev-dot--4"></div><span>Catastrophe</span></div>
+        </div>
+        <div class="hh-img-frame hh-reveal hh-reveal-d2">
+          <img src="assets/hh-heuristic.png" alt="Heuristic evaluation" onerror="this.parentElement.classList.add('hh-img-placeholder')">
+        </div>
+      </div>
+    </section>
+
+    <!-- USER RESEARCH INSIGHTS -->
+    <section class="hh-section hh-section--dark">
+      <div class="hh-section-inner hh-section-inner--col">
+        <div class="hh-reveal">
+          <p class="hh-section-eyebrow">User Research</p>
+          <h2 class="hh-section-title">What people actually wanted.</h2>
+        </div>
+        <div class="hh-insights hh-reveal hh-reveal-d1">
+          <div class="hh-insight">
+            <div class="hh-insight-pct">80%</div>
+            <p>visited primarily to adopt animals or volunteer — these flows needed to be front and center</p>
+          </div>
+          <div class="hh-insight">
+            <div class="hh-insight-pct">50%</div>
+            <p>wanted more animal information — behavioral traits, medical history, more photos</p>
+          </div>
+          <div class="hh-insight">
+            <div class="hh-insight-pct">70%</div>
+            <p>said they would recommend the site to others interested in adopting or volunteering</p>
+          </div>
+        </div>
+        <p class="hh-insight-note hh-reveal hh-reveal-d2">Users appreciated the cause but struggled with navigation, mobile responsiveness, and finding clear information. The need for a more intuitive structure was undeniable.</p>
+      </div>
+    </section>
+
+    <!-- PERSONAS -->
+    <section class="hh-section">
+      <div class="hh-section-inner hh-section-inner--col">
+        <div class="hh-reveal">
+          <p class="hh-section-eyebrow">User Personas</p>
+          <h2 class="hh-section-title">Four people. One goal.</h2>
+          <p class="hh-section-body hh-body-narrow">Every design decision was made with these people in mind.</p>
+        </div>
+        <div class="hh-personas">
+          <div class="hh-persona hh-reveal hh-reveal-d1" style="--ph:#7c533b;">
+            <div class="hh-persona-role">Donor</div>
+            <h3 class="hh-persona-name">Sarah Mitchell</h3>
+            <p class="hh-persona-quote">"I want to make sure my donation makes a real difference and goes directly to the animals."</p>
+            <div class="hh-persona-tags"><span>Transparency</span><span>Easy navigation</span><span>Confirmation</span></div>
+          </div>
+          <div class="hh-persona hh-reveal hh-reveal-d2" style="--ph:#646d37;">
+            <div class="hh-persona-role">Volunteer</div>
+            <h3 class="hh-persona-name">Michael Turner</h3>
+            <p class="hh-persona-quote">"I'm eager to help out, but I need flexible opportunities that work around my busy schedule."</p>
+            <div class="hh-persona-tags"><span>Updated listings</span><span>Quick sign-up</span><span>Schedules</span></div>
+          </div>
+          <div class="hh-persona hh-reveal hh-reveal-d3" style="--ph:#323031;">
+            <div class="hh-persona-role">Supporter</div>
+            <h3 class="hh-persona-name">David Johnson</h3>
+            <p class="hh-persona-quote">"I want to be more involved beyond just donating money — through my time and expertise."</p>
+            <div class="hh-persona-tags"><span>Events</span><span>Newsletter</span><span>Campaigns</span></div>
+          </div>
+          <div class="hh-persona hh-reveal hh-reveal-d4" style="--ph:#b59e82;">
+            <div class="hh-persona-role">Adopter</div>
+            <h3 class="hh-persona-name">Emily Davis</h3>
+            <p class="hh-persona-quote">"I'm ready to welcome a pet into my life, but I need clear details to make the right choice."</p>
+            <div class="hh-persona-tags"><span>Detailed profiles</span><span>Step-by-step</span><span>Filters</span></div>
+          </div>
+        </div>
+        <div class="hh-img-frame hh-reveal hh-reveal-d2">
+          <img src="assets/hh-personas.png" alt="User personas" onerror="this.parentElement.classList.add('hh-img-placeholder')">
+        </div>
+      </div>
+    </section>
+
+    <!-- DESIGN SYSTEM -->
+    <section class="hh-section hh-section--dark">
+      <div class="hh-section-inner">
+        <div class="hh-section-left hh-reveal">
+          <p class="hh-section-eyebrow">Visual Design</p>
+          <h2 class="hh-section-title">Refined, not redefined.</h2>
+          <p class="hh-section-body">I replaced the site's original serif font with Century Gothic — rounded geometry that feels friendly, legible across screen sizes, and aligned with the brand's emotional mission.</p>
+          <div class="hh-type-sample hh-reveal hh-reveal-d1">
+            <div class="hh-type-row"><span class="hh-type-name">Hero</span><span class="hh-type-spec">36px · Bold</span><span class="hh-type-preview" style="font-size:2rem;font-weight:700;">Healing.</span></div>
+            <div class="hh-type-row"><span class="hh-type-name">Heading</span><span class="hh-type-spec">24px · Semi-bold</span><span class="hh-type-preview" style="font-size:1.3rem;font-weight:600;">Adopt a friend.</span></div>
+            <div class="hh-type-row"><span class="hh-type-name">Body</span><span class="hh-type-spec">16px · Regular</span><span class="hh-type-preview" style="font-size:0.95rem;">Every animal deserves a home.</span></div>
+          </div>
+        </div>
+        <div class="hh-section-right hh-reveal hh-reveal-d2">
+          <p class="hh-section-eyebrow">Color Palette</p>
+          <div class="hh-palette">
+            <div class="hh-swatch" style="background:#646d37;"><span class="hh-swatch-hex">#646d37</span><span class="hh-swatch-name">Olive Green</span></div>
+            <div class="hh-swatch" style="background:#323031;"><span class="hh-swatch-hex">#323031</span><span class="hh-swatch-name">Deep Charcoal</span></div>
+            <div class="hh-swatch" style="background:#b59e82;"><span class="hh-swatch-hex">#b59e82</span><span class="hh-swatch-name">Dusty Beige</span></div>
+            <div class="hh-swatch hh-swatch--sm" style="background:#7c533b;"><span class="hh-swatch-hex">#7c533b</span><span class="hh-swatch-name">Earthy Brown</span></div>
+            <div class="hh-swatch hh-swatch--sm" style="background:#eef1f3; color:#333;"><span class="hh-swatch-hex" style="color:#555;">#eef1f3</span><span class="hh-swatch-name" style="color:#555;">Light Mist</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WIREFRAMES -->
+    <section class="hh-section hh-section--olive">
+      <div class="hh-section-inner hh-section-inner--col">
+        <div class="hh-reveal">
+          <p class="hh-section-eyebrow">Wireframes</p>
+          <h2 class="hh-section-title">Structure before surface.</h2>
+          <p class="hh-section-body hh-body-narrow">Low-fidelity wireframes mapped out the new information architecture — prioritising adoption, donation, and volunteer flows with clear hierarchy.</p>
+        </div>
+        <div class="hh-img-frame hh-reveal hh-reveal-d1">
+          <img src="assets/hh-wireframes.png" alt="Wireframes" onerror="this.parentElement.classList.add('hh-img-placeholder')">
+        </div>
+      </div>
+    </section>
+
+    <!-- HI-FI PROTOTYPE — 3 VIDEOS -->
+    <section class="hh-section hh-section--dark">
+      <div class="hh-section-inner hh-section-inner--col">
+        <div class="hh-reveal">
+          <p class="hh-section-eyebrow">High Fidelity Prototype</p>
+          <h2 class="hh-section-title">Three flows. One experience.</h2>
+          <p class="hh-section-body hh-body-narrow">Each core user journey redesigned from scratch — cleaner, faster, and emotionally connected to the cause.</p>
+        </div>
+        <div class="hh-videos">
+          <div class="hh-video-block hh-reveal hh-reveal-d1">
+            <div class="hh-macbook">
+              <div class="hh-macbook-screen">
+                <video src="assets/hh-adoption.mp4" autoplay muted loop playsinline onerror="this.parentElement.classList.add('hh-vid-placeholder')"></video>
+              </div>
+              <div class="hh-macbook-chin"></div>
+              <div class="hh-macbook-base"></div>
+            </div>
+            <p class="hh-video-label">Adoption walkthrough</p>
+          </div>
+          <div class="hh-video-block hh-reveal hh-reveal-d2">
+            <div class="hh-macbook">
+              <div class="hh-macbook-screen">
+                <video src="assets/hh-donation.mp4" autoplay muted loop playsinline onerror="this.parentElement.classList.add('hh-vid-placeholder')"></video>
+              </div>
+              <div class="hh-macbook-chin"></div>
+              <div class="hh-macbook-base"></div>
+            </div>
+            <p class="hh-video-label">Donation page walkthrough</p>
+          </div>
+          <div class="hh-video-block hh-reveal hh-reveal-d3">
+            <div class="hh-macbook">
+              <div class="hh-macbook-screen">
+                <video src="assets/hh-volunteer.mp4" autoplay muted loop playsinline onerror="this.parentElement.classList.add('hh-vid-placeholder')"></video>
+              </div>
+              <div class="hh-macbook-chin"></div>
+              <div class="hh-macbook-base"></div>
+            </div>
+            <p class="hh-video-label">Volunteer page walkthrough</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUTCOME -->
+    <section class="hh-section hh-section--olive hh-section--outcome">
+      <div class="hh-section-inner hh-section-inner--col hh-section-inner--center">
+        <div class="hh-reveal">
+          <p class="hh-section-eyebrow">The Outcome</p>
+          <h2 class="hh-section-title hh-title-xl">+40%</h2>
+          <p class="hh-section-body hh-body-narrow">adoption-process completion rate — a direct result of cleaner navigation, honest animal profiles, and a simplified donation flow that respected users' time and trust.</p>
+        </div>
+        <div class="hh-outcome-grid hh-reveal hh-reveal-d1">
+          <div class="hh-outcome-item">
+            <h4>Navigation redesigned</h4>
+            <p>Streamlined nav bar, reorganized hierarchy, consistent menu layout across all pages</p>
+          </div>
+          <div class="hh-outcome-item">
+            <h4>Donation simplified</h4>
+            <p>Reduced fields, progress bar, secure payment confirmation — fewer steps, higher completion</p>
+          </div>
+          <div class="hh-outcome-item">
+            <h4>Animal profiles enriched</h4>
+            <p>Personality traits, medical history, high-quality images, filters by age, breed & size</p>
+          </div>
+          <div class="hh-outcome-item">
+            <h4>Volunteer hub created</h4>
+            <p>Centralized page with current opportunities, role descriptions, and quick sign-up</p>
+          </div>
+        </div>
+        <p class="hh-outcome-quote hh-reveal hh-reveal-d2">"Making it easier for people to connect with the cause — whether they want to adopt, donate, or just learn more."</p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="hh-footer">
+      <button class="hh-back-btn" onclick="closeHH()">← Back to all work</button>
+    </div>
+
+  </div>
+</div>
+
 <!-- GFX Lightbox -->
 <div id="gfxLightbox" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
   <button id="gfxLightboxClose" style="position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1;opacity:0.7;">×</button>
@@ -1852,7 +2196,7 @@
     {l:'Say Hello',s:'Contact & footer',c:'Section',a:'rfooter'},
     {l:'WalletGyde',s:'Finance app · +32% task completion',c:'Project',a:'rct-section'},
     {l:'Mood Ticketing',s:'UX case study',c:'Project',a:'rct-section'},
-    {l:'Healing Hearts',s:'Healthcare UX · mobile redesign',c:'Project',a:'rct-section'},
+    {l:'Healing Hearts',s:'Animal rescue website redesign · +40% task completion',c:'Project',a:'rct-section'},
     {l:'Data Extraction System',s:'UX case study',c:'Project',a:'rct-section'},
     {l:'Copy Email',s:'pri.anka256@gmail.com',c:'Action',a:'email'},
     {l:'LinkedIn',s:'linkedin.com/in/priyanka-uttarkar',c:'Action',a:'linkedin'},
@@ -1915,6 +2259,54 @@
   function setA(els){els.forEach(function(el,i){el.classList.toggle('rsl-active',i===activeIdx);});if(els[activeIdx])els[activeIdx].scrollIntoView({block:'nearest'});}
   inp.addEventListener('input',function(){render(inp.value);});
 })();
+</script>
+
+<script>
+(function(){
+  var overlay = document.getElementById('hhOverlay');
+  var panel = document.getElementById('hhPanel');
+  var countersRun = false;
+
+  window.openHH = function(){
+    overlay.classList.add('hh-open');
+    overlay.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    panel.scrollTop = 0;
+    setTimeout(initReveal, 200);
+    setTimeout(runCounters, 600);
+  };
+
+  window.closeHH = function(){
+    overlay.classList.remove('hh-open');
+    overlay.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    countersRun = false;
+  };
+
+  document.getElementById('hhClose').addEventListener('click', closeHH);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && overlay.classList.contains('hh-open')) closeHH(); });
+
+  function initReveal(){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('hh-visible'); });
+    }, { root: panel, threshold: 0.12 });
+    panel.querySelectorAll('.hh-reveal').forEach(function(el){ io.observe(el); });
+  }
+
+  function runCounters(){
+    if(countersRun) return; countersRun = true;
+    panel.querySelectorAll('.hh-stat-num[data-target]').forEach(function(el){
+      var target = +el.getAttribute('data-target');
+      var start = 0; var dur = 1200;
+      var step = Math.ceil(dur / (target || 1));
+      var t = setInterval(function(){
+        start = Math.min(start + Math.ceil(target/20), target);
+        el.textContent = start;
+        if(start >= target) clearInterval(t);
+      }, step);
+    });
+  }
+}());
 </script>
 
 </body>
