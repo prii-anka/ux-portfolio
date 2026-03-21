@@ -1075,22 +1075,20 @@ document.getElementById('rSwitchCreative')?.addEventListener('click', e => {
 // ── DOCK HIDE WHEN IN PROJECTS SECTION ──────────────────────────────
 (function () {
   var dock = document.querySelector('.rdock');
-  var view = document.getElementById('view-recruiter');
   var projects = document.getElementById('rct-section');
-  if (!dock || !view || !projects) return;
+  if (!dock || !projects) return;
 
-  function check() {
-    var vRect = view.getBoundingClientRect();
-    var pRect = projects.getBoundingClientRect();
-    // hide when top of projects section reaches top 60% of viewport
-    if (pRect.top < vRect.top + vRect.height * 0.6) {
-      dock.classList.add('rdock--hidden');
-    } else {
-      dock.classList.remove('rdock--hidden');
-    }
-  }
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        dock.classList.add('rdock--hidden');
+      } else {
+        dock.classList.remove('rdock--hidden');
+      }
+    });
+  }, { threshold: 0.05 });
 
-  view.addEventListener('scroll', check, { passive: true });
+  obs.observe(projects);
 })();
 
 // ── SPOTLIGHT / FINDER SEARCH ────────────────────────────────────────
