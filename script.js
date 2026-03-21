@@ -1072,22 +1072,21 @@ document.getElementById('rSwitchCreative')?.addEventListener('click', e => {
   document.body.style.overflow = 'hidden';
 });
 
-// ── DOCK HIDE ON SCROLL ──────────────────────────────────────────────
+// ── DOCK HIDE WHEN IN PROJECTS SECTION ──────────────────────────────
 (function () {
   var dock = document.querySelector('.rdock');
-  if (!dock) return;
-  var t;
   var view = document.getElementById('view-recruiter');
-  if (!view) return;
+  var projects = document.getElementById('rct-section');
+  if (!dock || !view || !projects) return;
+
   view.addEventListener('scroll', function () {
-    dock.classList.add('rdock--hidden');
-    clearTimeout(t);
-    t = setTimeout(function () { dock.classList.remove('rdock--hidden'); }, 900);
+    var threshold = projects.offsetTop - 120;
+    if (view.scrollTop >= threshold) {
+      dock.classList.add('rdock--hidden');
+    } else {
+      dock.classList.remove('rdock--hidden');
+    }
   }, { passive: true });
-  dock.addEventListener('mouseenter', function () {
-    clearTimeout(t);
-    dock.classList.remove('rdock--hidden');
-  });
 })();
 
 // ── GFX LIGHTBOX ─────────────────────────────────────────────────────
