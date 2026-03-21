@@ -1624,6 +1624,42 @@
 }());
 </script>
 
+<!-- Photos Overlay -->
+<div class="rphotos" id="rphotosOverlay" aria-hidden="true">
+  <div class="rphotos-win">
+    <div class="rphotos-titlebar">
+      <button class="rphotos-close" id="rphotosClose" aria-label="Close">
+        <svg viewBox="0 0 10 10" width="10" height="10"><line x1="2" y1="2" x2="8" y2="8" stroke="rgba(0,0,0,0.5)" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="2" x2="2" y2="8" stroke="rgba(0,0,0,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="rphotos-wintitle">Photos — pri.anka</div>
+    </div>
+
+    <div class="rphotos-content">
+      <div class="rphotos-hero">
+        <h2 class="rphotos-heading">captured.</h2>
+        <p class="rphotos-sub">not professional. just present. i shoot architecture, light, dogs, and whatever makes me stop walking.</p>
+      </div>
+
+      <div class="rphotos-grid" id="rphotosGrid">
+        <!-- Row 1 -->
+        <div class="rph-tile rph-tile--wide"><img src="assets/photo-1.jpg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile rph-tile--tall"><img src="assets/photo-2.jpg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile"><img src="assets/photo-3.jpg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile"><img src="assets/photo-4.jpg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile rph-tile--wide"><img src="assets/photo-5.jpg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile rph-tile--tall"><img src="assets/photo-6.jpg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile"><img src="assets/photo-7.jpg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile"><img src="assets/photo-8.jpg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile rph-tile--wide"><img src="assets/photo-9.jpg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+      </div>
+
+      <p class="rphotos-ig">
+        <a href="https://instagram.com/pri.anka" target="_blank">→ more on instagram @pri.anka</a>
+      </p>
+    </div>
+  </div>
+</div>
+
 <!-- Spotlight / Finder Search -->
 <div class="rspotlight" id="rSpotlight" aria-hidden="true">
   <div class="rspotlight-box">
@@ -1657,6 +1693,20 @@
 
 <script src="script.js?v=10"></script>
 <script>
+// photos overlay
+(function(){
+  var overlay = document.getElementById('rphotosOverlay');
+  var closeBtn = document.getElementById('rphotosClose');
+  var photosBtn = document.querySelector('.rdock-item[title="Photos"]');
+  if(!overlay) return;
+  function open(){ overlay.classList.add('rphotos--open'); overlay.setAttribute('aria-hidden','false'); }
+  function close(){ overlay.classList.remove('rphotos--open'); overlay.setAttribute('aria-hidden','true'); }
+  if(photosBtn) photosBtn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', function(e){ if(e.target===overlay) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+
 // dock hide on scroll into projects
 (function(){
   var dock = document.querySelector('.rdock');
@@ -1685,6 +1735,7 @@
     {l:'WalletGyde',s:'Finance app · +32% task completion',c:'Project',a:'rct-section'},
     {l:'Mood Ticketing',s:'UX case study',c:'Project',a:'rct-section'},
     {l:'Healing Hearts',s:'Healthcare UX · mobile redesign',c:'Project',a:'rct-section'},
+    {l:'Data Extraction System',s:'UX case study',c:'Project',a:'rct-section'},
     {l:'Copy Email',s:'pri.anka256@gmail.com',c:'Action',a:'email'},
     {l:'LinkedIn',s:'linkedin.com/in/priyanka-uttarkar',c:'Action',a:'linkedin'},
     {l:'Chat with prianka.ai',s:'Ask me anything',c:'Action',a:'chat'},
