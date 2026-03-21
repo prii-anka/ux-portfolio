@@ -2537,12 +2537,17 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   border-radius: 10px; overflow: hidden;
   background: #252525; position: relative;
 }
+.rpaint-tile--bookmark { aspect-ratio: 1 / 2.8; }
 .rpaint-tile img {
   width: 100%; height: 100%;
   object-fit: cover; object-position: center top;
   transition: transform 0.4s ease;
 }
 .rpaint-tile:hover img { transform: scale(1.04); }
+/* stagger */
+.rpaint-tile:nth-child(4n+2) { margin-top: 28px; }
+.rpaint-tile:nth-child(4n+3) { margin-top: 14px; }
+.rpaint-tile:nth-child(4n+4) { margin-top: 42px; }
 .rpaint-tile.rpaint-empty {
   display: flex; align-items: center; justify-content: center;
 }
