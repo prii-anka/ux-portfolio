@@ -2652,6 +2652,20 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   display: flex; align-items: center; justify-content: space-between;
 }
 .rfooter-bar-links { display: flex; align-items: center; gap: 12px; }
+
+/* ── Email copy toast ── */
+#emailToast {
+  position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(12px);
+  background: #fff; color: #111;
+  font-family: 'Space Grotesk', sans-serif; font-size: 0.78rem; font-weight: 500;
+  padding: 10px 18px; border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.22);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 99999; white-space: nowrap;
+}
+#emailToast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.copy-email-btn { cursor: pointer; }
 .rfooter-sep { color: #444; font-size: 0.6rem; }
 .rfooter-copy { font-size: 0.55rem; font-weight: 400; color: #444; }
 .rfooter-link {
