@@ -1089,6 +1089,139 @@ document.getElementById('rSwitchCreative')?.addEventListener('click', e => {
   }, { passive: true });
 })();
 
+// ── SPOTLIGHT / FINDER SEARCH ────────────────────────────────────────
+(function () {
+  var overlay   = document.getElementById('rSpotlight');
+  var input     = document.getElementById('rSpotlightInput');
+  var results   = document.getElementById('rSpotlightResults');
+  var finderBtn = document.getElementById('rdockFinderBtn');
+  var view      = document.getElementById('view-recruiter');
+  if (!overlay || !input || !results) return;
+
+  var INDEX = [
+    // Sections
+    { label: 'Introduction', sub: 'Hero — Hi, I\'m Priyanka', cat: 'Section', icon: '✦', action: 'scrollTop' },
+    { label: 'Selected Work', sub: 'Projects & case studies', cat: 'Section', icon: '◈', anchor: 'rct-section' },
+    { label: 'Graphic Design & Branding', sub: 'Visual work & brand projects', cat: 'Section', icon: '◉', anchor: 'rgfx-section' },
+    { label: 'Say Hello', sub: 'Footer & contact info', cat: 'Section', icon: '◎', anchor: 'rfooter' },
+    // Projects
+    { label: 'Healing Hearts', sub: 'Healthcare UX · mobile redesign', cat: 'Project', icon: '❤', anchor: 'rct-section' },
+    { label: 'WalletGyde', sub: 'Finance app · +32% task completion', cat: 'Project', icon: '◈', anchor: 'rct-section' },
+    { label: 'Dashboard Statistics', sub: 'Enterprise analytics redesign', cat: 'Project', icon: '◉', anchor: 'rct-section' },
+    { label: 'Orion Design System', sub: '200+ components · Figma tokens', cat: 'Project', icon: '✦', anchor: 'rct-section' },
+    // Actions
+    { label: 'Copy Email', sub: 'pri.anka256@gmail.com', cat: 'Action', icon: '@', action: 'copyEmail' },
+    { label: 'LinkedIn', sub: 'linkedin.com/in/priyanka-uttarkar', cat: 'Action', icon: 'in', action: 'linkedin' },
+    { label: 'Chat with prianka.ai', sub: 'Ask me anything', cat: 'Action', icon: '✦', action: 'chat' },
+    { label: 'Download Resume', sub: 'PDF', cat: 'Action', icon: '↓', action: 'resume' },
+    // Skills
+    { label: 'Figma', sub: 'Design tool', cat: 'Skill', icon: '◈', anchor: 'rmarquee-area' },
+    { label: 'UX Research', sub: 'User research & testing', cat: 'Skill', icon: '◉', anchor: 'rmarquee-area' },
+    { label: 'Design Systems', sub: 'Component libraries & tokens', cat: 'Skill', icon: '✦', anchor: 'rmarquee-area' },
+    { label: 'Prototyping', sub: 'Interactive prototypes', cat: 'Skill', icon: '◎', anchor: 'rmarquee-area' },
+    { label: 'Framer', sub: 'No-code / motion', cat: 'Skill', icon: '◈', anchor: 'rmarquee-area' },
+  ];
+
+  var activeIdx = -1;
+  var filtered  = [];
+
+  function open() {
+    overlay.classList.add('rspotlight--open');
+    overlay.setAttribute('aria-hidden', 'false');
+    input.value = '';
+    renderResults('');
+    setTimeout(function () { input.focus(); }, 50);
+  }
+  function close() {
+    overlay.classList.remove('rspotlight--open');
+    overlay.setAttribute('aria-hidden', 'true');
+    input.blur();
+  }
+
+  function renderResults(q) {
+    activeIdx = -1;
+    q = q.trim().toLowerCase();
+    filtered = q === '' ? INDEX : INDEX.filter(function (r) {
+      return (r.label + r.sub + r.cat).toLowerCase().indexOf(q) !== -1;
+    });
+
+    if (filtered.length === 0) {
+      results.innerHTML = '<div class="rspotlight-empty">No results for "' + q + '"</div>';
+      return;
+    }
+
+    var cats = [], seen = {};
+    filtered.forEach(function (r) { if (!seen[r.cat]) { cats.push(r.cat); seen[r.cat] = true; } });
+
+    var html = '';
+    cats.forEach(function (cat) {
+      html += '<div class="rspotlight-cat-label">' + cat + '</div>';
+      filtered.filter(function (r) { return r.cat === cat; }).forEach(function (r, i) {
+        var idx = filtered.indexOf(r);
+        html += '<div class="rspotlight-result" data-idx="' + idx + '">' +
+          '<div class="rspotlight-result-icon">' + r.icon + '</div>' +
+          '<div class="rspotlight-result-text">' +
+          '<div class="rspotlight-result-label">' + r.label + '</div>' +
+          '<div class="rspotlight-result-sub">' + r.sub + '</div>' +
+          '</div><span class="rspotlight-result-arrow">↵</span></div>';
+      });
+    });
+    results.innerHTML = html;
+
+    results.querySelectorAll('.rspotlight-result').forEach(function (el) {
+      el.addEventListener('click', function () { activate(parseInt(el.getAttribute('data-idx'))); });
+    });
+  }
+
+  function activate(idx) {
+    var r = filtered[idx];
+    if (!r) return;
+    close();
+    if (r.action === 'scrollTop') {
+      if (view) view.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (r.action === 'copyEmail') {
+      navigator.clipboard.writeText('pri.anka256@gmail.com').then(function () {
+        var t = document.getElementById('emailToast');
+        if (t) { t.classList.add('show'); setTimeout(function () { t.classList.remove('show'); }, 2000); }
+      });
+    } else if (r.action === 'linkedin') {
+      window.open('https://linkedin.com/in/priyanka-uttarkar', '_blank');
+    } else if (r.action === 'chat') {
+      var btn = document.getElementById('rdockChatBtn');
+      if (btn) btn.click();
+    } else if (r.action === 'resume') {
+      var a = document.querySelector('a[href*="resume"], a[href*="Resume"]');
+      if (a) a.click();
+    } else if (r.anchor) {
+      var el = document.getElementById(r.anchor) || document.querySelector('.' + r.anchor);
+      if (el && view) view.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
+    }
+  }
+
+  function setActive(idx) {
+    var items = results.querySelectorAll('.rspotlight-result');
+    items.forEach(function (el) { el.classList.remove('rsl-active'); });
+    if (idx >= 0 && idx < items.length) {
+      activeIdx = idx;
+      items[idx].classList.add('rsl-active');
+      items[idx].scrollIntoView({ block: 'nearest' });
+    }
+  }
+
+  if (finderBtn) finderBtn.addEventListener('click', open);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', function (e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'f') { e.preventDefault(); open(); return; }
+    if (!overlay.classList.contains('rspotlight--open')) return;
+    if (e.key === 'Escape') { close(); return; }
+    var items = results.querySelectorAll('.rspotlight-result');
+    if (e.key === 'ArrowDown') { e.preventDefault(); setActive(Math.min(activeIdx + 1, items.length - 1)); }
+    if (e.key === 'ArrowUp')   { e.preventDefault(); setActive(Math.max(activeIdx - 1, 0)); }
+    if (e.key === 'Enter' && activeIdx >= 0) activate(activeIdx);
+  });
+  input.addEventListener('input', function () { renderResults(input.value); });
+})();
+
 // ── GFX LIGHTBOX ─────────────────────────────────────────────────────
 (function () {
   var lb  = document.getElementById('rgfxLightbox');

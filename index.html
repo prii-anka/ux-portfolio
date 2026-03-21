@@ -1524,7 +1524,7 @@
       <div class="rdock-icon"><img src="assets/icon-photos.png" alt="Photos"/></div>
       <span class="rdock-label">Photos</span>
     </div>
-    <div class="rdock-item" title="Work Files">
+    <div class="rdock-item" id="rdockFinderBtn" title="Search portfolio">
       <div class="rdock-icon rdock-folder"><img src="assets/icon-finder.png" alt="Finder"/></div>
       <span class="rdock-label">Finder</span>
     </div>
@@ -1618,6 +1618,18 @@
   }, 8000);
 }());
 </script>
+
+<!-- Spotlight / Finder Search -->
+<div class="rspotlight" id="rSpotlight" aria-hidden="true">
+  <div class="rspotlight-box">
+    <div class="rspotlight-input-row">
+      <svg class="rspotlight-icon" viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.6"/><line x1="13" y1="13" x2="18" y2="18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <input class="rspotlight-input" id="rSpotlightInput" type="text" placeholder="Search portfolio…" autocomplete="off" spellcheck="false"/>
+      <kbd class="rspotlight-esc">esc</kbd>
+    </div>
+    <div class="rspotlight-results" id="rSpotlightResults"></div>
+  </div>
+</div>
 
 <!-- Email copy toast -->
 <div id="emailToast">Email copied!</div>
