@@ -2501,6 +2501,63 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .rgfx-card:hover .rgfx-name { color: #fff; }
 
+/* ── Paintings Section ── */
+.rpaint-section {
+  padding: 68px 42px 60px;
+  background: #1a1a1a;
+}
+.rpaint-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 32px; gap: 24px; flex-wrap: wrap;
+}
+.rpaint-eyebrow {
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem; color: rgba(255,255,255,0.35);
+  display: block; margin-bottom: 4px;
+}
+.rpaint-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400; font-style: italic;
+  color: #fff; margin: 0; line-height: 1;
+}
+.rpaint-sub {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.82rem; color: rgba(255,255,255,0.35);
+  max-width: 320px; line-height: 1.6; margin: 0;
+  text-align: right;
+}
+.rpaint-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 220px;
+  gap: 10px;
+}
+.rpaint-tile {
+  border-radius: 10px; overflow: hidden;
+  background: #252525; position: relative;
+}
+.rpaint-tile--tall { grid-row: span 2; }
+.rpaint-tile--wide { grid-column: span 2; }
+.rpaint-tile img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.rpaint-tile:hover img { transform: scale(1.04); }
+.rpaint-tile.rpaint-empty {
+  display: flex; align-items: center; justify-content: center;
+}
+.rpaint-tile.rpaint-empty::after {
+  content: '+'; font-size: 1.4rem; color: rgba(255,255,255,0.08);
+}
+/* light mode */
+#view-recruiter.r-light .rpaint-section { background: #f0eeea; }
+#view-recruiter.r-light .rpaint-title { color: #1a1a1a; }
+#view-recruiter.r-light .rpaint-eyebrow { color: rgba(0,0,0,0.3); }
+#view-recruiter.r-light .rpaint-sub { color: rgba(0,0,0,0.4); }
+#view-recruiter.r-light .rpaint-tile { background: #dedad4; }
+
 /* ── Indian Street Montage ── */
 .rstreet-section {
   position: relative; overflow: hidden;
