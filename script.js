@@ -1079,14 +1079,18 @@ document.getElementById('rSwitchCreative')?.addEventListener('click', e => {
   var projects = document.getElementById('rct-section');
   if (!dock || !view || !projects) return;
 
-  view.addEventListener('scroll', function () {
-    var threshold = projects.offsetTop - 120;
-    if (view.scrollTop >= threshold) {
+  function check() {
+    var vRect = view.getBoundingClientRect();
+    var pRect = projects.getBoundingClientRect();
+    // hide when top of projects section reaches top 60% of viewport
+    if (pRect.top < vRect.top + vRect.height * 0.6) {
       dock.classList.add('rdock--hidden');
     } else {
       dock.classList.remove('rdock--hidden');
     }
-  }, { passive: true });
+  }
+
+  view.addEventListener('scroll', check, { passive: true });
 })();
 
 // ── SPOTLIGHT / FINDER SEARCH ────────────────────────────────────────
