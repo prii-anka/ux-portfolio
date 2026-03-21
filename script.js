@@ -1072,6 +1072,24 @@ document.getElementById('rSwitchCreative')?.addEventListener('click', e => {
   document.body.style.overflow = 'hidden';
 });
 
+// ── DOCK HIDE ON SCROLL ──────────────────────────────────────────────
+(function () {
+  var dock = document.querySelector('.rdock');
+  if (!dock) return;
+  var t;
+  var view = document.getElementById('view-recruiter');
+  if (!view) return;
+  view.addEventListener('scroll', function () {
+    dock.classList.add('rdock--hidden');
+    clearTimeout(t);
+    t = setTimeout(function () { dock.classList.remove('rdock--hidden'); }, 900);
+  }, { passive: true });
+  dock.addEventListener('mouseenter', function () {
+    clearTimeout(t);
+    dock.classList.remove('rdock--hidden');
+  });
+})();
+
 // ── GFX LIGHTBOX ─────────────────────────────────────────────────────
 (function () {
   var lb  = document.getElementById('rgfxLightbox');
