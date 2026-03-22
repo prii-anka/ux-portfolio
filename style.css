@@ -2921,7 +2921,13 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .rphotos-content {
   overflow-y: auto; padding: 36px 36px 48px; flex: 1;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.15) transparent;
 }
+.rphotos-content::-webkit-scrollbar { width: 4px; }
+.rphotos-content::-webkit-scrollbar-track { background: transparent; }
+.rphotos-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+.rphotos-content::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
 .rphotos-hero { margin-bottom: 28px; }
 .rphotos-heading {
   font-family: 'Cormorant Garamond', serif;
