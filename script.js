@@ -4,24 +4,41 @@
 
 // ── LOADER ─────────────────────────────────────────
 (function () {
-  var MAX_WAIT = 1200; // max ms before hiding loader
+  var MIN_SHOW = 1800;  // always show loader for at least this long
+  var MAX_WAIT = 5000;  // hard cap — never wait more than 5s
   var started = Date.now();
 
   function hideLoader() {
     var loader = document.getElementById('siteLoader');
     if (loader) loader.classList.add('hidden');
-    // start typewriter if landing on cv view
     var saved = localStorage.getItem('pv') || 'recruiter';
     if (saved === 'recruiter') setTimeout(function () { if (window.rLoopStart) window.rLoopStart(); }, 200);
   }
 
-  var fallback = setTimeout(hideLoader, MAX_WAIT);
-  window.addEventListener('load', function () {
+  function tryHide() {
     var elapsed = Date.now() - started;
-    var remaining = MAX_WAIT - elapsed;
+    var wait = Math.max(0, MIN_SHOW - elapsed);
+    setTimeout(hideLoader, wait);
+  }
+
+  // Hard fallback — never block more than MAX_WAIT
+  var fallback = setTimeout(hideLoader, MAX_WAIT);
+
+  // Wait for all loader images to load
+  window.addEventListener('load', function () {
     clearTimeout(fallback);
-    // hide after a minimum of 600ms so the entrance animation plays
-    setTimeout(hideLoader, Math.max(0, Math.min(remaining, 600)));
+    var imgs = document.querySelectorAll('#siteLoader .lframe img');
+    var total = imgs.length;
+    if (total === 0) { tryHide(); return; }
+    var loaded = 0;
+    function onLoad() {
+      loaded++;
+      if (loaded >= Math.min(total, 8)) { tryHide(); } // wait for first 8 images max
+    }
+    imgs.forEach(function (img) {
+      if (img.complete) { onLoad(); }
+      else { img.addEventListener('load', onLoad); img.addEventListener('error', onLoad); }
+    });
   });
 })();
 
