@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@300;400;500;600&family=Caveat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,700&family=DM+Sans:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400;1,6..96,700&family=Italiana&family=Gilda+Display&family=Dancing+Script:wght@400;600;700&family=Satisfy&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&family=Yeseva+One&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
-  <link rel="stylesheet" href="style.css?v=17" />
+  <link rel="stylesheet" href="style.css?v=19" />
 </head>
 <body>
 
@@ -265,7 +265,7 @@
           </div>
           <div class="rphone-screen" id="rPhoneScreen">
             <div class="rpchat-header">
-              <div class="rpchat-avatar">P</div>
+              <div class="rpchat-avatar"><img src="assets/mymemoji.jpeg" alt="Priyanka" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
               <div>
                 <div class="rpchat-name">Ask Priyanka</div>
                 <div class="rpchat-status"><span class="rpchat-dot"></span>always on</div>
@@ -1425,12 +1425,15 @@
     <!-- HERO -->
     <section class="hh-hero">
       <div class="hh-hero-bg"></div>
+      <div class="hh-hero-img hh-anim hh-anim-d1">
+        <img src="assets/hh-cover.png" alt="" onerror="this.parentElement.classList.add('hh-img-placeholder')">
+      </div>
       <div class="hh-hero-content">
-        <h1 class="hh-hero-title hh-anim hh-anim-d1">
+        <h1 class="hh-hero-title hh-anim hh-anim-d2">
           Redesigning<br><em>Healing Hearts</em><br>Animal Rescue
         </h1>
-        <p class="hh-hero-sub hh-anim hh-anim-d2">Healing Hearts does incredible work for animals in need. Their website wasn't keeping up. I redesigned it end to end so that the people who wanted to help could actually do it.</p>
-        <div class="hh-hero-stats hh-anim hh-anim-d3">
+        <p class="hh-hero-sub hh-anim hh-anim-d3">Healing Hearts does incredible work for animals in need. Their website wasn't keeping up. I redesigned it end to end so that the people who wanted to help could actually do it.</p>
+        <div class="hh-hero-stats hh-anim hh-anim-d4">
           <div class="hh-stat">
             <span class="hh-stat-num" data-target="40">0</span><span class="hh-stat-unit">%</span>
             <span class="hh-stat-label">adoption completion ↑</span>
@@ -1446,9 +1449,6 @@
             <span class="hh-stat-label">user personas built</span>
           </div>
         </div>
-      </div>
-      <div class="hh-hero-img hh-anim hh-anim-d2">
-        <img src="assets/hh-cover.png" alt="" onerror="this.parentElement.classList.add('hh-img-placeholder')">
       </div>
     </section>
 
@@ -1583,46 +1583,51 @@
       <div class="hh-section-inner hh-section-inner--col">
         <div class="hh-reveal">
           <p class="hh-section-eyebrow">User Personas</p>
-          <h2 class="hh-section-title">Four people. One goal.</h2>
-          <p class="hh-section-body hh-body-narrow">Every design decision was made with these people in mind.</p>
+          <h2 class="hh-section-title">The people I designed for.</h2>
+          <p class="hh-section-body hh-body-narrow">Different reasons to show up. Same broken experience standing in their way.</p>
         </div>
-        <div class="hh-personas">
-          <div class="hh-persona-chat hh-reveal hh-reveal-d1">
-            <div class="hh-persona-chat-header">
-              <div class="hh-persona-avatar" style="background:#7c533b;">SM</div>
-              <div><div class="hh-persona-chat-name">Sarah Mitchell</div><div class="hh-persona-chat-role">Donor</div></div>
+        <div class="hh-persona-float">
+
+          <div class="hh-pf-card hh-reveal hh-reveal-d1">
+            <div class="hh-pf-avatar"><img src="assets/hh-memoji-sarah.png" alt="Sarah"></div>
+            <p class="hh-pf-quote">I want to make sure my donation makes a real difference.</p>
+            <div class="hh-pf-footer">
+              <span class="hh-pf-name">Sarah Mitchell</span>
+              <span class="hh-pf-role">Donor</span>
             </div>
-            <div class="hh-bubble-row"><div class="hh-bubble hh-bubble--gray">Wants to donate but needs to know it actually reaches the animals.</div></div>
-            <div class="hh-bubble-row hh-bubble-row--right"><div class="hh-bubble hh-bubble--blue">I want to make sure my donation makes a real difference.</div></div>
-            <div class="hh-persona-needs"><span>Transparency</span><span>Easy navigation</span><span>Confirmation</span></div>
+            <div class="hh-pf-needs"><span>Transparency</span><span>Easy navigation</span><span>Confirmation</span></div>
           </div>
-          <div class="hh-persona-chat hh-reveal hh-reveal-d2">
-            <div class="hh-persona-chat-header">
-              <div class="hh-persona-avatar" style="background:#4a7c59;">MT</div>
-              <div><div class="hh-persona-chat-name">Michael Turner</div><div class="hh-persona-chat-role">Volunteer</div></div>
+
+          <div class="hh-pf-card hh-reveal hh-reveal-d2">
+            <div class="hh-pf-avatar"><img src="assets/hh-memoji-michael.png" alt="Michael"></div>
+            <p class="hh-pf-quote">I need flexible opportunities that fit around my schedule.</p>
+            <div class="hh-pf-footer">
+              <span class="hh-pf-name">Michael Turner</span>
+              <span class="hh-pf-role">Volunteer</span>
             </div>
-            <div class="hh-bubble-row"><div class="hh-bubble hh-bubble--gray">College student, busy schedule. Needs flexible opportunities fast.</div></div>
-            <div class="hh-bubble-row hh-bubble-row--right"><div class="hh-bubble hh-bubble--blue">I need flexible opportunities that work around my schedule.</div></div>
-            <div class="hh-persona-needs"><span>Updated listings</span><span>Quick sign-up</span><span>Schedules</span></div>
+            <div class="hh-pf-needs"><span>Updated listings</span><span>Quick sign-up</span><span>Schedules</span></div>
           </div>
-          <div class="hh-persona-chat hh-reveal hh-reveal-d3">
-            <div class="hh-persona-chat-header">
-              <div class="hh-persona-avatar" style="background:#3a3a3a;">DJ</div>
-              <div><div class="hh-persona-chat-name">David Johnson</div><div class="hh-persona-chat-role">Supporter</div></div>
+
+          <div class="hh-pf-card hh-reveal hh-reveal-d3">
+            <div class="hh-pf-avatar"><img src="assets/hh-memoji-david.png" alt="David"></div>
+            <p class="hh-pf-quote">I want to contribute more than money. My time and skills matter too.</p>
+            <div class="hh-pf-footer">
+              <span class="hh-pf-name">David Johnson</span>
+              <span class="hh-pf-role">Community Supporter</span>
             </div>
-            <div class="hh-bubble-row"><div class="hh-bubble hh-bubble--gray">Wants to go beyond donating. Skills and time, not just money.</div></div>
-            <div class="hh-bubble-row hh-bubble-row--right"><div class="hh-bubble hh-bubble--blue">I want to contribute more than money. My time and skills matter too.</div></div>
-            <div class="hh-persona-needs"><span>Events</span><span>Newsletter</span><span>Campaigns</span></div>
+            <div class="hh-pf-needs"><span>Events</span><span>Newsletter</span><span>Campaigns</span></div>
           </div>
-          <div class="hh-persona-chat hh-reveal hh-reveal-d4">
-            <div class="hh-persona-chat-header">
-              <div class="hh-persona-avatar" style="background:#b59e82;">ED</div>
-              <div><div class="hh-persona-chat-name">Emily Davis</div><div class="hh-persona-chat-role">Adopter</div></div>
+
+          <div class="hh-pf-card hh-reveal hh-reveal-d4">
+            <div class="hh-pf-avatar"><img src="assets/hh-memoji-emily.png" alt="Emily"></div>
+            <p class="hh-pf-quote">I need clear details and steps to make the right choice for my home.</p>
+            <div class="hh-pf-footer">
+              <span class="hh-pf-name">Emily Davis</span>
+              <span class="hh-pf-role">Adopter</span>
             </div>
-            <div class="hh-bubble-row"><div class="hh-bubble hh-bubble--gray">Ready to adopt but the profiles have no personality info or clear next steps.</div></div>
-            <div class="hh-bubble-row hh-bubble-row--right"><div class="hh-bubble hh-bubble--blue">I need clear details to make the right choice for my home.</div></div>
-            <div class="hh-persona-needs"><span>Detailed profiles</span><span>Step-by-step</span><span>Filters</span></div>
+            <div class="hh-pf-needs"><span>Detailed profiles</span><span>Step-by-step</span><span>Filters</span></div>
           </div>
+
         </div>
       </div>
     </section>
@@ -1668,7 +1673,7 @@
     </section>
 
     <!-- HI-FI PROTOTYPE — 3 VIDEOS -->
-    <section class="hh-section hh-section--dark">
+    <section class="hh-section hh-section--dark hh-section--videos">
       <div class="hh-section-inner hh-section-inner--col">
         <div class="hh-reveal">
           <p class="hh-section-eyebrow">High Fidelity Prototype</p>
@@ -1979,13 +1984,36 @@
   var panel = document.getElementById('hhPanel');
   var countersRun = false;
 
+  // scroll progress bar
+  var progressBar = document.createElement('div');
+  progressBar.className = 'hh-progress-bar';
+  progressBar.style.width = '0%';
+  panel.insertBefore(progressBar, panel.firstChild);
+
+  panel.addEventListener('scroll', function(){
+    var pct = panel.scrollTop / (panel.scrollHeight - panel.clientHeight) * 100;
+    progressBar.style.width = pct + '%';
+
+    // hero bg parallax
+    var heroBg = panel.querySelector('.hh-hero-bg');
+    if(heroBg) heroBg.style.transform = 'translateY(' + (panel.scrollTop * 0.22) + 'px)';
+
+    // hero image subtle parallax
+    var heroImg = panel.querySelector('.hh-hero-img');
+    if(heroImg && panel.scrollTop < window.innerHeight) {
+      heroImg.style.transform = 'translateY(' + (panel.scrollTop * 0.06) + 'px)';
+    }
+  });
+
   window.openHH = function(){
     overlay.classList.add('hh-open');
     overlay.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
     panel.scrollTop = 0;
+    progressBar.style.width = '0%';
     setTimeout(initReveal, 200);
-    setTimeout(runCounters, 600);
+    setTimeout(initWordReveal, 400);
+    setTimeout(runCounters, 700);
   };
 
   window.closeHH = function(){
@@ -2001,21 +2029,35 @@
   function initReveal(){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('hh-visible'); });
-    }, { root: panel, threshold: 0.12 });
+    }, { root: panel, threshold: 0.1 });
     panel.querySelectorAll('.hh-reveal').forEach(function(el){ io.observe(el); });
+  }
+
+  function initWordReveal(){
+    panel.querySelectorAll('.hh-hero-sub').forEach(function(el){
+      if(el.dataset.wordified) return;
+      el.dataset.wordified = '1';
+      var words = el.textContent.trim().split(/\s+/);
+      el.innerHTML = words.map(function(w,i){
+        return '<span class="hh-word" style="transition-delay:' + (i * 0.055) + 's">' + w + '\u00a0</span>';
+      }).join('');
+      setTimeout(function(){
+        el.querySelectorAll('.hh-word').forEach(function(w){ w.classList.add('hh-word-in'); });
+      }, 100);
+    });
   }
 
   function runCounters(){
     if(countersRun) return; countersRun = true;
     panel.querySelectorAll('.hh-stat-num[data-target]').forEach(function(el){
       var target = +el.getAttribute('data-target');
-      var start = 0; var dur = 1200;
-      var step = Math.ceil(dur / (target || 1));
+      var start = 0; var steps = 40;
+      var inc = Math.ceil(target / steps);
       var t = setInterval(function(){
-        start = Math.min(start + Math.ceil(target/20), target);
+        start = Math.min(start + inc, target);
         el.textContent = start;
         if(start >= target) clearInterval(t);
-      }, step);
+      }, 30);
     });
   }
 }());
