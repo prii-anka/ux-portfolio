@@ -2935,18 +2935,16 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   max-width: 480px; line-height: 1.6; margin: 0;
 }
 .rphotos-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 200px;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
 }
 .rph-tile {
   border-radius: 8px; overflow: hidden;
-  background: #2a2a2a; position: relative;
+  background: #2a2a2a;
 }
-.rph-tile--wide { grid-column: span 2; }
-.rph-tile--tall { grid-row: span 2; }
-.rph-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.rph-tile--wide, .rph-tile--tall { all: unset; border-radius: 8px; overflow: hidden; background: #2a2a2a; }
+.rph-tile img { width: 100%; height: auto; display: block; transition: transform 0.4s ease; }
 .rph-tile:hover img { transform: scale(1.03); }
 .rph-tile.rph-empty {
   background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
