@@ -139,6 +139,24 @@ body {
   overflow: hidden;
   height: 100vh;
   width: 100vw;
+  cursor: none;
+}
+a, button, [onclick], input, label, select, textarea { cursor: none; }
+
+/* ── Custom cursor ── */
+#cursor-dot {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.12s ease, background 0.2s ease, width 0.2s ease, height 0.2s ease;
+  mix-blend-mode: difference;
+}
+#cursor-dot.hovered {
+  width: 20px; height: 20px;
 }
 a { text-decoration: none; color: inherit; }
 img { display: block; width: 100%; height: 100%; object-fit: cover; }

@@ -2,6 +2,24 @@
    UX PORTFOLIO - script.js
    ═══════════════════════════════════════════════════ */
 
+// ── CUSTOM CURSOR ───────────────────────────────────
+(function () {
+  var dot = document.getElementById('cursor-dot');
+  if (!dot) return;
+  document.addEventListener('mousemove', function (e) {
+    dot.style.left = e.clientX + 'px';
+    dot.style.top  = e.clientY + 'px';
+  });
+  document.addEventListener('mouseover', function (e) {
+    if (e.target.closest('a, button, [onclick], input, label')) dot.classList.add('hovered');
+  });
+  document.addEventListener('mouseout', function (e) {
+    if (e.target.closest('a, button, [onclick], input, label')) dot.classList.remove('hovered');
+  });
+  // hide on mobile
+  if ('ontouchstart' in window) dot.style.display = 'none';
+})();
+
 // ── LOADER ─────────────────────────────────────────
 (function () {
   var MIN_SHOW = 1800;  // always show loader for at least this long
