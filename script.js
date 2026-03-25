@@ -22,16 +22,18 @@
 
 // ── FIGMA HERO ──────────────────────────────────────
 (function () {
-  var frame      = document.getElementById('rfigFrame');
-  var hint       = document.getElementById('rfigHint');
-  var coords     = document.getElementById('rfigCoords');
+  var frame1     = document.getElementById('rfigFrame1');
+  var frame2     = document.getElementById('rfigFrame2');
+  var hint1      = document.getElementById('rfigHint1');
+  var hint2      = document.getElementById('rfigHint2');
+  var coords1    = document.getElementById('rfigCoords1');
   var ghost      = document.getElementById('rfigCursorGhost');
   var bubble     = document.getElementById('rfigBubble');
   var bubbleText = document.getElementById('rfigBubbleText');
   var you        = document.getElementById('rfigCursorYou');
   var clock      = document.getElementById('rfigClock');
   var typeName   = document.getElementById('rfigTypeName');
-  if (!frame) return;
+  if (!frame1) return;
 
   // ── Clock
   function updateClock() {
@@ -43,14 +45,14 @@
   }
   updateClock(); setInterval(updateClock, 1000);
 
-  // ── Typewriter: "Priyanka"
+  // ── Typewriter: "Priyanka" (letter by letter)
   var NAME = 'Priyanka', nameIdx = 0;
   function typeLetter() {
     if (typeName) typeName.textContent = NAME.slice(0, nameIdx);
     nameIdx++;
-    if (nameIdx <= NAME.length) setTimeout(typeLetter, 85 + Math.random() * 65);
+    if (nameIdx <= NAME.length) setTimeout(typeLetter, 80 + Math.random() * 70);
   }
-  setTimeout(typeLetter, 1400);
+  setTimeout(typeLetter, 1200);
 
   // ── Sassy messages (no consecutive repeats)
   var msgs = [
@@ -81,11 +83,14 @@
     return msgs[idx];
   }
 
-  // ── Drag state
+  // ── Shared drag state (two frames, one active at a time)
+  var activeFrame = null, activeHint = null, activeCoords = null;
   var dragging = false;
-  var startX=0, startY=0, offsetX=0, offsetY=0, curOX=0, curOY=0;
+  var startX=0, startY=0, curOX=0, curOY=0;
+  var offX = {rfigFrame1:0, rfigFrame2:0};
+  var offY = {rfigFrame1:0, rfigFrame2:0};
   var ghostX=0, ghostY=0, ghostTX=0, ghostTY=0;
-  var msgTimeout = null;
+  var msgTimeout = null, gAnimFrame;
 
   function showBubble(x, y) {
     if (bubbleText) bubbleText.textContent = randomMsg();
@@ -96,8 +101,6 @@
     msgTimeout = setTimeout(function(){ bubble.classList.remove('show'); }, 2800);
   }
 
-  // ── Ghost lerp animation
-  var gAnimFrame;
   function animateGhost() {
     ghostX += (ghostTX - ghostX) * 0.08;
     ghostY += (ghostTY - ghostY) * 0.08;
@@ -105,66 +108,82 @@
     gAnimFrame = requestAnimationFrame(animateGhost);
   }
 
-  // ── Drag start
-  frame.addEventListener('mousedown', function(e) {
-    dragging = true;
-    startX = e.clientX; startY = e.clientY;
-    curOX = offsetX; curOY = offsetY;
-    hint.style.opacity = '0';
-    coords.style.opacity = '1';
-    var r = frame.getBoundingClientRect();
-    ghostTX = r.left + r.width / 2;
-    ghostTY = r.top  + r.height / 2;
-    ghostX = e.clientX - 30;
-    ghostY = e.clientY + 20;
-    if (ghost) { ghost.style.left = ghostX+'px'; ghost.style.top = ghostY+'px'; ghost.classList.add('visible'); }
-    animateGhost();
-    e.preventDefault();
-  });
+  function onFrameDown(fr, hn, co) {
+    return function(e) {
+      activeFrame = fr; activeHint = hn; activeCoords = co;
+      dragging = true;
+      startX = e.clientX; startY = e.clientY;
+      curOX = offX[fr.id]; curOY = offY[fr.id];
+      if (hn) hn.style.opacity = '0';
+      if (co) co.style.opacity = '1';
+      var r = fr.getBoundingClientRect();
+      ghostTX = r.left + r.width / 2;
+      ghostTY = r.top  + r.height / 2;
+      ghostX = e.clientX - 30; ghostY = e.clientY + 20;
+      if (ghost) { ghost.style.left = ghostX+'px'; ghost.style.top = ghostY+'px'; ghost.classList.add('visible'); }
+      animateGhost();
+      e.preventDefault();
+    };
+  }
+
+  frame1.addEventListener('mousedown', onFrameDown(frame1, hint1, coords1));
+  if (frame2) frame2.addEventListener('mousedown', onFrameDown(frame2, hint2, null));
 
   document.addEventListener('mousemove', function(e) {
     if (you) { you.style.left = e.clientX+'px'; you.style.top = e.clientY+'px'; }
-    if (!dragging) return;
+    if (!dragging || !activeFrame) return;
     var dx = e.clientX - startX, dy = e.clientY - startY;
-    offsetX = curOX + dx; offsetY = curOY + dy;
-    frame.style.transform = 'translate('+offsetX+'px,'+offsetY+'px)';
-    if (coords) coords.textContent = 'dx: '+Math.round(dx)+', dy: '+Math.round(dy);
+    offX[activeFrame.id] = curOX + dx;
+    offY[activeFrame.id] = curOY + dy;
+    activeFrame.style.transform = 'translate('+offX[activeFrame.id]+'px,'+offY[activeFrame.id]+'px)';
+    if (activeCoords) activeCoords.textContent = 'dx: '+Math.round(dx)+', dy: '+Math.round(dy);
     ghostTX = e.clientX - 60 + (Math.random()-0.5)*20;
     ghostTY = e.clientY - 40 + (Math.random()-0.5)*10;
   });
 
   document.addEventListener('mouseup', function(e) {
-    if (!dragging) return;
+    if (!dragging || !activeFrame) return;
     dragging = false;
     cancelAnimationFrame(gAnimFrame);
-    frame.style.transition = 'transform 0.65s cubic-bezier(0.34,1.56,0.64,1)';
-    frame.style.transform  = 'translate(0,0)';
-    offsetX = 0; offsetY = 0;
-    setTimeout(function(){ frame.style.transition = ''; }, 700);
-    if (coords) coords.style.opacity = '0';
-    hint.style.opacity = '1';
+    var f = activeFrame, hn = activeHint, co = activeCoords;
+    f.style.transition = 'transform 0.65s cubic-bezier(0.34,1.56,0.64,1)';
+    f.style.transform  = 'translate(0,0)';
+    offX[f.id] = 0; offY[f.id] = 0;
+    setTimeout(function(){ f.style.transition = ''; }, 700);
+    if (co) co.style.opacity = '0';
+    if (hn) hn.style.opacity = '1';
     if (ghost) ghost.classList.remove('visible');
     showBubble(ghostX, ghostY);
+    activeFrame = null; activeHint = null; activeCoords = null;
   });
 
-  // ── Statement section typewriter on scroll
+  // ── Statement section: full typewriter on scroll (Andy Reff style)
   var stmtSection = document.getElementById('rfig-stmt');
   var stmtTyped   = document.getElementById('rfigStmtTyped');
   var stmtCaret   = document.getElementById('rfigStmtCaret');
   var STMT = 'I design experiences rooted in empathy — where every flow feels inevitable and every system is built to last.';
   var stmtIdx = 0, stmtStarted = false;
+
   function typeStmt() {
     if (stmtIdx > STMT.length) return;
     if (stmtTyped) stmtTyped.textContent = STMT.slice(0, stmtIdx);
     stmtIdx++;
     if (stmtIdx <= STMT.length) {
-      setTimeout(typeStmt, 28 + Math.random() * 22);
-    } else if (stmtCaret) {
-      setTimeout(function(){ stmtCaret.style.animation = 'none'; stmtCaret.style.opacity = '0'; }, 1400);
+      // Realistic typing: vary speed, slow at punctuation
+      var ch = STMT[stmtIdx - 1];
+      var delay = 32 + Math.random() * 28;
+      if (ch === '—' || ch === '.') delay = 180 + Math.random() * 80;
+      else if (ch === ' ') delay = 20 + Math.random() * 15;
+      setTimeout(typeStmt, delay);
+    } else {
+      // Done typing — fade caret out after a pause
+      setTimeout(function(){
+        if (stmtCaret) { stmtCaret.style.animation = 'none'; stmtCaret.style.opacity = '0'; }
+      }, 1600);
     }
   }
 
-  // ── IntersectionObserver — scroll reveals + statement
+  // ── IntersectionObserver — scroll reveals + statement trigger
   var scrollParent = document.getElementById('view-recruiter') || document.body;
   var revealEls = document.querySelectorAll('.rfig-reveal');
   if (revealEls.length) {
@@ -182,10 +201,10 @@
         if (entry.isIntersecting && !stmtStarted) {
           stmtStarted = true;
           stmtSection.classList.add('rfig-stmt-active');
-          setTimeout(typeStmt, 500);
+          setTimeout(typeStmt, 400);
         }
       });
-    }, { root: scrollParent, threshold: 0.25 });
+    }, { root: scrollParent, threshold: 0.3 });
     stmtObs.observe(stmtSection);
   }
 

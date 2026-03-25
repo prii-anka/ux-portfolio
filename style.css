@@ -1549,13 +1549,19 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rfig-hero {
   position: relative;
   width: 100%; height: 100%;
-  background: #010f1e;
-  background-image: radial-gradient(rgba(1,108,185,0.20) 1.5px, transparent 1.5px);
-  background-size: 30px 30px;
+  background: #1a1a1a;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   overflow: hidden;
   user-select: none;
+}
+/* Noise overlay */
+.rfig-hero::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; z-index: 200;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.04; mix-blend-mode: overlay;
 }
 
 /* Top bar (location + clock only, left-aligned) */
@@ -1586,13 +1592,17 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rfig-eyes #rEyeRight { width: 34px; height: 34px; }
 .rfig-eyes .reye-pupil { width: 14px; height: 14px; }
 
-/* Stage */
+/* Stage: two frames stacked */
 .rfig-stage {
   display: flex; flex-direction: column;
   align-items: flex-start;
-  gap: 0;
+  gap: 14px;
+  position: relative; z-index: 10;
 }
 .rfig-frame-wrap { position: relative; }
+.rfig-frame-wrap-2 { padding-left: 24px; }
+.rfig-frame-label-dim { background: rgba(168,85,247,0.55); }
+.rfig-hint-row-dim { opacity: 0.55; }
 
 /* Figma layer label above frame (purple chip) */
 .rfig-frame-label {
@@ -1640,7 +1650,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* Corner handles (shared: hero frame + statement frame) */
 .rfig-corner {
   position: absolute; width: 8px; height: 8px;
-  background: #010f1e; border: 1.5px solid rgba(168,85,247,0.9);
+  background: #1a1a1a; border: 1.5px solid rgba(168,85,247,0.9);
   border-radius: 1px;
 }
 .rfig-corner--tl { top: -4px; left: -4px; }
@@ -1766,12 +1776,19 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* ── Scroll statement section ── */
 .rfig-stmt-section {
   min-height: 100vh;
-  background: #010f1e;
+  background: #1a1a1a;
   display: flex; align-items: center; justify-content: center;
   padding: 80px 60px;
   box-sizing: border-box; position: relative;
 }
-.rfig-stmt-inner { position: relative; max-width: 860px; width: 100%; }
+.rfig-stmt-section::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.04; mix-blend-mode: overlay;
+}
+.rfig-stmt-inner { position: relative; max-width: 860px; width: 100%; z-index: 2; }
 .rfig-stmt-lbl-row { margin-bottom: -1px; }
 .rfig-stmt-lbl {
   font-family: 'Space Grotesk', sans-serif;
@@ -1786,7 +1803,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   padding: 48px 56px;
   background: rgba(168,85,247,0.04);
 }
-.rfig-stmt-frame .rfig-corner { background: #010f1e; }
+.rfig-stmt-frame .rfig-corner { background: #1a1a1a; }
 .rfig-stmt-text {
   font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(1.7rem, 3.8vw, 3rem);

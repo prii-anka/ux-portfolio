@@ -24,7 +24,7 @@
   <link rel="preload" as="image" href="assets/project-poshaai.png" />
   <link rel="preload" as="image" href="assets/project-thegrind.png" />
   <link rel="preload" as="image" href="assets/project-deadlineiq.png" />
-  <link rel="stylesheet" href="style.css?v=21" />
+  <link rel="stylesheet" href="style.css?v=22" />
 </head>
 <body>
 <div id="cursor-dot"></div>
@@ -224,11 +224,13 @@
       <div class="reye" id="rEyeRight"><div class="reye-pupil" id="rPupilRight"></div></div>
     </div>
 
-    <!-- Draggable Figma frame: name + title -->
+    <!-- Two separate draggable Figma frames -->
     <div class="rfig-stage">
+
+      <!-- Frame 1: Name (typewriter) -->
       <div class="rfig-frame-wrap">
-        <div class="rfig-frame-label">p / Priyanka</div>
-        <div class="rfig-frame" id="rfigFrame">
+        <div class="rfig-frame-label">p / name</div>
+        <div class="rfig-frame rfig-frame-1" id="rfigFrame1">
           <span class="rfig-corner rfig-corner--tl"></span>
           <span class="rfig-corner rfig-corner--tr"></span>
           <span class="rfig-corner rfig-corner--bl"></span>
@@ -238,13 +240,28 @@
           <div class="rfig-name-line">
             <span class="rfig-hi">Hi, I'm&nbsp;</span><span id="rfigTypeName"></span><span class="rfig-caret" id="rfigCaret">|</span>
           </div>
-          <div class="rfig-role">Product &amp; UX Designer</div>
         </div>
         <div class="rfig-hint-row">
-          <span class="rfig-hint" id="rfigHint">DRAG TO MOVE</span>
-          <span class="rfig-coords" id="rfigCoords" style="opacity:0">dx: 0, dy: 0</span>
+          <span class="rfig-hint" id="rfigHint1">DRAG TO MOVE</span>
+          <span class="rfig-coords" id="rfigCoords1" style="opacity:0">dx: 0, dy: 0</span>
         </div>
       </div>
+
+      <!-- Frame 2: Role -->
+      <div class="rfig-frame-wrap rfig-frame-wrap-2">
+        <div class="rfig-frame-label rfig-frame-label-dim">p / role</div>
+        <div class="rfig-frame rfig-frame-2" id="rfigFrame2">
+          <span class="rfig-corner rfig-corner--tl"></span>
+          <span class="rfig-corner rfig-corner--tr"></span>
+          <span class="rfig-corner rfig-corner--bl"></span>
+          <span class="rfig-corner rfig-corner--br"></span>
+          <div class="rfig-role">Product &amp; UX Designer</div>
+        </div>
+        <div class="rfig-hint-row rfig-hint-row-dim">
+          <span class="rfig-hint" id="rfigHint2">DRAG TO MOVE</span>
+        </div>
+      </div>
+
     </div>
 
     <!-- Tagline -->
