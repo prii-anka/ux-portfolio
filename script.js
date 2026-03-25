@@ -22,16 +22,18 @@
 
 // ── FIGMA HERO ──────────────────────────────────────
 (function () {
-  var frame    = document.getElementById('rfigFrame');
-  var hint     = document.getElementById('rfigHint');
-  var coords   = document.getElementById('rfigCoords');
-  var ghost    = document.getElementById('rfigCursorGhost');
-  var bubble   = document.getElementById('rfigBubble');
-  var you      = document.getElementById('rfigCursorYou');
-  var clock    = document.getElementById('rfigClock');
+  var frame      = document.getElementById('rfigFrame');
+  var hint       = document.getElementById('rfigHint');
+  var coords     = document.getElementById('rfigCoords');
+  var ghost      = document.getElementById('rfigCursorGhost');
+  var bubble     = document.getElementById('rfigBubble');
+  var bubbleText = document.getElementById('rfigBubbleText');
+  var you        = document.getElementById('rfigCursorYou');
+  var clock      = document.getElementById('rfigClock');
+  var typeName   = document.getElementById('rfigTypeName');
   if (!frame) return;
 
-  // Clock
+  // ── Clock
   function updateClock() {
     var d = new Date();
     var h = String(d.getHours()).padStart(2,'0');
@@ -41,7 +43,16 @@
   }
   updateClock(); setInterval(updateClock, 1000);
 
-  // Sassy messages — always random, never repeat twice in a row
+  // ── Typewriter: "Priyanka"
+  var NAME = 'Priyanka', nameIdx = 0;
+  function typeLetter() {
+    if (typeName) typeName.textContent = NAME.slice(0, nameIdx);
+    nameIdx++;
+    if (nameIdx <= NAME.length) setTimeout(typeLetter, 85 + Math.random() * 65);
+  }
+  setTimeout(typeLetter, 1400);
+
+  // ── Sassy messages (no consecutive repeats)
   var msgs = [
     "not again...",
     "I spent 3 hours on that alignment",
@@ -70,44 +81,40 @@
     return msgs[idx];
   }
 
-  // Drag state
+  // ── Drag state
   var dragging = false;
   var startX=0, startY=0, offsetX=0, offsetY=0, curOX=0, curOY=0;
   var ghostX=0, ghostY=0, ghostTX=0, ghostTY=0;
   var msgTimeout = null;
 
   function showBubble(x, y) {
-    bubble.innerHTML = '<span class="rfig-bubble-name">pri.anka</span>' + randomMsg();
-    bubble.style.left = (x + 20) + 'px';
-    bubble.style.top  = (y - 10) + 'px';
+    if (bubbleText) bubbleText.textContent = randomMsg();
+    bubble.style.left = (x + 16) + 'px';
+    bubble.style.top  = (y - 54) + 'px';
     bubble.classList.add('show');
     clearTimeout(msgTimeout);
     msgTimeout = setTimeout(function(){ bubble.classList.remove('show'); }, 2800);
   }
 
-  // Ghost cursor animation (lerp towards frame center)
+  // ── Ghost lerp animation
   var gAnimFrame;
   function animateGhost() {
     ghostX += (ghostTX - ghostX) * 0.08;
     ghostY += (ghostTY - ghostY) * 0.08;
-    if (ghost) {
-      ghost.style.left = ghostX + 'px';
-      ghost.style.top  = ghostY + 'px';
-    }
+    if (ghost) { ghost.style.left = ghostX+'px'; ghost.style.top = ghostY+'px'; }
     gAnimFrame = requestAnimationFrame(animateGhost);
   }
 
-  // Drag start
+  // ── Drag start
   frame.addEventListener('mousedown', function(e) {
     dragging = true;
     startX = e.clientX; startY = e.clientY;
     curOX = offsetX; curOY = offsetY;
     hint.style.opacity = '0';
     coords.style.opacity = '1';
-    // Show ghost near frame
     var r = frame.getBoundingClientRect();
     ghostTX = r.left + r.width / 2;
-    ghostTY = r.top + r.height / 2;
+    ghostTY = r.top  + r.height / 2;
     ghostX = e.clientX - 30;
     ghostY = e.clientY + 20;
     if (ghost) { ghost.style.left = ghostX+'px'; ghost.style.top = ghostY+'px'; ghost.classList.add('visible'); }
@@ -116,17 +123,12 @@
   });
 
   document.addEventListener('mousemove', function(e) {
-    // Move "You" cursor
     if (you) { you.style.left = e.clientX+'px'; you.style.top = e.clientY+'px'; }
-
     if (!dragging) return;
-    var dx = e.clientX - startX;
-    var dy = e.clientY - startY;
-    offsetX = curOX + dx;
-    offsetY = curOY + dy;
+    var dx = e.clientX - startX, dy = e.clientY - startY;
+    offsetX = curOX + dx; offsetY = curOY + dy;
     frame.style.transform = 'translate('+offsetX+'px,'+offsetY+'px)';
     if (coords) coords.textContent = 'dx: '+Math.round(dx)+', dy: '+Math.round(dy);
-    // Ghost tries to push frame back to origin
     ghostTX = e.clientX - 60 + (Math.random()-0.5)*20;
     ghostTY = e.clientY - 40 + (Math.random()-0.5)*10;
   });
@@ -135,28 +137,56 @@
     if (!dragging) return;
     dragging = false;
     cancelAnimationFrame(gAnimFrame);
-    // Snap back
     frame.style.transition = 'transform 0.65s cubic-bezier(0.34,1.56,0.64,1)';
-    frame.style.transform = 'translate(0,0)';
+    frame.style.transform  = 'translate(0,0)';
     offsetX = 0; offsetY = 0;
     setTimeout(function(){ frame.style.transition = ''; }, 700);
     if (coords) coords.style.opacity = '0';
     hint.style.opacity = '1';
     if (ghost) ghost.classList.remove('visible');
-    // Show sassy message near ghost position
     showBubble(ghostX, ghostY);
   });
 
-  // Scroll reveal for sections below
+  // ── Statement section typewriter on scroll
+  var stmtSection = document.getElementById('rfig-stmt');
+  var stmtTyped   = document.getElementById('rfigStmtTyped');
+  var stmtCaret   = document.getElementById('rfigStmtCaret');
+  var STMT = 'I design experiences rooted in empathy — where every flow feels inevitable and every system is built to last.';
+  var stmtIdx = 0, stmtStarted = false;
+  function typeStmt() {
+    if (stmtIdx > STMT.length) return;
+    if (stmtTyped) stmtTyped.textContent = STMT.slice(0, stmtIdx);
+    stmtIdx++;
+    if (stmtIdx <= STMT.length) {
+      setTimeout(typeStmt, 28 + Math.random() * 22);
+    } else if (stmtCaret) {
+      setTimeout(function(){ stmtCaret.style.animation = 'none'; stmtCaret.style.opacity = '0'; }, 1400);
+    }
+  }
+
+  // ── IntersectionObserver — scroll reveals + statement
+  var scrollParent = document.getElementById('view-recruiter') || document.body;
   var revealEls = document.querySelectorAll('.rfig-reveal');
   if (revealEls.length) {
-    var scrollParent = document.getElementById('view-recruiter') || document.body;
     var revealObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
-        if (entry.isIntersecting) { entry.target.classList.add('rfig-in'); }
+        if (entry.isIntersecting) entry.target.classList.add('rfig-in');
       });
-    }, { root: scrollParent, threshold: 0.15 });
+    }, { root: scrollParent, threshold: 0.1 });
     revealEls.forEach(function(el) { revealObs.observe(el); });
+  }
+
+  if (stmtSection) {
+    var stmtObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !stmtStarted) {
+          stmtStarted = true;
+          stmtSection.classList.add('rfig-stmt-active');
+          setTimeout(typeStmt, 500);
+        }
+      });
+    }, { root: scrollParent, threshold: 0.25 });
+    stmtObs.observe(stmtSection);
   }
 
 })();
