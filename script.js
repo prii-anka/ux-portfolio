@@ -20,6 +20,147 @@
   if ('ontouchstart' in window) dot.style.display = 'none';
 })();
 
+// ── FIGMA HERO ──────────────────────────────────────
+(function () {
+  var frame    = document.getElementById('rfigFrame');
+  var hint     = document.getElementById('rfigHint');
+  var coords   = document.getElementById('rfigCoords');
+  var ghost    = document.getElementById('rfigCursorGhost');
+  var bubble   = document.getElementById('rfigBubble');
+  var you      = document.getElementById('rfigCursorYou');
+  var clock    = document.getElementById('rfigClock');
+  if (!frame) return;
+
+  // Clock
+  function updateClock() {
+    var d = new Date();
+    var h = String(d.getHours()).padStart(2,'0');
+    var m = String(d.getMinutes()).padStart(2,'0');
+    var s = String(d.getSeconds()).padStart(2,'0');
+    if (clock) clock.textContent = h+':'+m+':'+s+' MST';
+  }
+  updateClock(); setInterval(updateClock, 1000);
+
+  // Sassy messages — always random, never repeat twice in a row
+  var msgs = [
+    "not again...",
+    "I spent 3 hours on that alignment",
+    "please stop, I just got out of a user test",
+    "that's not on the 8pt grid",
+    "I will lock this layer",
+    "can we take this to slack?",
+    "stop. please. I'm begging.",
+    "the accessibility audit is tomorrow",
+    "that's in main. you can't touch main.",
+    "I literally just shipped this",
+    "we talked about this in standup",
+    "there's a component for this in the design system",
+    "who approved this interaction?",
+    "this is why we have design tokens",
+    "please refer to the Figma file",
+    "I will file a design critique",
+    "the stakeholders can see you doing this",
+    "sir this is a portfolio",
+  ];
+  var lastMsg = -1;
+  function randomMsg() {
+    var idx;
+    do { idx = Math.floor(Math.random() * msgs.length); } while (idx === lastMsg);
+    lastMsg = idx;
+    return msgs[idx];
+  }
+
+  // Drag state
+  var dragging = false;
+  var startX=0, startY=0, offsetX=0, offsetY=0, curOX=0, curOY=0;
+  var ghostX=0, ghostY=0, ghostTX=0, ghostTY=0;
+  var msgTimeout = null;
+
+  function showBubble(x, y) {
+    bubble.innerHTML = '<span class="rfig-bubble-name">pri.anka</span>' + randomMsg();
+    bubble.style.left = (x + 20) + 'px';
+    bubble.style.top  = (y - 10) + 'px';
+    bubble.classList.add('show');
+    clearTimeout(msgTimeout);
+    msgTimeout = setTimeout(function(){ bubble.classList.remove('show'); }, 2800);
+  }
+
+  // Ghost cursor animation (lerp towards frame center)
+  var gAnimFrame;
+  function animateGhost() {
+    ghostX += (ghostTX - ghostX) * 0.08;
+    ghostY += (ghostTY - ghostY) * 0.08;
+    if (ghost) {
+      ghost.style.left = ghostX + 'px';
+      ghost.style.top  = ghostY + 'px';
+    }
+    gAnimFrame = requestAnimationFrame(animateGhost);
+  }
+
+  // Drag start
+  frame.addEventListener('mousedown', function(e) {
+    dragging = true;
+    startX = e.clientX; startY = e.clientY;
+    curOX = offsetX; curOY = offsetY;
+    hint.style.opacity = '0';
+    coords.style.opacity = '1';
+    // Show ghost near frame
+    var r = frame.getBoundingClientRect();
+    ghostTX = r.left + r.width / 2;
+    ghostTY = r.top + r.height / 2;
+    ghostX = e.clientX - 30;
+    ghostY = e.clientY + 20;
+    if (ghost) { ghost.style.left = ghostX+'px'; ghost.style.top = ghostY+'px'; ghost.classList.add('visible'); }
+    animateGhost();
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    // Move "You" cursor
+    if (you) { you.style.left = e.clientX+'px'; you.style.top = e.clientY+'px'; }
+
+    if (!dragging) return;
+    var dx = e.clientX - startX;
+    var dy = e.clientY - startY;
+    offsetX = curOX + dx;
+    offsetY = curOY + dy;
+    frame.style.transform = 'translate('+offsetX+'px,'+offsetY+'px)';
+    if (coords) coords.textContent = 'dx: '+Math.round(dx)+', dy: '+Math.round(dy);
+    // Ghost tries to push frame back to origin
+    ghostTX = e.clientX - 60 + (Math.random()-0.5)*20;
+    ghostTY = e.clientY - 40 + (Math.random()-0.5)*10;
+  });
+
+  document.addEventListener('mouseup', function(e) {
+    if (!dragging) return;
+    dragging = false;
+    cancelAnimationFrame(gAnimFrame);
+    // Snap back
+    frame.style.transition = 'transform 0.65s cubic-bezier(0.34,1.56,0.64,1)';
+    frame.style.transform = 'translate(0,0)';
+    offsetX = 0; offsetY = 0;
+    setTimeout(function(){ frame.style.transition = ''; }, 700);
+    if (coords) coords.style.opacity = '0';
+    hint.style.opacity = '1';
+    if (ghost) ghost.classList.remove('visible');
+    // Show sassy message near ghost position
+    showBubble(ghostX, ghostY);
+  });
+
+  // Scroll reveal for sections below
+  var revealEls = document.querySelectorAll('.rfig-reveal');
+  if (revealEls.length) {
+    var scrollParent = document.getElementById('view-recruiter') || document.body;
+    var revealObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('rfig-in'); }
+      });
+    }, { root: scrollParent, threshold: 0.15 });
+    revealEls.forEach(function(el) { revealObs.observe(el); });
+  }
+
+})();
+
 // ── LOADER ─────────────────────────────────────────
 (function () {
   var MIN_SHOW = 1800;  // always show loader for at least this long

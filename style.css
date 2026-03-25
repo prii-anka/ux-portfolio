@@ -1543,6 +1543,212 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .rhero-left, .rhero-right { position: relative; z-index: 1; }
 
+/* ══════════════════════════════════════════
+   FIGMA-STYLE HERO
+══════════════════════════════════════════ */
+.rfig-hero {
+  position: relative;
+  width: 100%; height: 100%;
+  background: #0e0e0e;
+  background-image: radial-gradient(rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Top bar */
+.rfig-topbar {
+  position: absolute; top: 24px; left: 32px; right: 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  z-index: 10;
+}
+.rfig-topleft {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.72rem; letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.35);
+}
+.rfig-work-link {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.rfig-work-link:hover { color: #fff; }
+.rfig-work-arr { display: inline-block; transition: transform 0.2s; }
+.rfig-work-link:hover .rfig-work-arr { transform: translate(2px,-2px); }
+
+/* Eyebrow */
+.rfig-eyebrow {
+  position: absolute; top: 72px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.22);
+  text-align: center;
+}
+
+/* Stage */
+.rfig-stage {
+  display: flex; flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin-top: 20px;
+}
+.rfig-frame-wrap { position: relative; }
+
+/* Hint row above frame */
+.rfig-hint-row {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 8px;
+  padding-left: 2px;
+}
+.rfig-hint {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.45);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 3px 8px; border-radius: 3px;
+}
+.rfig-coords {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.62rem; letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.3);
+  transition: opacity 0.2s;
+}
+
+/* Figma selection frame */
+.rfig-frame {
+  position: relative;
+  border: 1.5px dashed rgba(255,255,255,0.55);
+  padding: 12px 20px 0;
+  cursor: grab;
+  transition: border-color 0.2s;
+}
+.rfig-frame:active { cursor: grabbing; border-color: rgba(168,85,247,0.8); }
+.rfig-frame:hover { border-color: rgba(255,255,255,0.8); }
+
+/* Corner handles */
+.rfig-corner {
+  position: absolute; width: 8px; height: 8px;
+  background: #0e0e0e; border: 1.5px solid rgba(255,255,255,0.7);
+  border-radius: 1px;
+}
+.rfig-corner--tl { top: -4px; left: -4px; }
+.rfig-corner--tr { top: -4px; right: -4px; }
+.rfig-corner--bl { bottom: -4px; left: -4px; }
+.rfig-corner--br { bottom: -4px; right: -4px; }
+.rfig-corner--tm { top: -4px; left: calc(50% - 4px); }
+.rfig-corner--bm { bottom: -4px; left: calc(50% - 4px); }
+
+/* Giant PRI text */
+.rfig-pri {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(8rem, 20vw, 22rem);
+  font-weight: 800;
+  color: #f0ede8;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+
+/* ANKA outline */
+.rfig-anka {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(8rem, 20vw, 22rem);
+  font-weight: 800;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255,255,255,0.75);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  padding-left: 20px;
+  transition: -webkit-text-stroke-color 0.3s;
+}
+
+/* Tagline */
+.rfig-tagline {
+  position: absolute; bottom: 36px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(0.9rem, 1.6vw, 1.2rem);
+  font-weight: 400; letter-spacing: 0.01em;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+}
+
+/* You cursor */
+.rfig-cursor-you {
+  position: fixed; pointer-events: none; z-index: 999998;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+  transform: translate(0,0);
+}
+.rfig-cursor-you span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.65rem; font-weight: 600;
+  background: #fff; color: #000;
+  padding: 2px 6px; border-radius: 3px;
+  margin-left: 12px;
+  white-space: nowrap;
+}
+
+/* Ghost cursor pri.anka */
+.rfig-cursor-ghost {
+  position: fixed; pointer-events: none; z-index: 999997;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.rfig-cursor-ghost.visible { opacity: 1; }
+.rfig-cursor-ghost span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.65rem; font-weight: 600;
+  background: #a855f7; color: #fff;
+  padding: 2px 6px; border-radius: 3px;
+  margin-left: 12px;
+  white-space: nowrap;
+}
+
+/* Sassy bubble */
+.rfig-bubble {
+  position: fixed; pointer-events: none; z-index: 999996;
+  background: #a855f7;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem; font-weight: 500;
+  padding: 7px 12px; border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0; transform: translateY(6px) scale(0.95);
+  transition: opacity 0.25s, transform 0.25s;
+  max-width: 260px; white-space: normal;
+}
+.rfig-bubble-name {
+  display: block; font-size: 0.6rem; font-weight: 700;
+  opacity: 0.7; margin-bottom: 3px; letter-spacing: 0.06em;
+}
+.rfig-bubble.show { opacity: 1; transform: translateY(0) scale(1); }
+
+/* ── SCROLL REVEAL for sections below hero ── */
+.rfig-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.rfig-reveal.rfig-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.rfig-reveal-d1 { transition-delay: 0.1s; }
+.rfig-reveal-d2 { transition-delay: 0.2s; }
+.rfig-reveal-d3 { transition-delay: 0.3s; }
+.rfig-reveal-d4 { transition-delay: 0.4s; }
+
+@media (max-width: 600px) {
+  .rfig-pri, .rfig-anka { font-size: clamp(5rem, 22vw, 8rem); }
+  .rfig-topbar { top: 16px; left: 16px; right: 16px; }
+  .rfig-eyebrow { top: 56px; font-size: 0.55rem; }
+}
+
 /* ── Recruiter Hero — φ = 1.618 scale ── */
 /* φ spacing scale: 6 · 10 · 16 · 26 · 42 · 68 · 110 · 178px */
 .rhero {

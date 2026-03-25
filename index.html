@@ -210,150 +210,65 @@
   </div>
 
 
-  <!-- HERO -->
-  <section class="rhero">
-    <!-- Golden ratio grid — φ = 1.618, canvas 1000×618 -->
-    <!-- Layout mirrors this: left section 618px (major) · right 382px (minor) -->
-    <svg class="rhero-golden" viewBox="0 0 1000 618" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <g fill="none">
+  <!-- ── FIGMA-STYLE HERO ── -->
+  <section class="rhero rfig-hero" id="rfig-hero">
 
-        <!-- ① Major vertical split at 61.8% — right edge of text = center of eyes -->
-        <line x1="618" y1="0"   x2="618" y2="618" stroke="rgba(255,255,255,0.12)" stroke-width="0.4"/>
-
-        <!-- ② Left block subdivisions -->
-        <line x1="0"   y1="382" x2="618" y2="382" stroke="rgba(255,255,255,0.06)" stroke-width="0.4"/>
-        <line x1="382" y1="0"   x2="382" y2="382" stroke="rgba(255,255,255,0.05)" stroke-width="0.4"/>
-        <line x1="382" y1="236" x2="618" y2="236" stroke="rgba(255,255,255,0.04)" stroke-width="0.4"/>
-
-        <!-- ③ Right block subdivisions -->
-        <line x1="618" y1="382" x2="1000" y2="382" stroke="rgba(255,255,255,0.06)" stroke-width="0.4"/>
-        <line x1="854" y1="0"   x2="854" y2="618" stroke="rgba(255,255,255,0.045)" stroke-width="0.4"/>
-        <line x1="618" y1="528" x2="854" y2="528" stroke="rgba(255,255,255,0.035)" stroke-width="0.4"/>
-
-        <!-- ④ Fibonacci spiral arcs -->
-        <path d="M618,0 A618,618 0 0,1 0,618"       stroke="rgba(255,255,255,0.10)" stroke-width="0.4"/>
-        <path d="M618,382 A382,382 0 0,0 1000,0"    stroke="rgba(255,255,255,0.07)" stroke-width="0.4"/>
-        <path d="M1000,382 A236,236 0 0,1 618,618"  stroke="rgba(255,255,255,0.055)" stroke-width="0.4"/>
-        <path d="M854,618 A146,146 0 0,0 854,382"   stroke="rgba(255,255,255,0.045)" stroke-width="0.4"/>
-        <path d="M854,528 A90,90   0 0,1 618,528"   stroke="rgba(255,255,255,0.035)" stroke-width="0.4"/>
-
-        <!-- φ label -->
-        <text x="972" y="612" font-family="Georgia,serif" font-size="10" fill="rgba(255,255,255,0.10)" text-anchor="end">φ = 1.618</text>
-
-      </g>
-    </svg>
-    <div class="rhero-left">
-      <h1 class="rhero-title">Hi, I'm <span class="rhero-tw" id="rTypeword">Priyanka</span><span class="rhero-cursor done" id="rTypeCursor">|</span></h1>
-      <p class="rhero-phonetic">/priː · yʌŋ · kə/</p>
-      <p class="rhero-role">product & ux designer</p>
-      <p class="rhero-desc">with focus on design systems & empathy rooted experiences.</p>
-      <div class="rhero-actions">
-        <a href="#rct-section" class="rbtn-primary" id="rHeroWork">View Work</a>
-        <a href="#" class="rbtn-outline">Download Resume</a>
-      </div>
+    <!-- Top bar: location + clock left, WORK right -->
+    <div class="rfig-topbar">
+      <span class="rfig-topleft">Tempe, AZ — <span id="rfigClock">00:00 MST</span></span>
+      <a href="#rct-section" class="rfig-work-link">WORK <span class="rfig-work-arr">↗</span></a>
     </div>
 
-    <!-- Googly Eyes -->
-    <div class="rhero-right">
-      <div class="reyes-wrap" id="rEyesWrap">
-        <div class="reye" id="rEyeLeft">
-          <div class="reye-pupil" id="rPupilLeft"></div>
+    <!-- Eyebrow -->
+    <p class="rfig-eyebrow">PRODUCT & UX DESIGNER · NOTICING WHAT OTHERS WALK PAST</p>
+
+    <!-- Stage: PRI frame + ANKA outline -->
+    <div class="rfig-stage">
+      <div class="rfig-frame-wrap">
+        <div class="rfig-hint-row">
+          <span class="rfig-hint" id="rfigHint">DRAG TO MOVE</span>
+          <span class="rfig-coords" id="rfigCoords" style="opacity:0">dx: 0, dy: 0</span>
         </div>
-        <div class="reye" id="rEyeRight">
-          <div class="reye-pupil" id="rPupilRight"></div>
+        <div class="rfig-frame" id="rfigFrame">
+          <span class="rfig-corner rfig-corner--tl"></span>
+          <span class="rfig-corner rfig-corner--tr"></span>
+          <span class="rfig-corner rfig-corner--bl"></span>
+          <span class="rfig-corner rfig-corner--br"></span>
+          <span class="rfig-corner rfig-corner--tm"></span>
+          <span class="rfig-corner rfig-corner--bm"></span>
+          <div class="rfig-pri">PRI</div>
         </div>
       </div>
-      <p class="reyes-label">always watching</p>
+      <div class="rfig-anka">ANKA</div>
     </div>
 
-    <!-- old phone (hidden, keep for reference) -->
-    <div style="display:none">
-      <div class="rphone">
-        <!-- Physical side buttons -->
-        <div class="rphone-btns-left">
-          <div class="rphone-btn rphone-btn-mute"></div>
-          <div class="rphone-btn rphone-btn-vol"></div>
-          <div class="rphone-btn rphone-btn-vol"></div>
-        </div>
-        <div class="rphone-btn rphone-btn-pwr"></div>
-        <div class="rphone-screen-area">
-          <div class="rphone-bar">
-            <span class="rphone-time" id="rPhoneTime">11:59</span>
-            <div class="rphone-island"></div>
-            <div class="rphone-status">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.56 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
-              <svg width="14" height="12" viewBox="0 0 24 22" fill="currentColor"><rect x="2" y="7" width="20" height="11" rx="2" ry="2"/><path d="M22 11V9a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2"/><line x1="23" y1="13" x2="23" y2="17"/></svg>
-            </div>
-          </div>
-          <div class="rphone-screen" id="rPhoneScreen">
-            <div class="rpchat-header">
-              <div class="rpchat-avatar"></div>
-              <div>
-                <div class="rpchat-name">Ask Priyanka</div>
-                <div class="rpchat-status"><span class="rpchat-dot"></span>always on</div>
-              </div>
-            </div>
-            <div class="rpchat-messages" id="rpchatMessages">
-              <div class="rpchat-msg rpchat-msg--bot">
-                <div class="rpchat-bubble">Hey! Ask me anything — my process, availability, background, or what I've been building 👋</div>
-              </div>
-            </div>
-            <div class="rpchat-chips" id="rpchatChips">
-              <button class="rpchat-chip" data-q="design-process">Design process</button>
-              <button class="rpchat-chip" data-q="availability">Availability</button>
-              <button class="rpchat-chip" data-q="background">Background</button>
-              <button class="rpchat-chip" data-q="design-systems">Design systems</button>
-              <button class="rpchat-chip" data-q="thinking">How I think</button>
-            </div>
-            <div class="rpchat-input-row">
-              <input class="rpchat-input" id="rpchatInput" type="text" placeholder="Ask something…" autocomplete="off"/>
-              <button class="rpchat-send" id="rpchatSend">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              </button>
-            </div>
-          </div>
-          <div class="rphone-home"></div>
-        </div>
-      </div>
-    </div><!-- /old phone hidden -->
+    <!-- Tagline -->
+    <p class="rfig-tagline">precision structure. bold creative vision.</p>
 
-    <span class="rhero-loc" id="rHeroLoc"></span>
+    <!-- You cursor -->
+    <div class="rfig-cursor-you" id="rfigCursorYou" aria-hidden="true">
+      <svg width="14" height="18" viewBox="0 0 14 18" fill="none"><path d="M0.5 0.5L13 10.5L7.5 11.5L5.5 17.5L0.5 0.5Z" fill="white" stroke="black" stroke-width="0.5"/></svg>
+      <span>You</span>
+    </div>
+
+    <!-- Ghost cursor pri.anka -->
+    <div class="rfig-cursor-ghost" id="rfigCursorGhost" aria-hidden="true">
+      <svg width="14" height="18" viewBox="0 0 14 18" fill="none"><path d="M0.5 0.5L13 10.5L7.5 11.5L5.5 17.5L0.5 0.5Z" fill="#a855f7" stroke="#7c3aed" stroke-width="0.5"/></svg>
+      <span>pri.anka</span>
+    </div>
+
+    <!-- Sassy message bubble -->
+    <div class="rfig-bubble" id="rfigBubble" aria-hidden="true"></div>
+
   </section>
 
   <script>
-  var rTwInterval, rTwTimeout;
-  window.rLoopStart = function(){
-    var word = 'Priyanka';
-    var el = document.getElementById('rTypeword');
-    var cur = document.getElementById('rTypeCursor');
-    if(!el || !cur) return;
-    clearInterval(rTwInterval); clearTimeout(rTwTimeout);
-    cur.className = 'rhero-cursor';
-    el.textContent = ''; var i = 0;
-    rTwInterval = setInterval(function(){
-      el.textContent += word[i++];
-      if(i >= word.length){
-        clearInterval(rTwInterval);
-        rTwTimeout = setTimeout(function(){
-          var j = word.length;
-          rTwInterval = setInterval(function(){
-            el.textContent = word.slice(0, --j);
-            if(j <= 0){ clearInterval(rTwInterval); rTwTimeout = setTimeout(window.rLoopStart, 600); }
-          }, 50);
-        }, 2200);
-      }
-    }, 80);
-  };
-  document.addEventListener('click', function(e){
-    var btn = e.target.closest('[data-view]');
-    if(btn && btn.dataset.view === 'recruiter') setTimeout(window.rLoopStart, 50);
-  });
-
   // ── Light mode toggle ──
   (function(){
     var view = document.getElementById('view-recruiter');
     var btn  = document.getElementById('rThemeBtn');
     var icon = document.getElementById('rThemeIcon');
+    if(!btn) return;
     var SUN  = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
     var MOON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
     btn.addEventListener('click', function(){
@@ -361,7 +276,6 @@
       icon.innerHTML = isLight ? SUN : MOON;
     });
   })();
-
   </script>
 
   <!-- LOCATION STRIP -->
@@ -435,7 +349,7 @@
   </script>
 
   <!-- MARQUEE -->
-  <div class="rmarquee">
+  <div class="rmarquee rfig-reveal">
     <div class="rmarquee-track">
       <span class="rmi"><span class="rmi-dot" style="background:#51cf66"></span>UX Research</span>
       <span class="rmi"><span class="rmi-dot" style="background:#339af0"></span>Framer</span>
@@ -477,7 +391,7 @@
 
   <!-- PROJECT TILES (Chinmay style, dark theme) -->
   <section class="rct-section" id="rct-section">
-    <div class="rct-header rsr">
+    <div class="rct-header rsr rfig-reveal rfig-reveal-d1">
       <h2 class="rct-title">Work I'm <em>proud of.</em></h2>
     </div>
 
@@ -573,7 +487,7 @@
   </section>
 
   <!-- GRAPHIC DESIGN -->
-  <section class="rgfx-section" id="rgfx-section">
+  <section class="rgfx-section rfig-reveal" id="rgfx-section">
     <div class="rgfx-header rsr">
       <div>
         <p class="rgfx-eyebrow">Selected Work</p>
@@ -668,7 +582,7 @@
   </section>
 
   <!-- ARCHITECTURE -->
-  <section class="rgfx-section rarch-section" id="rarch-section">
+  <section class="rgfx-section rarch-section rfig-reveal" id="rarch-section">
     <div class="rgfx-header rsr">
       <div>
         <p class="rgfx-eyebrow">Architecture</p>
@@ -723,7 +637,7 @@
   </section>
 
   <!-- PAINTINGS -->
-  <section class="rpaint-section" id="rpaint-section">
+  <section class="rpaint-section rfig-reveal" id="rpaint-section">
     <div class="rpaint-header rsr">
       <div>
         <span class="rpaint-eyebrow">also</span>
