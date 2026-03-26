@@ -54,15 +54,15 @@
       if (typeName) typeName.textContent = NAME.slice(0, nameIdx);
       nameIdx++;
       if (nameIdx <= NAME.length) {
-        setTimeout(typeLoop, 80 + Math.random() * 70);
+        setTimeout(typeLoop, 140 + Math.random() * 80);
       } else {
-        setTimeout(function(){ nameErasing = true; typeLoop(); }, 2400);
+        setTimeout(function(){ nameErasing = true; typeLoop(); }, 3000);
       }
     } else {
       if (typeName) typeName.textContent = NAME.slice(0, nameIdx);
       nameIdx--;
       if (nameIdx >= 0) {
-        setTimeout(typeLoop, 38 + Math.random() * 22);
+        setTimeout(typeLoop, 55 + Math.random() * 30);
       } else {
         nameErasing = false; nameIdx = 0;
         setTimeout(typeLoop, 600);
@@ -199,19 +199,42 @@
     var sy = scrollParent.scrollTop;
     var hh = heroSection.offsetHeight || window.innerHeight;
     var p  = Math.min(Math.max(sy / hh, 0), 1);
+    // Hero: shrink back + tilt + blur out — cinematic exit
     if (p < 0.002) {
       stage.style.transform = '';
       stage.style.opacity   = '';
+      stage.style.filter    = '';
     } else {
-      var ty = -(p * p * 260);
-      var sc = 1 - p * 0.14;
-      var op = Math.max(0, 1 - p * 2.6);
-      stage.style.transform = 'translateY('+ty.toFixed(1)+'px) scale('+sc.toFixed(3)+')';
-      stage.style.opacity   = op.toFixed(3);
+      var pE  = Math.pow(p, 0.7);                         // ease-in curve
+      var sc  = Math.max(0.38, 1 - pE * 0.62).toFixed(3); // 1.0 → 0.38
+      var op  = Math.max(0, 1 - pE * 1.6).toFixed(3);
+      var rx  = (pE * 18).toFixed(1);                     // tips back 18°
+      var blr = Math.min(8, pE * 10).toFixed(1);          // blurs out
+      stage.style.transform = 'scale(' + sc + ') rotateX(' + rx + 'deg)';
+      stage.style.opacity   = op;
+      stage.style.filter    = 'blur(' + blr + 'px)';
     }
     var jumpBtn = document.querySelector('.rfig-jump-btn');
-    var fastOp  = Math.max(0, 1 - p * 4).toFixed(3);
-    if (jumpBtn) jumpBtn.style.opacity = fastOp;
+    if (jumpBtn) jumpBtn.style.opacity = Math.max(0, 1 - p * 4).toFixed(3);
+
+    // Statement: rushes in from depth — aggressive ease-out
+    if (stmtSection) {
+      var sp  = Math.min(Math.max(sy / hh, 0), 1);
+      var spE = 1 - Math.pow(1 - sp, 3.2);              // aggressive ease-out
+      var sScale = (0.42 + spE * 0.58).toFixed(3);      // 0.42 → 1.0
+      var sOp    = Math.min(1, spE * 1.8).toFixed(3);
+      var sBlr   = Math.max(0, (1 - spE) * 8).toFixed(1); // blur clears as it arrives
+      stmtSection.style.transform = 'scale(' + sScale + ')';
+      stmtSection.style.opacity   = sOp;
+      stmtSection.style.filter    = 'blur(' + sBlr + 'px)';
+      // pointer-events + active class
+      if (parseFloat(sOp) > 0.5) {
+        stmtSection.classList.add('rfig-stmt-visible');
+        if (!stmtActive) { stmtActive = true; stmtSection.classList.add('rfig-stmt-active'); setTimeout(typeStmt, 300); }
+      } else {
+        stmtSection.classList.remove('rfig-stmt-visible');
+      }
+    }
   }, { passive: true });
 
   // Statement: looping typewriter
@@ -255,18 +278,9 @@
     revealEls.forEach(function(el) { revealObs.observe(el); });
   }
 
-  if (stmtSection) {
-    var stmtObs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e2) {
-        if (e2.isIntersecting && !stmtActive) {
-          stmtActive = true;
-          stmtSection.classList.add('rfig-stmt-active');
-          setTimeout(typeStmt, 400);
-        }
-      });
-    }, { root: scrollParent, threshold: 0.3 });
-    stmtObs.observe(stmtSection);
-  }
+  // stmtSection typewriter now triggered by scroll handler above
+
+  // letter physics lives in index.html inline script (isolated)
 
 })();
 // ── LOADER ─────────────────────────────────────────

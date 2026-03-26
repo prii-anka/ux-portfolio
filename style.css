@@ -212,7 +212,10 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   overflow-y: auto; overflow-x: hidden;
   background: #1a1a1a;
   z-index: 50;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+#view-recruiter.active::-webkit-scrollbar { display: none; }
 
 /* ═══════════════════════════════════════════
    MACBOOK FRAME
@@ -1547,8 +1550,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
    FIGMA-STYLE HERO
 ══════════════════════════════════════════ */
 .rfig-hero {
-  position: relative;
-  width: 100%; height: 100%;
+  position: sticky; top: 0; z-index: 1;
+  width: 100%; height: 100vh;
   background: #1a1a1a;
   background-image: radial-gradient(rgba(255,255,255,0.09) 1px, transparent 1px);
   background-size: 28px 28px;
@@ -1566,45 +1569,97 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   opacity: 0.04; mix-blend-mode: overlay;
 }
 
-/* Top bar (location + clock only, left-aligned) */
-.rfig-topbar {
-  position: absolute; top: 24px; left: 32px; right: 32px;
-  display: flex; align-items: center; justify-content: flex-start;
+/* Cartoon googly eyes — absolutely positioned in hero */
+.rfig-eyes {
+  position: absolute; top: 229px; left: 70px;
+  display: flex; gap: 18px; align-items: flex-end;
   z-index: 10;
 }
-.rfig-topleft {
-  font-family: 'Space Grotesk', monospace;
-  font-size: 0.72rem; letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.35);
+.reye-wrap {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 5px;
+}
+/* Eyebrows — curved arc using border-top technique */
+.reye-brow {
+  width: 44px; height: 16px;
+  border-top: 6px solid #f0ece5;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  transform: rotate(-6deg) scaleX(0.88);
+  transform-origin: center bottom;
+}
+.reye-brow-r {
+  transform: rotate(6deg) scaleX(0.88);
+}
+/* Eye orb — horizontal oval */
+.rfig-eyes .reye {
+  background: #f0ece5;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  transform-origin: center center;
+  animation: eyeBlink 3.8s ease-in-out infinite;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+}
+.rfig-eyes #rEyeLeft  { width: 52px; height: 46px; }
+.rfig-eyes #rEyeRight { width: 52px; height: 46px; animation-delay: 0.07s; }
+
+@keyframes eyeBlink {
+  0%, 85%, 100% { transform: scaleY(1); }
+  90%            { transform: scaleY(0.05); }
+  94%            { transform: scaleY(1); }
 }
 
-/* Small googly eyes (top-left of hero) */
-.rfig-eyes {
-  position: absolute; top: 72px; left: 40px;
-  display: flex; gap: 8px; align-items: flex-end;
-  z-index: 5;
+/* Single-brow lift — left and right variants preserve base rotation */
+@keyframes browLiftL {
+  0%, 100% { transform: rotate(-6deg) scaleX(0.88) translateY(0); }
+  35%       { transform: rotate(-10deg) scaleX(0.88) translateY(-9px); }
+  55%       { transform: rotate(-8deg) scaleX(0.88) translateY(-7px); }
 }
-.rfig-eyes .reye {
-  background: rgba(255,255,255,0.88);
+@keyframes browLiftR {
+  0%, 100% { transform: rotate(6deg) scaleX(0.88) translateY(0); }
+  35%       { transform: rotate(10deg) scaleX(0.88) translateY(-9px); }
+  55%       { transform: rotate(8deg) scaleX(0.88) translateY(-7px); }
+}
+.reye-brow.lift      { animation: browLiftL 0.55s ease-in-out forwards; }
+.reye-brow-r.lift    { animation: browLiftR 0.55s ease-in-out forwards; }
+
+/* Pupil — absolutely centered so JS translate(-50%+x, -50%+y) works */
+.rfig-eyes .reye-pupil {
+  width: 18px; height: 18px;
+  background: #111;
   border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
 }
-.rfig-eyes #rEyeLeft  { width: 44px; height: 44px; }
-.rfig-eyes #rEyeRight { width: 34px; height: 34px; }
-.rfig-eyes .reye-pupil { width: 14px; height: 14px; }
+.rfig-eyes .reye-pupil::after {
+  content: '';
+  position: absolute;
+  top: 5px; left: 6px;
+  width: 8px; height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.9;
+}
 
 /* Stage: two frames stacked */
 .rfig-stage {
   display: flex; flex-direction: column;
   align-items: flex-start;
-  gap: 14px;
-  position: relative; z-index: 10;
+  gap: 20px;
+  position: absolute; top: 353px; left: -37px;
+  z-index: 10;
   will-change: transform, opacity;
   transform-origin: center top;
+  padding: 0 6vw;
+  max-width: 88vw;
 }
 .rfig-frame-wrap { position: relative; }
-.rfig-frame-wrap-2 { padding-left: 24px; }
+.rfig-frame-wrap-2 { padding-left: 0; }
 .rfig-frame-label-dim { background: rgba(168,85,247,0.55); }
 .rfig-hint-row-dim { opacity: 0.55; }
 
@@ -1639,17 +1694,19 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   transition: opacity 0.2s;
 }
 
-/* Figma selection frame */
+/* Figma selection frame — boxes removed, open text layout */
 .rfig-frame {
   position: relative;
-  border: 1.5px solid rgba(168,85,247,0.65);
-  padding: 32px 48px 28px;
-  cursor: grab;
-  transition: border-color 0.2s;
-  background: rgba(168,85,247,0.04);
+  border: none;
+  padding: 0;
+  cursor: default;
+  background: transparent;
 }
-.rfig-frame:active { cursor: grabbing; }
-.rfig-frame:hover  { border-color: rgba(168,85,247,0.95); }
+.rfig-frame:active { cursor: default; }
+.rfig-frame:hover  { border-color: transparent; }
+.rfig-frame-label  { display: none; }
+.rfig-corner       { display: none; }
+.rfig-hint-row     { display: none; }
 
 /* Corner handles (shared: hero frame + statement frame) */
 .rfig-corner {
@@ -1668,7 +1725,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rfig-name-line {
   display: flex; align-items: baseline; justify-content: center;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(2.8rem, 6.5vw, 5.8rem);
+  font-size: clamp(1.4rem, 2.8vw, 2.6rem);
   font-weight: 700; line-height: 1;
   letter-spacing: -0.03em;
   color: #f0ede8;
@@ -1685,12 +1742,16 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   margin-left: 2px;
 }
 
-/* Role line */
+/* Role line — big open type, wraps to 2 lines */
 .rfig-role {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(1.1rem, 2.8vw, 2.3rem);
-  font-weight: 400; letter-spacing: 0.01em;
-  color: rgba(255,255,255,0.42);
+  font-size: clamp(2.8rem, 6.2vw, 5.8rem);
+  font-weight: 700; letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: rgba(255,255,255,0.88);
+  white-space: normal;
+  word-break: break-word;
+  max-width: 100%;
   text-align: center;
   white-space: nowrap;
 }
@@ -1700,11 +1761,97 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* Tagline — sits inside stage, aligned under frame 2 */
 .rfig-tagline {
-  padding-left: 24px;
+  padding-left: 0;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(0.7rem, 1.1vw, 0.9rem);
+  font-size: clamp(0.9rem, 1.4vw, 1.15rem);
   font-weight: 400; letter-spacing: 0.01em;
-  color: rgba(255,255,255,0.28);
+  color: rgba(255,255,255,0.52);
+}
+/* Sticky label words in tagline */
+.rfig-sticky-word {
+  display: inline-block;
+  cursor: default;
+  background: transparent;
+  border: 1px solid #a855f7;
+  border-radius: 2px;
+  padding: 2px 8px 3px;
+  color: rgba(255,255,255,0.85);
+  position: relative;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.18s ease;
+  transform-origin: center bottom;
+}
+/* Top-left + top-right hollow corner squares */
+.rfig-sticky-word::before {
+  content: '';
+  position: absolute;
+  width: 6px; height: 6px;
+  border: 1px solid #a855f7;
+  background: #1a1a1a;
+  top: -4px; left: -4px;
+  pointer-events: none;
+}
+.rfig-sticky-word::after {
+  content: '';
+  position: absolute;
+  width: 6px; height: 6px;
+  border: 1px solid #a855f7;
+  background: #1a1a1a;
+  top: -4px; right: -4px;
+  pointer-events: none;
+}
+/* Bottom corners + T label */
+.sw-corners {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+.sw-corners::before {
+  content: '';
+  position: absolute;
+  width: 6px; height: 6px;
+  border: 1px solid #a855f7;
+  background: #1a1a1a;
+  bottom: -4px; left: -4px;
+}
+.sw-corners::after {
+  content: '';
+  position: absolute;
+  width: 6px; height: 6px;
+  border: 1px solid #a855f7;
+  background: #1a1a1a;
+  bottom: -4px; right: -4px;
+}
+.sw-label {
+  position: absolute;
+  top: -15px; left: -1px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 8px; font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(168,85,247,0.28);
+  pointer-events: none; user-select: none;
+}
+.rfig-sticky-word:nth-child(1):hover {
+  transform: scale(1.15) rotate(-3deg);
+  color: #fff;
+}
+.rfig-sticky-word:nth-child(2):hover {
+  transform: scale(1.15) rotate(2.5deg);
+  color: #fff;
+}
+
+/* Sarcastic hover hint under role */
+.rfig-letter-hint {
+  padding-left: 0;
+  font-family: 'Caveat', cursive;
+  font-size: 1.05rem; font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.15);
+  transition: color 0.4s;
+  user-select: none; margin-top: -10px;
+}
+.rfig-stage:hover .rfig-letter-hint {
+  color: rgba(255,255,255,0.45);
 }
 
 /* Quick jump button (bottom-center) */
@@ -1749,36 +1896,31 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   margin-left: 12px; white-space: nowrap;
 }
 
-/* Sassy bubble — real chat bubble style */
+/* Sassy bubble — solid purple */
 .rfig-bubble {
   position: fixed; pointer-events: none; z-index: 999996;
-  background: #1e0b3a;
-  border: 1px solid rgba(168,85,247,0.35);
-  border-radius: 14px 14px 14px 2px;
-  padding: 10px 14px 10px 12px;
-  min-width: 160px; max-width: 280px;
-  opacity: 0; transform: translateY(10px) scale(0.88);
-  transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  background: #7c3aed;
+  border: none;
+  border-radius: 20px 20px 20px 5px;
+  padding: 5px 14px 6px 14px;
+  min-width: 190px; max-width: 300px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+  opacity: 0; transform: scale(0.92);
+  transition: opacity 0.06s ease, transform 0.08s cubic-bezier(0.34,1.56,0.64,1);
 }
-/* Speech bubble tail (bottom-left) */
-.rfig-bubble::before {
-  content: '';
-  position: absolute; bottom: -8px; left: 0;
-  width: 0; height: 0;
-  border-left: 0 solid transparent;
-  border-right: 12px solid transparent;
-  border-top: 8px solid #1e0b3a;
-}
+.rfig-bubble::before { display: none; }
 .rfig-bubble.show { opacity: 1; transform: translateY(0) scale(1); }
 .rfig-bubble-name {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.07em;
-  color: #a855f7; display: block; margin-bottom: 5px;
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.03em;
+  color: rgba(255,255,255,0.75);
+  display: inline-block;
+  margin-bottom: 3px;
 }
 .rfig-bubble-msg {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.82rem; font-weight: 400; line-height: 1.4;
-  color: #f0ede8;
+  font-size: 0.88rem; font-weight: 500; line-height: 1.3;
+  color: #f0ede8; display: block;
 }
 .rfig-blink-caret {
   color: rgba(168,85,247,0.8);
@@ -1786,14 +1928,44 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   margin-left: 1px; font-weight: 300;
 }
 
-/* ── Scroll statement section ── */
+/* ── Draggable letters in "Product & UX Designer" ── */
+.rfig-letter {
+  display: inline-block;
+  cursor: grab;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  transition: color 0.15s, text-shadow 0.15s;
+}
+.rfig-letter:hover {
+  color: #c084fc;
+  text-shadow: 0 0 18px rgba(168,85,247,0.5);
+}
+.rfig-letter:active { cursor: grabbing; }
+
+/* ── Statement section — hidden (letter hero replaces it) ── */
+.rfig-stmt-section { display: none !important; }
+.rfig-trans-spacer  { display: none; }
+
+/* ── Statement section — fixed overlay, crossfades over hero (no scroll movement) ── */
 .rfig-stmt-section {
-  min-height: 100vh;
+  position: fixed; top: 0; left: 0; right: 0; height: 100vh;
   background: #1a1a1a;
+  background-image: radial-gradient(rgba(255,255,255,0.09) 1px, transparent 1px);
+  background-size: 28px 28px;
   display: flex; align-items: center; justify-content: center;
   padding: 80px 60px;
-  box-sizing: border-box; position: relative;
+  box-sizing: border-box;
+  z-index: 2;
+  transform-origin: center center;
+  will-change: transform, opacity, filter;
+  opacity: 0;
+  pointer-events: none;
 }
+.rfig-stmt-section.rfig-stmt-visible { pointer-events: auto; }
+/* Spacer keeps document height so work section isn't pulled up */
+.rfig-trans-spacer { height: 100vh; }
 .rfig-stmt-section::after {
   content: '';
   position: absolute; inset: 0; pointer-events: none; z-index: 1;
@@ -1855,18 +2027,71 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 @keyframes rfigBlink  { 0%,100%{opacity:1} 50%{opacity:0} }
 @keyframes rfigBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
 
-@media (max-width: 600px) {
-  .rfig-name-line { font-size: clamp(2rem, 9vw, 3.2rem); white-space: normal; }
-  .rfig-role { font-size: clamp(1rem, 4.5vw, 1.6rem); white-space: normal; }
-  .rfig-topbar, .rfig-eyes { top: 16px; left: 16px; }
-  .rfig-topbar { right: 16px; }
-  .rfig-frame { padding: 24px 20px 20px; }
+/* ── Mobile & tablet hero layout ── */
+@media (max-width: 768px) {
+  /* Hero becomes a flex column, content flows naturally */
+  .rhero.rfig-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 6vw;
+    overflow: hidden;
+  }
+
+  /* Eyes: back to flow (not absolute) */
+  .rfig-eyes {
+    position: relative;
+    top: auto; left: auto;
+    margin-bottom: 12px;
+  }
+
+  /* Stage: back to flow (not absolute) */
+  .rfig-stage {
+    position: relative;
+    top: auto; left: auto;
+    padding: 0;
+    max-width: 100%;
+    gap: 10px;
+  }
+
+  /* Role — big but fits mobile */
+  .rfig-role {
+    font-size: clamp(2rem, 8.5vw, 3.4rem);
+    white-space: normal; word-break: break-word;
+  }
+
+  /* Name line */
+  .rfig-name-line {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    white-space: normal;
+  }
+
+  /* Eyes sizing */
+  .rfig-eyes #rEyeLeft, .rfig-eyes #rEyeRight { width: 44px; height: 38px; }
+  .reye-brow { width: 36px; height: 14px; border-top-width: 5px; }
+  .rfig-eyes { gap: 10px; }
+
+  /* Tagline & hint */
+  .rfig-tagline { font-size: clamp(0.8rem, 3vw, 1rem); }
+  .rfig-letter-hint { font-size: 0.95rem; }
+
+  /* Frame padding reset */
+  .rfig-frame { padding: 0; }
+
+  /* Jump btn */
+  .rfig-jump-btn { bottom: 24px; }
+
+  /* Statement */
   .rfig-stmt-section { padding: 60px 24px; }
   .rfig-stmt-text { font-size: clamp(1.4rem, 6vw, 2rem); }
   .rfig-stmt-frame { padding: 32px 28px; }
-  .rfig-jump-btn { bottom: 24px; }
-  .rfig-eyes #rEyeLeft  { width: 34px; height: 34px; }
-  .rfig-eyes #rEyeRight { width: 26px; height: 26px; }
+}
+
+/* Small phones */
+@media (max-width: 390px) {
+  .rfig-role { font-size: clamp(1.7rem, 8vw, 2.4rem); }
+  .rfig-eyes #rEyeLeft, .rfig-eyes #rEyeRight { width: 36px; height: 32px; }
+  .reye-brow { width: 28px; height: 12px; border-top-width: 4px; }
 }
 
 /* ── Recruiter Hero — φ = 1.618 scale ── */
@@ -1879,6 +2104,12 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   padding: 68px 42px;          /* φ³ vertical · φ² horizontal */
   position: relative;
   overflow: hidden;
+}
+/* figma hero overrides rhero — stays pinned */
+.rhero.rfig-hero {
+  position: sticky; top: 0;
+  height: 100vh; min-height: 100vh;
+  perspective: 1100px;
 }
 .rhero-left {
   position: absolute;

@@ -24,7 +24,7 @@
   <link rel="preload" as="image" href="assets/project-poshaai.png" />
   <link rel="preload" as="image" href="assets/project-thegrind.png" />
   <link rel="preload" as="image" href="assets/project-deadlineiq.png" />
-  <link rel="stylesheet" href="style.css?v=23" />
+  <link rel="stylesheet" href="style.css?v=130" />
 </head>
 <body>
 <div id="cursor-dot"></div>
@@ -213,15 +213,16 @@
   <!-- ── FIGMA-STYLE HERO ── -->
   <section class="rhero rfig-hero" id="rfig-hero">
 
-    <!-- Top bar: location + clock only (dock is on right) -->
-    <div class="rfig-topbar">
-      <span class="rfig-topleft">Tempe, AZ — <span id="rfigClock">00:00 MST</span></span>
-    </div>
-
-    <!-- Small googly eyes (top-left) -->
+    <!-- Googly eyes — absolutely positioned in hero -->
     <div class="rfig-eyes" id="rEyesWrap">
-      <div class="reye" id="rEyeLeft"><div class="reye-pupil" id="rPupilLeft"></div></div>
-      <div class="reye" id="rEyeRight"><div class="reye-pupil" id="rPupilRight"></div></div>
+      <div class="reye-wrap">
+        <div class="reye-brow"></div>
+        <div class="reye" id="rEyeLeft"><div class="reye-pupil" id="rPupilLeft"></div></div>
+      </div>
+      <div class="reye-wrap">
+        <div class="reye-brow reye-brow-r"></div>
+        <div class="reye" id="rEyeRight"><div class="reye-pupil" id="rPupilRight"></div></div>
+      </div>
     </div>
 
     <!-- Two separate draggable Figma frames -->
@@ -263,7 +264,8 @@
       </div>
 
       <!-- Tagline under role frame -->
-      <p class="rfig-tagline">focused on design systems &amp; empathy-rooted experiences</p>
+      <p class="rfig-tagline">focused on <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>design systems</span> &amp; <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>empathy</span>-rooted experiences</p>
+      <p class="rfig-letter-hint">hover the text. i dare you.</p>
 
     </div>
 
@@ -342,6 +344,41 @@
     })();
   </script>
 
+  <!-- Random single-eyebrow lift -->
+  <script>
+  (function(){
+    var brows = document.querySelectorAll('.reye-brow');
+    if (!brows.length) return;
+    var browL = brows[0], browR = brows[1];
+    function lift(brow, cb) {
+      brow.classList.remove('lift');
+      void brow.offsetWidth;
+      brow.classList.add('lift');
+      setTimeout(function(){ brow.classList.remove('lift'); if(cb) cb(); }, 560);
+    }
+    // Rapid L-R-L-R showoff sequence
+    function doLoop() {
+      var seq = [browL, browR, browL, browR, browL];
+      var i = 0;
+      function next() {
+        if (i >= seq.length) return;
+        lift(seq[i++], function(){ setTimeout(next, 120); });
+      }
+      next();
+    }
+    function randomLift() {
+      if (Math.random() < 0.25) {
+        doLoop(); // 25% chance: rapid alternating sequence
+        setTimeout(randomLift, 5000 + Math.random() * 4000);
+      } else {
+        lift(Math.random() > 0.5 ? browL : browR);
+        setTimeout(randomLift, 2800 + Math.random() * 4200);
+      }
+    }
+    setTimeout(randomLift, 1800 + Math.random() * 2000);
+  })();
+  </script>
+
   <!-- Googly eyes cursor tracking -->
   <script>
   (function () {
@@ -386,6 +423,8 @@
       </div>
     </div>
   </section>
+  <!-- Scroll spacer — keeps doc height so work section isn't pulled up while stmt is fixed -->
+  <div class="rfig-trans-spacer"></div>
 
   <!-- MARQUEE -->
   <div class="rmarquee rfig-reveal">
@@ -1839,8 +1878,174 @@
 }());
 </script>
 
-<script src="script.js?v=10"></script>
+<script src="script.js?v=99"></script>
 <script>
+// ── Letter physics — standalone, isolated from script.js ──
+(function() {
+  var roleEl = document.querySelector('.rfig-role');
+  if (!roleEl) return;
+  var bubble     = document.getElementById('rfigBubble');
+  var bubbleText = document.getElementById('rfigBubbleText');
+  var heroEl     = document.getElementById('rfig-hero');
+  var msgT = null;
+
+  var lMsgs = [
+    'excuse me?? \uD83D\uDE2D',
+    'put it back or i\'m filing a bug',
+    'that took 3 iterations to kern',
+    'i JUST aligned that',
+    'the accessibility audit is tomorrow',
+    'my type system is crying rn',
+    'babe that\'s load-bearing text',
+    'undo. UNDO.',
+    'design tokens don\'t cover this',
+    'sir this is a portfolio',
+    'i will component-ize you',
+    'figma would never let this happen',
+  ];
+  var lastL = -1;
+  function rMsg() {
+    var i; do { i = Math.floor(Math.random()*lMsgs.length); } while(i===lastL);
+    lastL=i; return lMsgs[i];
+  }
+
+  // Split text into letter spans — regular spaces so text wraps naturally
+  var text = roleEl.textContent;
+  roleEl.innerHTML = '';
+  var spans = [];
+  for (var ci = 0; ci < text.length; ci++) {
+    if (text[ci] === ' ') {
+      var sp = document.createElement('span');
+      sp.style.cssText = 'display:inline-block;width:0.35em;';
+      roleEl.appendChild(sp);
+      spans.push(null);
+    } else {
+      var s = document.createElement('span');
+      s.className = 'rfig-letter';
+      s.textContent = text[ci];
+      roleEl.appendChild(s);
+      spans.push(s);
+    }
+  }
+
+  // Capture original screen positions before any transforms
+  var states = spans.map(function(s) {
+    if (!s) return null;
+    var r = s.getBoundingClientRect();
+    return {el:s, dx:0, dy:0, vx:0, vy:0, rot:0, falling:false, aid:null, settled:false,
+            origX: r.left + r.width/2, origY: r.top + r.height/2};
+  });
+
+  var drag = null, dSX, dSY, dPX;
+  var NUM_BUCKETS = 16;
+  var LETTER_H = 46; // approx letter height for stacking
+  var SCREEN_FLOOR = window.innerHeight - (window.innerWidth < 768 ? 80 : 52);
+  var stackFloors = [];
+  function resetFloors() { for (var i=0;i<NUM_BUCKETS;i++) stackFloors[i]=SCREEN_FLOOR; }
+  resetFloors();
+
+  function getBucket(screenX) {
+    return Math.max(0, Math.min(NUM_BUCKETS-1, Math.floor(screenX / (window.innerWidth / NUM_BUCKETS))));
+  }
+
+  function stopFall(st) {
+    st.falling = false;
+    if (st.aid) { cancelAnimationFrame(st.aid); st.aid = null; }
+  }
+
+  function fall(st) {
+    if (!st.falling) return;
+    st.vy += 0.65; st.vx *= 0.97;
+    st.rot += st.vx * 2.8;
+    st.dx += st.vx; st.dy += st.vy;
+
+    // Per-column stacking floor in dy-space
+    var screenX = st.origX + st.dx;
+    var bucket = getBucket(screenX);
+    var floorDY = stackFloors[bucket] - st.origY;
+
+    if (st.dy >= floorDY) {
+      st.dy = floorDY;
+      st.vy = -st.vy * 0.28;
+      st.vx *= 0.7;
+      if (Math.abs(st.vy) < 0.8) { st.vy = 0; st.vx *= 0.85; }
+      if (Math.abs(st.vy) < 0.2 && Math.abs(st.vx) < 0.2) {
+        st.falling = false;
+        if (!st.settled) {
+          st.settled = true;
+          stackFloors[bucket] -= LETTER_H;
+        }
+      }
+    }
+    st.el.style.transform = 'translate('+st.dx.toFixed(1)+'px,'+st.dy.toFixed(1)+'px) rotate('+st.rot.toFixed(1)+'deg)';
+    if (st.falling) st.aid = requestAnimationFrame(function(){ fall(st); });
+  }
+
+  function snapAll() {
+    resetFloors();
+    states.forEach(function(st) {
+      if (!st) return;
+      stopFall(st);
+      st.dx=0; st.dy=0; st.vx=0; st.vy=0; st.rot=0; st.settled=false;
+      st.el.style.transition = 'transform 0.65s cubic-bezier(0.34,1.56,0.64,1)';
+      st.el.style.transform  = 'translate(0,0) rotate(0deg)';
+      setTimeout(function(){ st.el.style.transition=''; }, 720);
+    });
+  }
+
+  function showBub(x, y) {
+    var msg = rMsg();
+    if (bubbleText) bubbleText.textContent = '';
+    if (!bubble) return;
+    bubble.style.left = (x+14)+'px'; bubble.style.top = (y-56)+'px';
+    bubble.classList.add('show');
+    clearTimeout(msgT);
+    var bi=0;
+    (function tb(){ if(bi<=msg.length&&bubbleText){ bubbleText.textContent=msg.slice(0,bi++); if(bi<=msg.length) setTimeout(tb,5+Math.random()*4); } })();
+    msgT = setTimeout(function(){ bubble.classList.remove('show'); }, 3600);
+  }
+
+  states.forEach(function(st) {
+    if (!st) return;
+    // Hover → fall
+    st.el.addEventListener('mouseenter', function() {
+      if (drag === st || st.falling) return;
+      stopFall(st); st.el.style.transition='none';
+      st.settled = false;
+      st.vy = 2.5 + Math.random() * 2;
+      st.vx = (Math.random() - 0.5) * 2.5;
+      st.falling = true; fall(st);
+    });
+    // Drag → move + bubble
+    st.el.addEventListener('mousedown', function(e) {
+      e.stopPropagation(); e.preventDefault();
+      stopFall(st); st.el.style.transition='none';
+      dSX=e.clientX-st.dx; dSY=e.clientY-st.dy; dPX=e.clientX;
+      drag=st; showBub(e.clientX, e.clientY);
+    });
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!drag) return;
+    drag.vx=(e.clientX-dPX)*0.4; dPX=e.clientX;
+    drag.dx=e.clientX-dSX; drag.dy=e.clientY-dSY;
+    drag.el.style.transform='translate('+drag.dx.toFixed(1)+'px,'+drag.dy.toFixed(1)+'px)';
+  });
+
+  document.addEventListener('mouseup', function() {
+    if (!drag) return;
+    var st=drag; drag=null;
+    st.vy=3+Math.random()*2; st.vx+=(Math.random()-0.5)*3;
+    st.falling=true; fall(st);
+  });
+
+  if (heroEl) {
+    heroEl.addEventListener('click', function(e) {
+      if (e.target.classList.contains('rfig-letter')) return;
+      snapAll();
+    });
+  }
+})();
 // photos overlay + hint bubble
 (function(){
   var overlay  = document.getElementById('rphotosOverlay');
@@ -2045,6 +2250,7 @@
   }
 }());
 </script>
+
 
 </body>
 </html>
