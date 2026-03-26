@@ -24,7 +24,7 @@
   <link rel="preload" as="image" href="assets/project-poshaai.png" />
   <link rel="preload" as="image" href="assets/project-thegrind.png" />
   <link rel="preload" as="image" href="assets/project-deadlineiq.png" />
-  <link rel="stylesheet" href="style.css?v=130" />
+  <link rel="stylesheet" href="style.css?v=134" />
 </head>
 <body>
 <div id="cursor-dot"></div>
@@ -264,7 +264,7 @@
       </div>
 
       <!-- Tagline under role frame -->
-      <p class="rfig-tagline">focused on <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>design systems</span> &amp; <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>empathy</span>-rooted experiences</p>
+      <p class="rfig-tagline">focused on <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>design systems</span> &amp; <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>empathy-rooted</span> experiences</p>
       <p class="rfig-letter-hint">hover the text. i dare you.</p>
 
     </div>
@@ -273,6 +273,12 @@
     <a href="#rct-section" class="rfig-jump-btn">
       <span class="rfig-jump-arr">↓</span> WORK
     </a>
+
+    <!-- pri.anka ghost cursor (snaps letters back) -->
+    <div class="rfig-ghost-cursor" id="rfigGhostCursor" aria-hidden="true">
+      <svg width="14" height="18" viewBox="0 0 14 18" fill="none"><path d="M0.5 0.5L13 10.5L7.5 11.5L5.5 17.5L0.5 0.5Z" fill="#a855f7" stroke="#7c3aed" stroke-width="0.8"/></svg>
+      <span class="rfig-ghost-label">pri.anka</span>
+    </div>
 
     <!-- You cursor -->
     <div class="rfig-cursor-you" id="rfigCursorYou" aria-hidden="true">
@@ -2007,14 +2013,15 @@
 
   states.forEach(function(st) {
     if (!st) return;
-    // Hover → fall
-    st.el.addEventListener('mouseenter', function() {
+    // Hover → fall + bubble
+    st.el.addEventListener('mouseenter', function(e) {
       if (drag === st || st.falling) return;
       stopFall(st); st.el.style.transition='none';
       st.settled = false;
       st.vy = 2.5 + Math.random() * 2;
       st.vx = (Math.random() - 0.5) * 2.5;
       st.falling = true; fall(st);
+      showBub(e.clientX, e.clientY);
     });
     // Drag → move + bubble
     st.el.addEventListener('mousedown', function(e) {
@@ -2039,10 +2046,23 @@
     st.falling=true; fall(st);
   });
 
+  var ghostCur = document.getElementById('rfigGhostCursor');
   if (heroEl) {
     heroEl.addEventListener('click', function(e) {
       if (e.target.classList.contains('rfig-letter')) return;
       snapAll();
+      // Show pri.anka ghost cursor at click position
+      if (ghostCur) {
+        ghostCur.style.left = e.clientX + 'px';
+        ghostCur.style.top  = e.clientY + 'px';
+        ghostCur.classList.remove('hide');
+        ghostCur.classList.add('show');
+        clearTimeout(ghostCur._t);
+        ghostCur._t = setTimeout(function(){
+          ghostCur.classList.remove('show');
+          ghostCur.classList.add('hide');
+        }, 1200);
+      }
     });
   }
 })();

@@ -1868,6 +1868,22 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rfig-jump-btn:hover { color: #fff; border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.07); }
 .rfig-jump-arr { display: inline-block; animation: rfigBounce 2s ease-in-out infinite; }
 
+/* pri.anka ghost cursor — appears on snap-back click */
+.rfig-ghost-cursor {
+  position: fixed; pointer-events: none; z-index: 999997;
+  display: flex; align-items: flex-start; gap: 4px;
+  opacity: 0; transition: opacity 0.1s ease;
+}
+.rfig-ghost-cursor.show { opacity: 1; }
+.rfig-ghost-cursor.hide { opacity: 0; transition: opacity 0.6s ease; }
+.rfig-ghost-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.65rem; font-weight: 700;
+  background: #a855f7; color: #fff;
+  padding: 2px 7px; border-radius: 3px;
+  white-space: nowrap; margin-top: 2px;
+}
+
 /* You cursor */
 .rfig-cursor-you {
   position: fixed; pointer-events: none; z-index: 999998;
@@ -2027,71 +2043,63 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 @keyframes rfigBlink  { 0%,100%{opacity:1} 50%{opacity:0} }
 @keyframes rfigBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
 
-/* ── Mobile & tablet hero layout ── */
+/* ── Mobile hero layout ── */
 @media (max-width: 768px) {
-  /* Hero becomes a flex column, content flows naturally */
+  /* Hero: full-height, flex column, vertically centered */
   .rhero.rfig-hero {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 6vw;
+    align-items: flex-start;
+    padding: 0;
     overflow: hidden;
   }
 
-  /* Eyes: back to flow (not absolute) */
+  /* Eyes: flow in column, left margin for padding */
   .rfig-eyes {
     position: relative;
     top: auto; left: auto;
-    margin-bottom: 12px;
+    margin: 0 0 14px 28px;
+    gap: 10px;
   }
+  .rfig-eyes #rEyeLeft, .rfig-eyes #rEyeRight { width: 40px; height: 36px; }
+  .reye-brow { width: 32px; height: 13px; border-top-width: 5px; }
 
-  /* Stage: back to flow (not absolute) */
+  /* Stage: flow in column, proper left padding */
   .rfig-stage {
     position: relative;
     top: auto; left: auto;
-    padding: 0;
+    padding: 0 28px;
     max-width: 100%;
     gap: 10px;
+    will-change: transform, opacity;
+    transform-origin: left center;
   }
 
-  /* Role — big but fits mobile */
+  /* Role — fits single viewport width cleanly */
   .rfig-role {
-    font-size: clamp(2rem, 8.5vw, 3.4rem);
+    font-size: clamp(1.6rem, 7vw, 2.6rem);
     white-space: normal; word-break: break-word;
+    line-height: 1.1;
   }
 
-  /* Name line */
+  /* Name line — smaller than role */
   .rfig-name-line {
-    font-size: clamp(1rem, 4vw, 1.5rem);
+    font-size: clamp(0.85rem, 3.5vw, 1.2rem);
     white-space: normal;
+    justify-content: flex-start;
   }
-
-  /* Eyes sizing */
-  .rfig-eyes #rEyeLeft, .rfig-eyes #rEyeRight { width: 44px; height: 38px; }
-  .reye-brow { width: 36px; height: 14px; border-top-width: 5px; }
-  .rfig-eyes { gap: 10px; }
 
   /* Tagline & hint */
-  .rfig-tagline { font-size: clamp(0.8rem, 3vw, 1rem); }
-  .rfig-letter-hint { font-size: 0.95rem; }
+  .rfig-tagline  { font-size: 0.82rem; }
+  .rfig-letter-hint { font-size: 0.9rem; }
 
-  /* Frame padding reset */
+  /* Frame reset */
   .rfig-frame { padding: 0; }
-
-  /* Jump btn */
-  .rfig-jump-btn { bottom: 24px; }
-
-  /* Statement */
+  .rfig-jump-btn { bottom: 20px; }
   .rfig-stmt-section { padding: 60px 24px; }
   .rfig-stmt-text { font-size: clamp(1.4rem, 6vw, 2rem); }
   .rfig-stmt-frame { padding: 32px 28px; }
-}
-
-/* Small phones */
-@media (max-width: 390px) {
-  .rfig-role { font-size: clamp(1.7rem, 8vw, 2.4rem); }
-  .rfig-eyes #rEyeLeft, .rfig-eyes #rEyeRight { width: 36px; height: 32px; }
-  .reye-brow { width: 28px; height: 12px; border-top-width: 4px; }
 }
 
 /* ── Recruiter Hero — φ = 1.618 scale ── */

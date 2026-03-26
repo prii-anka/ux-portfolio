@@ -34,6 +34,7 @@
   var clock      = document.getElementById('rfigClock');
   var typeName   = document.getElementById('rfigTypeName');
   var stage      = document.querySelector('.rfig-stage');
+  var eyesWrap   = document.getElementById('rEyesWrap');
   var heroSection= document.getElementById('rfig-hero');
   if (!frame1) return;
 
@@ -204,6 +205,7 @@
       stage.style.transform = '';
       stage.style.opacity   = '';
       stage.style.filter    = '';
+      if (eyesWrap) { eyesWrap.style.transform=''; eyesWrap.style.opacity=''; eyesWrap.style.filter=''; }
     } else {
       var pE  = Math.pow(p, 0.7);                         // ease-in curve
       var sc  = Math.max(0.38, 1 - pE * 0.62).toFixed(3); // 1.0 → 0.38
@@ -213,9 +215,24 @@
       stage.style.transform = 'scale(' + sc + ') rotateX(' + rx + 'deg)';
       stage.style.opacity   = op;
       stage.style.filter    = 'blur(' + blr + 'px)';
+      if (eyesWrap) {
+        eyesWrap.style.transform = 'scale(' + sc + ') rotateX(' + rx + 'deg)';
+        eyesWrap.style.opacity   = op;
+        eyesWrap.style.filter    = 'blur(' + blr + 'px)';
+      }
     }
     var jumpBtn = document.querySelector('.rfig-jump-btn');
     if (jumpBtn) jumpBtn.style.opacity = Math.max(0, 1 - p * 4).toFixed(3);
+
+    // Fade hero shell so work section shows through when scrolled past
+    if (p > 0.65) {
+      var hFade = Math.min(1, (p - 0.65) / 0.35);
+      heroSection.style.opacity = (1 - hFade).toFixed(3);
+      heroSection.style.pointerEvents = hFade > 0.9 ? 'none' : '';
+    } else {
+      heroSection.style.opacity = '';
+      heroSection.style.pointerEvents = '';
+    }
 
     // Statement: rushes in from depth — aggressive ease-out
     if (stmtSection) {
