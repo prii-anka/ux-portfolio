@@ -2045,56 +2045,65 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* ── Mobile hero layout ── */
 @media (max-width: 768px) {
-  /* Hero: full-height, flex column, vertically centered */
+  /* Hero: full-height flex column, content centered */
   .rhero.rfig-hero {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 0;
+    padding: 0 32px;
     overflow: hidden;
   }
 
-  /* Eyes: flow in column, left margin for padding */
+  /* Eyes: relative, sits above text */
   .rfig-eyes {
     position: relative;
     top: auto; left: auto;
-    margin: 0 0 14px 28px;
+    margin: 0 0 18px 0;
     gap: 10px;
   }
-  .rfig-eyes #rEyeLeft, .rfig-eyes #rEyeRight { width: 40px; height: 36px; }
-  .reye-brow { width: 32px; height: 13px; border-top-width: 5px; }
+  .rfig-eyes #rEyeLeft, .rfig-eyes #rEyeRight { width: 38px; height: 34px; }
+  .reye-brow { width: 30px; height: 12px; border-top-width: 4px; }
 
-  /* Stage: flow in column, proper left padding */
+  /* Stage: relative, full width */
   .rfig-stage {
     position: relative;
     top: auto; left: auto;
-    padding: 0 28px;
+    padding: 0;
     max-width: 100%;
-    gap: 10px;
+    gap: 12px;
     will-change: transform, opacity;
     transform-origin: left center;
   }
 
-  /* Role — fits single viewport width cleanly */
-  .rfig-role {
-    font-size: clamp(1.6rem, 7vw, 2.6rem);
-    white-space: normal; word-break: break-word;
-    line-height: 1.1;
-  }
-
-  /* Name line — smaller than role */
+  /* Name — small, above role */
   .rfig-name-line {
-    font-size: clamp(0.85rem, 3.5vw, 1.2rem);
+    font-size: clamp(0.9rem, 3.8vw, 1.3rem);
     white-space: normal;
     justify-content: flex-start;
   }
 
-  /* Tagline & hint */
-  .rfig-tagline  { font-size: 0.82rem; }
-  .rfig-letter-hint { font-size: 0.9rem; }
+  /* Role — clean 2-line wrap, no overflow */
+  .rfig-role {
+    font-size: clamp(1.55rem, 8.5vw, 2.6rem);
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.08;
+  }
 
-  /* Frame reset */
+  /* Tagline: plain, no Figma boxes clutter */
+  .rfig-tagline { font-size: 0.8rem; line-height: 1.5; }
+  .rfig-letter-hint { display: none; }
+
+  /* Hide Figma corner elements on mobile — too small to be useful */
+  .sw-corners, .sw-label { display: none; }
+  .rfig-sticky-word {
+    border: none;
+    padding: 0;
+    color: inherit;
+  }
+  .rfig-sticky-word::before, .rfig-sticky-word::after { display: none; }
+
   .rfig-frame { padding: 0; }
   .rfig-jump-btn { bottom: 20px; }
   .rfig-stmt-section { padding: 60px 24px; }
