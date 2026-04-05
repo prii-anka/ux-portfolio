@@ -24,7 +24,7 @@
   <link rel="preload" as="image" href="assets/project-poshaai.png" />
   <link rel="preload" as="image" href="assets/project-thegrind.png" />
   <link rel="preload" as="image" href="assets/project-deadlineiq.png" />
-  <link rel="stylesheet" href="style.css?v=196" />
+  <link rel="stylesheet" href="style.css?v=197" />
 </head>
 <body>
 <div id="cursor-dot"></div>
@@ -303,6 +303,15 @@
       <!-- Tagline -->
       <p class="rfig-tagline">building <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>design systems</span> that feel <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>deeply human</span></p>
       <p class="rfig-letter-hint">hover the text. i dare you.</p>
+      <!-- Mobile-only scroll hint -->
+      <div class="rmob-scroll-hint" id="rmobScrollHint" aria-hidden="true">
+        <span class="rmob-scroll-text">scroll to explore</span>
+        <svg class="rmob-scroll-arrow" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4.5" y="0.5" width="7" height="13" rx="3.5" stroke="currentColor" stroke-width="1"/>
+          <circle cx="8" cy="5" r="1.5" fill="currentColor" class="rmob-scroll-dot"/>
+          <path d="M8 18 L8 26 M5 23 L8 26 L11 23" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
 
     </div>
 
@@ -957,30 +966,6 @@
 <div class="rdock-item" title="Trash">
       <div class="rdock-icon"><img src="assets/icon-trash.png" alt="Trash"/></div>
       <span class="rdock-label">nice try.</span>
-    </div>
-  </div>
-
-  <!-- Mobile bottom dock (shown only on ≤900px) -->
-  <div class="rmob-dock">
-    <a class="rmob-item" href="https://linkedin.com/in/priyanka-uttarkar" target="_blank">
-      <img src="assets/icon-linkedin.png" alt="LinkedIn"/>
-      <span>LinkedIn</span>
-    </a>
-    <div class="rmob-item copy-email-btn" data-email="pri.anka256@gmail.com">
-      <img src="assets/icon-gmail.png" alt="Email"/>
-      <span>Email</span>
-    </div>
-    <div class="rmob-item" id="rmobChatBtn">
-      <img src="assets/icon-imessage.png" alt="Chat"/>
-      <span>prianka.ai</span>
-    </div>
-    <div class="rmob-item" id="rmobPaintBtn">
-      <img src="assets/icon-paint.png" alt="Paintings"/>
-      <span>Paintings</span>
-    </div>
-    <div class="rmob-item" id="rmobPhotosBtn">
-      <img src="assets/icon-photos.png" alt="Photos"/>
-      <span>Photos</span>
     </div>
   </div>
 
@@ -2219,14 +2204,156 @@
   });
 })();
 
-// ── Mobile bottom dock wiring ──
+// ── Mobile-only: touch eyes + floating letters + scroll hint ──
 (function(){
-  var map = { 'rmobChatBtn':'rdockChatBtn', 'rmobPaintBtn':'rdockPaintBtn', 'rmobPhotosBtn':'rdockPhotosBtn' };
-  Object.keys(map).forEach(function(mobId){
-    var mob = document.getElementById(mobId);
-    var desk = document.getElementById(map[mobId]);
-    if(mob && desk) mob.addEventListener('click', function(){ desk.click(); });
+  if (window.innerWidth > 900) return; // desktop unchanged
+
+  var eyeL = document.getElementById('rEyeLeft');
+  var eyeR = document.getElementById('rEyeRight');
+  var pupL = document.getElementById('rPupilLeft');
+  var pupR = document.getElementById('rPupilRight');
+
+  // ── Eyes follow touch ──
+  function movePupilTouch(eye, pup, tx, ty) {
+    if (!eye || !pup) return;
+    var rect = eye.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var dx = tx - cx, dy = ty - cy;
+    var dist = Math.sqrt(dx*dx + dy*dy);
+    var maxR = rect.width / 2 - 6;
+    var ratio = Math.min(dist, maxR) / (dist || 1);
+    pup.style.transform = 'translate(calc(-50% + '+(dx*ratio).toFixed(1)+'px), calc(-50% + '+(dy*ratio).toFixed(1)+'px))';
+  }
+
+  // Periodic random "attitude" rolls when idle
+  var rollT = null;
+  var rollDirections = [
+    {dx:-1,dy:-0.5},{dx:1,dy:-0.5},{dx:0,dy:-1},{dx:-1,dy:0.8},{dx:1,dy:0.8},
+    {dx:0,dy:1},{dx:-0.8,dy:0},{dx:0.8,dy:0}
+  ];
+  function randomRoll() {
+    if (!pupL || !pupR) return;
+    var d = rollDirections[Math.floor(Math.random()*rollDirections.length)];
+    var maxR = eyeL ? eyeL.getBoundingClientRect().width/2 - 6 : 10;
+    var tx = d.dx * maxR * 0.85, ty = d.dy * maxR * 0.85;
+    [pupL, pupR].forEach(function(p){ p.style.transition='transform 0.35s ease'; p.style.transform='translate(calc(-50% + '+tx.toFixed(1)+'px), calc(-50% + '+ty.toFixed(1)+'px))'; });
+    setTimeout(function(){ [pupL,pupR].forEach(function(p){ p.style.transition='transform 0.5s ease'; p.style.transform='translate(-50%,-50%)'; }); }, 420);
+    rollT = setTimeout(randomRoll, 2500 + Math.random()*4000);
+  }
+  rollT = setTimeout(randomRoll, 3000);
+
+  document.addEventListener('touchmove', function(e) {
+    var t = e.touches[0];
+    clearTimeout(rollT);
+    [pupL,pupR].forEach(function(p){ if(p) p.style.transition=''; });
+    movePupilTouch(eyeL, pupL, t.clientX, t.clientY);
+    movePupilTouch(eyeR, pupR, t.clientX, t.clientY);
+    rollT = setTimeout(randomRoll, 2500 + Math.random()*2000);
+  }, {passive:true});
+
+  document.addEventListener('touchstart', function(e) {
+    var t = e.touches[0];
+    clearTimeout(rollT);
+    [pupL,pupR].forEach(function(p){ if(p) p.style.transition='transform 0.15s ease'; });
+    movePupilTouch(eyeL, pupL, t.clientX, t.clientY);
+    movePupilTouch(eyeR, pupR, t.clientX, t.clientY);
+  }, {passive:true});
+
+  // ── Letters: float + color cycle on mobile ──
+  var letters = document.querySelectorAll('.rfig-letter');
+  if (!letters.length) return;
+
+  var palette = ['#f97316','#a855f7','#3b82f6','#ec4899','#22d3ee','#84cc16','#eab308','#f43f5e','#6366f1','#10b981'];
+  var floatStates = [];
+  var heroEl = document.querySelector('.rfig-hero') || document.getElementById('rhero');
+
+  letters.forEach(function(el, i) {
+    var colIdx = Math.floor(Math.random()*palette.length);
+    var state = {
+      el: el,
+      dx: 0, dy: 0,
+      vx: (Math.random()-0.5)*0.6,
+      vy: (Math.random()-0.5)*0.6,
+      ax: (Math.random()-0.5)*0.08,
+      ay: (Math.random()-0.5)*0.08,
+      rot: 0, rotV: (Math.random()-0.5)*0.4,
+      colIdx: colIdx,
+      colT: 0, colInterval: 60 + Math.floor(Math.random()*80),
+      floating: true, settled: false
+    };
+    floatStates.push(state);
+    el.style.color = palette[colIdx];
   });
+
+  var frame = 0;
+  var raf = null;
+  var bounds = { w: window.innerWidth, h: window.innerHeight * 0.7 };
+
+  function floatTick() {
+    frame++;
+    floatStates.forEach(function(st) {
+      if (!st.floating) return;
+      // Soft acceleration drift
+      st.ax += (Math.random()-0.5)*0.015; st.ay += (Math.random()-0.5)*0.015;
+      st.ax = Math.max(-0.12, Math.min(0.12, st.ax));
+      st.ay = Math.max(-0.12, Math.min(0.12, st.ay));
+      st.vx += st.ax; st.vy += st.ay;
+      st.vx = Math.max(-1.8, Math.min(1.8, st.vx));
+      st.vy = Math.max(-1.8, Math.min(1.8, st.vy));
+      st.dx += st.vx; st.dy += st.vy;
+      // Gentle boundary bounce
+      if (Math.abs(st.dx) > 55) { st.vx *= -0.6; st.ax *= -0.5; }
+      if (Math.abs(st.dy) > 40) { st.vy *= -0.6; st.ay *= -0.5; }
+      st.rotV += (Math.random()-0.5)*0.06;
+      st.rotV = Math.max(-1.2, Math.min(1.2, st.rotV));
+      st.rot += st.rotV;
+      st.el.style.transform = 'translate('+st.dx.toFixed(1)+'px,'+st.dy.toFixed(1)+'px) rotate('+st.rot.toFixed(1)+'deg)';
+      // Color cycle
+      st.colT++;
+      if (st.colT >= st.colInterval) {
+        st.colT = 0;
+        st.colIdx = (st.colIdx + 1 + Math.floor(Math.random()*(palette.length-1))) % palette.length;
+        st.colInterval = 50 + Math.floor(Math.random()*100);
+        st.el.style.transition = 'color 0.6s ease';
+        st.el.style.color = palette[st.colIdx];
+        setTimeout(function(){ st.el.style.transition=''; }, 700);
+      }
+    });
+    raf = requestAnimationFrame(floatTick);
+  }
+  raf = requestAnimationFrame(floatTick);
+
+  // Tap anywhere on hero → snap letters home
+  function snapLetters() {
+    floatStates.forEach(function(st) {
+      st.floating = false;
+      st.dx=0; st.dy=0; st.vx=0; st.vy=0; st.rot=0; st.rotV=0; st.ax=0; st.ay=0;
+      st.el.style.transition='transform 0.55s cubic-bezier(0.34,1.56,0.64,1), color 0.4s ease';
+      st.el.style.transform='translate(0,0) rotate(0deg)';
+      st.el.style.color='';
+      setTimeout(function(){
+        st.el.style.transition='';
+        st.floating=true; // resume floating after snap
+      }, 600);
+    });
+  }
+
+  if (heroEl) {
+    heroEl.addEventListener('touchstart', function(e) {
+      // Only snap if not touching a letter
+      if (e.target.classList.contains('rfig-letter')) return;
+      snapLetters();
+    }, {passive:true});
+  }
+
+  // ── Hide scroll hint after first scroll ──
+  var hint = document.getElementById('rmobScrollHint');
+  if (hint) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 60) { hint.style.opacity='0'; hint.style.pointerEvents='none'; }
+    }, {passive:true});
+  }
 })();
 
 </script>

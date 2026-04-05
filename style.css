@@ -4498,46 +4498,36 @@ video.rgfx-lb-img--active { display: block; }
   .rgfx-hint { font-size: 0.9rem; }
 }
 
-/* ── Mobile Bottom Dock ── */
-.rmob-dock { display: none; }
+/* ── Mobile scroll hint ── */
+.rmob-scroll-hint { display: none; }
 
 @media (max-width: 900px) {
-  .rmob-dock {
-    display: flex;
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    z-index: 1200;
-    align-items: center;
-    justify-content: space-around;
-    padding: 6px 8px;
-    padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px));
-    background: rgba(16,16,18,0.9);
-    backdrop-filter: blur(24px) saturate(1.8);
-    -webkit-backdrop-filter: blur(24px) saturate(1.8);
-    border-top: 1px solid rgba(255,255,255,0.09);
+  .rmob-scroll-hint {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    margin-top: 40px;
+    opacity: 1; transition: opacity 0.5s ease;
+    pointer-events: none;
+    animation: rmobScrollBob 2.2s ease-in-out infinite;
   }
-  .rmob-item {
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 3px; cursor: pointer; text-decoration: none;
-    padding: 6px 10px; border-radius: 10px;
-    min-width: 44px; min-height: 44px;
-    transition: background 0.15s;
-    -webkit-tap-highlight-color: transparent;
+  .rmob-scroll-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.28);
   }
-  .rmob-item:active { background: rgba(255,255,255,0.08); }
-  .rmob-item img {
-    width: 28px; height: 28px;
-    object-fit: contain; border-radius: 7px;
-    flex-shrink: 0;
+  .rmob-scroll-arrow {
+    width: 16px; height: 28px; color: rgba(255,255,255,0.22);
   }
-  .rmob-item span {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 9px; color: rgba(255,255,255,0.45);
-    letter-spacing: 0.01em; white-space: nowrap;
+  .rmob-scroll-dot {
+    animation: rmobDotSlide 2.2s ease-in-out infinite;
   }
-  /* Push page content up so bottom dock doesn't cover it */
-  body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+  @keyframes rmobScrollBob {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(5px); }
+  }
+  @keyframes rmobDotSlide {
+    0%,100% { cy: 5; }
+    50%      { cy: 9; }
+  }
 }
 
 /* Photos gallery: 2-col on small screens */
