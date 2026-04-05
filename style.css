@@ -2269,13 +2269,13 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
     justify-content: flex-start;
   }
 
-  /* Role — big & bold on mobile so it feels like a statement */
+  /* Role — fits "Product & UX Designer" on 2 clean lines, no orphaned "er" */
   .rfig-role {
-    font-size: clamp(2rem, 8.5vw, 3rem);
+    font-size: clamp(1.55rem, 6.5vw, 2.4rem);
     font-weight: 800;
     white-space: normal;
-    word-break: break-word;
-    line-height: 1.08;
+    word-break: normal;
+    line-height: 1.12;
   }
 
   /* Tagline */
@@ -4508,6 +4508,9 @@ video.rgfx-lb-img--active { display: block; }
   /* Footer */
   .rfooter { padding: 28px 20px; }
   .rfooter-cta { font-size: 0.85rem; }
+
+  /* Hide chat bubble on mobile */
+  .rfig-bubble { display: none !important; }
 
   /* Small text fixes */
   .rct-meta { font-size: 0.6rem; }
