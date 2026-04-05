@@ -192,67 +192,8 @@
     }, 700);
   });
 
-  // Scroll parallax: stage flies up and away
+  // Hero scrolls away naturally — no JS animation needed
   var scrollParent = document.getElementById('view-recruiter') || document.body;
-
-  scrollParent.addEventListener('scroll', function() {
-    if (!stage || !heroSection) return;
-    var sy = scrollParent.scrollTop;
-    var hh = heroSection.offsetHeight || window.innerHeight;
-    var p  = Math.min(Math.max(sy / hh, 0), 1);
-    // Hero: shrink back + tilt + blur out — cinematic exit
-    if (p < 0.002) {
-      stage.style.transform = '';
-      stage.style.opacity   = '';
-      stage.style.filter    = '';
-      if (eyesWrap) { eyesWrap.style.transform=''; eyesWrap.style.opacity=''; eyesWrap.style.filter=''; }
-    } else {
-      var pE  = Math.pow(p, 0.7);                         // ease-in curve
-      var sc  = Math.max(0.38, 1 - pE * 0.62).toFixed(3); // 1.0 → 0.38
-      var op  = Math.max(0, 1 - pE * 1.6).toFixed(3);
-      var rx  = (pE * 18).toFixed(1);                     // tips back 18°
-      var blr = Math.min(8, pE * 10).toFixed(1);          // blurs out
-      stage.style.transform = 'scale(' + sc + ') rotateX(' + rx + 'deg)';
-      stage.style.opacity   = op;
-      stage.style.filter    = 'blur(' + blr + 'px)';
-      if (eyesWrap) {
-        eyesWrap.style.transform = 'scale(' + sc + ') rotateX(' + rx + 'deg)';
-        eyesWrap.style.opacity   = op;
-        eyesWrap.style.filter    = 'blur(' + blr + 'px)';
-      }
-    }
-    var jumpBtn = document.querySelector('.rfig-jump-btn');
-    if (jumpBtn) jumpBtn.style.opacity = Math.max(0, 1 - p * 4).toFixed(3);
-
-    // Fade hero shell so work section shows through when scrolled past
-    if (p > 0.65) {
-      var hFade = Math.min(1, (p - 0.65) / 0.35);
-      heroSection.style.opacity = (1 - hFade).toFixed(3);
-      heroSection.style.pointerEvents = hFade > 0.9 ? 'none' : '';
-    } else {
-      heroSection.style.opacity = '';
-      heroSection.style.pointerEvents = '';
-    }
-
-    // Statement: rushes in from depth — aggressive ease-out
-    if (stmtSection) {
-      var sp  = Math.min(Math.max(sy / hh, 0), 1);
-      var spE = 1 - Math.pow(1 - sp, 3.2);              // aggressive ease-out
-      var sScale = (0.42 + spE * 0.58).toFixed(3);      // 0.42 → 1.0
-      var sOp    = Math.min(1, spE * 1.8).toFixed(3);
-      var sBlr   = Math.max(0, (1 - spE) * 8).toFixed(1); // blur clears as it arrives
-      stmtSection.style.transform = 'scale(' + sScale + ')';
-      stmtSection.style.opacity   = sOp;
-      stmtSection.style.filter    = 'blur(' + sBlr + 'px)';
-      // pointer-events + active class
-      if (parseFloat(sOp) > 0.5) {
-        stmtSection.classList.add('rfig-stmt-visible');
-        if (!stmtActive) { stmtActive = true; stmtSection.classList.add('rfig-stmt-active'); setTimeout(typeStmt, 300); }
-      } else {
-        stmtSection.classList.remove('rfig-stmt-visible');
-      }
-    }
-  }, { passive: true });
 
   // Statement: looping typewriter
   var stmtSection = document.getElementById('rfig-stmt');
@@ -1216,6 +1157,19 @@ document.getElementById('rHeroWork')?.addEventListener('click', e => {
   document.getElementById('rct-section')?.scrollIntoView({ behavior: 'smooth' });
 });
 
+// Jump-to-work button (hero bottom) — scroll the fixed view-recruiter container
+(function() {
+  var btn = document.querySelector('.rfig-jump-btn');
+  var view = document.getElementById('view-recruiter');
+  var target = document.getElementById('rct-section');
+  if (!btn || !view || !target) return;
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    var offset = target.offsetTop;
+    view.scrollTo({ top: offset, behavior: 'smooth' });
+  });
+})();
+
 // Phone chat bot
 (function() {
   const responses = {
@@ -1522,40 +1476,60 @@ document.getElementById('rSwitchCreative')?.addEventListener('click', e => {
   input.addEventListener('input', function () { renderResults(input.value); });
 })();
 
-// ── GFX LIGHTBOX ─────────────────────────────────────────────────────
-(function () {
-  var lb  = document.getElementById('rgfxLightbox');
-  var img = document.getElementById('rgfxLbImg');
-  var cls = document.getElementById('rgfxLbClose');
-  if (!lb || !img) return;
+// ── BENTO PANEL ──────────────────────────────────────────────────────
+var GFX_HTML = `<div class="rgfx-track" id="rBentoGfxTrack"><div class="rgfx-strip">
+  <div class="rgfx-card rgfx-card--wide"><div class="rgfx-thumb" style="background:linear-gradient(145deg,#1a0830,#6b21a8)"><img src="assets/gfx-posters.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Poster Series</span><span class="rgfx-name">ASU AI Carnival</span></div></div>
+  <div class="rgfx-card rgfx-card--tall"><div class="rgfx-thumb" style="background:linear-gradient(160deg,#0f1a0f,#2d5a2d)"><img src="assets/gfx-brand.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Brand Identity</span><span class="rgfx-name">Logo &amp; Brand Systems</span></div></div>
+  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(135deg,#1a0a00,#7c3a00)"><img src="assets/gfx-typography.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Typography</span><span class="rgfx-name">Type Experiments</span></div></div>
+  <div class="rgfx-card rgfx-card--wide"><div class="rgfx-thumb" style="background:linear-gradient(120deg,#001a2e,#005fa3)"><img src="assets/gfx-social-1.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Social &amp; Digital</span><span class="rgfx-name">Social Media Carousel</span></div></div>
+  <div class="rgfx-card rgfx-card--tall"><div class="rgfx-thumb" style="background:linear-gradient(150deg,#1a001a,#700070)"><video src="assets/gfx-brochureominterior.mp4" class="rgfx-img" autoplay muted loop playsinline style="object-fit:cover;"></video><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Brochure Design</span><span class="rgfx-name">Om Interiors</span></div></div>
+  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(140deg,#001a1a,#006666)"><img src="assets/gfx-packaging.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Packaging</span><span class="rgfx-name">Packaging Design</span></div></div>
+  <div class="rgfx-card rgfx-card--wide"><div class="rgfx-thumb" style="background:linear-gradient(130deg,#1a0a00,#c87941)"><img src="assets/gfx-pattern-1.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Miscellaneous</span><span class="rgfx-name">Illustrations &amp; Explorations</span></div></div>
+</div></div>`;
 
-  function open(src) {
-    img.src = src;
-    lb.classList.add('rgfx-lb--open');
-    lb.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-  function close() {
-    lb.classList.remove('rgfx-lb--open');
-    lb.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    setTimeout(function () { img.src = ''; }, 300);
-  }
+var ARCH_HTML = `<div style="padding:0 0 32px"><p style="font-family:'Space Grotesk',sans-serif;color:rgba(255,255,255,0.5);font-size:0.85rem;margin-bottom:24px;">B.Arch portfolio — <a href="https://www.behance.net/gallery/244318419/Architecture_Portfolio_Priyanka" target="_blank" style="color:#f0ede8;text-decoration:underline;">Full collection on Behance ↗</a></p></div>
+<div class="rgfx-track" id="rBentoArchTrack"><div class="rgfx-strip">
+  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(135deg,#1a1208,#7a5a28)"><img src="assets/arch-housing.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Residential</span><span class="rgfx-name">Housing Project</span></div></div>
+  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(135deg,#0e1618,#2e4a58)"><img src="assets/arch-interior.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Interior</span><span class="rgfx-name">Interior Space Design</span></div></div>
+  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(135deg,#120818,#4a1870)"><img src="assets/arch-urban.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Urban Design</span><span class="rgfx-name">Urban Planning Study</span></div></div>
+</div></div>`;
 
-  // Open on thumb click/tap
-  document.querySelectorAll('.rgfx-thumb[data-img]').forEach(function (thumb) {
-    thumb.addEventListener('click', function (e) {
-      e.stopPropagation();
-      open(thumb.getAttribute('data-img'));
-    });
-  });
+var PAINT_HTML = `<div class="rpaint-grid">
+  <div class="rpaint-tile"><img src="assets/painting-1.jpeg" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
+  <div class="rpaint-tile"><img src="assets/painting-2.jpeg" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
+  <div class="rpaint-tile"><img src="assets/painting-3.jpeg" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
+  <div class="rpaint-tile rpaint-tile--bookmark"><img src="assets/painting-4.jpeg" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
+  <div class="rpaint-tile"><img src="assets/painting-5.jpeg" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
+  <div class="rpaint-tile"><img src="assets/painting-6.jpeg" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
+</div>`;
 
-  // Close on backdrop, close button, or Escape
-  lb.addEventListener('click', close);
-  if (cls) cls.addEventListener('click', function (e) { e.stopPropagation(); close(); });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') close();
-  });
-})();
+function openBentoPanel(type) {
+  var panel   = document.getElementById('rBentoPanel');
+  var title   = document.getElementById('rBentoPanelTitle');
+  var content = document.getElementById('rBentoPanelContent');
+  if (!panel) return;
+  if (type === 'gfx')   { title.textContent = 'Graphic Design & Branding'; content.innerHTML = GFX_HTML; initBentoScroll('rBentoGfxTrack'); }
+  if (type === 'arch')  { title.textContent = 'Architecture Portfolio';    content.innerHTML = ARCH_HTML; initBentoScroll('rBentoArchTrack'); }
+  if (type === 'paint') { title.textContent = 'Paintings & Illustrations'; content.innerHTML = PAINT_HTML; }
+  panel.classList.add('open');
+  document.getElementById('view-recruiter').style.overflow = 'hidden';
+}
+
+function closeBentoPanel() {
+  var panel = document.getElementById('rBentoPanel');
+  if (panel) panel.classList.remove('open');
+  document.getElementById('view-recruiter').style.overflow = '';
+}
+
+function initBentoScroll(id) {
+  var track = document.getElementById(id);
+  if (!track) return;
+  var isDown = false, startX, scrollLeft;
+  track.addEventListener('mousedown', function(e) { isDown = true; track.classList.add('dragging'); startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
+  document.addEventListener('mouseup', function() { isDown = false; track.classList.remove('dragging'); });
+  track.addEventListener('mousemove', function(e) { if (!isDown) return; e.preventDefault(); track.scrollLeft = scrollLeft - (e.pageX - track.offsetLeft - startX) * 1.2; });
+}
+
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeBentoPanel(); });
 
 
