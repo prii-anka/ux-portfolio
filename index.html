@@ -24,7 +24,7 @@
   <link rel="preload" as="image" href="assets/project-poshaai.png" />
   <link rel="preload" as="image" href="assets/project-thegrind.png" />
   <link rel="preload" as="image" href="assets/project-deadlineiq.png" />
-  <link rel="stylesheet" href="style.css?v=197" />
+  <link rel="stylesheet" href="style.css?v=198" />
 </head>
 <body>
 <div id="cursor-dot"></div>
@@ -302,16 +302,16 @@
 
       <!-- Tagline -->
       <p class="rfig-tagline">building <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>design systems</span> that feel <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>deeply human</span></p>
-      <p class="rfig-letter-hint">hover the text. i dare you.</p>
-      <!-- Mobile-only scroll hint -->
-      <div class="rmob-scroll-hint" id="rmobScrollHint" aria-hidden="true">
-        <span class="rmob-scroll-text">scroll to explore</span>
-        <svg class="rmob-scroll-arrow" viewBox="0 0 16 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4.5" y="0.5" width="7" height="13" rx="3.5" stroke="currentColor" stroke-width="1"/>
-          <circle cx="8" cy="5" r="1.5" fill="currentColor" class="rmob-scroll-dot"/>
-          <path d="M8 18 L8 26 M5 23 L8 26 L11 23" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <p class="rfig-letter-hint">tap the letters. i dare you.</p>
+      <!-- Mobile inline CTA -->
+      <button class="rmob-see-work" onclick="document.getElementById('rct-section').scrollIntoView({behavior:'smooth'})">
+        see my work
+        <svg viewBox="0 0 24 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2 C11.5 8 13 14 11.5 22 C11 26 10.5 28 12 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 32 C10 28.5 7.5 27 5 26.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M12 32 C13.5 28 16.5 27 19 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-      </div>
+      </button>
 
     </div>
 
@@ -2204,155 +2204,131 @@
   });
 })();
 
-// ── Mobile-only: touch eyes + floating letters + scroll hint ──
+// ── Mobile-only: touch eyes + on-tap letter game ──
 (function(){
-  if (window.innerWidth > 900) return; // desktop unchanged
+  if (window.innerWidth > 900) return; // desktop untouched
 
+  // ── Eyes follow touch + idle attitude rolls ──
   var eyeL = document.getElementById('rEyeLeft');
   var eyeR = document.getElementById('rEyeRight');
   var pupL = document.getElementById('rPupilLeft');
   var pupR = document.getElementById('rPupilRight');
 
-  // ── Eyes follow touch ──
   function movePupilTouch(eye, pup, tx, ty) {
     if (!eye || !pup) return;
     var rect = eye.getBoundingClientRect();
-    var cx = rect.left + rect.width / 2;
-    var cy = rect.top + rect.height / 2;
-    var dx = tx - cx, dy = ty - cy;
-    var dist = Math.sqrt(dx*dx + dy*dy);
-    var maxR = rect.width / 2 - 6;
-    var ratio = Math.min(dist, maxR) / (dist || 1);
-    pup.style.transform = 'translate(calc(-50% + '+(dx*ratio).toFixed(1)+'px), calc(-50% + '+(dy*ratio).toFixed(1)+'px))';
+    var cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
+    var dx = tx-cx, dy = ty-cy;
+    var dist = Math.sqrt(dx*dx+dy*dy);
+    var maxR = rect.width/2 - 6;
+    var r = Math.min(dist, maxR)/(dist||1);
+    pup.style.transform='translate(calc(-50% + '+(dx*r).toFixed(1)+'px), calc(-50% + '+(dy*r).toFixed(1)+'px))';
   }
 
-  // Periodic random "attitude" rolls when idle
-  var rollT = null;
-  var rollDirections = [
-    {dx:-1,dy:-0.5},{dx:1,dy:-0.5},{dx:0,dy:-1},{dx:-1,dy:0.8},{dx:1,dy:0.8},
-    {dx:0,dy:1},{dx:-0.8,dy:0},{dx:0.8,dy:0}
-  ];
-  function randomRoll() {
-    if (!pupL || !pupR) return;
-    var d = rollDirections[Math.floor(Math.random()*rollDirections.length)];
-    var maxR = eyeL ? eyeL.getBoundingClientRect().width/2 - 6 : 10;
-    var tx = d.dx * maxR * 0.85, ty = d.dy * maxR * 0.85;
-    [pupL, pupR].forEach(function(p){ p.style.transition='transform 0.35s ease'; p.style.transform='translate(calc(-50% + '+tx.toFixed(1)+'px), calc(-50% + '+ty.toFixed(1)+'px))'; });
-    setTimeout(function(){ [pupL,pupR].forEach(function(p){ p.style.transition='transform 0.5s ease'; p.style.transform='translate(-50%,-50%)'; }); }, 420);
-    rollT = setTimeout(randomRoll, 2500 + Math.random()*4000);
+  var rollT;
+  var rollDirs=[{x:-1,y:-0.5},{x:1,y:-0.5},{x:0,y:-1},{x:-0.8,y:0.8},{x:0.8,y:0.8},{x:0,y:1},{x:-1,y:0},{x:1,y:0}];
+  function doRoll(){
+    if(!pupL||!pupR) return;
+    var d=rollDirs[Math.floor(Math.random()*rollDirs.length)];
+    var maxR=eyeL?eyeL.getBoundingClientRect().width/2-6:10;
+    [pupL,pupR].forEach(function(p){
+      p.style.transition='transform 0.3s cubic-bezier(0.34,1.56,0.64,1)';
+      p.style.transform='translate(calc(-50% + '+(d.x*maxR*0.88).toFixed(1)+'px), calc(-50% + '+(d.y*maxR*0.88).toFixed(1)+'px))';
+    });
+    setTimeout(function(){
+      [pupL,pupR].forEach(function(p){ p.style.transition='transform 0.45s ease'; p.style.transform='translate(-50%,-50%)'; });
+    }, 380);
+    rollT=setTimeout(doRoll, 2800+Math.random()*3500);
   }
-  rollT = setTimeout(randomRoll, 3000);
+  rollT=setTimeout(doRoll, 2500);
 
-  document.addEventListener('touchmove', function(e) {
-    var t = e.touches[0];
-    clearTimeout(rollT);
+  document.addEventListener('touchstart', function(e){
+    var t=e.touches[0]; clearTimeout(rollT);
+    [pupL,pupR].forEach(function(p){ if(p) p.style.transition='transform 0.12s ease'; });
+    movePupilTouch(eyeL,pupL,t.clientX,t.clientY);
+    movePupilTouch(eyeR,pupR,t.clientX,t.clientY);
+  },{passive:true});
+  document.addEventListener('touchmove', function(e){
+    var t=e.touches[0];
     [pupL,pupR].forEach(function(p){ if(p) p.style.transition=''; });
-    movePupilTouch(eyeL, pupL, t.clientX, t.clientY);
-    movePupilTouch(eyeR, pupR, t.clientX, t.clientY);
-    rollT = setTimeout(randomRoll, 2500 + Math.random()*2000);
-  }, {passive:true});
+    movePupilTouch(eyeL,pupL,t.clientX,t.clientY);
+    movePupilTouch(eyeR,pupR,t.clientX,t.clientY);
+  },{passive:true});
+  document.addEventListener('touchend', function(){
+    rollT=setTimeout(doRoll, 2800+Math.random()*2000);
+  },{passive:true});
 
-  document.addEventListener('touchstart', function(e) {
-    var t = e.touches[0];
-    clearTimeout(rollT);
-    [pupL,pupR].forEach(function(p){ if(p) p.style.transition='transform 0.15s ease'; });
-    movePupilTouch(eyeL, pupL, t.clientX, t.clientY);
-    movePupilTouch(eyeR, pupR, t.clientX, t.clientY);
-  }, {passive:true});
-
-  // ── Letters: float + color cycle on mobile ──
+  // ── Letter tap game ──
   var letters = document.querySelectorAll('.rfig-letter');
   if (!letters.length) return;
 
-  var palette = ['#f97316','#a855f7','#3b82f6','#ec4899','#22d3ee','#84cc16','#eab308','#f43f5e','#6366f1','#10b981'];
-  var floatStates = [];
-  var heroEl = document.querySelector('.rfig-hero') || document.getElementById('rhero');
+  var palette=['#f97316','#a855f7','#3b82f6','#ec4899','#22d3ee','#84cc16','#eab308','#f43f5e','#6366f1','#10b981'];
+  var heroEl = document.getElementById('rhero') || document.querySelector('.rfig-hero');
 
-  letters.forEach(function(el, i) {
-    var colIdx = Math.floor(Math.random()*palette.length);
-    var state = {
-      el: el,
-      dx: 0, dy: 0,
-      vx: (Math.random()-0.5)*0.6,
-      vy: (Math.random()-0.5)*0.6,
-      ax: (Math.random()-0.5)*0.08,
-      ay: (Math.random()-0.5)*0.08,
-      rot: 0, rotV: (Math.random()-0.5)*0.4,
-      colIdx: colIdx,
-      colT: 0, colInterval: 60 + Math.floor(Math.random()*80),
-      floating: true, settled: false
-    };
-    floatStates.push(state);
-    el.style.color = palette[colIdx];
+  // State per letter
+  var states = [];
+  letters.forEach(function(el){
+    states.push({ el:el, dx:0, dy:0, vx:0, vy:0, rot:0, rotV:0, flying:false, aid:null, colIdx:0 });
   });
 
-  var frame = 0;
-  var raf = null;
-  var bounds = { w: window.innerWidth, h: window.innerHeight * 0.7 };
-
-  function floatTick() {
-    frame++;
-    floatStates.forEach(function(st) {
-      if (!st.floating) return;
-      // Soft acceleration drift
-      st.ax += (Math.random()-0.5)*0.015; st.ay += (Math.random()-0.5)*0.015;
-      st.ax = Math.max(-0.12, Math.min(0.12, st.ax));
-      st.ay = Math.max(-0.12, Math.min(0.12, st.ay));
-      st.vx += st.ax; st.vy += st.ay;
-      st.vx = Math.max(-1.8, Math.min(1.8, st.vx));
-      st.vy = Math.max(-1.8, Math.min(1.8, st.vy));
-      st.dx += st.vx; st.dy += st.vy;
-      // Gentle boundary bounce
-      if (Math.abs(st.dx) > 55) { st.vx *= -0.6; st.ax *= -0.5; }
-      if (Math.abs(st.dy) > 40) { st.vy *= -0.6; st.ay *= -0.5; }
-      st.rotV += (Math.random()-0.5)*0.06;
-      st.rotV = Math.max(-1.2, Math.min(1.2, st.rotV));
-      st.rot += st.rotV;
-      st.el.style.transform = 'translate('+st.dx.toFixed(1)+'px,'+st.dy.toFixed(1)+'px) rotate('+st.rot.toFixed(1)+'deg)';
-      // Color cycle
-      st.colT++;
-      if (st.colT >= st.colInterval) {
-        st.colT = 0;
-        st.colIdx = (st.colIdx + 1 + Math.floor(Math.random()*(palette.length-1))) % palette.length;
-        st.colInterval = 50 + Math.floor(Math.random()*100);
-        st.el.style.transition = 'color 0.6s ease';
-        st.el.style.color = palette[st.colIdx];
-        setTimeout(function(){ st.el.style.transition=''; }, 700);
-      }
-    });
-    raf = requestAnimationFrame(floatTick);
+  function physicsLoop(st){
+    if (!st.flying) return;
+    // Gravity + air resistance
+    st.vy += 0.55; st.vx *= 0.985; st.vy *= 0.99;
+    st.rotV += (Math.random()-0.5)*0.3; st.rotV *= 0.95;
+    st.dx += st.vx; st.dy += st.vy;
+    st.rot += st.rotV;
+    // Off-screen: keep going (no bounce — fly away freely)
+    st.el.style.transform='translate('+st.dx.toFixed(1)+'px,'+st.dy.toFixed(1)+'px) rotate('+st.rot.toFixed(1)+'deg)';
+    st.aid = requestAnimationFrame(function(){ physicsLoop(st); });
   }
-  raf = requestAnimationFrame(floatTick);
 
-  // Tap anywhere on hero → snap letters home
-  function snapLetters() {
-    floatStates.forEach(function(st) {
-      st.floating = false;
-      st.dx=0; st.dy=0; st.vx=0; st.vy=0; st.rot=0; st.rotV=0; st.ax=0; st.ay=0;
-      st.el.style.transition='transform 0.55s cubic-bezier(0.34,1.56,0.64,1), color 0.4s ease';
+  function launchLetter(st, touchX, touchY){
+    if (st.aid) cancelAnimationFrame(st.aid);
+    // Velocity away from touch point
+    var rect = st.el.getBoundingClientRect();
+    var cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
+    var dx = cx - touchX, dy = cy - touchY;
+    var dist = Math.sqrt(dx*dx+dy*dy) || 1;
+    var spd = 8 + Math.random()*6;
+    st.vx = (dx/dist)*spd + (Math.random()-0.5)*4;
+    st.vy = (dy/dist)*spd - 4 - Math.random()*4; // bias upward
+    st.rotV = (Math.random()-0.5)*12;
+    st.flying = true;
+    // Random color
+    var newIdx = (st.colIdx + 1 + Math.floor(Math.random()*(palette.length-1))) % palette.length;
+    st.colIdx = newIdx;
+    st.el.style.color = palette[newIdx];
+    physicsLoop(st);
+  }
+
+  function snapAll(){
+    states.forEach(function(st){
+      if (st.aid) cancelAnimationFrame(st.aid);
+      st.flying=false; st.dx=0; st.dy=0; st.vx=0; st.vy=0; st.rot=0; st.rotV=0;
+      st.el.style.transition='transform 0.55s cubic-bezier(0.34,1.56,0.64,1), color 0.35s ease';
       st.el.style.transform='translate(0,0) rotate(0deg)';
       st.el.style.color='';
-      setTimeout(function(){
-        st.el.style.transition='';
-        st.floating=true; // resume floating after snap
-      }, 600);
+      setTimeout(function(){ st.el.style.transition=''; }, 620);
     });
   }
 
-  if (heroEl) {
-    heroEl.addEventListener('touchstart', function(e) {
-      // Only snap if not touching a letter
-      if (e.target.classList.contains('rfig-letter')) return;
-      snapLetters();
-    }, {passive:true});
-  }
+  // Touch on a letter → launch it
+  letters.forEach(function(el, i){
+    el.addEventListener('touchstart', function(e){
+      e.stopPropagation();
+      var t=e.touches[0];
+      launchLetter(states[i], t.clientX, t.clientY);
+    },{passive:true});
+  });
 
-  // ── Hide scroll hint after first scroll ──
-  var hint = document.getElementById('rmobScrollHint');
-  if (hint) {
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 60) { hint.style.opacity='0'; hint.style.pointerEvents='none'; }
-    }, {passive:true});
+  // Touch anywhere else on hero → snap all back
+  if (heroEl){
+    heroEl.addEventListener('touchstart', function(e){
+      if (e.target.classList.contains('rfig-letter')) return;
+      var anyFlying = states.some(function(s){ return s.flying; });
+      if (anyFlying) snapAll();
+    },{passive:true});
   }
 })();
 
