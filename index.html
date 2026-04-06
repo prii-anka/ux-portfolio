@@ -2421,12 +2421,13 @@
       'z-index:99999;background:rgba(10,10,10,0.95)',
       'border:1px solid #f97316;border-radius:12px',
       'padding:12px 16px;display:none;font-family:monospace',
-      'box-shadow:0 12px 40px rgba(0,0,0,0.8);min-width:520px'
+      'box-shadow:0 12px 40px rgba(0,0,0,0.8);min-width:420px;max-width:520px'
     ].join(';');
 
     var row=document.createElement('div');
     row.style.cssText='display:flex;align-items:center;gap:8px;flex-wrap:wrap;';
 
+    // Sweep row
     var lbl=document.createElement('span');
     lbl.textContent='Sweep:';
     lbl.style.cssText='color:rgba(255,255,255,0.4);font-size:11px;margin-right:4px;';
@@ -2465,6 +2466,36 @@
     row.appendChild(closeHint);
 
     edPanel.appendChild(row);
+
+    // Point input grid — 7 rows of X/Y inputs
+    var grid=document.createElement('div');
+    grid.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:6px 10px;margin-top:12px;border-top:1px solid rgba(255,255,255,0.1);padding-top:12px;';
+
+    for(var k=0;k<7;k++){
+      (function(idx){
+        var pLbl=document.createElement('span');
+        pLbl.textContent='P'+idx+' x:';
+        pLbl.style.cssText='color:rgba(255,165,0,0.7);font-size:11px;align-self:center;text-align:right;';
+
+        var xIn=document.createElement('input');
+        xIn.type='number'; xIn.value=pts[idx].x; xIn.id='ged-px'+idx;
+        xIn.style.cssText='width:72px;background:#1a1a1a;color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:5px;padding:4px 6px;font:12px monospace;';
+        xIn.addEventListener('input',function(){ pts[idx].x=parseInt(xIn.value)||0; refresh(); });
+
+        var yLbl=document.createElement('span');
+        yLbl.textContent='y:';
+        yLbl.style.cssText='color:rgba(255,165,0,0.7);font-size:11px;align-self:center;text-align:right;';
+
+        var yIn=document.createElement('input');
+        yIn.type='number'; yIn.value=pts[idx].y; yIn.id='ged-py'+idx;
+        yIn.style.cssText='width:72px;background:#1a1a1a;color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:5px;padding:4px 6px;font:12px monospace;';
+        yIn.addEventListener('input',function(){ pts[idx].y=parseInt(yIn.value)||0; refresh(); });
+
+        grid.appendChild(pLbl); grid.appendChild(xIn);
+        grid.appendChild(yLbl); grid.appendChild(yIn);
+      })(k);
+    }
+    edPanel.appendChild(grid);
     document.body.appendChild(edPanel);
 
     // Mouse events
@@ -2483,16 +2514,16 @@
   }
 
   function refresh(){
-    // Update handles
+    // Update handles + sync inputs
     for(var i=0;i<7;i++){
       var c=document.getElementById('ged-c'+i);
       var t=document.getElementById('ged-t'+i);
       var xy=document.getElementById('ged-xy'+i);
-      if(!c) continue;
-      c.setAttribute('cx',pts[i].x); c.setAttribute('cy',pts[i].y);
-      t.setAttribute('x',pts[i].x);  t.setAttribute('y',pts[i].y);
-      xy.setAttribute('x',pts[i].x); xy.setAttribute('y',pts[i].y);
-      xy.textContent='('+pts[i].x+','+pts[i].y+')';
+      if(c){ c.setAttribute('cx',pts[i].x); c.setAttribute('cy',pts[i].y); }
+      if(t){ t.setAttribute('x',pts[i].x); t.setAttribute('y',pts[i].y); }
+      if(xy){ xy.setAttribute('x',pts[i].x); xy.setAttribute('y',pts[i].y); xy.textContent='('+pts[i].x+','+pts[i].y+')'; }
+      var px=document.getElementById('ged-px'+i); if(px&&document.activeElement!==px) px.value=pts[i].x;
+      var py=document.getElementById('ged-py'+i); if(py&&document.activeElement!==py) py.value=pts[i].y;
     }
     // Update live hero SVG paths
     var paths=document.querySelectorAll('.rhero-golden path');
