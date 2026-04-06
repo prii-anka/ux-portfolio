@@ -24,7 +24,7 @@
   <link rel="preload" as="image" href="assets/project-poshaai.png" />
   <link rel="preload" as="image" href="assets/project-thegrind.png" />
   <link rel="preload" as="image" href="assets/project-deadlineiq.png" />
-  <link rel="stylesheet" href="style.css?v=199" />
+  <link rel="stylesheet" href="style.css?v=200" />
 </head>
 <body>
 <div id="cursor-dot"></div>
@@ -215,37 +215,49 @@
 
     <!-- Golden ratio — complete Fibonacci spiral with nested rectangle grid -->
     <svg class="rhero-golden" viewBox="0 0 1618 1000" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!--
+        ════════════════════════════════════════════════════
+        GOLDEN RATIO CONTROLS — change sweep flag: 0 or 1
+        ════════════════════════════════════════════════════
+        Grid lines: change opacity (0.00–0.30) to hide/show
+        Arcs: change sweep (0 or 1) to flip curl direction
+
+        LAYOUT (1618×1000 = φ×1 rectangle)
+        ┌──────────────────────┬────────────┐
+        │                      │  S2 618×618│
+        │   S1  1000×1000      ├─────┬──────┤
+        │   (big square LEFT)  │  S4 │  S3  │
+        │                      ├──┬──┤      │
+        └──────────────────────┴──┴──┴──────┘
+        Spiral pivot corners:
+          A1: bottom-right of S1  = (1000, 1000)
+          A2: bottom-left  of S2  = (1000, 618)
+          A3: top-right    of S3  = (1618, 618) ← wait, actually (1618,1000) no...
+        ════════════════════════════════════════════════════
+      -->
       <g fill="none" stroke="white" stroke-linecap="round">
 
-        <!--
-          Layout (viewBox 1618×1000 = φ×1 golden rectangle):
-          ┌──────────────────────────┬──────────────┐
-          │                          │   L2 618×618  │
-          │   L1 — big square        ├──────────────┤
-          │      1000×1000           │   618×382     │
-          │                          │  L3 ┼ L4 ...  │
-          └──────────────────────────┴──────────────┘
-          Spiral: A1→A2→A3→A4→A5→A6 (continuous quarter-circle arcs)
-        -->
+        <!-- ── GRID LINES (opacity: 0.00 to hide, 0.30 max) ── -->
+        <line x1="1000" y1="0"   x2="1000" y2="1000" stroke-width="0.7" opacity="0.18"/> <!-- L1: main vertical -->
+        <line x1="1000" y1="618" x2="1618" y2="618"  stroke-width="0.7" opacity="0.18"/> <!-- L2: right-rect horizontal -->
+        <line x1="1236" y1="618" x2="1236" y2="1000" stroke-width="0.7" opacity="0.16"/> <!-- L3: bottom-right vertical -->
+        <line x1="1000" y1="764" x2="1236" y2="764"  stroke-width="0.7" opacity="0.15"/> <!-- L4: bottom-left horizontal -->
+        <line x1="1146" y1="618" x2="1146" y2="764"  stroke-width="0.6" opacity="0.13"/> <!-- L5: nested vertical -->
+        <line x1="1146" y1="708" x2="1236" y2="708"  stroke-width="0.6" opacity="0.12"/> <!-- L6: nested horizontal -->
 
-        <!-- ── Nested golden rectangle dividing lines ─────────────────── -->
-        <line x1="1000" y1="0"   x2="1000" y2="1000" stroke-width="0.8" opacity="0.12"/>  <!-- L1 main vertical  -->
-        <line x1="1000" y1="618" x2="1618" y2="618"  stroke-width="0.7" opacity="0.10"/>  <!-- L2 in right rect  -->
-        <line x1="1236" y1="618" x2="1236" y2="1000" stroke-width="0.6" opacity="0.09"/>  <!-- L3 in bottom-right-->
-        <line x1="1000" y1="764" x2="1236" y2="764"  stroke-width="0.5" opacity="0.08"/>  <!-- L4 in bottom-left -->
-        <line x1="1146" y1="618" x2="1146" y2="764"  stroke-width="0.5" opacity="0.07"/>  <!-- L5 nested         -->
-        <line x1="1146" y1="708" x2="1236" y2="708"  stroke-width="0.4" opacity="0.06"/>  <!-- L6 nested         -->
-
-        <!-- ── Continuous golden spiral (6 quarter-circle arcs) ────────
-             Each arc pivots at the inner corner of its square, spiraling inward.
-             A1 center(1000,1000) · A2 center(1000,618) · A3 center(1236,618)
-             A4 center(1000,1000) · A5 center(1000,618) · A6 center(1236,618) -->
-        <path d="M 0    1000 A 1000 1000 0 0 1 1000 0"    stroke-width="0.9" opacity="0.10"/>
-        <path d="M 1000 0    A 618  618  0 0 1 1618 618"  stroke-width="0.8" opacity="0.09"/>
-        <path d="M 1618 618  A 382  382  0 0 1 1236 1000" stroke-width="0.7" opacity="0.08"/>
-        <path d="M 1236 1000 A 236  236  0 0 0 1000 764"  stroke-width="0.6" opacity="0.07"/>
-        <path d="M 1000 764  A 146  146  0 0 0 1146 618"  stroke-width="0.5" opacity="0.06"/>
-        <path d="M 1146 618  A 90   90   0 0 0 1236 708"  stroke-width="0.4" opacity="0.05"/>
+        <!-- ── SPIRAL ARCS — flip sweep 0↔1 to change curl direction ── -->
+        <!-- A1: r=1000  from(0,1000)→(1000,0)       sweep=1 -->
+        <path d="M 0    1000 A 1000 1000 0 0 1 1000 0"    stroke-width="1.0" opacity="0.22"/>
+        <!-- A2: r=618   from(1000,0)→(1618,618)     sweep=1 -->
+        <path d="M 1000 0    A 618  618  0 0 1 1618 618"  stroke-width="0.9" opacity="0.20"/>
+        <!-- A3: r=382   from(1618,618)→(1236,1000)  sweep=1 -->
+        <path d="M 1618 618  A 382  382  0 0 1 1236 1000" stroke-width="0.85" opacity="0.18"/>
+        <!-- A4: r=236   from(1236,1000)→(1000,764)  sweep=1 -->
+        <path d="M 1236 1000 A 236  236  0 0 1 1000 764"  stroke-width="0.8" opacity="0.17"/>
+        <!-- A5: r=146   from(1000,764)→(1146,618)   sweep=1 -->
+        <path d="M 1000 764  A 146  146  0 0 1 1146 618"  stroke-width="0.75" opacity="0.15"/>
+        <!-- A6: r=90    from(1146,618)→(1236,708)   sweep=1 -->
+        <path d="M 1146 618  A 90   90   0 0 1 1236 708"  stroke-width="0.7" opacity="0.14"/>
 
       </g>
     </svg>
@@ -2332,6 +2344,181 @@
   }
 })();
 
+</script>
+
+<!-- GOLDEN RATIO EDITOR — press G to toggle. Drag orange dots, flip sweeps, copy result. -->
+<script>
+(function(){
+  var VW=1618, VH=1000;
+  // 7 points: P0=A1start, P1=A1end/A2start, ..., P6=A6end
+  var pts=[
+    {x:0,    y:1000},
+    {x:1000, y:0},
+    {x:1618, y:618},
+    {x:1236, y:1000},
+    {x:1000, y:764},
+    {x:1146, y:618},
+    {x:1236, y:708}
+  ];
+  var radii=[1000,618,382,236,146,90];
+  var sweeps=[1,1,1,1,1,1];
+  var active=false, built=false;
+  var edSVG, edPanel, dragging=null;
+
+  function toSVG(ex,ey){
+    var hero=document.querySelector('.rfig-hero')||document.documentElement;
+    var r=hero.getBoundingClientRect();
+    var scale=Math.max(VW/r.width, VH/r.height);
+    var ox=(r.width*scale-VW)/2, oy=(r.height*scale-VH)/2;
+    return {
+      x: Math.round((ex-r.left)*scale - ox),
+      y: Math.round((ey-r.top )*scale - oy)
+    };
+  }
+
+  function build(){
+    // Overlay SVG for handles
+    edSVG=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    edSVG.setAttribute('viewBox','0 0 '+VW+' '+VH);
+    edSVG.setAttribute('preserveAspectRatio','xMidYMid slice');
+    edSVG.style.cssText='position:fixed;inset:0;width:100%;height:100%;z-index:99990;pointer-events:none;display:none;';
+
+    // Crosshair lines per handle
+    for(var i=0;i<7;i++){
+      var g=document.createElementNS('http://www.w3.org/2000/svg','g');
+      g.id='ged-g'+i;
+      // circle handle
+      var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('r','18'); c.setAttribute('fill','#f97316');
+      c.setAttribute('stroke','#fff'); c.setAttribute('stroke-width','2');
+      c.style.cssText='cursor:grab;pointer-events:all;';
+      c.id='ged-c'+i;
+      // label
+      var t=document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('text-anchor','middle'); t.setAttribute('dy','-26');
+      t.setAttribute('font-size','28'); t.setAttribute('font-family','monospace');
+      t.setAttribute('fill','#f97316'); t.setAttribute('font-weight','bold');
+      t.id='ged-t'+i; t.textContent='P'+i;
+      // coord label
+      var coords=document.createElementNS('http://www.w3.org/2000/svg','text');
+      coords.setAttribute('text-anchor','middle'); coords.setAttribute('dy','42');
+      coords.setAttribute('font-size','20'); coords.setAttribute('font-family','monospace');
+      coords.setAttribute('fill','rgba(255,255,255,0.6)');
+      coords.id='ged-xy'+i;
+      g.appendChild(c); g.appendChild(t); g.appendChild(coords);
+      edSVG.appendChild(g);
+      // drag
+      (function(idx){
+        c.addEventListener('mousedown',function(e){ e.preventDefault(); dragging=idx; c.style.cursor='grabbing'; });
+      })(i);
+    }
+    document.body.appendChild(edSVG);
+
+    // Small control panel — sweep toggles + copy
+    edPanel=document.createElement('div');
+    edPanel.style.cssText=[
+      'position:fixed;top:16px;left:50%;transform:translateX(-50%)',
+      'z-index:99999;background:rgba(10,10,10,0.95)',
+      'border:1px solid #f97316;border-radius:12px',
+      'padding:12px 16px;display:none;font-family:monospace',
+      'box-shadow:0 12px 40px rgba(0,0,0,0.8);min-width:520px'
+    ].join(';');
+
+    var row=document.createElement('div');
+    row.style.cssText='display:flex;align-items:center;gap:8px;flex-wrap:wrap;';
+
+    var lbl=document.createElement('span');
+    lbl.textContent='Sweep:';
+    lbl.style.cssText='color:rgba(255,255,255,0.4);font-size:11px;margin-right:4px;';
+    row.appendChild(lbl);
+
+    for(var j=0;j<6;j++){
+      (function(idx){
+        var btn=document.createElement('button');
+        btn.id='ged-sw'+idx;
+        btn.style.cssText='padding:6px 12px;border-radius:6px;border:none;cursor:pointer;font:12px monospace;font-weight:bold;';
+        function upd(){ btn.textContent='A'+(idx+1)+'='+(sweeps[idx]?'CW':'CCW'); btn.style.background=sweeps[idx]?'#7c3aed':'#0369a1'; btn.style.color='#fff'; }
+        upd();
+        btn.addEventListener('click',function(){ sweeps[idx]=sweeps[idx]?0:1; upd(); refresh(); });
+        row.appendChild(btn);
+      })(j);
+    }
+
+    var sep=document.createElement('span');
+    sep.style.cssText='width:1px;height:24px;background:rgba(255,255,255,0.15);margin:0 4px;';
+    row.appendChild(sep);
+
+    var copy=document.createElement('button');
+    copy.textContent='⎘ Copy';
+    copy.style.cssText='padding:6px 14px;border-radius:6px;border:none;cursor:pointer;font:12px monospace;font-weight:bold;background:#f97316;color:#000;';
+    copy.addEventListener('click',function(){
+      var out=buildOutput();
+      navigator.clipboard.writeText(out);
+      copy.textContent='✓ Copied!';
+      setTimeout(function(){ copy.textContent='⎘ Copy'; },1800);
+    });
+    row.appendChild(copy);
+
+    var closeHint=document.createElement('span');
+    closeHint.textContent='  G = close';
+    closeHint.style.cssText='color:rgba(255,255,255,0.2);font-size:10px;margin-left:6px;';
+    row.appendChild(closeHint);
+
+    edPanel.appendChild(row);
+    document.body.appendChild(edPanel);
+
+    // Mouse events
+    window.addEventListener('mousemove',function(e){
+      if(dragging===null) return;
+      var c=toSVG(e.clientX,e.clientY);
+      pts[dragging].x=c.x; pts[dragging].y=c.y;
+      refresh();
+    });
+    window.addEventListener('mouseup',function(){
+      if(dragging!==null){ document.getElementById('ged-c'+dragging).style.cursor='grab'; dragging=null; }
+    });
+
+    built=true;
+    refresh();
+  }
+
+  function refresh(){
+    // Update handles
+    for(var i=0;i<7;i++){
+      var c=document.getElementById('ged-c'+i);
+      var t=document.getElementById('ged-t'+i);
+      var xy=document.getElementById('ged-xy'+i);
+      if(!c) continue;
+      c.setAttribute('cx',pts[i].x); c.setAttribute('cy',pts[i].y);
+      t.setAttribute('x',pts[i].x);  t.setAttribute('y',pts[i].y);
+      xy.setAttribute('x',pts[i].x); xy.setAttribute('y',pts[i].y);
+      xy.textContent='('+pts[i].x+','+pts[i].y+')';
+    }
+    // Update live hero SVG paths
+    var paths=document.querySelectorAll('.rhero-golden path');
+    for(var j=0;j<6;j++){
+      if(!paths[j]) continue;
+      paths[j].setAttribute('d','M '+pts[j].x+' '+pts[j].y+' A '+radii[j]+' '+radii[j]+' 0 0 '+sweeps[j]+' '+pts[j+1].x+' '+pts[j+1].y);
+    }
+  }
+
+  function buildOutput(){
+    var lines=['<!-- paste into .rhero-golden -->'];
+    for(var i=0;i<6;i++){
+      lines.push('<path d="M '+pts[i].x+' '+pts[i].y+' A '+radii[i]+' '+radii[i]+' 0 0 '+sweeps[i]+' '+pts[i+1].x+' '+pts[i+1].y+'" stroke-width="'+(1.0-i*0.05).toFixed(2)+'" opacity="'+(0.22-i*0.013).toFixed(2)+'"/>');
+    }
+    return lines.join('\n');
+  }
+
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='g'&&e.key!=='G') return;
+    if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+    if(!built) build();
+    active=!active;
+    edSVG.style.display=active?'block':'none';
+    edPanel.style.display=active?'block':'none';
+  });
+})();
 </script>
 
 
