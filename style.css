@@ -43,20 +43,22 @@
 
 
 /* ── Theme sphere-rotation transition ── */
+/* A circle larger than the screen diagonal rolls up from below,
+   covers everything, then exits above — like a globe rotating */
 #theme-wipe {
   position: fixed;
-  /* Oversized circle — wider & taller than viewport so scaleY looks like a sphere */
   left: 50%;
   top: 50%;
-  width: 180vmax;
-  height: 180vmax;
-  margin-left: -90vmax;
-  margin-top: -90vmax;
+  /* 150vmax covers entire screen including corners (diagonal ≈ 141vmax) */
+  width: 150vmax;
+  height: 150vmax;
+  margin-left: -75vmax;
+  margin-top: -75vmax;
   border-radius: 50%;
   z-index: 999998;
   pointer-events: none;
-  transform: scaleY(0);
-  transform-origin: center bottom;
+  /* starts below viewport */
+  transform: translateY(120%);
   will-change: transform;
 }
 

@@ -453,51 +453,46 @@ function setTheme(dark) {
 }
 
 // ── Sphere-rotation theme transition ────────────────
-// A large circle rises from below (scaleY 0→1, origin=bottom),
-// covers the screen like a rotating globe, theme switches, then
-// continues upward (scaleY 1→0, origin=top) revealing new theme.
+// A large circle (150vmax, border-radius 50%) rises from below
+// the viewport, rolls over the screen like a globe completing
+// a rotation, then exits above — revealing the new theme.
 let _wipeActive = false;
 function triggerThemeWipe() {
   if (_wipeActive) return;
   _wipeActive = true;
 
   const wipe = document.getElementById('theme-wipe');
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const goingDark = !isDark;
+  const goingDark = document.documentElement.getAttribute('data-theme') !== 'dark';
 
-  // Destination colour fills the sphere
-  wipe.style.background = goingDark ? '#111009' : '#edeae2';
+  wipe.style.background    = goingDark ? '#111009' : '#edeae2';
   wipe.style.pointerEvents = 'all';
 
-  // Reset — squashed at bottom, no transition
-  wipe.style.transition   = 'none';
-  wipe.style.transformOrigin = 'center bottom';
-  wipe.style.transform    = 'scaleY(0)';
+  // Snap to start: circle sitting below the screen
+  wipe.style.transition = 'none';
+  wipe.style.transform  = 'translateY(120%)';
 
-  // Phase 1 — sphere rises up (bottom → covers screen)
+  // Phase 1 — roll up from below into center (ease-in: gains speed)
   requestAnimationFrame(() => requestAnimationFrame(() => {
-    wipe.style.transition = 'transform 0.52s cubic-bezier(0.55, 0, 0.1, 1)';
-    wipe.style.transform  = 'scaleY(1)';
+    wipe.style.transition = 'transform 0.58s cubic-bezier(0.4, 0, 0.6, 1)';
+    wipe.style.transform  = 'translateY(0%)';
   }));
 
-  // At peak coverage — swap the theme underneath
+  // At peak (circle covers entire screen) — swap theme
   setTimeout(() => {
     setTheme(goingDark);
 
-    // Phase 2 — sphere continues rotating upward (exits top)
-    wipe.style.transition      = 'none';
-    wipe.style.transformOrigin = 'center top';
-    // still scaleY(1) — just change origin so it exits the other way
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      wipe.style.transition = 'transform 0.52s cubic-bezier(0.9, 0, 0.45, 1)';
-      wipe.style.transform  = 'scaleY(0)';
-    }));
+    // Phase 2 — continue rotating upward, exiting above (ease-out: loses speed)
+    wipe.style.transition = 'transform 0.58s cubic-bezier(0.4, 0, 0.6, 1)';
+    wipe.style.transform  = 'translateY(-120%)';
 
     setTimeout(() => {
+      // Reset position silently for next click
+      wipe.style.transition = 'none';
+      wipe.style.transform  = 'translateY(120%)';
       wipe.style.pointerEvents = 'none';
       _wipeActive = false;
-    }, 540);
-  }, 540);
+    }, 590);
+  }, 590);
 }
 
 // Init theme from localStorage (no animation on load)
