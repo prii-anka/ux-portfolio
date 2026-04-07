@@ -215,42 +215,50 @@
 
     <!-- Golden ratio — complete Fibonacci spiral with nested rectangle grid -->
     <svg class="rhero-golden" viewBox="0 0 1618 1000" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <!-- Glow filter for the animated snake -->
-        <!-- no SVG filter needed — glow via CSS -->
-      </defs>
-
+      <!--
+        All arcs CW sweep=1. Fibonacci radii: 1000,618,382,236,146,90,56
+        Verified endpoints (each arc starts where previous ends):
+          A1: (0,1000)→(1000,0)      pivot(1000,1000)
+          A2: (1000,0)→(1618,618)    pivot(1000,618)
+          A3: (1618,618)→(1236,1000) pivot(1236,618) ← corrected pivot
+          A4: (1236,1000)→(1000,764) pivot(1236,764) ← corrected pivot
+          A5: (1000,764)→(1146,618)  pivot(1146,764) ← corrected pivot
+          A6: (1146,618)→(1236,708)  pivot(1146,708) ← corrected pivot
+          A7: (1236,708)→(1180,764)  pivot(1180,708) r=56
+      -->
       <g fill="none" stroke-linecap="round">
 
-        <!-- Grid lines -->
-        <g stroke="white" opacity="0.06" stroke-width="0.4">
-          <line x1="1000" y1="0"   x2="1000" y2="1000"/>
-          <line x1="1000" y1="618" x2="1618" y2="618"/>
-          <line x1="1236" y1="618" x2="1236" y2="1000"/>
-          <line x1="1000" y1="764" x2="1236" y2="764"/>
-          <line x1="1146" y1="618" x2="1146" y2="764"/>
-          <line x1="1146" y1="708" x2="1236" y2="708"/>
-          <line x1="1180" y1="708" x2="1180" y2="764"/>
+        <!-- Grid lines — all uniform, dim -->
+        <g stroke="white" opacity="0.08" stroke-width="0.4">
+          <line x1="1000" y1="0"    x2="1000" y2="1000"/>
+          <line x1="1000" y1="618"  x2="1618" y2="618"/>
+          <line x1="1236" y1="618"  x2="1236" y2="1000"/>
+          <line x1="1000" y1="764"  x2="1236" y2="764"/>
+          <line x1="1146" y1="618"  x2="1146" y2="764"/>
+          <line x1="1146" y1="708"  x2="1236" y2="708"/>
+          <line x1="1180" y1="708"  x2="1180" y2="764"/>
+          <line x1="1146" y1="730"  x2="1180" y2="730"/>
         </g>
 
-        <!-- Ghost spiral — all same stroke -->
-        <g stroke="white" fill="none" stroke-width="0.5" opacity="0.16">
-          <path d="M 0    1000 A 1000 1000 0 0 1 1000 0"/>
-          <path d="M 1000 0    A 618  618  0 0 1 1618 618"/>
-          <path d="M 1618 618  A 382  382  0 0 1 1236 1000"/>
-          <path d="M 1236 1000 A 236  236  0 0 1 1000 764"/>
-          <path d="M 1000 764  A 146  146  0 0 1 1146 618"/>
-          <path d="M 1146 618  A 90   90   0 0 1 1236 708"/>
-          <path d="M 1236 708  A 56   56   0 0 1 1180 764"/>
+        <!-- Spiral arcs — thicker on smaller arcs so they're visible at screen scale -->
+        <g stroke="white" fill="none" opacity="0.15">
+          <path d="M 0    1000 A 1000 1000 0 0 1 1000 0"    stroke-width="0.4"/>
+          <path d="M 1000 0    A 618  618  0 0 1 1618 618"  stroke-width="0.4"/>
+          <path d="M 1618 618  A 382  382  0 0 1 1236 1000" stroke-width="0.4"/>
+          <path d="M 1236 1000 A 236  236  0 0 1 1000 764"  stroke-width="0.4"/>
+          <path d="M 1000 764  A 146  146  0 0 1 1146 618"  stroke-width="0.55"/>
+          <path d="M 1146 618  A 90   90   0 0 1 1236 708"  stroke-width="0.7"/>
+          <path d="M 1236 708  A 56   56   0 0 1 1180 764"  stroke-width="0.9"/>
+          <path d="M 1180 764  A 34   34   0 0 1 1146 730"  stroke-width="1.1"/>
         </g>
 
-        <!-- Hidden path for orb — includes A7 -->
+        <!-- Hidden path for orb travel (A1–A8) -->
         <path id="gr-spiral"
-          d="M 0 1000 A 1000 1000 0 0 1 1000 0 A 618 618 0 0 1 1618 618 A 382 382 0 0 1 1236 1000 A 236 236 0 0 1 1000 764 A 146 146 0 0 1 1146 618 A 90 90 0 0 1 1236 708 A 56 56 0 0 1 1180 764"
+          d="M 0 1000 A 1000 1000 0 0 1 1000 0 A 618 618 0 0 1 1618 618 A 382 382 0 0 1 1236 1000 A 236 236 0 0 1 1000 764 A 146 146 0 0 1 1146 618 A 90 90 0 0 1 1236 708 A 56 56 0 0 1 1180 764 A 34 34 0 0 1 1146 730"
           stroke="none" fill="none"/>
 
-        <!-- Trail + orb rendered via JS into this group -->
-        <g id="gr-orb-group" style="will-change:transform;"></g>
+        <!-- Trail + orb -->
+        <g id="gr-orb-group"></g>
       </g>
     </svg>
 
