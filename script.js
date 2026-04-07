@@ -452,7 +452,7 @@ function setTheme(dark) {
   localStorage.setItem('theme', dark ? 'dark' : 'light');
 }
 
-// Circular wipe transition
+// Circular wipe transition — all inline styles to avoid specificity conflicts
 let _wipeActive = false;
 function triggerThemeWipe(originEl) {
   if (_wipeActive) return;
@@ -462,40 +462,41 @@ function triggerThemeWipe(originEl) {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   const goingDark = !isDark;
 
-  // Position wipe origin at the button center
+  // Origin = button center
   const rect = originEl.getBoundingClientRect();
-  const cx = Math.round(rect.left + rect.width / 2);
-  const cy = Math.round(rect.top  + rect.height / 2);
-  wipe.style.setProperty('--wipe-x', cx + 'px');
-  wipe.style.setProperty('--wipe-y', cy + 'px');
+  const cx = Math.round(rect.left + rect.width / 2) + 'px';
+  const cy = Math.round(rect.top  + rect.height / 2) + 'px';
+  const at  = ' at ' + cx + ' ' + cy;
 
-  // Wipe color = destination theme background
+  // Destination theme bg color
   wipe.style.background = goingDark ? '#111009' : '#edeae2';
+  wipe.style.pointerEvents = 'all';
 
-  // Reset to collapsed
-  wipe.classList.remove('wipe-expand', 'wipe-shrink');
-  wipe.style.clipPath = 'circle(0% at ' + cx + 'px ' + cy + 'px)';
+  // Step 1: snap to 0 with no transition
+  wipe.style.transition = 'none';
+  wipe.style.clipPath = 'circle(0%' + at + ')';
 
-  // Force reflow so the transition fires
-  void wipe.offsetWidth;
+  // Step 2: next frame — expand outward
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      wipe.style.transition = 'clip-path 0.65s cubic-bezier(0.76, 0, 0.24, 1)';
+      wipe.style.clipPath = 'circle(150%' + at + ')';
+    });
+  });
 
-  // Expand circle outward
-  wipe.classList.add('wipe-expand');
-
-  // At peak (slightly before transition ends) — swap the theme
+  // Step 3: mid-expansion — swap theme (invisible under wipe)
   setTimeout(() => {
     setTheme(goingDark);
-  }, 340);
+  }, 350);
 
-  // After full expansion, shrink back to reveal new theme
+  // Step 4: shrink back, revealing the new theme
   setTimeout(() => {
-    wipe.classList.remove('wipe-expand');
-    wipe.classList.add('wipe-shrink');
-    wipe.style.clipPath = 'circle(0% at ' + cx + 'px ' + cy + 'px)';
+    wipe.style.transition = 'clip-path 0.52s cubic-bezier(0.76, 0, 0.24, 1)';
+    wipe.style.clipPath = 'circle(0%' + at + ')';
     setTimeout(() => {
-      wipe.classList.remove('wipe-shrink');
+      wipe.style.pointerEvents = 'none';
       _wipeActive = false;
-    }, 500);
+    }, 540);
   }, 620);
 }
 
