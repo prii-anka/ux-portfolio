@@ -1188,15 +1188,15 @@
 
       <div class="rphotos-grid" id="rphotosGrid">
         <!-- Row 1 -->
-        <div class="rph-tile rph-tile--wide"><img src="assets/photo-1.jpeg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
-        <div class="rph-tile rph-tile--tall"><img src="assets/photo-2.jpeg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
-        <div class="rph-tile"><img src="assets/photo-3.jpeg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
-        <div class="rph-tile"><img src="assets/photo-4.jpeg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
-        <div class="rph-tile rph-tile--wide"><img src="assets/photo-5.jpeg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
-        <div class="rph-tile rph-tile--tall"><img src="assets/photo-6.jpeg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
-        <div class="rph-tile"><img src="assets/photo-7.jpeg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
-        <div class="rph-tile"><img src="assets/photo-8.jpeg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
-        <div class="rph-tile rph-tile--wide"><img src="assets/photo-9.jpeg" alt="" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile rph-tile--wide"><img src="assets/photo-1.jpeg" alt="Photography by Priyanka" loading="lazy" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile rph-tile--tall"><img src="assets/photo-2.jpeg" alt="Photography by Priyanka" loading="lazy" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile"><img src="assets/photo-3.jpeg" alt="Photography by Priyanka" loading="lazy" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile"><img src="assets/photo-4.jpeg" alt="Photography by Priyanka" loading="lazy" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile rph-tile--wide"><img src="assets/photo-5.jpeg" alt="Photography by Priyanka" loading="lazy" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile rph-tile--tall"><img src="assets/photo-6.jpeg" alt="Photography by Priyanka" loading="lazy" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile"><img src="assets/photo-7.jpeg" alt="Photography by Priyanka" loading="lazy" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile"><img src="assets/photo-8.jpeg" alt="Photography by Priyanka" loading="lazy" onerror="this.parentElement.classList.add('rph-empty')"/></div>
+        <div class="rph-tile rph-tile--wide"><img src="assets/photo-9.jpeg" alt="Photography by Priyanka" loading="lazy" onerror="this.parentElement.classList.add('rph-empty')"/></div>
       </div>
 
       <p class="rphotos-ig">
@@ -1239,7 +1239,7 @@
     <section class="hh-hero">
       <div class="hh-hero-bg"></div>
       <div class="hh-hero-img hh-anim hh-anim-d1">
-        <img src="assets/hh-cover.png" alt="" onerror="this.parentElement.classList.add('hh-img-placeholder')">
+        <img src="assets/hh-cover.png" alt="Healing Hearts Animal Rescue — app redesign cover" loading="lazy" onerror="this.parentElement.classList.add('hh-img-placeholder')">
       </div>
       <div class="hh-hero-content">
         <h1 class="hh-hero-title hh-anim hh-anim-d2">
@@ -2420,211 +2420,6 @@
 
 </script>
 
-<!-- GOLDEN RATIO EDITOR — press G to toggle. Drag orange dots, flip sweeps, copy result. -->
-<script>
-(function(){
-  var VW=1618, VH=1000;
-  // 7 points: P0=A1start, P1=A1end/A2start, ..., P6=A6end
-  var pts=[
-    {x:0,    y:1000},
-    {x:1000, y:0},
-    {x:1618, y:618},
-    {x:1236, y:1000},
-    {x:1000, y:764},
-    {x:1146, y:618},
-    {x:1236, y:708}
-  ];
-  var radii=[1000,618,382,236,146,90];
-  var sweeps=[1,1,1,1,1,1];
-  var active=false, built=false;
-  var edSVG, edPanel, dragging=null;
-
-  function toSVG(ex,ey){
-    var hero=document.querySelector('.rfig-hero')||document.documentElement;
-    var r=hero.getBoundingClientRect();
-    var scale=Math.max(VW/r.width, VH/r.height);
-    var ox=(r.width*scale-VW)/2, oy=(r.height*scale-VH)/2;
-    return {
-      x: Math.round((ex-r.left)*scale - ox),
-      y: Math.round((ey-r.top )*scale - oy)
-    };
-  }
-
-  function build(){
-    // Overlay SVG for handles
-    edSVG=document.createElementNS('http://www.w3.org/2000/svg','svg');
-    edSVG.setAttribute('viewBox','0 0 '+VW+' '+VH);
-    edSVG.setAttribute('preserveAspectRatio','xMidYMid slice');
-    edSVG.style.cssText='position:fixed;inset:0;width:100%;height:100%;z-index:99990;pointer-events:none;display:none;';
-
-    // Crosshair lines per handle
-    for(var i=0;i<7;i++){
-      var g=document.createElementNS('http://www.w3.org/2000/svg','g');
-      g.id='ged-g'+i;
-      // circle handle
-      var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
-      c.setAttribute('r','18'); c.setAttribute('fill','#f97316');
-      c.setAttribute('stroke','#fff'); c.setAttribute('stroke-width','2');
-      c.style.cssText='cursor:grab;pointer-events:all;';
-      c.id='ged-c'+i;
-      // label
-      var t=document.createElementNS('http://www.w3.org/2000/svg','text');
-      t.setAttribute('text-anchor','middle'); t.setAttribute('dy','-26');
-      t.setAttribute('font-size','28'); t.setAttribute('font-family','monospace');
-      t.setAttribute('fill','#f97316'); t.setAttribute('font-weight','bold');
-      t.id='ged-t'+i; t.textContent='P'+i;
-      // coord label
-      var coords=document.createElementNS('http://www.w3.org/2000/svg','text');
-      coords.setAttribute('text-anchor','middle'); coords.setAttribute('dy','42');
-      coords.setAttribute('font-size','20'); coords.setAttribute('font-family','monospace');
-      coords.setAttribute('fill','rgba(255,255,255,0.6)');
-      coords.id='ged-xy'+i;
-      g.appendChild(c); g.appendChild(t); g.appendChild(coords);
-      edSVG.appendChild(g);
-      // drag
-      (function(idx){
-        c.addEventListener('mousedown',function(e){ e.preventDefault(); dragging=idx; c.style.cursor='grabbing'; });
-      })(i);
-    }
-    document.body.appendChild(edSVG);
-
-    // Small control panel — sweep toggles + copy
-    edPanel=document.createElement('div');
-    edPanel.style.cssText=[
-      'position:fixed;top:16px;left:50%;transform:translateX(-50%)',
-      'z-index:99999;background:rgba(10,10,10,0.95)',
-      'border:1px solid #f97316;border-radius:12px',
-      'padding:12px 16px;display:none;font-family:monospace',
-      'box-shadow:0 12px 40px rgba(0,0,0,0.8);min-width:420px;max-width:520px'
-    ].join(';');
-
-    var row=document.createElement('div');
-    row.style.cssText='display:flex;align-items:center;gap:8px;flex-wrap:wrap;';
-
-    // Sweep row
-    var lbl=document.createElement('span');
-    lbl.textContent='Sweep:';
-    lbl.style.cssText='color:rgba(255,255,255,0.4);font-size:11px;margin-right:4px;';
-    row.appendChild(lbl);
-
-    for(var j=0;j<6;j++){
-      (function(idx){
-        var btn=document.createElement('button');
-        btn.id='ged-sw'+idx;
-        btn.style.cssText='padding:6px 12px;border-radius:6px;border:none;cursor:pointer;font:12px monospace;font-weight:bold;';
-        function upd(){ btn.textContent='A'+(idx+1)+'='+(sweeps[idx]?'CW':'CCW'); btn.style.background=sweeps[idx]?'#7c3aed':'#0369a1'; btn.style.color='#fff'; }
-        upd();
-        btn.addEventListener('click',function(){ sweeps[idx]=sweeps[idx]?0:1; upd(); refresh(); });
-        row.appendChild(btn);
-      })(j);
-    }
-
-    var sep=document.createElement('span');
-    sep.style.cssText='width:1px;height:24px;background:rgba(255,255,255,0.15);margin:0 4px;';
-    row.appendChild(sep);
-
-    var copy=document.createElement('button');
-    copy.textContent='⎘ Copy';
-    copy.style.cssText='padding:6px 14px;border-radius:6px;border:none;cursor:pointer;font:12px monospace;font-weight:bold;background:#f97316;color:#000;';
-    copy.addEventListener('click',function(){
-      var out=buildOutput();
-      navigator.clipboard.writeText(out);
-      copy.textContent='✓ Copied!';
-      setTimeout(function(){ copy.textContent='⎘ Copy'; },1800);
-    });
-    row.appendChild(copy);
-
-    var closeHint=document.createElement('span');
-    closeHint.textContent='  G = close';
-    closeHint.style.cssText='color:rgba(255,255,255,0.2);font-size:10px;margin-left:6px;';
-    row.appendChild(closeHint);
-
-    edPanel.appendChild(row);
-
-    // Point input grid — 7 rows of X/Y inputs
-    var grid=document.createElement('div');
-    grid.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:6px 10px;margin-top:12px;border-top:1px solid rgba(255,255,255,0.1);padding-top:12px;';
-
-    for(var k=0;k<7;k++){
-      (function(idx){
-        var pLbl=document.createElement('span');
-        pLbl.textContent='P'+idx+' x:';
-        pLbl.style.cssText='color:rgba(255,165,0,0.7);font-size:11px;align-self:center;text-align:right;';
-
-        var xIn=document.createElement('input');
-        xIn.type='number'; xIn.value=pts[idx].x; xIn.id='ged-px'+idx;
-        xIn.style.cssText='width:72px;background:#1a1a1a;color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:5px;padding:4px 6px;font:12px monospace;';
-        xIn.addEventListener('input',function(){ pts[idx].x=parseInt(xIn.value)||0; refresh(); });
-
-        var yLbl=document.createElement('span');
-        yLbl.textContent='y:';
-        yLbl.style.cssText='color:rgba(255,165,0,0.7);font-size:11px;align-self:center;text-align:right;';
-
-        var yIn=document.createElement('input');
-        yIn.type='number'; yIn.value=pts[idx].y; yIn.id='ged-py'+idx;
-        yIn.style.cssText='width:72px;background:#1a1a1a;color:#fff;border:1px solid rgba(255,255,255,0.2);border-radius:5px;padding:4px 6px;font:12px monospace;';
-        yIn.addEventListener('input',function(){ pts[idx].y=parseInt(yIn.value)||0; refresh(); });
-
-        grid.appendChild(pLbl); grid.appendChild(xIn);
-        grid.appendChild(yLbl); grid.appendChild(yIn);
-      })(k);
-    }
-    edPanel.appendChild(grid);
-    document.body.appendChild(edPanel);
-
-    // Mouse events
-    window.addEventListener('mousemove',function(e){
-      if(dragging===null) return;
-      var c=toSVG(e.clientX,e.clientY);
-      pts[dragging].x=c.x; pts[dragging].y=c.y;
-      refresh();
-    });
-    window.addEventListener('mouseup',function(){
-      if(dragging!==null){ document.getElementById('ged-c'+dragging).style.cursor='grab'; dragging=null; }
-    });
-
-    built=true;
-    refresh();
-  }
-
-  function refresh(){
-    // Update handles + sync inputs
-    for(var i=0;i<7;i++){
-      var c=document.getElementById('ged-c'+i);
-      var t=document.getElementById('ged-t'+i);
-      var xy=document.getElementById('ged-xy'+i);
-      if(c){ c.setAttribute('cx',pts[i].x); c.setAttribute('cy',pts[i].y); }
-      if(t){ t.setAttribute('x',pts[i].x); t.setAttribute('y',pts[i].y); }
-      if(xy){ xy.setAttribute('x',pts[i].x); xy.setAttribute('y',pts[i].y); xy.textContent='('+pts[i].x+','+pts[i].y+')'; }
-      var px=document.getElementById('ged-px'+i); if(px&&document.activeElement!==px) px.value=pts[i].x;
-      var py=document.getElementById('ged-py'+i); if(py&&document.activeElement!==py) py.value=pts[i].y;
-    }
-    // Update live hero SVG paths
-    var paths=document.querySelectorAll('.rhero-golden path');
-    for(var j=0;j<6;j++){
-      if(!paths[j]) continue;
-      paths[j].setAttribute('d','M '+pts[j].x+' '+pts[j].y+' A '+radii[j]+' '+radii[j]+' 0 0 '+sweeps[j]+' '+pts[j+1].x+' '+pts[j+1].y);
-    }
-  }
-
-  function buildOutput(){
-    var lines=['<!-- paste into .rhero-golden -->'];
-    for(var i=0;i<6;i++){
-      lines.push('<path d="M '+pts[i].x+' '+pts[i].y+' A '+radii[i]+' '+radii[i]+' 0 0 '+sweeps[i]+' '+pts[i+1].x+' '+pts[i+1].y+'" stroke-width="'+(1.0-i*0.05).toFixed(2)+'" opacity="'+(0.22-i*0.013).toFixed(2)+'"/>');
-    }
-    return lines.join('\n');
-  }
-
-  document.addEventListener('keydown',function(e){
-    if(e.key!=='g'&&e.key!=='G') return;
-    if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
-    if(!built) build();
-    active=!active;
-    edSVG.style.display=active?'block':'none';
-    edPanel.style.display=active?'block':'none';
-  });
-})();
-</script>
 
 
 </body>

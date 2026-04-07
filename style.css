@@ -42,6 +42,14 @@
 }
 
 
+/* ── Focus-visible (keyboard nav accessibility) ── */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 /* ── Loader ── */
 #siteLoader {
   position: fixed; inset: 0; z-index: 99999;

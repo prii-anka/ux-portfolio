@@ -566,7 +566,7 @@ document.querySelectorAll('#chips .chip').forEach(chip => {
 });
 
 // Send button + Enter key
-sendBtn.addEventListener('click', () => askAI(searchInput.value));
+if (sendBtn) sendBtn.addEventListener('click', () => askAI(searchInput.value));
 searchInput.addEventListener('keydown', e => {
   if (e.key === 'Enter') askAI(searchInput.value);
 });
