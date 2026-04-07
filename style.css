@@ -5352,3 +5352,92 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 
   .hh-footer { padding: 32px 24px; }
 }
+
+/* ══════════════════════════════════════════════════════
+   GLOBAL LIGHT MODE  [data-theme="light"]
+   Overrides for the main portfolio hero + Mac chrome
+   ══════════════════════════════════════════════════════ */
+
+/* ── Mac bar ── */
+[data-theme="light"] .rmac-bar {
+  background: #e8e4de;
+  border-bottom-color: rgba(0,0,0,0.1);
+}
+[data-theme="light"] .rmac-url {
+  background: rgba(0,0,0,0.06);
+  color: rgba(0,0,0,0.5);
+}
+[data-theme="light"] .rmac-tabs-inner {
+  background: rgba(0,0,0,0.06);
+}
+[data-theme="light"] .rmac-tab { color: rgba(0,0,0,0.35); }
+[data-theme="light"] .rmac-tab:hover { color: rgba(0,0,0,0.65); }
+[data-theme="light"] .rmac-tab-active {
+  background: rgba(0,0,0,0.1);
+  color: rgba(0,0,0,0.8);
+}
+[data-theme="light"] .rmac-time,
+[data-theme="light"] .rmac-battery,
+[data-theme="light"] .rmac-location { color: rgba(0,0,0,0.45); }
+[data-theme="light"] .rmac-theme-btn {
+  background: rgba(0,0,0,0.06);
+  border-color: rgba(0,0,0,0.12);
+  color: rgba(0,0,0,0.5);
+}
+[data-theme="light"] .rmac-theme-btn:hover {
+  background: rgba(0,0,0,0.12);
+  color: rgba(0,0,0,0.8);
+}
+
+/* ── Hero background ── */
+[data-theme="light"] .rfig-hero {
+  background: #f0ede6;
+  background-image: radial-gradient(rgba(0,0,0,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+[data-theme="light"] .rfig-stmt-section {
+  background: #f0ede6;
+  background-image: radial-gradient(rgba(0,0,0,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ── Name / greeting ── */
+[data-theme="light"] .rfig-name-line { color: #1a1a1a; }
+[data-theme="light"] .rfig-hi { color: rgba(0,0,0,0.45); }
+[data-theme="light"] #rfigTypeName { color: #1a1a1a; }
+[data-theme="light"] .rfig-caret { color: #a855f7; }
+
+/* ── Big role line ── */
+[data-theme="light"] .rfig-role { color: rgba(0,0,0,0.85); }
+
+/* ── Tagline ── */
+[data-theme="light"] .rfig-tagline { color: rgba(0,0,0,0.52); }
+
+/* ── Hint text ── */
+[data-theme="light"] .rfig-letter-hint { color: rgba(0,0,0,0.12); }
+[data-theme="light"] .rfig-stage:hover .rfig-letter-hint { color: rgba(0,0,0,0.30); }
+
+/* ── Figma frame corners ── */
+[data-theme="light"] .rfig-corner {
+  background: #f0ede6;
+  border-color: rgba(168,85,247,0.7);
+}
+[data-theme="light"] .rfig-stmt-frame .rfig-corner { background: #f0ede6; }
+
+/* ── Eyes ── */
+[data-theme="light"] .reye { background: rgba(255,255,255,0.9); }
+[data-theme="light"] .reye-pupil { background: #1a1a18; }
+[data-theme="light"] .reyes-label { color: rgba(0,0,0,0.3); }
+[data-theme="light"] .rhint-text { color: rgba(0,0,0,0.35); }
+[data-theme="light"] .rhint-arrow { color: rgba(0,0,0,0.22); }
+
+/* ── Jump btn ── */
+[data-theme="light"] .rfig-jump-btn { color: rgba(0,0,0,0.4); }
+[data-theme="light"] .rfig-jump-btn:hover { color: rgba(0,0,0,0.7); }
+
+/* ── Resume file ── */
+[data-theme="light"] .rfig-resume-layer { color: rgba(0,0,0,0.55); }
+
+/* ── Custom cursor ── */
+[data-theme="light"] #cursor-dot { background: #1a1a1a; }
+[data-theme="light"] #cursor-ring { border-color: rgba(0,0,0,0.35); }
