@@ -221,7 +221,8 @@
       </defs>
 
       <g fill="none" stroke-linecap="round">
-        <!-- Grid lines — dim static base -->
+
+        <!-- Grid lines -->
         <g stroke="white" opacity="0.06" stroke-width="0.4">
           <line x1="1000" y1="0"   x2="1000" y2="1000"/>
           <line x1="1000" y1="618" x2="1618" y2="618"/>
@@ -229,21 +230,23 @@
           <line x1="1000" y1="764" x2="1236" y2="764"/>
           <line x1="1146" y1="618" x2="1146" y2="764"/>
           <line x1="1146" y1="708" x2="1236" y2="708"/>
+          <line x1="1180" y1="708" x2="1180" y2="764"/>
         </g>
 
-        <!-- Ghost spiral — individual arcs, smaller ones progressively brighter -->
-        <g stroke="white" fill="none">
-          <path d="M 0 1000 A 1000 1000 0 0 1 1000 0"    stroke-width="0.5" opacity="0.12"/>
-          <path d="M 1000 0 A 618 618 0 0 1 1618 618"     stroke-width="0.5" opacity="0.13"/>
-          <path d="M 1618 618 A 382 382 0 0 1 1236 1000"  stroke-width="0.5" opacity="0.15"/>
-          <path d="M 1236 1000 A 236 236 0 0 1 1000 764"  stroke-width="0.6" opacity="0.18"/>
-          <path d="M 1000 764 A 146 146 0 0 1 1146 618"   stroke-width="0.7" opacity="0.22"/>
-          <path d="M 1146 618 A 90 90 0 0 1 1236 708"     stroke-width="0.8" opacity="0.26"/>
+        <!-- Ghost spiral — all same stroke -->
+        <g stroke="white" fill="none" stroke-width="0.5" opacity="0.16">
+          <path d="M 0    1000 A 1000 1000 0 0 1 1000 0"/>
+          <path d="M 1000 0    A 618  618  0 0 1 1618 618"/>
+          <path d="M 1618 618  A 382  382  0 0 1 1236 1000"/>
+          <path d="M 1236 1000 A 236  236  0 0 1 1000 764"/>
+          <path d="M 1000 764  A 146  146  0 0 1 1146 618"/>
+          <path d="M 1146 618  A 90   90   0 0 1 1236 708"/>
+          <path d="M 1236 708  A 56   56   0 0 1 1180 764"/>
         </g>
 
-        <!-- Hidden path used only for orb position calculation -->
+        <!-- Hidden path for orb — includes A7 -->
         <path id="gr-spiral"
-          d="M 0 1000 A 1000 1000 0 0 1 1000 0 A 618 618 0 0 1 1618 618 A 382 382 0 0 1 1236 1000 A 236 236 0 0 1 1000 764 A 146 146 0 0 1 1146 618 A 90 90 0 0 1 1236 708"
+          d="M 0 1000 A 1000 1000 0 0 1 1000 0 A 618 618 0 0 1 1618 618 A 382 382 0 0 1 1236 1000 A 236 236 0 0 1 1000 764 A 146 146 0 0 1 1146 618 A 90 90 0 0 1 1236 708 A 56 56 0 0 1 1180 764"
           stroke="none" fill="none"/>
 
         <!-- Trail + orb rendered via JS into this group -->
