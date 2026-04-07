@@ -217,10 +217,9 @@
     <svg class="rhero-golden" viewBox="0 0 1618 1000" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
         <!-- Glow filter for the animated snake -->
-        <filter id="gr-glow" x="-120%" y="-120%" width="340%" height="340%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="big"/>
-          <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="small"/>
-          <feMerge><feMergeNode in="big"/><feMergeNode in="small"/><feMergeNode in="SourceGraphic"/></feMerge>
+        <filter id="gr-glow" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
       </defs>
 
@@ -262,14 +261,14 @@
       var TRAIL = 18;   // number of trail dots
       var speed = 3.5;  // SVG units per frame
 
-      // Colour palette — subtle cycling
+      // Pastel project accent colors
       var colors = [
-        [255,255,255],  // white
-        [180,210,255],  // cool blue
-        [255,235,160],  // warm gold
-        [210,180,255],  // soft purple
-        [160,255,210],  // mint
-        [255,190,190],  // blush rose
+        [180,210,240],  // pastel #3a82c4 blue
+        [180,225,185],  // pastel #52ac55 green
+        [255,185,210],  // pastel #ff709f pink
+        [210,200,250],  // pastel #7c6ff7 purple
+        [255,230,160],  // pastel #ffde59 yellow
+        [255,205,175],  // pastel #e07d3f orange
       ];
       var cIdx=0, cNext=1, cT=0, cDur=220;
 
