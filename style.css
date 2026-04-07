@@ -42,14 +42,22 @@
 }
 
 
-/* ── Theme circular wipe transition ── */
+/* ── Theme sphere-rotation transition ── */
 #theme-wipe {
   position: fixed;
-  inset: 0;
+  /* Oversized circle — wider & taller than viewport so scaleY looks like a sphere */
+  left: 50%;
+  top: 50%;
+  width: 180vmax;
+  height: 180vmax;
+  margin-left: -90vmax;
+  margin-top: -90vmax;
+  border-radius: 50%;
   z-index: 999998;
   pointer-events: none;
-  clip-path: circle(0% at 50% 50%);
-  will-change: clip-path;
+  transform: scaleY(0);
+  transform-origin: center bottom;
+  will-change: transform;
 }
 
 /* ── Focus-visible (keyboard nav accessibility) ── */

@@ -452,9 +452,12 @@ function setTheme(dark) {
   localStorage.setItem('theme', dark ? 'dark' : 'light');
 }
 
-// Circular wipe transition — all inline styles to avoid specificity conflicts
+// ── Sphere-rotation theme transition ────────────────
+// A large circle rises from below (scaleY 0→1, origin=bottom),
+// covers the screen like a rotating globe, theme switches, then
+// continues upward (scaleY 1→0, origin=top) revealing new theme.
 let _wipeActive = false;
-function triggerThemeWipe(originEl) {
+function triggerThemeWipe() {
   if (_wipeActive) return;
   _wipeActive = true;
 
@@ -462,51 +465,46 @@ function triggerThemeWipe(originEl) {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   const goingDark = !isDark;
 
-  // Origin = button center
-  const rect = originEl.getBoundingClientRect();
-  const cx = Math.round(rect.left + rect.width / 2) + 'px';
-  const cy = Math.round(rect.top  + rect.height / 2) + 'px';
-  const at  = ' at ' + cx + ' ' + cy;
-
-  // Destination theme bg color
+  // Destination colour fills the sphere
   wipe.style.background = goingDark ? '#111009' : '#edeae2';
   wipe.style.pointerEvents = 'all';
 
-  // Step 1: snap to 0 with no transition
-  wipe.style.transition = 'none';
-  wipe.style.clipPath = 'circle(0%' + at + ')';
+  // Reset — squashed at bottom, no transition
+  wipe.style.transition   = 'none';
+  wipe.style.transformOrigin = 'center bottom';
+  wipe.style.transform    = 'scaleY(0)';
 
-  // Step 2: next frame — expand outward
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      wipe.style.transition = 'clip-path 0.65s cubic-bezier(0.76, 0, 0.24, 1)';
-      wipe.style.clipPath = 'circle(150%' + at + ')';
-    });
-  });
+  // Phase 1 — sphere rises up (bottom → covers screen)
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    wipe.style.transition = 'transform 0.52s cubic-bezier(0.55, 0, 0.1, 1)';
+    wipe.style.transform  = 'scaleY(1)';
+  }));
 
-  // Step 3: mid-expansion — swap theme (invisible under wipe)
+  // At peak coverage — swap the theme underneath
   setTimeout(() => {
     setTheme(goingDark);
-  }, 350);
 
-  // Step 4: shrink back, revealing the new theme
-  setTimeout(() => {
-    wipe.style.transition = 'clip-path 0.52s cubic-bezier(0.76, 0, 0.24, 1)';
-    wipe.style.clipPath = 'circle(0%' + at + ')';
+    // Phase 2 — sphere continues rotating upward (exits top)
+    wipe.style.transition      = 'none';
+    wipe.style.transformOrigin = 'center top';
+    // still scaleY(1) — just change origin so it exits the other way
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      wipe.style.transition = 'transform 0.52s cubic-bezier(0.9, 0, 0.45, 1)';
+      wipe.style.transform  = 'scaleY(0)';
+    }));
+
     setTimeout(() => {
       wipe.style.pointerEvents = 'none';
       _wipeActive = false;
     }, 540);
-  }, 620);
+  }, 540);
 }
 
 // Init theme from localStorage (no animation on load)
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'dark') setTheme(true);
 
-document.getElementById('rThemeBtn')?.addEventListener('click', function() {
-  triggerThemeWipe(this);
-});
+document.getElementById('rThemeBtn')?.addEventListener('click', triggerThemeWipe);
 
 // ── View toggle ─────────────────────────────────────
 function switchView(target) {
