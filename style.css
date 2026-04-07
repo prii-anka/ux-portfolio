@@ -42,6 +42,26 @@
 }
 
 
+/* ── Theme circular wipe transition ── */
+#theme-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 999998;
+  pointer-events: none;
+  /* circle starts at 0 radius at the button position — set via JS */
+  clip-path: circle(0% at 50% 50%);
+  background: var(--bg);
+  will-change: clip-path;
+}
+#theme-wipe.wipe-expand {
+  transition: clip-path 0.62s cubic-bezier(0.76, 0, 0.24, 1);
+  clip-path: circle(150% at var(--wipe-x, 50%) var(--wipe-y, 50%));
+}
+#theme-wipe.wipe-shrink {
+  transition: clip-path 0.48s cubic-bezier(0.76, 0, 0.24, 1);
+  clip-path: circle(0% at var(--wipe-x, 50%) var(--wipe-y, 50%));
+}
+
 /* ── Focus-visible (keyboard nav accessibility) ── */
 :focus { outline: none; }
 :focus-visible {

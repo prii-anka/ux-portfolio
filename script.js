@@ -444,22 +444,67 @@ setInterval(updateClock, 30000);
 // ── Theme toggle ────────────────────────────────────
 function setTheme(dark) {
   document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-  const icon = dark ? 'sun' : 'moon';
-  document.querySelectorAll('#themeBtn, #menuThemeBtn').forEach(btn => {
-    if (btn) btn.textContent = icon;
-  });
+  // Update icon: moon when light (click → go dark), sun when dark (click → go light)
+  const svgMoon = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  const svgSun  = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+  const icon = document.getElementById('rThemeIcon');
+  if (icon) icon.innerHTML = dark ? svgSun : svgMoon;
   localStorage.setItem('theme', dark ? 'dark' : 'light');
 }
 
-// Init theme from localStorage
+// Circular wipe transition
+let _wipeActive = false;
+function triggerThemeWipe(originEl) {
+  if (_wipeActive) return;
+  _wipeActive = true;
+
+  const wipe = document.getElementById('theme-wipe');
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const goingDark = !isDark;
+
+  // Position wipe origin at the button center
+  const rect = originEl.getBoundingClientRect();
+  const cx = Math.round(rect.left + rect.width / 2);
+  const cy = Math.round(rect.top  + rect.height / 2);
+  wipe.style.setProperty('--wipe-x', cx + 'px');
+  wipe.style.setProperty('--wipe-y', cy + 'px');
+
+  // Wipe color = destination theme background
+  wipe.style.background = goingDark ? '#111009' : '#edeae2';
+
+  // Reset to collapsed
+  wipe.classList.remove('wipe-expand', 'wipe-shrink');
+  wipe.style.clipPath = 'circle(0% at ' + cx + 'px ' + cy + 'px)';
+
+  // Force reflow so the transition fires
+  void wipe.offsetWidth;
+
+  // Expand circle outward
+  wipe.classList.add('wipe-expand');
+
+  // At peak (slightly before transition ends) — swap the theme
+  setTimeout(() => {
+    setTheme(goingDark);
+  }, 340);
+
+  // After full expansion, shrink back to reveal new theme
+  setTimeout(() => {
+    wipe.classList.remove('wipe-expand');
+    wipe.classList.add('wipe-shrink');
+    wipe.style.clipPath = 'circle(0% at ' + cx + 'px ' + cy + 'px)';
+    setTimeout(() => {
+      wipe.classList.remove('wipe-shrink');
+      _wipeActive = false;
+    }, 500);
+  }, 620);
+}
+
+// Init theme from localStorage (no animation on load)
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'dark') setTheme(true);
 
-document.getElementById('themeBtn')?.addEventListener('click', () => {
-  setTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
-});
-document.getElementById('menuThemeBtn')?.addEventListener('click', () => {
-  setTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+document.getElementById('rThemeBtn')?.addEventListener('click', function() {
+  triggerThemeWipe(this);
 });
 
 // ── View toggle ─────────────────────────────────────
