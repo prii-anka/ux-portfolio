@@ -216,16 +216,17 @@
     <!-- Golden ratio — complete Fibonacci spiral with nested rectangle grid -->
     <svg class="rhero-golden" viewBox="0 0 1618 1000" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
-        <!-- Hand-drawn sketch wobble filter -->
-        <filter id="gr-sketch" x="-2%" y="-2%" width="104%" height="104%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.018 0.022" numOctaves="4" seed="5" result="noise"/>
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
+        <!-- Glow filter for the animated snake -->
+        <filter id="gr-glow" x="-120%" y="-120%" width="340%" height="340%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="big"/>
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="small"/>
+          <feMerge><feMergeNode in="big"/><feMergeNode in="small"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
       </defs>
 
-      <g fill="none" stroke="white" stroke-linecap="round" filter="url(#gr-sketch)">
-        <!-- Grid lines — static, light -->
-        <g opacity="0.13" stroke-width="0.35">
+      <g fill="none" stroke-linecap="round">
+        <!-- Grid lines — dim static base -->
+        <g stroke="white" opacity="0.06" stroke-width="0.4">
           <line x1="1000" y1="0"   x2="1000" y2="1000"/>
           <line x1="1000" y1="618" x2="1618" y2="618"/>
           <line x1="1236" y1="618" x2="1236" y2="1000"/>
@@ -234,30 +235,87 @@
           <line x1="1146" y1="708" x2="1236" y2="708"/>
         </g>
 
-        <!-- Single continuous spiral path — animated as travelling snake -->
+        <!-- Ghost spiral — static base line, slightly visible -->
+        <path
+          d="M 0 1000 A 1000 1000 0 0 1 1000 0 A 618 618 0 0 1 1618 618 A 382 382 0 0 1 1236 1000 A 236 236 0 0 1 1000 764 A 146 146 0 0 1 1146 618 A 90 90 0 0 1 1236 708"
+          stroke="white" stroke-width="0.5" opacity="0.14"/>
+
+        <!-- Hidden path used only for orb position calculation -->
         <path id="gr-spiral"
           d="M 0 1000 A 1000 1000 0 0 1 1000 0 A 618 618 0 0 1 1618 618 A 382 382 0 0 1 1236 1000 A 236 236 0 0 1 1000 764 A 146 146 0 0 1 1146 618 A 90 90 0 0 1 1236 708"
-          stroke-width="0.5" opacity="0.28"/>
+          stroke="none" fill="none"/>
+
+        <!-- Trail + orb rendered via JS into this group -->
+        <g id="gr-orb-group"></g>
       </g>
     </svg>
 
     <script>
-    // Golden spiral — travelling snake animation (waits for paint)
     window.addEventListener('load', function(){
-      var path = document.getElementById('gr-spiral');
-      if (!path) return;
+      var path  = document.getElementById('gr-spiral');
+      var group = document.getElementById('gr-orb-group');
+      if (!path || !group) return;
       var total = path.getTotalLength();
       if (!total) return;
-      var visible = total * 0.38;
-      var gap = total - visible;
-      path.style.strokeDasharray  = visible + ' ' + gap;
-      path.style.strokeDashoffset = '0';
-      var offset = 0;
-      var speed = 1.2;
+
+      var NS = 'http://www.w3.org/2000/svg';
+      var TRAIL = 18;   // number of trail dots
+      var speed = 3.5;  // SVG units per frame
+
+      // Colour palette — subtle cycling
+      var colors = [
+        [255,255,255],  // white
+        [180,210,255],  // cool blue
+        [255,235,160],  // warm gold
+        [210,180,255],  // soft purple
+        [160,255,210],  // mint
+        [255,190,190],  // blush rose
+      ];
+      var cIdx=0, cNext=1, cT=0, cDur=220;
+
+      function lerp(a,b,t){ return Math.round(a+(b-a)*t); }
+      function lerpColor(a,b,t){ return 'rgb('+lerp(a[0],b[0],t)+','+lerp(a[1],b[1],t)+','+lerp(a[2],b[2],t)+')'; }
+
+      // Pre-create trail circles + head
+      var dots = [];
+      for(var i=0;i<=TRAIL;i++){
+        var c = document.createElementNS(NS,'circle');
+        var isHead = (i===TRAIL);
+        c.setAttribute('r', isHead ? 3.5 : (2.5*(i/TRAIL)));
+        c.setAttribute('fill','white');
+        if(isHead) c.setAttribute('filter','url(#gr-glow)');
+        group.appendChild(c);
+        dots.push(c);
+      }
+
+      var dist = 0;
+      var history = []; // ring buffer of past positions
+
       (function tick(){
-        offset -= speed;
-        if (offset <= -total) offset = 0;
-        path.style.strokeDashoffset = offset;
+        dist += speed;
+        if(dist >= total) dist = 0;
+
+        var pt = path.getPointAtLength(dist);
+        history.push({x:pt.x, y:pt.y});
+        if(history.length > TRAIL+1) history.shift();
+
+        // Colour cycle
+        cT++;
+        if(cT>=cDur){ cT=0; cIdx=cNext; cNext=(cNext+1)%colors.length; }
+        var col = lerpColor(colors[cIdx],colors[cNext],cT/cDur);
+
+        // Update dots — head is newest, tail is oldest
+        for(var i=0;i<dots.length;i++){
+          var hIdx = history.length-1-( (dots.length-1-i) );
+          if(hIdx<0){ dots[i].setAttribute('opacity','0'); continue; }
+          var pos = history[hIdx];
+          var t = i/TRAIL; // 0=tail, 1=head
+          dots[i].setAttribute('cx', pos.x);
+          dots[i].setAttribute('cy', pos.y);
+          dots[i].setAttribute('opacity', (t*t*0.9).toFixed(3)); // quadratic fade
+          dots[i].setAttribute('fill', i===TRAIL ? col : 'white');
+        }
+
         requestAnimationFrame(tick);
       })();
     });
