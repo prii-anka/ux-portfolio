@@ -4869,6 +4869,47 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
   .rmac-pill { width: 200px; font-size: 8px; }
 }
 
+/* ── Product folio mac bar mobile ── */
+@media (max-width: 768px) {
+  /* Mac bar: hide overflow items, center tabs */
+  .rmac-bar { height: 36px; padding: 0 10px; gap: 8px; }
+  .rmac-tabs-inner { position: absolute; left: 50%; transform: translateX(-50%); height: 36px; }
+  .rmac-tab { padding: 0 20px; font-size: 11px; }
+  .rmac-tab-active { border-radius: 6px 6px 0 0; }
+  .rmac-loc, .rmac-loc + * { display: none; }
+  .rmac-time { display: none; }
+  .rmac-right { gap: 6px; }
+  /* Hide resume link on mobile */
+  .rmac-bar a[href*="resume"] { display: none; }
+
+  /* FigJam stage: ensure font sizes are readable on small screens */
+  .rfig-name-line { font-size: clamp(1rem, 4.5vw, 1.6rem) !important; }
+  .rfig-role { font-size: clamp(1.8rem, 7.5vw, 3rem) !important; white-space: normal !important; line-height: 1.1 !important; }
+  .rfig-tagline { font-size: 0.82rem !important; }
+  .rfig-bubble { display: none !important; }
+  .rfig-eyes { display: none !important; }
+  .rfig-cursor-you { display: none !important; }
+
+  /* Right dock on product folio: move to bottom */
+  .rdock {
+    position: fixed; right: unset; top: unset;
+    bottom: 16px; left: 50%; transform: translateX(-50%);
+    flex-direction: row; border-radius: 18px;
+    padding: 6px 10px; gap: 4px;
+  }
+  .rdock-sep { width: 1px; height: 24px; }
+  .rdock-item { width: 40px; height: 40px; }
+  .rdock-icon { width: 32px; height: 32px; }
+  .rdock-label { bottom: calc(100% + 8px); left: 50%; right: unset; transform: translateX(-50%) translateY(4px); }
+  .rdock-item:hover .rdock-label { transform: translateX(-50%) translateY(0); }
+}
+
+@media (max-width: 430px) {
+  .rmac-tab { padding: 0 14px; font-size: 10px; }
+  .rfig-role { font-size: 10vw !important; }
+  .rfig-name-line { font-size: 6vw !important; }
+}
+
 /* ── Touch & safe-area fixes (all mobile) ── */
 @media (max-width: 900px) {
   /* Smooth scrolling on iOS */

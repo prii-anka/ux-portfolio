@@ -450,58 +450,73 @@
 
     /* ══ MOBILE RESPONSIVE ══ */
     @media (max-width: 768px) {
-      /* Mac bar */
-      .rmac-bar { padding: 0 10px; gap: 10px; }
-      .rmac-tab  { padding: 0 18px; font-size: 10px; }
-      .rmac-loc  { display: none; }
-      .rmac-resume { display: none; }
-      .rmac-tabs-inner { position: absolute; left: 50%; transform: translateX(-50%); }
 
-      /* Portfolio word */
-      .portfolio-word { font-size: clamp(48px, 14vw, 90px); }
+      /* ── Mac bar: compact, no location ── */
+      .rmac-bar { padding: 0 10px; gap: 8px; height: 36px; }
+      .rmac-tabs-inner { position: absolute; left: 50%; transform: translateX(-50%); height: 36px; }
+      .rmac-tab { padding: 0 20px; font-size: 11px; height: 100%; }
+      .rmac-tab-active { border-radius: 6px 6px 0 0; }
+      .rmac-loc { display: none; }
+      .rmac-right { gap: 8px; }
+      .rmac-right a[download] { display: none; }
 
-      /* Eyes */
-      .eye { width: 40px; height: 36px; }
-      .eye-pupil { width: 14px; height: 14px; }
-      .eyes-wrap { gap: 12px; }
+      /* ── Curtains start below taller bar ── */
+      #curtain-top  { top: 36px; height: calc(50vh - 18px); }
+      #curtain-bottom { top: calc(36px + 50vh - 18px); }
+      #projects-overlay { top: 36px; }
+      .stage { top: 36px; }
+      #screen-frame { top: 36px; border-width: 2px; }
 
-      /* Hero bottom-left */
-      .hero-bl { bottom: 70px; left: 16px; }
-      .hero-bl-line1 { font-size: clamp(1.2rem, 6vw, 2rem); }
-      .hero-bl-role  { font-size: clamp(1.2rem, 6vw, 2rem); }
+      /* ── Portfolio word ── */
+      .portfolio-word { font-size: 17vw; }
 
-      /* Dock — stay bottom center, smaller icons */
-      .rdock { padding: 6px; gap: 2px; }
-      .rdock-item { width: 38px; height: 38px; }
-      .rdock-icon { width: 30px; height: 30px; }
+      /* ── Eyes: smaller ── */
+      .eye { width: 38px; height: 34px; }
+      .eye-pupil { width: 13px; height: 13px; }
+      .eyes-wrap { gap: 14px; }
+      .eye-brow { width: 34px; }
 
-      /* Toast bubble */
-      .toast { width: min(220px, 70vw); font-size: 0.72rem; padding: 8px 12px; top: calc(50% + 100px); }
+      /* ── Stage gap ── */
+      .stage { gap: 8px; }
 
-      /* Screen frame */
-      #screen-frame { border-width: 2px; }
+      /* ── Hero bottom-left: smaller, above dock ── */
+      .hero-bl { bottom: 90px; left: 16px; line-height: 0.88; }
+      .hero-bl-line1 { font-size: 7vw; }
+      .hero-bl-role  { font-size: 7vw; }
 
-      /* Curtains */
-      #curtain-top  { top: 28px; }
-      #curtain-bottom { top: calc(28px + 50vh); }
+      /* ── Ready to work: top right, smaller ── */
+      #ready-badge { top: 44px; right: 12px; }
+      #ready-badge div { font-size: 5vw !important; }
 
-      /* Projects grid */
-      .rct-section { padding: 32px 16px 40px; }
-      .rct-grid { grid-template-columns: 1fr; gap: 24px; }
-      .rct-title { font-size: clamp(1.6rem, 6vw, 2.4rem); }
-      .rct-name  { font-size: clamp(1.1rem, 4vw, 1.6rem); }
+      /* ── Dock: compact ── */
+      .rdock { padding: 6px 10px; gap: 4px; bottom: 12px; }
+      .rdock-item { width: 40px; height: 40px; }
+      .rdock-icon { width: 32px; height: 32px; }
+      .rdock-sep { width: 1px; height: 24px; }
 
-      /* Tagline SVG */
-      #taglineSvg text { font-size: 16px; }
+      /* ── Toast ── */
+      .toast { width: min(200px, 72vw); font-size: 0.72rem; padding: 8px 11px; top: calc(50% + 80px); left: 50%; }
+
+      /* ── Tagline ── */
+      #taglineSvg text { font-size: 15px; }
+
+      /* ── Projects overlay ── */
+      .rct-section { padding: 24px 16px 40px; }
+      .rct-header { margin-bottom: 24px; }
+      .rct-grid { grid-template-columns: 1fr; gap: 28px; }
+      .rct-title { font-size: 6vw; }
+      .rct-name  { font-size: 5vw; }
+      .rct-img   { border-radius: 14px; }
     }
 
-    @media (max-width: 480px) {
-      .portfolio-word { font-size: clamp(36px, 16vw, 70px); }
-      .rmac-tab { padding: 0 14px; }
-      .hero-bl-line1, .hero-bl-role { font-size: 5.5vw; }
-      .rdock-item { width: 32px; height: 32px; }
-      .rdock-icon { width: 26px; height: 26px; }
-      .toast { top: calc(50% + 80px); }
+    @media (max-width: 430px) {
+      .portfolio-word { font-size: 19vw; }
+      .hero-bl-line1, .hero-bl-role { font-size: 6.5vw; }
+      .hero-bl { bottom: 85px; }
+      .rmac-tab { padding: 0 16px; font-size: 10px; }
+      .rdock-item { width: 36px; height: 36px; }
+      .rdock-icon { width: 28px; height: 28px; }
+      #ready-badge div { font-size: 4.5vw !important; }
     }
   </style>
 </head>
@@ -521,34 +536,34 @@
     </div>
     <div class="rct-grid">
       <div class="rct" style="--rtb:#1a0830;--rta:#6b21a8;">
-        <div class="rct-img"><img src="assets/gfx-posters.png" alt="ASU AI Carnival"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
+        <div class="rct-img"><img src="../assets/gfx-posters.png" alt="ASU AI Carnival"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
         <div class="rct-label"><div class="rct-meta">Poster Series <span class="rct-dot"></span> ASU</div><div class="rct-name">ASU AI Carnival</div></div>
       </div>
       <div class="rct" style="--rtb:#0f1a0f;--rta:#2d5a2d;">
-        <div class="rct-img"><img src="assets/gfx-brand.png" alt="Brand Identity"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
+        <div class="rct-img"><img src="../assets/gfx-brand.png" alt="Brand Identity"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
         <div class="rct-label"><div class="rct-meta">Brand Identity <span class="rct-dot"></span> Logo Systems</div><div class="rct-name">Logo &amp; Brand Systems</div></div>
       </div>
       <div class="rct" style="--rtb:#1a0a00;--rta:#7c3a00;">
-        <div class="rct-img"><img src="assets/gfx-typography.png" alt="Typography"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
+        <div class="rct-img"><img src="../assets/gfx-typography.png" alt="Typography"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
         <div class="rct-label"><div class="rct-meta">Typography <span class="rct-dot"></span> Experiments</div><div class="rct-name">Type Experiments</div></div>
       </div>
       <div class="rct" style="--rtb:#001a2e;--rta:#005fa3;">
-        <div class="rct-img"><img src="assets/gfx-social-1.png" alt="Social Media"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
+        <div class="rct-img"><img src="../assets/gfx-social-1.png" alt="Social Media"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
         <div class="rct-label"><div class="rct-meta">Social &amp; Digital <span class="rct-dot"></span> Carousel</div><div class="rct-name">Social Media Carousel</div></div>
       </div>
       <div class="rct" style="--rtb:#1a001a;--rta:#700070;">
         <div class="rct-img" style="background:#1a001a;">
-          <video src="assets/gfx-brochureominterior.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" autoplay muted loop playsinline></video>
+          <video src="../assets/gfx-brochureominterior.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" autoplay muted loop playsinline></video>
           <div class="rct-overlay"><div class="rct-view">View ↗</div></div>
         </div>
         <div class="rct-label"><div class="rct-meta">Brochure Design <span class="rct-dot"></span> Print</div><div class="rct-name">Om Interiors</div></div>
       </div>
       <div class="rct" style="--rtb:#001a1a;--rta:#006666;">
-        <div class="rct-img"><img src="assets/gfx-packaging.png" alt="Packaging"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
+        <div class="rct-img"><img src="../assets/gfx-packaging.png" alt="Packaging"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
         <div class="rct-label"><div class="rct-meta">Packaging <span class="rct-dot"></span> Design</div><div class="rct-name">Packaging Design</div></div>
       </div>
       <div class="rct" style="--rtb:#1a0a00;--rta:#c87941;">
-        <div class="rct-img"><img src="assets/gfx-pattern-1.png" alt="Illustrations"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
+        <div class="rct-img"><img src="../assets/gfx-pattern-1.png" alt="Illustrations"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
         <div class="rct-label"><div class="rct-meta">Miscellaneous <span class="rct-dot"></span> Illustrations</div><div class="rct-name">Illustrations &amp; Explorations</div></div>
       </div>
     </div>
@@ -613,7 +628,7 @@
 </main>
 
 <!-- Available text — top right, big ghost -->
-<div style="position:fixed;top:36px;right:28px;z-index:200;pointer-events:none;text-align:right;line-height:0.9;">
+<div id="ready-badge" style="position:fixed;top:36px;right:28px;z-index:200;pointer-events:none;text-align:right;line-height:0.9;">
   <div style="font-family:'Space Grotesk',sans-serif;font-size:clamp(1.4rem,2.8vw,2.8rem);font-weight:700;
     letter-spacing:-0.03em;text-transform:uppercase;
     color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,0.5);">READY TO</div>
@@ -674,24 +689,24 @@
 <!-- Left dock — graphic tools only -->
 <nav class="rdock">
   <div class="rdock-item" title="Figma">
-    <div class="rdock-icon"><img src="assets/icon-figma.png" alt="Figma"/></div>
+    <div class="rdock-icon"><img src="../assets/icon-figma.png" alt="Figma"/></div>
     <span class="rdock-label">Figma</span>
   </div>
   <div class="rdock-item" title="Photoshop">
-    <div class="rdock-icon"><img src="assets/icon-photoshop.png" alt="Photoshop"/></div>
+    <div class="rdock-icon"><img src="../assets/icon-photoshop.png" alt="Photoshop"/></div>
     <span class="rdock-label">Photoshop</span>
   </div>
   <div class="rdock-item" title="Illustrator">
-    <div class="rdock-icon"><img src="assets/icon-illustrator.png" alt="Illustrator"/></div>
+    <div class="rdock-icon"><img src="../assets/icon-illustrator.png" alt="Illustrator"/></div>
     <span class="rdock-label">Illustrator</span>
   </div>
   <div class="rdock-sep"></div>
   <a class="rdock-item" href="https://linkedin.com/in/priyanka-uttarkar" target="_blank" title="LinkedIn">
-    <div class="rdock-icon"><img src="assets/icon-linkedin.png" alt="LinkedIn"/></div>
+    <div class="rdock-icon"><img src="../assets/icon-linkedin.png" alt="LinkedIn"/></div>
     <span class="rdock-label">LinkedIn</span>
   </a>
   <div class="rdock-item" title="Email">
-    <div class="rdock-icon"><img src="assets/icon-gmail.png" alt="Gmail"/></div>
+    <div class="rdock-icon"><img src="../assets/icon-gmail.png" alt="Gmail"/></div>
     <span class="rdock-label">Copy Email</span>
   </div>
 </nav>
