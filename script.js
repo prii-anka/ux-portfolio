@@ -444,11 +444,13 @@ setInterval(updateClock, 30000);
 // ── Theme toggle ────────────────────────────────────
 function setTheme(dark) {
   document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  const rv = document.getElementById('view-recruiter');
+  if (rv) rv.classList.toggle('r-light', !dark);
   // Update icon: sun shown when dark (click → go light), moon when light (click → go dark)
   const svgMoon = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
   const svgSun  = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
   const icon = document.getElementById('rThemeIcon');
-  if (icon) icon.innerHTML = dark ? svgSun : svgMoon;
+  if (icon) icon.innerHTML = dark ? svgMoon : svgSun;
   // SVG stroke attributes can't be overridden by CSS attr selectors reliably — do it in JS
   const spiralColor = dark ? 'white' : '#2A2520';
   document.querySelectorAll('.rhero-golden g[stroke]').forEach(g => {
@@ -501,8 +503,9 @@ function triggerThemeWipe() {
 }
 
 // Init theme from localStorage (no animation on load)
+// Default is dark — only switch if user explicitly chose light
 const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') setTheme(true);
+if (savedTheme === 'light') setTheme(false);
 
 document.getElementById('rThemeBtn')?.addEventListener('click', triggerThemeWipe);
 
