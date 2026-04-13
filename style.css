@@ -113,6 +113,15 @@
   aspect-ratio: 4/3;
 }
 
+@keyframes role-color-shift {
+  0%   { -webkit-text-stroke-color: #FFB3C6; } /* pastel pink */
+  16%  { -webkit-text-stroke-color: #B5D5FF; } /* pastel blue */
+  33%  { -webkit-text-stroke-color: #C3F0C8; } /* pastel mint */
+  50%  { -webkit-text-stroke-color: #E8C8FF; } /* pastel lavender */
+  66%  { -webkit-text-stroke-color: #FFE5A0; } /* pastel yellow */
+  83%  { -webkit-text-stroke-color: #FFCBA4; } /* pastel peach */
+  100% { -webkit-text-stroke-color: #FFB3C6; } /* back to pink */
+}
 @keyframes lScrollUp {
   from { transform: translateY(0); }
   to   { transform: translateY(-50%); }
@@ -1472,7 +1481,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   inset: 0;
   pointer-events: none;
   z-index: 9000;
-  opacity: 0.08;
+  opacity: 0.14;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   background-size: 220px 220px;
   mix-blend-mode: screen;
@@ -1503,22 +1512,35 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   white-space: nowrap; pointer-events: none;
 }
 .rmac-tabs-inner {
-  display: flex; align-items: center; gap: 2px;
-  background: rgba(255,255,255,0.07); border-radius: 6px; padding: 2px;
+  display: flex; align-items: flex-end;
+  background: transparent; border-radius: 0; padding: 0;
+  gap: 0; height: 28px;
 }
 .rmac-tab {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-  font-size: 10px; font-weight: 400; letter-spacing: 0;
-  padding: 1px 14px; border-radius: 4px; cursor: pointer;
-  color: rgba(255,255,255,0.35);
+  font-size: 11px; font-weight: 400; letter-spacing: 0;
+  padding: 0 36px;
+  height: 100%;
+  display: flex; align-items: center;
+  cursor: pointer;
+  color: rgba(255,255,255,0.38);
   background: transparent; border: none;
+  border-right: 1px solid rgba(255,255,255,0.07);
   transition: background 0.15s, color 0.15s;
-  user-select: none; line-height: 1.6;
+  user-select: none;
+  position: relative;
+  white-space: nowrap;
+  border-radius: 6px 6px 0 0;
 }
-.rmac-tab:hover { color: rgba(255,255,255,0.6); }
+.rmac-tab:first-child { border-left: 1px solid rgba(255,255,255,0.07); }
+.rmac-tab:hover { color: rgba(255,255,255,0.65); background: rgba(255,255,255,0.04); }
 .rmac-tab-active {
-  background: rgba(255,255,255,0.12);
-  color: rgba(255,255,255,0.88);
+  background: #1e1e20;
+  color: rgba(255,255,255,0.9);
+  border-bottom: 1px solid #1e1e20;
+  margin-bottom: -1px;
+  z-index: 1;
+  border-radius: 6px 6px 0 0;
 }
 .rmac-actions {
   display: flex; gap: 8px; flex-shrink: 0;
@@ -1534,7 +1556,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rmac-loc {
   display: flex; align-items: center; gap: 6px;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-  font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.85);
+  font-size: 10px; font-weight: 400; color: rgba(255,255,255,0.85);
   letter-spacing: 0; flex-shrink: 0;
 }
 
@@ -1754,16 +1776,16 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   display: flex; align-items: baseline; justify-content: center;
   font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(1.4rem, 2.8vw, 2.6rem);
-  font-weight: 700; line-height: 1;
-  letter-spacing: -0.03em;
+  font-weight: 300; line-height: 1;
+  letter-spacing: 0.04em;
   color: #f0ede8;
   white-space: nowrap;
 }
 .rfig-hi {
   color: rgba(255,255,255,0.5);
-  font-weight: 400;
+  font-weight: 300;
 }
-#rfigTypeName { color: #f0ede8; font-weight: 700; }
+#rfigTypeName { color: #f0ede8; font-weight: 300; }
 .rfig-caret {
   color: #a855f7; font-weight: 300;
   animation: rfigBlink 1s step-end infinite;
@@ -1772,16 +1794,20 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* Role line — big open type, wraps to 2 lines */
 .rfig-role {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(2.8rem, 6.2vw, 5.8rem);
-  font-weight: 700; letter-spacing: -0.02em;
+  font-family: 'Alumni Sans Collegiate One', sans-serif;
+  font-size: 6.2vw;
+  font-weight: 400; letter-spacing: 0.08em;
+  color: transparent;
+  -webkit-text-stroke: 0.8px #FFB3C6;
   line-height: 1.05;
-  color: rgba(255,255,255,0.88);
-  white-space: normal;
-  word-break: break-word;
+  animation: role-color-shift 8s ease-in-out infinite;
+  white-space: nowrap;
   max-width: 100%;
   text-align: center;
-  white-space: nowrap;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* Centered content within each frame */
@@ -2139,7 +2165,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   border: none;
   border-radius: 14px 14px 14px 4px;
   padding: 2px 10px 3px;
-  min-width: 120px; max-width: 220px;
+  width: max-content; max-width: 240px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.45);
   opacity: 0; transform: scale(0.92);
   transition: opacity 0.06s ease, transform 0.08s cubic-bezier(0.34,1.56,0.64,1);
@@ -2152,12 +2178,12 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rfig-bubble-msg {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.72rem; font-weight: 500; line-height: 1.3;
-  color: #f0ede8; display: block;
+  color: #f0ede8; display: inline;
 }
 .rfig-blink-caret {
-  color: rgba(168,85,247,0.8);
+  color: #a5f3a0;
   animation: rfigBlink 1s step-end infinite;
-  margin-left: 1px; font-weight: 300;
+  margin-left: 1px; font-weight: 300; display: inline;
 }
 
 /* ── Draggable letters in "Product & UX Designer" ── */
@@ -4220,14 +4246,13 @@ video.rgfx-lb-img--active { display: block; }
   background: rgba(0,0,0,0.06);
   color: rgba(0,0,0,0.45);
 }
-#view-recruiter.r-light .rmac-tabs-inner {
-  background: rgba(0,0,0,0.07);
-}
-#view-recruiter.r-light .rmac-tab { color: rgba(0,0,0,0.35); }
-#view-recruiter.r-light .rmac-tab:hover { color: rgba(0,0,0,0.6); }
+#view-recruiter.r-light .rmac-tabs-inner { background: transparent; }
+#view-recruiter.r-light .rmac-tab { color: rgba(0,0,0,0.35); border-color: rgba(0,0,0,0.1); }
+#view-recruiter.r-light .rmac-tab:hover { color: rgba(0,0,0,0.6); background: rgba(0,0,0,0.04); }
 #view-recruiter.r-light .rmac-tab-active {
-  background: rgba(0,0,0,0.1);
+  background: #f0eeea;
   color: rgba(0,0,0,0.88);
+  border-bottom-color: #f0eeea;
 }
 #view-recruiter.r-light .rmac-loc { color: rgba(0,0,0,0.7); }
 #view-recruiter.r-light .rmac-theme-btn {
@@ -5367,14 +5392,13 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
   background: rgba(0,0,0,0.06);
   color: rgba(0,0,0,0.5);
 }
-[data-theme="light"] .rmac-tabs-inner {
-  background: rgba(0,0,0,0.06);
-}
-[data-theme="light"] .rmac-tab { color: rgba(0,0,0,0.35); }
-[data-theme="light"] .rmac-tab:hover { color: rgba(0,0,0,0.65); }
+[data-theme="light"] .rmac-tabs-inner { background: transparent; }
+[data-theme="light"] .rmac-tab { color: rgba(0,0,0,0.35); border-color: rgba(0,0,0,0.1); }
+[data-theme="light"] .rmac-tab:hover { color: rgba(0,0,0,0.65); background: rgba(0,0,0,0.04); }
 [data-theme="light"] .rmac-tab-active {
-  background: rgba(0,0,0,0.1);
+  background: #f0eeea;
   color: rgba(0,0,0,0.8);
+  border-bottom-color: #f0eeea;
 }
 [data-theme="light"] .rmac-time,
 [data-theme="light"] .rmac-battery,
@@ -5392,14 +5416,17 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 /* ── Hero background ── */
 [data-theme="light"] .rfig-hero {
   background: #f0ede6;
-  background-image: radial-gradient(rgba(0,0,0,0.07) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(0,0,0,0.18) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 [data-theme="light"] .rfig-stmt-section {
   background: #f0ede6;
-  background-image: radial-gradient(rgba(0,0,0,0.07) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(0,0,0,0.18) 1px, transparent 1px);
   background-size: 28px 28px;
 }
+
+/* ── Golden ratio lines — more visible on light bg ── */
+[data-theme="light"] .rhero-golden g { opacity: 0.65 !important; }
 
 /* ── Name / greeting ── */
 [data-theme="light"] .rfig-name-line { color: #1a1a1a; }
@@ -5408,7 +5435,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 [data-theme="light"] .rfig-caret { color: #a855f7; }
 
 /* ── Big role line ── */
-[data-theme="light"] .rfig-role { color: rgba(0,0,0,0.85); }
+[data-theme="light"] .rfig-role { color: #3D1A78; }
 
 /* ── Tagline ── */
 [data-theme="light"] .rfig-tagline { color: rgba(0,0,0,0.52); }
@@ -5440,4 +5467,13 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 
 /* ── Custom cursor ── */
 [data-theme="light"] #cursor-dot { background: #1a1a1a; }
+
+/* ── Project card names: darken accent on light bg ── */
+/* Bright accents like yellow (#ffde59) wash out on cream — mix in black for contrast */
+[data-theme="light"] .rct:not(.rct-wip):hover .rct-name {
+  color: color-mix(in srgb, var(--rta, #1a1a1a) 55%, #000);
+}
+[data-theme="light"] .rct-meta { color: rgba(0,0,0,0.45); }
+[data-theme="light"] .rct-dot  { background: rgba(0,0,0,0.35); }
+[data-theme="light"] .rct-name { color: #1a1a1a; }
 [data-theme="light"] #cursor-ring { border-color: rgba(0,0,0,0.35); }
