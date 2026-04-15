@@ -190,14 +190,14 @@
       <span class="rmac-dot" style="background:#ffbd2e;"></span>
       <span class="rmac-dot" style="background:#28ca41;"></span>
     </div>
-    <span style="font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:0.02em;margin-left:4px;">pri.anka</span>
+    <span id="rmac-brand" style="font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:0.02em;margin-left:4px;">pri.anka</span>
     <!-- Center tabs — macOS style -->
     <div class="rmac-tabs-inner" style="position:absolute;left:50%;transform:translateX(-50%);">
       <div class="rmac-tab rmac-tab-active">product</div>
       <div class="rmac-tab" id="graphicTabBtn" style="cursor:pointer;">graphic</div>
     </div>
     <div class="rmac-right">
-      <a href="resume.pdf" download style="
+      <a id="rmac-resume" href="resume.pdf" download style="
         font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;
         font-size:10px; color:rgba(255,255,255,0.5); text-decoration:none;
         padding:2px 10px; border-radius:5px;
@@ -216,8 +216,8 @@
       </div>
       <button class="rmac-theme-btn" id="rThemeBtn" title="Toggle light mode" aria-label="Toggle light mode">
         <svg id="rThemeIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <!-- moon icon (default: dark mode) -->
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          <!-- sun icon (default: dark mode, click to go light) -->
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
         </svg>
       </button>
     </div>
@@ -388,7 +388,7 @@
           <span class="rfig-corner rfig-corner--tr"></span>
           <span class="rfig-corner rfig-corner--bl"></span>
           <span class="rfig-corner rfig-corner--br"></span>
-          <div class="rfig-role">Product &amp; UX Designer</div>
+          <div class="rfig-role"><span class="rfig-role-l1">Product &amp; UX</span><span class="rfig-role-br" style="display:block;height:0;"></span><span class="rfig-role-l2">Designer</span></div>
         </div>
         <div class="rfig-hint-row rfig-hint-row-dim">
           <span class="rfig-hint" id="rfigHint2">DRAG TO MOVE</span>
@@ -397,7 +397,6 @@
 
       <!-- Tagline -->
       <p class="rfig-tagline">building <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>design systems</span> that feel <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>deeply human</span></p>
-      <p class="rfig-letter-hint">tap the letters. i dare you.</p>
       <!-- Mobile inline CTA -->
       <button class="rmob-see-work" onclick="document.getElementById('rct-section').scrollIntoView({behavior:'smooth'})">
         see my work
@@ -458,9 +457,45 @@
     if(!btn) return;
     var SUN  = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
     var MOON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+    var themeStyle = document.createElement('style');
+    themeStyle.id = 'theme-override';
+    document.head.appendChild(themeStyle);
+
+    var LIGHT_CSS = `
+      .rfig-hero, .rfig-stmt-section { background: #f0ede6 !important; background-image: radial-gradient(rgba(0,0,0,0.12) 1px, transparent 1px) !important; background-size: 28px 28px !important; }
+      .rmac-bar { background: #e8e4dc !important; }
+      .rfig-role { color: transparent !important; -webkit-text-stroke: 2px rgba(0,0,0,0.85) !important; }
+      .rfig-name-line, .rfig-hi, #rfigTypeName { color: rgba(0,0,0,0.7) !important; }
+      .rfig-tagline { color: rgba(0,0,0,0.55) !important; }
+      #golden-hint { color: rgba(0,0,0,0.4) !important; }
+      .rhero-golden { filter: brightness(0) !important; opacity: 0.18 !important; }
+      .rct-section, .rwork-section, .rnotes-section, .rgfx-section, .rfooter, .rpaint-section, .rarch-section { background: #ede9e1 !important; }
+      .rmac-tab { color: rgba(0,0,0,0.6) !important; }
+      .rmac-tab-active { color: rgba(0,0,0,0.88) !important; background: #faf9f6 !important; }
+      .rmac-loc, #rLocTime { color: rgba(0,0,0,0.6) !important; }
+      .rmac-theme-btn { color: rgba(0,0,0,0.5) !important; }
+      .rct-title { color: #1a1a1a !important; }
+      .rct-title em { color: rgba(0,0,0,0.55) !important; }
+      .rwork-title, .rwork-hint { color: rgba(0,0,0,0.75) !important; }
+      .rfig-jump-btn { color: rgba(0,0,0,0.5) !important; }
+      .rfig-jump-arrow-svg { stroke: rgba(0,0,0,0.5) !important; }
+      .rfig-cursor-you span { background: rgba(0,0,0,0.75) !important; color: #fff !important; }
+      #cursor-dot { background: #1a1a1a !important; }
+      .reye-brow { border-top-color: #3a3a3a !important; }
+    `;
+
     btn.addEventListener('click', function(){
       var isLight = view.classList.toggle('r-light');
-      icon.innerHTML = isLight ? SUN : MOON;
+      icon.innerHTML = isLight ? MOON : SUN;
+      themeStyle.textContent = isLight ? LIGHT_CSS : '';
+      var brand = document.getElementById('rmac-brand');
+      var resume = document.getElementById('rmac-resume');
+      if(brand) brand.style.color = isLight ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.45)';
+      if(resume){
+        resume.style.color = isLight ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.5)';
+        resume.style.borderColor = isLight ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.15)';
+        resume.style.background = isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.06)';
+      }
     });
   })();
   </script>
@@ -763,10 +798,7 @@
         <img src="assets/icon-imessage.png" alt="Messages"/>
       </div>
       <span class="rdock-label">prianka.ai</span>
-      <div class="rdock-chat-hint" id="rdockChatHint">
-        <span>chat with me!</span>
-        <svg viewBox="0 0 36 24" fill="none"><path d="M4,18 C12,16 22,10 32,6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M32,6 L26,8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M32,6 L30,12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      </div>
+      <div class="rdock-notif-dot" id="rdockChatDot"></div>
     </div>
     <!-- Divider -->
     <div class="rdock-sep"></div>
@@ -774,14 +806,12 @@
     <div class="rdock-item" title="Paintings" id="rdockPaintBtn">
       <div class="rdock-icon"><img src="assets/icon-paint.png" alt="Paintings"/></div>
       <span class="rdock-label">Paintings</span>
+      <div class="rdock-notif-dot"></div>
     </div>
     <div class="rdock-item" title="Photos" id="rdockPhotosBtn">
       <div class="rdock-icon"><img src="assets/icon-photos.png" alt="Photos"/></div>
       <span class="rdock-label">Photos</span>
-      <div class="rdock-chat-hint" id="rdockPhotosHint">
-        <span>my photography!</span>
-        <svg viewBox="0 0 36 24" fill="none"><path d="M4,18 C12,16 22,10 32,6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M32,6 L26,8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M32,6 L30,12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      </div>
+      <div class="rdock-notif-dot"></div>
     </div>
     <div class="rdock-item" id="rdockFinderBtn" title="Search portfolio">
       <div class="rdock-icon rdock-folder"><img src="assets/icon-finder.png" alt="Finder"/></div>
@@ -850,6 +880,9 @@
 
 </div><!-- /view-recruiter -->
 
+
+
+
 <script>
 (function () {
   var popup    = document.getElementById('rchatPopup');
@@ -862,10 +895,24 @@
   function closeChat() { if (popup) popup.classList.remove('rchat-popup--open'); }
   function isOpen()    { return popup && popup.classList.contains('rchat-popup--open'); }
 
-  // Dock icon toggles open/close
+  var dot = document.getElementById('rdockChatDot');
+  // Start icon bouncing — staggered
+  var paintBtn = document.getElementById('rdockPaintBtn');
+  var photosBtn = document.getElementById('rdockPhotosBtn');
+  setTimeout(function(){ if(dockBtn) dockBtn.classList.add('rdock-bounce'); }, 1800);
+  setTimeout(function(){ if(paintBtn) paintBtn.classList.add('rdock-bounce'); }, 2800);
+  setTimeout(function(){ if(photosBtn) photosBtn.classList.add('rdock-bounce'); }, 3800);
+
+  function stopBounce(btn){ if(btn){ btn.classList.remove('rdock-bounce'); var d=btn.querySelector('.rdock-notif-dot'); if(d) d.style.opacity='0.3'; } }
+  if(paintBtn) paintBtn.addEventListener('click', function(){ stopBounce(paintBtn); });
+  if(photosBtn) photosBtn.addEventListener('click', function(){ stopBounce(photosBtn); });
+
   if (dockBtn) dockBtn.addEventListener('click', function () {
     isOpen() ? closeChat() : openChat();
     dismissHint();
+    // Stop bounce when opened
+    dockBtn.classList.remove('rdock-bounce');
+    if(dot) dot.style.opacity = '0.3';
   });
 
   // Close button always closes
@@ -1474,22 +1521,46 @@
     lastL = i; return pool[i];
   }
 
-  // Split text into letter spans — regular spaces so text wraps naturally
-  var text = roleEl.textContent;
-  roleEl.innerHTML = '';
+  // Split text into letter spans — handles two-line layout via rfig-role-l1/l2
+  var lineEls = roleEl.querySelectorAll('.rfig-role-l1, .rfig-role-l2');
   var spans = [];
-  for (var ci = 0; ci < text.length; ci++) {
-    if (text[ci] === ' ') {
-      var sp = document.createElement('span');
-      sp.style.cssText = 'display:inline-block;width:0.35em;';
-      roleEl.appendChild(sp);
-      spans.push(null);
-    } else {
-      var s = document.createElement('span');
-      s.className = 'rfig-letter';
-      s.textContent = text[ci];
-      roleEl.appendChild(s);
-      spans.push(s);
+  if (lineEls.length >= 2) {
+    // Clear each line el and refill with letter spans
+    lineEls.forEach(function(lineEl) {
+      var text = lineEl.textContent;
+      lineEl.innerHTML = '';
+      for (var ci = 0; ci < text.length; ci++) {
+        if (text[ci] === ' ') {
+          var sp = document.createElement('span');
+          sp.style.cssText = 'display:inline-block;width:0.200em;';
+          lineEl.appendChild(sp);
+          spans.push(null);
+        } else {
+          var s = document.createElement('span');
+          s.className = 'rfig-letter';
+          s.textContent = text[ci];
+          lineEl.appendChild(s);
+          spans.push(s);
+        }
+      }
+    });
+  } else {
+    // Fallback: single line
+    var text = roleEl.textContent;
+    roleEl.innerHTML = '';
+    for (var ci = 0; ci < text.length; ci++) {
+      if (text[ci] === ' ') {
+        var sp = document.createElement('span');
+        sp.style.cssText = 'display:inline-block;width:0.200em;';
+        roleEl.appendChild(sp);
+        spans.push(null);
+      } else {
+        var s = document.createElement('span');
+        s.className = 'rfig-letter';
+        s.textContent = text[ci];
+        roleEl.appendChild(s);
+        spans.push(s);
+      }
     }
   }
 
@@ -2170,6 +2241,89 @@
 
 <!-- Theme transition wipe -->
 <div id="theme-wipe" aria-hidden="true"></div>
+
+
+
+<!-- Press G hint -->
+<div id="golden-hint" style="position:fixed;bottom:28px;left:28px;z-index:50;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.18em;color:rgba(255,255,255,0.35);pointer-events:none;user-select:none;transition:opacity 0.5s;line-height:1.8;text-transform:uppercase;">nature's favourite ratio<br>is hiding here<br>press G</div>
+<script>
+(function(){
+  var hint = document.getElementById('golden-hint');
+  var hero = document.getElementById('rfig-hero');
+  if(!hint||!hero) return;
+  document.getElementById('view-recruiter').addEventListener('scroll', function(){
+    var heroBottom = hero.getBoundingClientRect().bottom;
+    hint.style.opacity = heroBottom < 100 ? '0' : '';
+  });
+})();
+</script>
+
+<!-- Figma cursor coords -->
+<div id="figma-coords" style="position:fixed;z-index:60;pointer-events:none;user-select:none;display:none;">
+  <div style="background:rgba(25,25,35,0.85);border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:3px 8px;font-family:'Space Grotesk',monospace;font-size:10px;color:rgba(255,255,255,0.65);letter-spacing:0.04em;white-space:nowrap;">
+    <span id="fc-x">X: 0</span><span style="opacity:0.35;margin:0 5px;">|</span><span id="fc-y">Y: 0</span>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* ── Figma cursor coords ── */
+  var coords = document.getElementById('figma-coords');
+  var fcx = document.getElementById('fc-x');
+  var fcy = document.getElementById('fc-y');
+  var hero = document.getElementById('rfig-hero');
+  var mx=0,my=0,showing=false,gOn=false;
+
+  /* G key — toggle full brightness */
+  var hint=document.getElementById('golden-hint');
+  document.addEventListener('keydown', function(e){
+    if(e.key==='g'||e.key==='G'){
+      gOn=!gOn;
+      var svg=document.querySelector('.rhero-golden');
+      if(svg){
+        var isLight=document.getElementById('view-recruiter').classList.contains('r-light');
+        var ts=document.getElementById('theme-override');
+        if(gOn){
+          /* punch through the !important by removing spiral line from theme style */
+          if(ts) ts.textContent=ts.textContent.replace(/\.rhero-golden\s*\{[^}]*\}/,'');
+          svg.style.setProperty('opacity', isLight?'1':'1', 'important');
+          svg.style.setProperty('filter', isLight?'brightness(0) contrast(3)':'none', 'important');
+        } else {
+          svg.style.setProperty('opacity', isLight?'0.18':'0.28', 'important');
+          svg.style.setProperty('filter', isLight?'brightness(0)':'blur(0.6px)', 'important');
+        }
+      }
+      if(hint) hint.style.opacity=gOn?'0':'1';
+    }
+  });
+
+  document.addEventListener('mousemove', function(e){
+    var inHero = hero && hero.contains(e.target);
+    if(inHero){
+      if(!showing){ coords.style.display='block'; showing=true; }
+      var rect = hero.getBoundingClientRect();
+      var x = Math.round(e.clientX - rect.left);
+      var y = Math.round(e.clientY - rect.top);
+      fcx.textContent = 'X: '+x;
+      fcy.textContent = 'Y: '+y;
+      coords.style.left = (e.clientX + 16)+'px';
+      coords.style.top  = (e.clientY - 28)+'px';
+
+      /* ── Spiral parallax (moves at 8% of cursor delta, feels deep) ── */
+      var svg = document.querySelector('.rhero-golden');
+      if(svg){
+        var cx = (e.clientX / window.innerWidth  - 0.5) * -8;
+        var cy = (e.clientY / window.innerHeight - 0.5) * -8;
+        svg.style.transform = 'translate('+cx+'px,'+cy+'px)';
+      }
+    } else {
+      if(showing){ coords.style.display='none'; showing=false; }
+    }
+  });
+})();
+</script>
+
+
 
 </body>
 </html>

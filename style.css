@@ -114,13 +114,9 @@
 }
 
 @keyframes role-color-shift {
-  0%   { -webkit-text-stroke-color: #FFB3C6; } /* pastel pink */
-  16%  { -webkit-text-stroke-color: #B5D5FF; } /* pastel blue */
-  33%  { -webkit-text-stroke-color: #C3F0C8; } /* pastel mint */
-  50%  { -webkit-text-stroke-color: #E8C8FF; } /* pastel lavender */
-  66%  { -webkit-text-stroke-color: #FFE5A0; } /* pastel yellow */
-  83%  { -webkit-text-stroke-color: #FFCBA4; } /* pastel peach */
-  100% { -webkit-text-stroke-color: #FFB3C6; } /* back to pink */
+  0%   { -webkit-text-stroke-color: #FFB3C6; }
+  50%  { -webkit-text-stroke-color: #FFCFDC; }
+  100% { -webkit-text-stroke-color: #FFB3C6; }
 }
 @keyframes lScrollUp {
   from { transform: translateY(0); }
@@ -1586,13 +1582,22 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .rnav-cta:hover { background: #fff; color: #1a1a1a; border-color: #fff; }
 
-/* Golden ratio grid */
+/* Golden ratio grid — deep background, parallax on mouse move */
 .rhero-golden {
   position: absolute;
   inset: 0;
   width: 100%; height: 100%;
   pointer-events: none;
   z-index: 0;
+  opacity: 0.28;
+  filter: blur(0.6px);
+  transform: translate(0,0);
+  transition: opacity 0.6s ease, transform 0.18s linear;
+  will-change: transform;
+  transform-origin: center center;
+}
+.rhero-golden.golden-visible {
+  opacity: 1;
 }
 .rhero-left, .rhero-right { position: relative; z-index: 1; }
 
@@ -1619,9 +1624,9 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   opacity: 0.07; mix-blend-mode: overlay;
 }
 
-/* Cartoon googly eyes — absolutely positioned in hero */
+/* Cartoon googly eyes — floating in the open space, right side */
 .rfig-eyes {
-  position: absolute; top: 229px; left: 70px;
+  position: absolute; top: 5vh; left: 2vw; right: auto;
   display: flex; gap: 18px; align-items: flex-end;
   z-index: 10;
 }
@@ -1696,20 +1701,24 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   opacity: 0.9;
 }
 
-/* Stage: two frames stacked */
+/* Stage: full-screen type canvas — everything centered
+   padding-right accounts for the fixed right dock (~72px wide + 16px gap) */
 .rfig-stage {
   display: flex; flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-  position: absolute; top: 353px; left: -37px;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  height: 100%; max-width: none;
   z-index: 10;
   will-change: transform, opacity;
-  transform-origin: center top;
-  padding: 0 6vw;
-  max-width: 88vw;
+  padding: 0 88px 0 0;
 }
-.rfig-frame-wrap { position: relative; }
-.rfig-frame-wrap-2 { padding-left: 0; }
+.rfig-frame-wrap { position: relative; text-align: center; width: 100%; }
+/* Name frame: sits just above role */
+.rfig-frame-wrap:first-child { margin-bottom: 8px; }
+/* Role frame: full width */
+.rfig-frame-wrap-2 { padding-left: 0; margin-top: 0; width: 100%; }
 .rfig-frame-label-dim { background: rgba(168,85,247,0.55); }
 .rfig-hint-row-dim { opacity: 0.55; }
 
@@ -1771,38 +1780,40 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rfig-corner--tm { top: -4px; left: calc(50% - 4px); }
 .rfig-corner--bm { bottom: -4px; left: calc(50% - 4px); }
 
-/* "Hi, I'm Priyanka" name line */
+/* "Hi, I'm Priyanka" name line — centered above big role */
 .rfig-name-line {
   display: flex; align-items: baseline; justify-content: center;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(1.4rem, 2.8vw, 2.6rem);
-  font-weight: 300; line-height: 1;
-  letter-spacing: 0.04em;
-  color: #f0ede8;
+  font-size: 36px;
+  font-weight: 600; line-height: 1;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.55);
   white-space: nowrap;
+  text-transform: uppercase;
+  position: relative; top: 23px; left: -181px;
 }
 .rfig-hi {
-  color: rgba(255,255,255,0.5);
-  font-weight: 300;
+  color: rgba(255,255,255,0.4);
+  font-weight: 600;
 }
-#rfigTypeName { color: #f0ede8; font-weight: 300; }
+#rfigTypeName { color: rgba(255,255,255,0.7); font-weight: 600; }
 .rfig-caret {
-  color: #a855f7; font-weight: 300;
+  color: #a855f7; font-weight: 600;
   animation: rfigBlink 1s step-end infinite;
   margin-left: 2px;
 }
 
-/* Role line — big open type, wraps to 2 lines */
+/* Role line — screen-filling statement type */
 .rfig-role {
   font-family: 'Alumni Sans Collegiate One', sans-serif;
-  font-size: 6.2vw;
-  font-weight: 400; letter-spacing: 0.08em;
+  font-size: clamp(4.5rem, 14vw, 20rem);
+  font-weight: 400; letter-spacing: 0.01em;
   color: transparent;
-  -webkit-text-stroke: 0.8px #FFB3C6;
+  -webkit-text-stroke: 2px rgba(255,255,255,0.85);
   line-height: 1.05;
-  animation: role-color-shift 8s ease-in-out infinite;
-  white-space: nowrap;
-  max-width: 100%;
+  white-space: normal;
+  word-break: normal;
+  width: 100%;
   text-align: center;
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
@@ -1811,15 +1822,24 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 
 /* Centered content within each frame */
-.rfig-frame-1, .rfig-frame-2 { text-align: center; }
+.rfig-frame-1 { text-align: center; }
+.rfig-frame-2 { text-align: center; width: 100%; }
+.rfig-role-l1 { display: block; text-align: center; }
+.rfig-role-l2 { display: block; text-align: center; position: relative; left: -128px; top: -82px; }
 
-/* Tagline — sits inside stage, aligned under frame 2 */
+/* Tagline — fixed bottom-left, clear of the center type */
 .rfig-tagline {
-  padding-left: 0;
+  position: fixed;
+  bottom: 201px; left: 554px;
+  margin: 0; padding: 0;
+  text-align: left;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(0.9rem, 1.4vw, 1.15rem);
-  font-weight: 400; letter-spacing: 0.01em;
-  color: rgba(255,255,255,0.52);
+  font-size: clamp(0.78rem, 1vw, 0.95rem);
+  font-weight: 600; letter-spacing: 0.01em;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  z-index: 20;
+  pointer-events: none;
 }
 /* Sticky label words in tagline */
 .rfig-sticky-word {
@@ -1832,6 +1852,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   position: relative;
   transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
   transform-origin: center bottom;
+  pointer-events: auto;
 }
 .rfig-tagline .rfig-sticky-word:first-of-type {
   background: #fda4af;
@@ -1846,8 +1867,9 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rfig-sticky-word::before, .rfig-sticky-word::after { display: none; }
 /* Bottom corners — hidden */
 .sw-corners { display: none; }
-/* T label — Figma text node indicator, barely visible */
+/* T label — hidden */
 .sw-label {
+  display: none;
   position: absolute;
   top: -13px; left: 0;
   font-family: 'Space Grotesk', sans-serif;
@@ -2289,52 +2311,48 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* ── Mobile hero layout ── */
 @media (max-width: 768px) {
-  /* Hero: shorter so marquee peeks in at bottom */
+  /* Hero: full viewport */
   .rhero.rfig-hero {
     perspective: none;
-    height: 100vh !important;
-    min-height: 100vh !important;
+    height: 100svh !important;
+    min-height: 100svh !important;
     overflow: hidden;
   }
 
-  /* Eyes */
+  /* Eyes — smaller, tucked center-right */
   .rfig-eyes {
-    position: absolute;
-    top: 22vh; left: 32px;
+    top: 22vh; right: 16px; left: auto;
     gap: 10px;
   }
   .rfig-eyes #rEyeLeft, .rfig-eyes #rEyeRight { width: 38px; height: 34px; }
   .reye-brow { width: 30px; height: 12px; border-top-width: 4px; }
 
-  /* Stage */
+  /* Stage — centered on mobile too */
   .rfig-stage {
-    position: absolute;
-    top: 34vh; left: 0;
-    padding: 0 32px;
-    max-width: 100%;
-    gap: 12px;
-    transform-origin: left center;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
   }
 
-  /* Name */
+  /* Name — centered above role */
   .rfig-name-line {
-    font-size: clamp(0.9rem, 3.8vw, 1.3rem);
+    font-size: clamp(0.68rem, 2.8vw, 0.88rem);
     white-space: normal;
-    justify-content: flex-start;
+    justify-content: center;
   }
 
-  /* Role — fits "Product & UX Designer" on 2 clean lines, no orphaned "er" */
+  /* Role — big but fits mobile */
   .rfig-role {
-    font-size: clamp(1.55rem, 6.5vw, 2.4rem);
-    font-weight: 800;
+    font-size: clamp(3rem, 14vw, 8rem);
+    line-height: 0.88;
     white-space: normal;
     word-break: normal;
-    line-height: 1.12;
+    -webkit-text-stroke-width: 1.5px;
   }
 
   /* Tagline */
-  .rfig-tagline { font-size: 0.8rem; line-height: 1.5; }
-  .rfig-letter-hint { display: block; font-size: 0.6rem; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 12px; }
+  .rfig-tagline { font-size: 0.78rem; line-height: 1.5; margin-top: 12px; }
+  .rfig-letter-hint { font-size: 0.6rem; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 10px; }
 
   /* Hide Figma boxes on mobile */
   .sw-corners, .sw-label { display: none; }
@@ -3763,6 +3781,29 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   transition: opacity 0.35s ease;
 }
 .rdock-chat-hint.rdock-hint--visible { opacity: 1; }
+
+/* macOS notification dot — static, stays under icon */
+.rdock-notif-dot {
+  position: absolute;
+  bottom: -5px; left: 50%; transform: translateX(-50%);
+  width: 5px; height: 5px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+}
+
+/* macOS bounce — applied to the icon itself */
+.rdock-bounce .rdock-icon {
+  animation: dock-bounce 1.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+}
+@keyframes dock-bounce {
+  0%, 100% { transform: translateY(0); }
+  10%       { transform: translateY(-20px); }
+  20%       { transform: translateY(0); }
+  30%       { transform: translateY(-12px); }
+  40%       { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+  60%       { transform: translateY(0); }
+}
 .rdock-chat-hint svg {
   width: 28px; height: 18px;
   color: rgba(255,255,255,0.38);
@@ -4250,9 +4291,9 @@ video.rgfx-lb-img--active { display: block; }
 #view-recruiter.r-light .rmac-tab { color: rgba(0,0,0,0.35); border-color: rgba(0,0,0,0.1); }
 #view-recruiter.r-light .rmac-tab:hover { color: rgba(0,0,0,0.6); background: rgba(0,0,0,0.04); }
 #view-recruiter.r-light .rmac-tab-active {
-  background: #f0eeea;
+  background: #faf9f6;
   color: rgba(0,0,0,0.88);
-  border-bottom-color: #f0eeea;
+  border-bottom-color: #faf9f6;
 }
 #view-recruiter.r-light .rmac-loc { color: rgba(0,0,0,0.7); }
 #view-recruiter.r-light .rmac-theme-btn {
@@ -4324,8 +4365,8 @@ video.rgfx-lb-img--active { display: block; }
 
 /* Project tiles section */
 #view-recruiter.r-light .rct-section { border-top-color: rgba(0,0,0,0.08); }
-#view-recruiter.r-light .rct-title { color: #1a1a1a; }
-#view-recruiter.r-light .rct-title em { color: rgba(0,0,0,0.45); }
+#view-recruiter.r-light .rct-title { color: #1a1a1a !important; }
+#view-recruiter.r-light .rct-title em { color: rgba(0,0,0,0.45) !important; }
 #view-recruiter.r-light .rct-count { color: #777; }
 #view-recruiter.r-light .rct { color: #1a1a1a; }
 #view-recruiter.r-light .rct-img { background: #ddd; }
@@ -4882,10 +4923,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
   /* Hide resume link on mobile */
   .rmac-bar a[href*="resume"] { display: none; }
 
-  /* FigJam stage: ensure font sizes are readable on small screens */
-  .rfig-name-line { font-size: clamp(1rem, 4.5vw, 1.6rem) !important; }
-  .rfig-role { font-size: clamp(1.8rem, 7.5vw, 3rem) !important; white-space: normal !important; line-height: 1.1 !important; }
-  .rfig-tagline { font-size: 0.82rem !important; }
+  /* FigJam stage: handled in mobile hero layout block above */
   .rfig-bubble { display: none !important; }
   .rfig-eyes { display: none !important; }
   .rfig-cursor-you { display: none !important; }
@@ -4906,8 +4944,8 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 
 @media (max-width: 430px) {
   .rmac-tab { padding: 0 14px; font-size: 10px; }
-  .rfig-role { font-size: 10vw !important; }
-  .rfig-name-line { font-size: 6vw !important; }
+  .rfig-role { font-size: clamp(2.4rem, 13vw, 6rem) !important; }
+  .rfig-name-line { font-size: clamp(0.6rem, 2.5vw, 0.8rem) !important; }
 }
 
 /* ── Touch & safe-area fixes (all mobile) ── */
@@ -5454,60 +5492,114 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
   color: rgba(0,0,0,0.8);
 }
 
+/* ══ PRODUCT FOLIO LIGHT MODE (fires on both data-theme attr and .r-light class) ══ */
+
 /* ── Hero background ── */
-[data-theme="light"] .rfig-hero {
-  background: #f0ede6;
-  background-image: radial-gradient(rgba(0,0,0,0.18) 1px, transparent 1px);
-  background-size: 28px 28px;
+[data-theme="light"] .rfig-hero,
+#view-recruiter.r-light .rfig-hero {
+  background: #f5f5f5 !important;
+  background-image: radial-gradient(rgba(0,0,0,0.15) 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
 }
-[data-theme="light"] .rfig-stmt-section {
-  background: #f0ede6;
-  background-image: radial-gradient(rgba(0,0,0,0.18) 1px, transparent 1px);
+[data-theme="light"] .rfig-stmt-section,
+#view-recruiter.r-light .rfig-stmt-section {
+  background: #f5f5f5;
+  background-image: radial-gradient(rgba(0,0,0,0.15) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
-/* ── Golden ratio lines — more visible on light bg ── */
-[data-theme="light"] .rhero-golden g { opacity: 0.65 !important; }
+/* ── Golden ratio ── */
+[data-theme="light"] .rhero-golden g,
+.r-light .rhero-golden g { opacity: 0.65 !important; }
+[data-theme="light"] .rhero-golden,
+.r-light .rhero-golden { filter: invert(1); }
 
 /* ── Name / greeting ── */
-[data-theme="light"] .rfig-name-line { color: #1a1a1a; }
-[data-theme="light"] .rfig-hi { color: rgba(0,0,0,0.45); }
-[data-theme="light"] #rfigTypeName { color: #1a1a1a; }
-[data-theme="light"] .rfig-caret { color: #a855f7; }
+[data-theme="light"] .rfig-name-line,
+.r-light .rfig-name-line { color: rgba(0,0,0,0.7) !important; }
+[data-theme="light"] .rfig-hi,
+.r-light .rfig-hi { color: rgba(0,0,0,0.5) !important; }
+[data-theme="light"] #rfigTypeName,
+.r-light #rfigTypeName { color: rgba(0,0,0,0.75) !important; }
+[data-theme="light"] .rfig-caret,
+.r-light .rfig-caret { color: #a855f7; }
+
+/* ── Press G hint ── */
+[data-theme="light"] #golden-hint,
+.r-light #golden-hint { color: rgba(0,0,0,0.4) !important; }
+
+/* ── Mac bar text ── */
+[data-theme="light"] .rmac-bar,
+.r-light .rmac-bar { background: #ebebeb; border-bottom-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .rmac-loc,
+.r-light .rmac-loc { color: rgba(0,0,0,0.6); }
+[data-theme="light"] .rmac-pill,
+.r-light .rmac-pill { background: rgba(0,0,0,0.06); color: rgba(0,0,0,0.55); }
+[data-theme="light"] .rmac-toggle,
+.r-light .rmac-toggle { color: rgba(0,0,0,0.5); }
+[data-theme="light"] .rmac-toggle.rmac-tab-active,
+.r-light .rmac-toggle.rmac-tab-active { background: rgba(0,0,0,0.12); color: rgba(0,0,0,0.85); }
 
 /* ── Big role line ── */
-[data-theme="light"] .rfig-role { color: #3D1A78; }
+[data-theme="light"] .rfig-role,
+#view-recruiter.r-light .rfig-role {
+  color: transparent !important;
+  -webkit-text-stroke: 2px rgba(0,0,0,0.85) !important;
+}
 
 /* ── Tagline ── */
-[data-theme="light"] .rfig-tagline { color: rgba(0,0,0,0.52); }
+[data-theme="light"] .rfig-tagline,
+.r-light .rfig-tagline { color: rgba(0,0,0,0.55); }
 
 /* ── Hint text ── */
-[data-theme="light"] .rfig-letter-hint { color: rgba(0,0,0,0.12); }
-[data-theme="light"] .rfig-stage:hover .rfig-letter-hint { color: rgba(0,0,0,0.30); }
+[data-theme="light"] .rfig-letter-hint,
+.r-light .rfig-letter-hint { color: rgba(0,0,0,0.12); }
+[data-theme="light"] .rfig-stage:hover .rfig-letter-hint,
+.r-light .rfig-stage:hover .rfig-letter-hint { color: rgba(0,0,0,0.30); }
 
 /* ── Figma frame corners ── */
-[data-theme="light"] .rfig-corner {
-  background: #f0ede6;
-  border-color: rgba(168,85,247,0.7);
-}
-[data-theme="light"] .rfig-stmt-frame .rfig-corner { background: #f0ede6; }
+[data-theme="light"] .rfig-corner,
+.r-light .rfig-corner { background: #f5f5f5; border-color: rgba(168,85,247,0.7); }
+[data-theme="light"] .rfig-stmt-frame .rfig-corner,
+.r-light .rfig-stmt-frame .rfig-corner { background: #f5f5f5; }
 
 /* ── Eyes ── */
-[data-theme="light"] .reye { background: rgba(255,255,255,0.9); }
-[data-theme="light"] .reye-pupil { background: #1a1a18; }
-[data-theme="light"] .reyes-label { color: rgba(0,0,0,0.3); }
-[data-theme="light"] .rhint-text { color: rgba(0,0,0,0.35); }
-[data-theme="light"] .rhint-arrow { color: rgba(0,0,0,0.22); }
+[data-theme="light"] .reye,
+.r-light .reye { background: rgba(255,255,255,0.9); }
+[data-theme="light"] .reye-pupil,
+.r-light .reye-pupil { background: #1a1a18; }
+[data-theme="light"] .reyes-label,
+.r-light .reyes-label { color: rgba(0,0,0,0.3); }
+[data-theme="light"] .rhint-text,
+.r-light .rhint-text { color: rgba(0,0,0,0.35); }
+[data-theme="light"] .rhint-arrow,
+.r-light .rhint-arrow { color: rgba(0,0,0,0.22); }
 
 /* ── Jump btn ── */
-[data-theme="light"] .rfig-jump-btn { color: rgba(0,0,0,0.4); }
-[data-theme="light"] .rfig-jump-btn:hover { color: rgba(0,0,0,0.7); }
+[data-theme="light"] .rfig-jump-btn,
+.r-light .rfig-jump-btn { color: rgba(0,0,0,0.5); }
+[data-theme="light"] .rfig-jump-btn:hover,
+.r-light .rfig-jump-btn:hover { color: rgba(0,0,0,0.8); }
+[data-theme="light"] .rfig-jump-arrow-svg,
+.r-light .rfig-jump-arrow-svg { stroke: rgba(0,0,0,0.5) !important; color: rgba(0,0,0,0.5); }
+[data-theme="light"] .rfig-cursor-you span,
+.r-light .rfig-cursor-you span { background: rgba(0,0,0,0.75) !important; color: #fff !important; }
 
 /* ── Resume file ── */
-[data-theme="light"] .rfig-resume-layer { color: rgba(0,0,0,0.55); }
+[data-theme="light"] .rfig-resume-layer,
+.r-light .rfig-resume-layer { color: rgba(0,0,0,0.55); }
 
 /* ── Custom cursor ── */
 [data-theme="light"] #cursor-dot { background: #1a1a1a; }
+
+/* ── Light mode: global text darkening for recruiter view ── */
+#view-recruiter.r-light .rmac-tab { color: rgba(0,0,0,0.6) !important; border-color: rgba(0,0,0,0.12) !important; }
+#view-recruiter.r-light .rmac-tab-active { color: rgba(0,0,0,0.88) !important; }
+#view-recruiter.r-light .rmac-loc,
+#view-recruiter.r-light #rLocTime { color: rgba(0,0,0,0.6) !important; }
+#view-recruiter.r-light .rmac-theme-btn { color: rgba(0,0,0,0.5) !important; }
+#view-recruiter.r-light .rfig-hi { color: rgba(0,0,0,0.5) !important; }
+#view-recruiter.r-light #rfigTypeName { color: rgba(0,0,0,0.75) !important; }
 
 /* ── Project card names: darken accent on light bg ── */
 /* Bright accents like yellow (#ffde59) wash out on cream — mix in black for contrast */
