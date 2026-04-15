@@ -1468,6 +1468,7 @@
 <script>
 // ── Letter physics — standalone, isolated from script.js ──
 (function() {
+  if (window.innerWidth <= 768) return; // skip letter physics on mobile
   var roleEl = document.querySelector('.rfig-role');
   if (!roleEl) return;
   var bubble     = document.getElementById('rfigBubble');

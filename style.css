@@ -2365,6 +2365,62 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .rfig-stmt-section { padding: 60px 24px; }
   .rfig-stmt-text { font-size: clamp(1.4rem, 6vw, 2rem); }
   .rfig-stmt-frame { padding: 32px 28px; }
+
+  /* ── Mobile hero: simple, minimal layout ── */
+  .rfig-stage {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 0 32px !important;
+    gap: 12px !important;
+    position: absolute !important;
+    top: 0; left: 0; right: 0; bottom: 0;
+  }
+
+  /* Hide all the desktop decorative stuff */
+  .rfig-frame-wrap, .rfig-frame, .rfig-role-br,
+  .rfig-corner, .rfig-hint-row, .rfig-frame-label { display: none !important; }
+
+  /* Name line — small, above */
+  .rfig-name-line {
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.06em !important;
+    color: rgba(255,255,255,0.5) !important;
+    text-transform: none !important;
+    position: static !important;
+    top: auto !important; left: auto !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+  }
+
+  /* Role — Space Grotesk, solid fill, no Alumni Sans outline */
+  .rfig-role {
+    font-family: 'Space Grotesk', sans-serif !important;
+    font-size: clamp(2.8rem, 11vw, 4rem) !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    -webkit-text-stroke: 0 !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.01em !important;
+    animation: none !important;
+    width: auto !important;
+    text-align: center !important;
+  }
+
+  /* Both lines stacked naturally */
+  .rfig-role-l1, .rfig-role-l2 {
+    display: block !important;
+    position: static !important;
+    top: auto !important; left: auto !important;
+    text-align: center !important;
+    word-spacing: normal !important;
+  }
+
+  /* Hide tagline, golden hint, eyes, press G on mobile */
+  .rfig-tagline, #golden-hint, .rfig-eyes { display: none !important; }
 }
 
 /* ── Mobile inline "see my work" CTA ── */
