@@ -2368,11 +2368,6 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
   /* ── Mobile hero: simple, minimal ── */
 
-  /* Hide ALL decorative Figma stuff */
-  .rfig-corner, .rfig-hint-row, .rfig-frame-label,
-  .rfig-role-br, .rfig-tagline, #golden-hint,
-  .rfig-eyes, .rfig-frame-wrap { display: none !important; }
-
   /* Stage: centered column */
   .rfig-stage {
     display: flex !important;
@@ -2385,7 +2380,32 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
     inset: 0 !important;
   }
 
-  /* Inject name + role directly into stage via pseudo-visible overrides */
+  /* Frame wraps: plain blocks, no desktop positioning */
+  .rfig-frame-wrap, .rfig-frame-wrap-2 {
+    display: block !important;
+    position: static !important;
+    transform: none !important;
+    width: auto !important;
+    padding: 0 !important; margin: 0 !important;
+    text-align: center !important;
+  }
+
+  /* Frame: strip all figma styling */
+  .rfig-frame {
+    display: block !important;
+    position: static !important;
+    border: none !important;
+    padding: 0 !important;
+    background: none !important;
+    transform: none !important;
+  }
+
+  /* Hide only the decorative bits */
+  .rfig-corner, .rfig-hint-row, .rfig-frame-label,
+  .rfig-role-br, .rfig-tagline, #golden-hint,
+  .rfig-eyes, .rfig-figma-coords { display: none !important; }
+
+  /* Name line */
   .rfig-name-line {
     display: flex !important;
     position: static !important;
@@ -2399,12 +2419,13 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
     justify-content: center !important;
   }
 
+  /* Role — Space Grotesk solid */
   .rfig-role {
     font-family: 'Space Grotesk', sans-serif !important;
     font-size: clamp(2.6rem, 12vw, 3.8rem) !important;
     font-weight: 700 !important;
     color: #fff !important;
-    -webkit-text-stroke: 0 !important;
+    -webkit-text-stroke: 0px transparent !important;
     line-height: 1.1 !important;
     letter-spacing: -0.02em !important;
     animation: none !important;
@@ -2418,20 +2439,6 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
     top: auto !important; left: auto !important;
     word-spacing: normal !important;
     text-align: center !important;
-  }
-
-  /* Show the frame wraps so name+role are visible */
-  .rfig-frame-wrap {
-    display: block !important;
-    position: static !important;
-    transform: none !important;
-    width: auto !important;
-    padding: 0 !important; margin: 0 !important;
-  }
-
-  .rfig-frame {
-    all: unset !important;
-    display: block !important;
   }
 }
 
