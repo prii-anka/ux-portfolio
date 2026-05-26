@@ -1,4 +1,3 @@
-/* © 2025 Priyanka Uttarkar — prianka.design. All rights reserved. Not for reuse or redistribution. */
 /* ═══════════════════════════════════════════════════
    UX PORTFOLIO — style.css
    Fonts: Cormorant Garamond · Space Grotesk · Caveat
@@ -3179,14 +3178,14 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rnote-arrow { position: absolute; bottom: 20px; right: 20px; font-size: 1rem; color: rgba(0,0,0,0.25); transition: color 0.2s, transform 0.2s; }
 .rnote:hover .rnote-arrow { color: rgba(0,0,0,0.5); transform: translate(2px,-2px); }
 
-/* ── Project Tiles — Card Flip ── */
+/* ── Project Tiles ── */
 .rct-section {
-  padding: 52px 52px 80px;
+  padding: 52px 52px 60px;
   border-top: 1px solid rgba(255,255,255,0.08);
 }
 .rct-header {
   display: flex; align-items: flex-end; justify-content: space-between;
-  margin-bottom: 40px;
+  margin-bottom: 48px;
 }
 .rct-title {
   font-family: 'Space Grotesk', sans-serif;
@@ -3198,154 +3197,101 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
   color: rgba(255,255,255,0.6);
 }
-.rct-drag-hint { display: none; }
-.rct-grid { display: none; }
-
-/* ── Card Flip — Match Reference ── */
-
-/* outer wrap: perspective lives here */
-.fc-wrap {
-  perspective: 1800px;
+.rct-drag-hint {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.22);
+  align-self: flex-end;
+  padding-bottom: 6px;
+}
+.rct-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px 28px;
 }
 
-/* the flipper — rotates around Y axis */
-.fc-flipper {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  transform-style: preserve-3d;
-  transition: transform 0.72s cubic-bezier(0.4,0,0.2,1);
+/* tile */
+.rct {
+  display: flex; flex-direction: column; text-decoration: none; color: #fff;
+  transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
 }
+.rct:not(.rct-wip):hover { transform: translateY(-5px); }
 
-/* both faces share this */
-.fc-face {
+/* image */
+.rct-img {
+  width: 100%; aspect-ratio: 4/3; border-radius: 20px; overflow: hidden;
+  position: relative; background: var(--rtb, #222);
+}
+.rct-img img {
   position: absolute; inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  border-radius: 24px;
-  background: #181a1d;
-  border: 1px solid rgba(255,255,255,0.09);
-  overflow: hidden;
-  display: flex; align-items: stretch;
-}
-
-/* back face is pre-rotated 180° */
-.fc-back { transform: rotateY(180deg); }
-
-/* ── Arrows inside the card, on left/right edges ── */
-.fc-arrow {
-  flex-shrink: 0;
-  width: 52px;
-  background: transparent;
-  border: none; border-right: 1px solid rgba(255,255,255,0.06);
-  color: rgba(255,255,255,0.35);
-  font-size: 2rem; line-height: 1;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-  z-index: 10;
-}
-.fc-arrow--r { border-right: none; border-left: 1px solid rgba(255,255,255,0.06); }
-.fc-arrow:hover { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.9); }
-
-/* ── Screenshot collage (fills remaining space between arrows) ── */
-.fc-collage {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 2fr 1.3fr 1.3fr;
-  gap: 8px;
-  padding: 14px;
-  min-width: 0;
-}
-.fc-col-main {
-  border-radius: 12px; overflow: hidden;
-  background: rgba(255,255,255,0.03);
-}
-.fc-col-main img {
   width: 100%; height: 100%;
-  object-fit: cover; object-position: 0% center;
-  display: block;
+  object-fit: cover; object-position: top;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -20px 48px rgba(0,0,0,0.55);
+  transition: transform 0.5s cubic-bezier(0.25,1,0.5,1);
 }
-.fc-col-side {
-  display: flex; flex-direction: column; gap: 8px;
-}
-.fc-cell {
-  flex: 1; border-radius: 10px; overflow: hidden;
-  background: rgba(255,255,255,0.03);
-}
-.fc-cell img {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
-}
+.rct:hover .rct-img img { transform: scale(1.04); }
 
-/* noise on collage */
-.fc-collage::after {
+/* noise grain on tiles */
+.rct-img::after {
   content: '';
-  position: absolute; inset: 0; z-index: 5; pointer-events: none;
+  position: absolute; inset: 0; z-index: 10;
+  pointer-events: none; border-radius: 20px;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  opacity: 0.06; mix-blend-mode: overlay;
+  background-size: 160px 160px;
+  opacity: 0.13;
+  mix-blend-mode: overlay;
 }
 
-/* cursor icon — top right inside card */
-.fc-cursor-icon {
-  position: absolute; top: 16px; right: 64px;
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.15);
+/* hover overlay */
+.rct-overlay {
+  position: absolute; inset: 0; border-radius: 20px;
+  background: rgba(0,0,0,0);
   display: flex; align-items: center; justify-content: center;
-  font-size: 0.8rem; color: rgba(255,255,255,0.4);
-  z-index: 10; pointer-events: none;
-  font-family: 'Space Grotesk', sans-serif;
+  transition: background 0.3s; z-index: 5;
+}
+.rct:hover .rct-overlay { background: rgba(0,0,0,0.35); }
+.rct-view {
+  width: 76px; height: 76px; border-radius: 50%;
+  background: var(--rta, #fff); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;
+  opacity: 0; transform: scale(0.6);
+  transition: opacity 0.28s, transform 0.32s cubic-bezier(0.34,1.45,0.64,1);
+  pointer-events: none;
+}
+.rct:hover .rct-view { opacity: 1; transform: scale(1); }
+
+/* wip overlay */
+.rct-soon {
+  position: absolute; inset: 0; border-radius: 20px;
+  background: rgba(26,26,26,0.55);
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(2px); z-index: 4;
+}
+.rct-soon span {
+  font-size: 0.56rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #666;
+  background: rgba(26,26,26,0.92); padding: 6px 14px;
+  border-radius: 50px; border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* ── Info below the card ── */
-.fc-below {
-  margin-top: 28px;
-  display: flex; align-items: flex-end; justify-content: space-between;
-  gap: 20px;
+/* label */
+.rct-label { padding: 20px 4px 0; }
+.rct-meta {
+  font-size: 0.52rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #555; margin-bottom: 7px;
+  display: flex; align-items: center; gap: 8px;
 }
-.fc-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-  font-weight: 700; letter-spacing: -0.04em; line-height: 1;
-  color: #fff;
+.rct-dot { width: 3px; height: 3px; border-radius: 50%; background: #555; }
+.rct-name {
+  font-size: clamp(1.4rem, 2.4vw, 2.1rem);
+  font-weight: 600; letter-spacing: -0.03em; line-height: 1.1;
+  transition: color 0.2s;
 }
-.fc-tags {
-  display: flex; gap: 8px; flex-wrap: wrap;
-  align-items: center; justify-content: flex-end;
-  padding-bottom: 4px;
-}
-.fc-tag {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.52rem; font-weight: 600; letter-spacing: 0.04em;
-  padding: 6px 14px; border-radius: 50px;
-  border: 1px solid rgba(255,255,255,0.2);
-  color: rgba(255,255,255,0.65);
-  background: rgba(255,255,255,0.04);
-  white-space: nowrap;
-}
-
-/* ── Dot indicators ── */
-.fc-dots {
-  display: flex; justify-content: flex-start; gap: 8px;
-  margin-top: 20px;
-}
-.fc-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-  border: none; cursor: pointer; padding: 0;
-  transition: background 0.3s, width 0.3s;
-}
-.fc-dot--active {
-  background: var(--acc, #fff);
-  width: 22px; border-radius: 3px;
-}
-
-/* hide old tile elements */
-.rct-img, .rct-label, .rct-overlay, .rct-soon,
-.rct-view, .rct-meta, .rct-dot, .rct-name { display: none; }
+.rct:not(.rct-wip):hover .rct-name { color: var(--rta, rgba(255,255,255,0.5)); }
+.rct-wip .rct-name { color: #444; }
 
 /* delay classes reused */
 .rsr-d4 { transition-delay: 0.18s; }
