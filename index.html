@@ -1,3 +1,4 @@
+<!-- © 2025 Priyanka Uttarkar — prianka.design. All rights reserved. Not for reuse or redistribution. -->
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -26,6 +27,7 @@
   <link rel="preload" as="image" href="assets/project-thegrind.png" />
   <link rel="preload" as="image" href="assets/project-deadlineiq.png" />
   <link rel="stylesheet" href="style.css?v=200" />
+  <link rel="stylesheet" href="rfig-about.css?v=3" />
 </head>
 <body>
 <div id="cursor-dot"></div>
@@ -613,99 +615,180 @@
       </div>
     </div>
   </section>
-  <!-- PROJECT TILES -->
+  <!-- PROJECT TILES — Card Flip -->
   <section class="rct-section" id="rct-section">
     <div class="rct-header rsr rfig-reveal rfig-reveal-d1">
       <h2 class="rct-title">Work I'm <em>proud of.</em></h2>
     </div>
 
-    <div class="rct-grid">
+    <!-- Flip wrapper -->
+    <div class="fc-wrap">
+      <div class="fc-flipper" id="fcFlipper">
 
-      <a href="https://priyenka-dataextraction.framer.website/" target="_blank"
-         class="rct rsr rsr-d3" style="--rtb:#1c2a38; --rta:#3a82c4;">
-        <div class="rct-img">
-          <img src="assets/project-dashboard.png" alt="Data Extraction System" />
-          <div class="rct-overlay"><div class="rct-view">View ↗</div></div>
+        <!-- FRONT face -->
+        <div class="fc-face fc-front" id="fcFront">
+          <button class="fc-arrow fc-arrow--l" id="fcPrev">&#8249;</button>
+          <div class="fc-collage" id="fcFrontCollage"></div>
+          <div class="fc-cursor-icon">&#8599;</div>
+          <button class="fc-arrow fc-arrow--r" id="fcNext">&#8250;</button>
         </div>
-        <div class="rct-label">
-          <div class="rct-meta">Product Design <span class="rct-dot"></span> Mayo Clinic</div>
-          <div class="rct-name">Data Extraction System</div>
-        </div>
-      </a>
 
-      <a href="https://priyenka-walletgyde.framer.website/" target="_blank"
-         class="rct rsr rsr-d4" style="--rtb:#1a2a1e; --rta:#52ac55;">
-        <div class="rct-img">
-          <img src="assets/project-walletgyde.png" alt="WalletGyde" />
-          <div class="rct-overlay"><div class="rct-view">View ↗</div></div>
+        <!-- BACK face (next project lives here) -->
+        <div class="fc-face fc-back" id="fcBack">
+          <button class="fc-arrow fc-arrow--l">&#8249;</button>
+          <div class="fc-collage" id="fcBackCollage"></div>
+          <div class="fc-cursor-icon">&#8599;</div>
+          <button class="fc-arrow fc-arrow--r">&#8250;</button>
         </div>
-        <div class="rct-label">
-          <div class="rct-meta">Product Design <span class="rct-dot"></span> Finance App</div>
-          <div class="rct-name">WalletGyde</div>
-        </div>
-      </a>
 
-      <a href="https://priyenka-moodticketing.framer.website/" target="_blank"
-         class="rct rsr rsr-d3" style="--rtb:#2a1a1c; --rta:#d41e2d;">
-        <div class="rct-img">
-          <img src="assets/project-moodticketing.png" alt="Mood Ticketing" />
-          <div class="rct-overlay"><div class="rct-view">View ↗</div></div>
-        </div>
-        <div class="rct-label">
-          <div class="rct-meta">Product Design <span class="rct-dot"></span> Entertainment</div>
-          <div class="rct-name">Mood Ticketing</div>
-        </div>
-      </a>
-
-      <div class="rct rsr rsr-d4" id="hhCard" style="--rtb:#1f1208; --rta:#e07d3f; cursor:pointer;" onclick="openHH()">
-        <div class="rct-img">
-          <img src="assets/project-healinghearts.png" alt="Healing Hearts" />
-          <div class="rct-overlay"><div class="rct-view">View ↗</div></div>
-        </div>
-        <div class="rct-label">
-          <div class="rct-meta">UX Research + Design <span class="rct-dot"></span> Social Good</div>
-          <div class="rct-name">Healing Hearts</div>
-        </div>
       </div>
 
-      <a href="https://posha-ai.vercel.app/" target="_blank"
-         class="rct rsr rsr-d3" style="--rtb:#2d1020; --rta:#ff709f;">
-        <div class="rct-img">
-          <img src="assets/project-poshaai.png" alt="Posha AI" />
-          <div class="rct-overlay"><div class="rct-view">View ↗</div></div>
-        </div>
-        <div class="rct-label">
-          <div class="rct-meta">Vibe Coded <span class="rct-dot"></span> Fashion AI</div>
-          <div class="rct-name">Posha AI</div>
-        </div>
-      </a>
+      <!-- Info below card -->
+      <div class="fc-below">
+        <div class="fc-title" id="fcTitle"></div>
+        <div class="fc-tags" id="fcTags"></div>
+      </div>
 
-      <a href="https://the-grind-seven.vercel.app/" target="_blank"
-         class="rct rsr rsr-d4" style="--rtb:#1a1708; --rta:#ffde59;">
-        <div class="rct-img">
-          <img src="assets/project-thegrind.png" alt="The Grind" />
-          <div class="rct-overlay"><div class="rct-view">View ↗</div></div>
-        </div>
-        <div class="rct-label">
-          <div class="rct-meta">Vibe Coded <span class="rct-dot"></span> Journaling</div>
-          <div class="rct-name">The Grind</div>
-        </div>
-      </a>
-
-      <a href="https://deadline-iq.vercel.app/" target="_blank"
-         class="rct rsr rsr-d3" style="--rtb:#1a1a2e; --rta:#7c6ff7;">
-        <div class="rct-img">
-          <img src="assets/project-deadlineiq.png" alt="Deadline IQ" />
-          <div class="rct-overlay"><div class="rct-view">View ↗</div></div>
-        </div>
-        <div class="rct-label">
-          <div class="rct-meta">Vibe Coded <span class="rct-dot"></span> Productivity</div>
-          <div class="rct-name">Deadline IQ</div>
-        </div>
-      </a>
-
+      <!-- dots -->
+      <div class="fc-dots" id="fcDots"></div>
     </div>
+
   </section>
+
+  <script>
+  (function(){
+    const projects = [
+      { img:'assets/project-dashboard.png',    title:'Data Extraction System', tags:['Product Design','Mayo Clinic'],    accent:'#3a82c4', href:'https://priyenka-dataextraction.framer.website/' },
+      { img:'assets/project-walletgyde.png',   title:'WalletGyde',             tags:['Product Design','Finance App'],    accent:'#52ac55', href:'https://priyenka-walletgyde.framer.website/'   },
+      { img:'assets/project-moodticketing.png',title:'Mood Ticketing',          tags:['Product Design','Entertainment'],  accent:'#d41e2d', href:'https://priyenka-moodticketing.framer.website/' },
+      { img:'assets/project-healinghearts.png',title:'Healing Hearts',          tags:['UX Research','Social Good'],       accent:'#e07d3f', href:'healing-hearts.html'                   },
+      { img:'assets/project-poshaai.png',      title:'Posha AI',               tags:['Vibe Coded','Fashion AI'],         accent:'#ff709f', href:'https://posha-ai.vercel.app/'                  },
+      { img:'assets/project-thegrind.png',     title:'The Grind',              tags:['Vibe Coded','Journaling'],         accent:'#ffde59', href:'https://the-grind-seven.vercel.app/'           },
+      { img:'assets/project-deadlineiq.png',   title:'Deadline IQ',            tags:['Vibe Coded','Productivity'],       accent:'#7c6ff7', href:'https://deadline-iq.vercel.app/'               },
+    ];
+
+    const flipper   = document.getElementById('fcFlipper');
+    const frontEl   = document.getElementById('fcFront');
+    const backEl    = document.getElementById('fcBack');
+    const frontCol  = document.getElementById('fcFrontCollage');
+    const backCol   = document.getElementById('fcBackCollage');
+    const titleEl   = document.getElementById('fcTitle');
+    const tagsEl    = document.getElementById('fcTags');
+    const dotsEl    = document.getElementById('fcDots');
+    const prevBtn   = document.getElementById('fcPrev');
+    const nextBtn   = document.getElementById('fcNext');
+
+    let current = 0;
+    let flipping = false;
+    let flipDir = 1; // 1 = forward, -1 = backward
+
+    function collageHTML(p) {
+      return `
+        <div class="fc-col-main">
+          <img src="${p.img}" alt="${p.title}" draggable="false" style="object-position:0% center">
+        </div>
+        <div class="fc-col-side">
+          <div class="fc-cell"><img src="${p.img}" draggable="false" style="object-position:40% 10%"></div>
+          <div class="fc-cell"><img src="${p.img}" draggable="false" style="object-position:60% 70%"></div>
+        </div>
+        <div class="fc-col-side">
+          <div class="fc-cell"><img src="${p.img}" draggable="false" style="object-position:80% 20%"></div>
+          <div class="fc-cell"><img src="${p.img}" draggable="false" style="object-position:100% 75%"></div>
+        </div>`;
+    }
+
+    function setFace(colEl, faceEl, p) {
+      colEl.innerHTML = collageHTML(p);
+      faceEl.style.setProperty('--acc', p.accent);
+      faceEl.style.cursor = p.href ? 'pointer' : 'default';
+    }
+
+    function updateBelow(p) {
+      titleEl.textContent = p.title;
+      tagsEl.innerHTML = p.tags.map(t => `<span class="fc-tag">${t}</span>`).join('');
+      document.querySelector('.fc-wrap').style.setProperty('--acc', p.accent);
+    }
+
+    function updateDots() {
+      dotsEl.querySelectorAll('.fc-dot').forEach((d,i) => {
+        d.classList.toggle('fc-dot--active', i === current);
+      });
+    }
+
+    function buildDots() {
+      dotsEl.innerHTML = '';
+      projects.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'fc-dot' + (i===0?' fc-dot--active':'');
+        d.style.setProperty('--acc', projects[i].accent);
+        d.addEventListener('click', () => goTo(i));
+        dotsEl.appendChild(d);
+      });
+    }
+
+    function goTo(idx) {
+      if (flipping) return;
+      idx = ((idx % projects.length) + projects.length) % projects.length;
+      if (idx === current) return;
+      flipping = true;
+      const dir = idx > current ? 1 : -1;
+      const nextP = projects[idx];
+
+      // Load next project onto back face
+      setFace(backCol, backEl, nextP);
+
+      // Flip
+      flipper.style.transition = 'transform 0.7s cubic-bezier(0.4,0,0.2,1)';
+      flipper.style.transform  = `rotateY(${dir * 180}deg)`;
+
+      setTimeout(() => {
+        // Swap: front becomes the "new" project, reset flipper
+        current = idx;
+        setFace(frontCol, frontEl, projects[current]);
+        updateBelow(projects[current]);
+        updateDots();
+
+        flipper.style.transition = 'none';
+        flipper.style.transform  = 'rotateY(0deg)';
+        setTimeout(() => { flipper.style.transition = ''; flipping = false; }, 40);
+      }, 720);
+    }
+
+    function init() {
+      setFace(frontCol, frontEl, projects[0]);
+      updateBelow(projects[0]);
+      buildDots();
+
+      // Click front face to open project
+      frontEl.addEventListener('click', () => {
+        const p = projects[current];
+        if (p.href) window.open(p.href, '_blank');
+      });
+
+      prevBtn.addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
+      nextBtn.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
+
+      // Scroll to flip
+      let lastY = window.scrollY, acc = 0;
+      window.addEventListener('scroll', () => {
+        const rect = document.getElementById('rct-section').getBoundingClientRect();
+        if (rect.top > window.innerHeight || rect.bottom < 0) return;
+        const dy = window.scrollY - lastY;
+        lastY = window.scrollY;
+        acc += dy;
+        if (acc > 100)  { acc = 0; goTo(current + 1); }
+        if (acc < -100) { acc = 0; goTo(current - 1); }
+      }, { passive: true });
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') goTo(current + 1);
+        if (e.key === 'ArrowLeft')  goTo(current - 1);
+      });
+    }
+
+    init();
+  })();
+  </script>
 
 
   <!-- BENTO PANEL — fullscreen overlay for gfx / arch / paint -->
@@ -762,7 +845,7 @@
   <!-- RIGHT DOCK — vertical macOS-style -->
   <div class="rdock">
     <!-- TOOLS GROUP -->
-    <div class="rdock-item" title="Figma">
+    <div class="rdock-item" id="rdockFigmaBtn" title="Figma">
       <div class="rdock-icon"><img src="assets/icon-figma.png" alt="Figma"/></div>
       <span class="rdock-label">Figma</span>
     </div>
@@ -877,6 +960,203 @@
     </div>
     <button class="rgfx-lb-nav rgfx-lb-next" id="rgfxLbNext" aria-label="Next">›</button>
   </div>
+
+<!-- ── Figma About Overlay ── -->
+<div class="rfig-about" id="rfigAbout" aria-hidden="true">
+
+  <!-- Figma top bar -->
+  <div class="rfab-topbar">
+    <div class="rfab-top-left">
+      <svg class="rfab-logo" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 28.5C19 23.253 23.253 19 28.5 19C33.747 19 38 23.253 38 28.5C38 33.747 33.747 38 28.5 38C23.253 38 19 33.747 19 28.5Z" fill="#1ABCFE"/>
+        <path d="M0 47.5C0 42.253 4.253 38 9.5 38H19V47.5C19 52.747 14.747 57 9.5 57C4.253 57 0 52.747 0 47.5Z" fill="#0ACF83"/>
+        <path d="M19 0V19H28.5C33.747 19 38 14.747 38 9.5C38 4.253 33.747 0 28.5 0H19Z" fill="#FF7262"/>
+        <path d="M0 9.5C0 14.747 4.253 19 9.5 19H19V0H9.5C4.253 0 0 4.253 0 9.5Z" fill="#F24E1E"/>
+        <path d="M0 28.5C0 33.747 4.253 38 9.5 38H19V19H9.5C4.253 19 0 23.253 0 28.5Z" fill="#FF7262"/>
+      </svg>
+      <div class="rfab-breadcrumb">
+        <span class="rfab-team">prianka</span>
+        <span class="rfab-sep">/</span>
+        <span class="rfab-file">about me.fig</span>
+      </div>
+    </div>
+    <div class="rfab-top-center">
+      <div class="rfab-tool active" title="Move">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l2 4H6L8 1zm0 14l-2-4h4L8 15zM1 8l4-2v4L1 8zm14 0l-4 2V6l4 2z"/></svg>
+      </div>
+    </div>
+    <div class="rfab-top-right">
+      <div class="rfab-avatars">
+        <div class="rfab-avatar" style="background:#a855f7;">P</div>
+      </div>
+      <button class="rfab-share-btn">Share</button>
+      <button class="rfab-present-btn">▶ Present</button>
+      <button class="rfab-close" id="rfigAboutClose">✕</button>
+    </div>
+  </div>
+
+  <!-- Main area -->
+  <div class="rfab-body">
+
+    <!-- Left: Layers panel -->
+    <div class="rfab-layers">
+      <div class="rfab-layers-title">Layers</div>
+      <div class="rfab-layer rfab-layer--page active">
+        <svg viewBox="0 0 12 12" fill="currentColor"><rect x="1" y="1" width="10" height="10" rx="2"/></svg>
+        <span>about me</span>
+      </div>
+      <div class="rfab-layer-group">
+        <div class="rfab-layer rfab-layer--frame" data-target="rfab-cover">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor"><rect x="1" y="1" width="10" height="10" rx="1.5" stroke-width="1.5"/></svg>
+          <span>cover</span>
+        </div>
+        <div class="rfab-layer rfab-layer--frame" data-target="rfab-bio">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor"><rect x="1" y="1" width="10" height="10" rx="1.5" stroke-width="1.5"/></svg>
+          <span>profile</span>
+        </div>
+        <div class="rfab-layer rfab-layer--frame" data-target="rfab-currently">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor"><rect x="1" y="1" width="10" height="10" rx="1.5" stroke-width="1.5"/></svg>
+          <span>currently</span>
+        </div>
+        <div class="rfab-layer rfab-layer--frame" data-target="rfab-traits">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor"><rect x="1" y="1" width="10" height="10" rx="1.5" stroke-width="1.5"/></svg>
+          <span>traits</span>
+        </div>
+        <div class="rfab-layer rfab-layer--text" data-target="rfab-values">
+          <svg viewBox="0 0 12 12" fill="currentColor"><path d="M2 3h8v1H2zm0 2.5h6v1H2zm0 2.5h8v1H2z"/></svg>
+          <span>values</span>
+        </div>
+        <div class="rfab-layer rfab-layer--frame" data-target="rfab-modeling">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor"><rect x="1" y="1" width="10" height="10" rx="1.5" stroke-width="1.5"/></svg>
+          <span>modeling shots</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center: Canvas -->
+    <div class="rfab-canvas" id="rfabCanvas">
+      <div class="rfab-canvas-inner">
+
+        <!-- Cover strip -->
+        <div class="rfab-node rfab-node--frame rfab-node--cover" id="rfab-cover">
+          <div class="rfab-node-label">cover</div>
+          <div class="rfab-cover-inner">
+            <span class="rfab-cover-name">Priyanka Uttarkar</span>
+            <span class="rfab-cover-dot">·</span>
+            <span class="rfab-cover-role">UX &amp; Product Designer</span>
+            <div class="rfab-cover-meta">
+              <span>Tempe, AZ 🌵</span>
+              <span>·</span>
+              <span class="rfab-cover-avail">● Available</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile: photo + bio combined -->
+        <div class="rfab-node rfab-node--frame rfab-node--profile" id="rfab-bio">
+          <div class="rfab-node-label">profile</div>
+          <div class="rfab-profile-inner">
+            <div class="rfab-profile-photo">
+              <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="19" r="8" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/><path d="M7 42c0-9.389 7.611-17 17-17s17 7.611 17 17" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/></svg>
+              <span>photo coming soon</span>
+            </div>
+            <div class="rfab-bio-text">
+              <p>Hi, I'm Priyanka — a UX &amp; Product Designer based in Tempe, AZ.</p>
+              <p>I care deeply about the gap between how things <em>work</em> and how they <em>feel</em>. I design systems that are rigorous and human at the same time.</p>
+              <p>Before UX, I modelled, studied psychology, and spent too many hours rearranging furniture "for better flow."</p>
+            </div>
+          </div>
+          <div class="rfab-annotation">
+            <div class="rfab-ann-text">that's me :)</div>
+          </div>
+        </div>
+
+        <!-- Currently (right col) -->
+        <div class="rfab-node rfab-node--frame rfab-node--currently" id="rfab-currently">
+          <div class="rfab-node-label">currently</div>
+          <div class="rfab-currently-list">
+            <div class="rfab-curr-item">📖 <span>reading — The Design of Everyday Things</span></div>
+            <div class="rfab-curr-item">🎧 <span>listening — Hozier on loop</span></div>
+            <div class="rfab-curr-item">🌱 <span>learning — motion design in After Effects</span></div>
+            <div class="rfab-curr-item">🐶 <span>co-working with my dog, always</span></div>
+          </div>
+        </div>
+
+        <!-- Traits sticky notes (left, row 3) -->
+        <div class="rfab-node rfab-node--group" id="rfab-traits">
+          <div class="rfab-node-label">traits</div>
+          <div class="rfab-stickies">
+            <div class="rfab-sticky" style="background:#fde68a;transform:rotate(-2deg);">systems thinker</div>
+            <div class="rfab-sticky" style="background:#fda4af;transform:rotate(1.5deg);">dog person 🐶</div>
+            <div class="rfab-sticky" style="background:#bbf7d0;transform:rotate(-1deg);">figma nerd</div>
+            <div class="rfab-sticky" style="background:#c4b5fd;transform:rotate(2deg);">empathy first</div>
+            <div class="rfab-sticky" style="background:#fed7aa;transform:rotate(-1.5deg);">ex-model ✨</div>
+            <div class="rfab-sticky" style="background:#a5f3fc;transform:rotate(1deg);">furniture rearranger</div>
+          </div>
+        </div>
+
+        <!-- Values (right col, row 3) -->
+        <div class="rfab-node rfab-node--text" id="rfab-values">
+          <div class="rfab-node-label">values</div>
+          <div class="rfab-values-list">
+            <span>Clarity over cleverness.</span>
+            <span>Details that earn trust.</span>
+            <span>Design that doesn't shout.</span>
+          </div>
+        </div>
+
+        <!-- Modeling grid (full width, row 4) -->
+        <div class="rfab-node rfab-node--frame rfab-node--modeling" id="rfab-modeling">
+          <div class="rfab-node-label">modeling shots</div>
+          <div class="rfab-modeling-grid">
+            <div class="rfab-model-ph"></div>
+            <div class="rfab-model-ph"></div>
+            <div class="rfab-model-ph"></div>
+          </div>
+          <div class="rfab-annotation" style="bottom:-28px;left:12px;">
+            <div class="rfab-ann-text" style="font-size:10px;">📸 yes, I did this too</div>
+          </div>
+        </div>
+
+      </div>
+      <!-- Zoom bar -->
+      <div class="rfab-zoom-bar">
+        <button class="rfab-zoom-btn" id="rfabZoomOut">−</button>
+        <span id="rfabZoomVal">100%</span>
+        <button class="rfab-zoom-btn" id="rfabZoomIn">+</button>
+      </div>
+    </div>
+
+    <!-- Right: Inspect panel -->
+    <div class="rfab-inspect">
+      <div class="rfab-inspect-title">Design</div>
+      <div class="rfab-inspect-section">
+        <div class="rfab-inspect-label">Component</div>
+        <div class="rfab-inspect-chip">👤 Priyanka / Designer</div>
+      </div>
+      <div class="rfab-inspect-section">
+        <div class="rfab-inspect-label">Font</div>
+        <div class="rfab-inspect-val">Space Grotesk</div>
+        <div class="rfab-inspect-val muted">Regular · 14</div>
+      </div>
+      <div class="rfab-inspect-section">
+        <div class="rfab-inspect-label">Fill</div>
+        <div class="rfab-color-row"><div class="rfab-swatch" style="background:#1a1a1a;"></div><span>#1A1A1A</span></div>
+        <div class="rfab-color-row"><div class="rfab-swatch" style="background:#fda4af;"></div><span>#FDA4AF</span></div>
+        <div class="rfab-color-row"><div class="rfab-swatch" style="background:#fde68a;"></div><span>#FDE68A</span></div>
+      </div>
+      <div class="rfab-inspect-section">
+        <div class="rfab-inspect-label">Based in</div>
+        <div class="rfab-inspect-val">Tempe, AZ 🌵</div>
+      </div>
+      <div class="rfab-inspect-section">
+        <div class="rfab-inspect-label">Available</div>
+        <div class="rfab-inspect-val" style="color:#4ade80;">● Open to work</div>
+      </div>
+    </div>
+
+  </div><!-- /rfab-body -->
+</div><!-- /rfig-about -->
 
 </div><!-- /view-recruiter -->
 
@@ -2238,6 +2518,226 @@
   }
 })();
 
+</script>
+
+<!-- Figma About JS -->
+<script>
+(function(){
+  var overlay = document.getElementById('rfigAbout');
+  var openBtn = document.getElementById('rdockFigmaBtn');
+  var closeBtn = document.getElementById('rfigAboutClose');
+  if(!overlay||!openBtn) return;
+
+  function openOverlay(){ overlay.classList.add('rfig-about--open'); overlay.setAttribute('aria-hidden','false'); }
+  function closeOverlay(){ overlay.classList.remove('rfig-about--open'); overlay.setAttribute('aria-hidden','true'); }
+  openBtn.addEventListener('click', openOverlay);
+  if(closeBtn) closeBtn.addEventListener('click', closeOverlay);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeOverlay(); });
+
+  // ── Inspect data per node ──
+  var inspectData = {
+    'rfab-cover': {
+      component: '🏷 Frame / Cover',
+      font: 'Space Grotesk', fontDetail: 'SemiBold · 22 + Regular · 13',
+      fills: [['#2a2a2a','bg gradient'],['#4ade80','available']],
+      extra: [['Width','100%'],['Height','auto'],['Row','1 / span 2 col']]
+    },
+    'rfab-bio': {
+      component: '👤 Frame / Profile',
+      font: 'Space Grotesk', fontDetail: 'Regular · 13 · lh 1.75',
+      fills: [['#242424','frame bg'],['#fda4af','em text']],
+      extra: [['Layout','Flex row'],['Photo','180px wide'],['Radius','4px']]
+    },
+    'rfab-traits': {
+      component: '📌 Sticky Notes · 6',
+      font: 'Space Grotesk', fontDetail: 'Medium · 12',
+      fills: [['#fde68a',''],['#fda4af',''],['#bbf7d0',''],['#c4b5fd',''],['#fed7aa',''],['#a5f3fc','']],
+      extra: [['Count','6 stickies'],['Layout','Flex wrap'],['Gap','10px']]
+    },
+    'rfab-photo': {
+      component: '🖼 Image / Placeholder',
+      font: '—', fontDetail: '—',
+      fills: [['#242424','bg'],['rgba(255,255,255,0.04)','inner']],
+      extra: [['Width','240px'],['Height','240px'],['Radius','4px']]
+    },
+    'rfab-currently': {
+      component: '📋 List / Currently',
+      font: 'Space Grotesk', fontDetail: 'Regular · 12 · lh 1.5',
+      fills: [['#242424','bg']],
+      extra: [['Items','4 entries'],['Gap','10px'],['Col','1']]
+    },
+    'rfab-modeling': {
+      component: '📸 Grid / Modeling',
+      font: '—', fontDetail: '—',
+      fills: [['#2a2a2a','col 1'],['#2a2a2a','col 2'],['#2a2a2a','col 3']],
+      extra: [['Columns','3 equal'],['Gap','10px'],['Item H','180px']]
+    },
+    'rfab-values': {
+      component: '✍ Text / Values',
+      font: 'Space Grotesk', fontDetail: 'Italic · 500 · 15',
+      fills: [['#1a1a1a','bg']],
+      extra: [['Lines','3'],['Gap','12px'],['Style','italic']]
+    }
+  };
+
+  function fillsHtml(fills){
+    return fills.map(function(f){
+      return '<div class="rfab-color-row"><div class="rfab-swatch" style="background:'+f[0]+';"></div><span>'+f[0].toUpperCase()+(f[1]?' · '+f[1]:'')+'</span></div>';
+    }).join('');
+  }
+  function defaultInspectHtml(){
+    return '<div class="rfab-inspect-title">Design</div>'+
+      '<div class="rfab-inspect-section"><div class="rfab-inspect-label">Component</div><div class="rfab-inspect-chip">👤 Priyanka / Designer</div></div>'+
+      '<div class="rfab-inspect-section"><div class="rfab-inspect-label">Font</div><div class="rfab-inspect-val">Space Grotesk</div><div class="rfab-inspect-val muted">Regular · 14</div></div>'+
+      '<div class="rfab-inspect-section"><div class="rfab-inspect-label">Fill</div>'+
+        '<div class="rfab-color-row"><div class="rfab-swatch" style="background:#1a1a1a;"></div><span>#1A1A1A</span></div>'+
+        '<div class="rfab-color-row"><div class="rfab-swatch" style="background:#fda4af;"></div><span>#FDA4AF</span></div>'+
+        '<div class="rfab-color-row"><div class="rfab-swatch" style="background:#fde68a;"></div><span>#FDE68A</span></div>'+
+      '</div>'+
+      '<div class="rfab-inspect-section"><div class="rfab-inspect-label">Based in</div><div class="rfab-inspect-val">Tempe, AZ 🌵</div></div>'+
+      '<div class="rfab-inspect-section"><div class="rfab-inspect-label">Available</div><div class="rfab-inspect-val" style="color:#4ade80;">● Open to work</div></div>';
+  }
+
+  function updateInspect(nodeId){
+    var panel = overlay.querySelector('.rfab-inspect');
+    if(!panel) return;
+    var d = nodeId ? inspectData[nodeId] : null;
+    if(!d){ panel.innerHTML = defaultInspectHtml(); return; }
+    var extraHtml = d.extra.map(function(e){
+      return '<div class="rfab-inspect-section"><div class="rfab-inspect-label">'+e[0]+'</div><div class="rfab-inspect-val">'+e[1]+'</div></div>';
+    }).join('');
+    panel.innerHTML =
+      '<div class="rfab-inspect-title">Inspect</div>'+
+      '<div class="rfab-inspect-section"><div class="rfab-inspect-label">Component</div><div class="rfab-inspect-chip">'+d.component+'</div></div>'+
+      '<div class="rfab-inspect-section"><div class="rfab-inspect-label">Font</div><div class="rfab-inspect-val">'+d.font+'</div><div class="rfab-inspect-val muted">'+d.fontDetail+'</div></div>'+
+      '<div class="rfab-inspect-section"><div class="rfab-inspect-label">Fill</div>'+fillsHtml(d.fills)+'</div>'+
+      extraHtml+
+      '<div class="rfab-inspect-section"><div class="rfab-inspect-label">Available</div><div class="rfab-inspect-val" style="color:#4ade80;">● Open to work</div></div>';
+  }
+
+  // ── Node selection ──
+  var selectedNode = null;
+  var handles = [];
+  function addHandles(node){
+    removeHandles();
+    ['tl','tr','bl','br'].forEach(function(p){
+      var h = document.createElement('div');
+      h.className = 'rfab-handle rfab-handle--'+p;
+      node.appendChild(h); handles.push(h);
+    });
+    // dimension label
+    var dim = document.createElement('div');
+    dim.className = 'rfab-dim-label'; dim.id = 'rfabDimLabel';
+    var r = node.getBoundingClientRect();
+    dim.textContent = Math.round(r.width)+' × '+Math.round(r.height);
+    node.appendChild(dim); handles.push(dim);
+  }
+  function removeHandles(){ handles.forEach(function(h){ if(h.parentNode) h.parentNode.removeChild(h); }); handles=[]; }
+
+  function selectNode(node){
+    if(selectedNode) selectedNode.classList.remove('rfab-node--selected');
+    selectedNode = node;
+    node.classList.add('rfab-node--selected');
+    addHandles(node);
+    var id = node.id;
+    overlay.querySelectorAll('.rfab-layer--frame,.rfab-layer--text').forEach(function(l){
+      l.classList.toggle('highlighted', l.dataset.target===id);
+    });
+    updateInspect(id);
+  }
+  function deselectAll(){
+    if(selectedNode) selectedNode.classList.remove('rfab-node--selected');
+    selectedNode = null; removeHandles();
+    overlay.querySelectorAll('.rfab-layer--frame,.rfab-layer--text').forEach(function(l){ l.classList.remove('highlighted'); });
+    updateInspect(null);
+  }
+
+  overlay.querySelectorAll('.rfab-node').forEach(function(node){
+    node.addEventListener('click', function(e){ e.stopPropagation(); selectNode(node); });
+  });
+  var canvas = document.getElementById('rfabCanvas');
+  if(canvas) canvas.addEventListener('click', function(e){
+    if(e.target===canvas||e.target.classList.contains('rfab-canvas-inner')) deselectAll();
+  });
+
+  // ── Layer panel: click selects + scrolls, hover previews ──
+  overlay.querySelectorAll('.rfab-layer--frame,.rfab-layer--text').forEach(function(layer){
+    layer.addEventListener('click', function(){
+      var target = document.getElementById(layer.dataset.target);
+      if(target){ selectNode(target); target.scrollIntoView({behavior:'smooth',block:'center'}); }
+    });
+    layer.addEventListener('mouseenter', function(){
+      var t = document.getElementById(layer.dataset.target);
+      if(t && t!==selectedNode) t.classList.add('rfab-node--hovered');
+    });
+    layer.addEventListener('mouseleave', function(){
+      var t = document.getElementById(layer.dataset.target);
+      if(t) t.classList.remove('rfab-node--hovered');
+    });
+  });
+
+  // ── Draggable stickies ──
+  overlay.querySelectorAll('.rfab-sticky').forEach(function(sticky){
+    var dragging=false, ox=0, oy=0;
+    sticky.style.position='relative';
+    sticky.addEventListener('mousedown', function(e){
+      e.preventDefault(); e.stopPropagation();
+      dragging=true;
+      ox=e.clientX-(parseInt(sticky.style.left)||0);
+      oy=e.clientY-(parseInt(sticky.style.top)||0);
+      sticky.classList.add('rfab-sticky--grabbed');
+      sticky.style.zIndex=200;
+    });
+    document.addEventListener('mousemove', function(e){
+      if(!dragging) return;
+      sticky.style.left=(e.clientX-ox)+'px';
+      sticky.style.top=(e.clientY-oy)+'px';
+    });
+    document.addEventListener('mouseup', function(){
+      if(!dragging) return;
+      dragging=false;
+      sticky.classList.remove('rfab-sticky--grabbed');
+      sticky.style.zIndex='';
+    });
+  });
+
+  // ── Canvas pan (drag empty space) ──
+  var panning=false, panStartX=0, panStartY=0, scrollStartX=0, scrollStartY=0;
+  if(canvas){
+    canvas.addEventListener('mousedown', function(e){
+      if(e.target===canvas||e.target.classList.contains('rfab-canvas-inner')){
+        panning=true; panStartX=e.clientX; panStartY=e.clientY;
+        scrollStartX=canvas.scrollLeft; scrollStartY=canvas.scrollTop;
+        canvas.classList.add('rfab-panning');
+      }
+    });
+    document.addEventListener('mousemove', function(e){
+      if(!panning) return;
+      canvas.scrollLeft=scrollStartX-(e.clientX-panStartX);
+      canvas.scrollTop=scrollStartY-(e.clientY-panStartY);
+    });
+    document.addEventListener('mouseup', function(){ if(panning){ panning=false; canvas.classList.remove('rfab-panning'); } });
+  }
+
+  // ── Zoom ──
+  var zoom=1;
+  var canvasInner=overlay.querySelector('.rfab-canvas-inner');
+  var zoomVal=document.getElementById('rfabZoomVal');
+  function setZoom(z){
+    zoom=Math.min(2,Math.max(0.25,z));
+    if(canvasInner){ canvasInner.style.transform='scale('+zoom+')'; canvasInner.style.transformOrigin='top left'; }
+    if(zoomVal) zoomVal.textContent=Math.round(zoom*100)+'%';
+  }
+  if(canvas) canvas.addEventListener('wheel', function(e){
+    if(!e.ctrlKey&&!e.metaKey) return;
+    e.preventDefault(); setZoom(zoom - e.deltaY*0.001);
+  },{passive:false});
+  var zoomIn=document.getElementById('rfabZoomIn');
+  var zoomOut=document.getElementById('rfabZoomOut');
+  if(zoomIn) zoomIn.addEventListener('click', function(){ setZoom(zoom+0.1); });
+  if(zoomOut) zoomOut.addEventListener('click', function(){ setZoom(zoom-0.1); });
+
+})();
 </script>
 
 <!-- Theme transition wipe -->
