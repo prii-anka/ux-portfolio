@@ -12,14 +12,17 @@
   <link rel="stylesheet" href="style.css?v=200" />
   <style>
     body { background: #1a1a1a; color: #fff; margin: 0; }
-    /* override overlay defaults — this is a standalone page, not a modal */
+    /* override overlay defaults — standalone page, not a modal */
     #hhPanel {
       position: static !important;
       transform: none !important;
       transition: none !important;
       background: #1a1a1a;
     }
-    .hh-anim { opacity: 1 !important; transform: none !important; }
+    /* show hero animations immediately */
+    .hh-anim { opacity: 1 !important; transform: none !important; transition: none !important; }
+    /* scroll reveals use hh-visible */
+    .hh-reveal.hh-visible { opacity: 1 !important; transform: none !important; }
     .hh-standalone-nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -254,14 +257,9 @@
   (function(){
     const reveals = document.querySelectorAll('.hh-reveal');
     const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('hh-revealed'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
+      entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('hh-visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
     reveals.forEach(el => io.observe(el));
-
-    // Hero anims
-    document.querySelectorAll('.hh-anim').forEach(el => {
-      setTimeout(() => el.classList.add('hh-anim-in'), 100);
-    });
 
     // Counters
     function runCounters() {
