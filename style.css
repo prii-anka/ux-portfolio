@@ -3326,11 +3326,11 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rexp-img {
   width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden;
   position: relative; background: var(--rtb, #222);
+  display: block;
 }
 .rexp-img img {
-  position: absolute; inset: 0; width: 100%; height: 100%;
+  display: block; width: 100%; height: 100%;
   object-fit: cover; object-position: top;
-  border-radius: 8px 8px 0 0;
   filter: saturate(0.7) brightness(0.85);
   transition: transform 0.5s cubic-bezier(0.25,1,0.5,1), filter 0.3s;
 }
@@ -3340,7 +3340,10 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   background: rgba(0,0,0,0);
   display: flex; align-items: center; justify-content: center;
   transition: background 0.3s; z-index: 5;
+  pointer-events: none;
 }
+.rexp:hover .rexp-img { position: relative; }
+.rexp:hover .rexp-overlay { pointer-events: auto; }
 .rexp:hover .rexp-overlay { background: rgba(0,0,0,0.3); }
 .rexp-view {
   width: 56px; height: 56px; border-radius: 50%;
