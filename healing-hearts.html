@@ -4,12 +4,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Healing Hearts — Priyanka Uttarkar</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <title>Healing Hearts · Priyanka Uttarkar</title>
+  <meta name="description" content="Healing Hearts: UX research and redesign for an animal rescue nonprofit, making adopt, donate and volunteer obvious. A case study by Priyanka Uttarkar." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Priyanka Uttarkar" />
+  <meta property="og:title" content="Healing Hearts · Priyanka Uttarkar" />
+  <meta property="og:description" content="Healing Hearts: UX research and redesign for an animal rescue nonprofit, making adopt, donate and volunteer obvious. A case study by Priyanka Uttarkar." />
+  <meta property="og:url" content="https://prianka.design/healing-hearts.html" />
+  <meta property="og:image" content="https://prianka.design/assets/og/og-healinghearts.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Healing Hearts · Priyanka Uttarkar" />
+  <meta name="twitter:description" content="Healing Hearts: UX research and redesign for an animal rescue nonprofit, making adopt, donate and volunteer obvious. A case study by Priyanka Uttarkar." />
+  <meta name="twitter:image" content="https://prianka.design/assets/og/og-healinghearts.jpg" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate icon" href="/assets/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=200" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Caveat:wght@600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=202" />
   <style>
     body { background: #1a1a1a; color: #fff; margin: 0; }
     /* override overlay defaults — standalone page, not a modal */
@@ -53,23 +68,27 @@
       text-transform: uppercase; color: rgba(255,255,255,0.4);
       border: 1px solid rgba(255,255,255,0.15); padding: 4px 10px; border-radius: 50px;
     }
-    #hhPanel { padding-top: 64px; }
+    #hhPanel { padding-top: 0; }
     .hh-footer .hh-back-btn {
       display: none;
     }
   </style>
+<link rel="stylesheet" href="/site-chrome.css">
 </head>
 <body>
 
-  <nav class="hh-standalone-nav">
-    <a class="hh-standalone-back" href="index.html">← Back to work</a>
-    <span class="hh-standalone-title">Healing Hearts</span>
-    <div class="hh-standalone-tags">
-      <span>Social Good</span>
-      <span>UX Research</span>
-      <span>UX/UI Design</span>
-    </div>
+  <header class="sc-bar">
+  <div class="sc-dots" aria-hidden="true"><span style="background:#ff5f57"></span><span style="background:#ffbd2e"></span><span style="background:#28ca41"></span></div>
+  <a class="sc-brand" href="/index.html#rct-section" aria-label="Back to all work">← pri.anka</a>
+  <nav class="sc-tabs" aria-label="Portfolio sections">
+    <a class="sc-tab is-active" href="/index.html#rct-section" aria-current="page">product</a>
+    <a class="sc-tab" href="/graphic/index.html#work">graphic</a>
   </nav>
+  <div class="sc-right">
+    <a class="sc-resume" href="/resume.pdf" download>Resume Download</a>
+    <div class="sc-loc"><span>Mountain View, CA</span><span class="sc-sep">·</span><span data-sc-time></span></div>
+  </div>
+</header>
 
   <div id="hhPanel">
 
@@ -77,7 +96,7 @@
     <section class="hh-hero">
       <div class="hh-hero-bg"></div>
       <div class="hh-hero-img hh-anim hh-anim-d1">
-        <img src="assets/hh-cover.png" alt="Healing Hearts Animal Rescue — app redesign cover" loading="eager" onerror="this.parentElement.classList.add('hh-img-placeholder')">
+        <img src="assets/hh-cover.webp" alt="Healing Hearts Animal Rescue: app redesign cover" loading="eager" onerror="this.parentElement.classList.add('hh-img-placeholder')" decoding="async" width="1600" height="1034">
       </div>
       <div class="hh-hero-content">
         <h1 class="hh-hero-title hh-anim hh-anim-d2">
@@ -180,10 +199,10 @@
       <div class="hh-section-inner hh-section-inner--col">
         <div class="hh-reveal"><p class="hh-section-eyebrow">User Personas</p><h2 class="hh-section-title">The people I designed for.</h2><p class="hh-section-body hh-body-narrow">Different reasons to show up. Same broken experience standing in their way.</p></div>
         <div class="hh-persona-float">
-          <div class="hh-pf-card hh-reveal hh-reveal-d1"><div class="hh-pf-avatar"><img src="assets/hh-memoji-sarah.png" alt="Sarah"></div><p class="hh-pf-quote">I want to make sure my donation makes a real difference.</p><div class="hh-pf-footer"><span class="hh-pf-name">Sarah Mitchell</span><span class="hh-pf-role">Donor</span></div><div class="hh-pf-needs"><span>Transparency</span><span>Easy navigation</span><span>Confirmation</span></div></div>
-          <div class="hh-pf-card hh-reveal hh-reveal-d2"><div class="hh-pf-avatar"><img src="assets/hh-memoji-michael.png" alt="Michael"></div><p class="hh-pf-quote">I need flexible opportunities that fit around my schedule.</p><div class="hh-pf-footer"><span class="hh-pf-name">Michael Turner</span><span class="hh-pf-role">Volunteer</span></div><div class="hh-pf-needs"><span>Updated listings</span><span>Quick sign-up</span><span>Schedules</span></div></div>
-          <div class="hh-pf-card hh-reveal hh-reveal-d3"><div class="hh-pf-avatar"><img src="assets/hh-memoji-david.png" alt="David"></div><p class="hh-pf-quote">I want to contribute more than money. My time and skills matter too.</p><div class="hh-pf-footer"><span class="hh-pf-name">David Johnson</span><span class="hh-pf-role">Community Supporter</span></div><div class="hh-pf-needs"><span>Events</span><span>Newsletter</span><span>Campaigns</span></div></div>
-          <div class="hh-pf-card hh-reveal hh-reveal-d4"><div class="hh-pf-avatar"><img src="assets/hh-memoji-emily.png" alt="Emily"></div><p class="hh-pf-quote">I need clear details and steps to make the right choice for my home.</p><div class="hh-pf-footer"><span class="hh-pf-name">Emily Davis</span><span class="hh-pf-role">Adopter</span></div><div class="hh-pf-needs"><span>Detailed profiles</span><span>Step-by-step</span><span>Filters</span></div></div>
+          <div class="hh-pf-card hh-reveal hh-reveal-d1"><div class="hh-pf-avatar"><img src="assets/hh-memoji-sarah.png" alt="Sarah" loading="lazy" decoding="async" width="202" height="202"></div><p class="hh-pf-quote">I want to make sure my donation makes a real difference.</p><div class="hh-pf-footer"><span class="hh-pf-name">Sarah Mitchell</span><span class="hh-pf-role">Donor</span></div><div class="hh-pf-needs"><span>Transparency</span><span>Easy navigation</span><span>Confirmation</span></div></div>
+          <div class="hh-pf-card hh-reveal hh-reveal-d2"><div class="hh-pf-avatar"><img src="assets/hh-memoji-michael.png" alt="Michael" loading="lazy" decoding="async" width="202" height="202"></div><p class="hh-pf-quote">I need flexible opportunities that fit around my schedule.</p><div class="hh-pf-footer"><span class="hh-pf-name">Michael Turner</span><span class="hh-pf-role">Volunteer</span></div><div class="hh-pf-needs"><span>Updated listings</span><span>Quick sign-up</span><span>Schedules</span></div></div>
+          <div class="hh-pf-card hh-reveal hh-reveal-d3"><div class="hh-pf-avatar"><img src="assets/hh-memoji-david.png" alt="David" loading="lazy" decoding="async" width="202" height="202"></div><p class="hh-pf-quote">I want to contribute more than money. My time and skills matter too.</p><div class="hh-pf-footer"><span class="hh-pf-name">David Johnson</span><span class="hh-pf-role">Community Supporter</span></div><div class="hh-pf-needs"><span>Events</span><span>Newsletter</span><span>Campaigns</span></div></div>
+          <div class="hh-pf-card hh-reveal hh-reveal-d4"><div class="hh-pf-avatar"><img src="assets/hh-memoji-emily.png" alt="Emily" loading="lazy" decoding="async" width="199" height="199"></div><p class="hh-pf-quote">I need clear details and steps to make the right choice for my home.</p><div class="hh-pf-footer"><span class="hh-pf-name">Emily Davis</span><span class="hh-pf-role">Adopter</span></div><div class="hh-pf-needs"><span>Detailed profiles</span><span>Step-by-step</span><span>Filters</span></div></div>
         </div>
       </div>
     </section>
@@ -217,8 +236,8 @@
     <!-- WIREFRAMES -->
     <section class="hh-section hh-section--white">
       <div class="hh-section-inner hh-section-inner--col">
-        <div class="hh-reveal"><p class="hh-section-eyebrow">Wireframes</p><h2 class="hh-section-title">Structure before surface.</h2><p class="hh-section-body hh-body-narrow">Three paths — adopt, donate, volunteer — needed to be obvious the second someone landed on the page.</p></div>
-        <div class="hh-img-frame hh-reveal hh-reveal-d1"><img src="assets/hh-wireframes.png" alt="Wireframes" onerror="this.parentElement.classList.add('hh-img-placeholder')"></div>
+        <div class="hh-reveal"><p class="hh-section-eyebrow">Wireframes</p><h2 class="hh-section-title">Structure before surface.</h2><p class="hh-section-body hh-body-narrow">Three paths (adopt, donate, volunteer) needed to be obvious the second someone landed on the page.</p></div>
+        <div class="hh-img-frame hh-reveal hh-reveal-d1"><img src="assets/hh-wireframes.png" alt="Wireframes" onerror="this.parentElement.classList.add('hh-img-placeholder')" loading="lazy" decoding="async" width="3456" height="2234"></div>
       </div>
     </section>
 
@@ -227,9 +246,9 @@
       <div class="hh-section-inner hh-section-inner--col">
         <div class="hh-reveal"><p class="hh-section-eyebrow">High Fidelity Prototype</p><h2 class="hh-section-title">Three flows. One experience.</h2><p class="hh-section-body hh-body-narrow">Three flows, rebuilt from scratch. A clear next step at every point.</p></div>
         <div class="hh-videos">
-          <div class="hh-video-block hh-reveal hh-reveal-d1"><div class="hh-macbook"><div class="hh-macbook-screen"><video src="assets/hh-adoption.mp4" autoplay muted loop playsinline onerror="this.parentElement.classList.add('hh-vid-placeholder')"></video></div><div class="hh-macbook-chin"></div><div class="hh-macbook-base"></div></div><p class="hh-video-label">Adoption walkthrough</p></div>
-          <div class="hh-video-block hh-reveal hh-reveal-d2"><div class="hh-macbook"><div class="hh-macbook-screen"><video src="assets/hh-donation.mp4" autoplay muted loop playsinline onerror="this.parentElement.classList.add('hh-vid-placeholder')"></video></div><div class="hh-macbook-chin"></div><div class="hh-macbook-base"></div></div><p class="hh-video-label">Donation page walkthrough</p></div>
-          <div class="hh-video-block hh-reveal hh-reveal-d3"><div class="hh-macbook"><div class="hh-macbook-screen"><video src="assets/hh-volunteer.mp4" autoplay muted loop playsinline onerror="this.parentElement.classList.add('hh-vid-placeholder')"></video></div><div class="hh-macbook-chin"></div><div class="hh-macbook-base"></div></div><p class="hh-video-label">Volunteer page walkthrough</p></div>
+          <div class="hh-video-block hh-reveal hh-reveal-d1"><div class="hh-macbook"><div class="hh-macbook-screen"><video src="assets/hh-adoption.mp4" data-autoplay preload="none" poster="assets/hh-poster-adoption.jpg" muted loop playsinline onerror="this.parentElement.classList.add('hh-vid-placeholder')"></video></div><div class="hh-macbook-chin"></div><div class="hh-macbook-base"></div></div><p class="hh-video-label">Adoption walkthrough</p></div>
+          <div class="hh-video-block hh-reveal hh-reveal-d2"><div class="hh-macbook"><div class="hh-macbook-screen"><video src="assets/hh-donation.mp4" data-autoplay preload="none" poster="assets/hh-poster-donation.jpg" muted loop playsinline onerror="this.parentElement.classList.add('hh-vid-placeholder')"></video></div><div class="hh-macbook-chin"></div><div class="hh-macbook-base"></div></div><p class="hh-video-label">Donation page walkthrough</p></div>
+          <div class="hh-video-block hh-reveal hh-reveal-d3"><div class="hh-macbook"><div class="hh-macbook-screen"><video src="assets/hh-volunteer.mp4" data-autoplay preload="none" poster="assets/hh-poster-volunteer.jpg" muted loop playsinline onerror="this.parentElement.classList.add('hh-vid-placeholder')"></video></div><div class="hh-macbook-chin"></div><div class="hh-macbook-base"></div></div><p class="hh-video-label">Volunteer page walkthrough</p></div>
         </div>
       </div>
     </section>
@@ -247,11 +266,6 @@
         <p class="hh-outcome-quote hh-reveal hh-reveal-d2">"The goal was simple: make it easier for people to connect with the cause, whether they want to adopt, donate, or just learn more."</p>
       </div>
     </section>
-
-    <!-- FOOTER -->
-    <div class="hh-footer">
-      <a class="hh-back-btn" href="index.html" style="text-decoration:none;">← Back to all work</a>
-    </div>
 
   </div>
 
@@ -275,5 +289,33 @@
     setTimeout(runCounters, 600);
   })();
   </script>
+<footer class="sc-footer">
+  <div class="sc-footer-body">
+    <div class="sc-footer-cta">
+      <h2 class="sc-footer-heading">say hello.</h2>
+      <p class="sc-footer-sub">open to work. email's fastest. linkedin works too.</p>
+    </div>
+    <div class="sc-footer-contacts">
+      <a href="mailto:pri.anka256@gmail.com" class="sc-footer-email">
+        <span class="sc-footer-label">Email</span>
+        <span class="sc-footer-addr">pri.anka256@gmail.com</span>
+        <span class="sc-footer-note">I reply like a human (promise).</span>
+      </a>
+      <div class="sc-footer-socials">
+        <a href="https://www.behance.net/priyankautkarkar" target="_blank" rel="noopener" title="Behance: Architecture Portfolio"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029H23.726zm-7.726-3h3.543c-.135-1.514-1.271-2.159-1.621-2.159-1.315 0-1.743.743-1.922 2.159zM9.848 7.116c.436.153.93.402 1.388.791.645.548 1.109 1.41 1.109 2.609 0 2.916-2.255 3.84-4.854 3.84H2V5h5.465c1.308 0 2.387.338 2.383 2.116zm-2.51 5.24c1.143 0 1.987-.365 1.987-1.445 0-1.174-.949-1.45-1.987-1.45H5v2.895h2.338zm-.395-4.24c.972 0 1.704-.287 1.704-1.226 0-.994-.792-1.164-1.704-1.164H5v2.39h1.943z"/></svg><span>Behance</span></a>
+        <a href="https://instagram.com/pri.anka" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a>
+        <a href="https://linkedin.com/in/priyanka-uttarkar" target="_blank" rel="noopener" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="4"/><path fill="#1a1a1a" d="M7 10h2v7H7zm1-3a1.1 1.1 0 110 2.2A1.1 1.1 0 018 7zm4 3h1.8v1h.03c.26-.48.9-1 1.87-1C17.6 10 18 11.37 18 13v4h-2v-3.5c0-.84-.02-1.9-1.17-1.9-1.17 0-1.35.91-1.35 1.85V17H12v-7z"/></svg><span>LinkedIn</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="sc-footer-bar">
+    <span class="sc-footer-copy">© 2026 Priyanka Uttarkar · built with too many tiny iterations (and a good playlist).</span>
+    <nav class="sc-footer-links" aria-label="Footer">
+      <a href="/index.html#rct-section">Product work</a><span>·</span><a href="/graphic/index.html#work">Graphic work</a><span>·</span><a href="#" data-sc-top>Back to top ↑</a>
+    </nav>
+  </div>
+</footer>
+<script src="video-autoplay.js" defer></script>
+<script src="/site-chrome.js" defer></script>
 </body>
 </html>

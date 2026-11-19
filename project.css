@@ -119,7 +119,7 @@ body.project-page {
 
 .project-stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   margin-bottom: 52px;
 }
@@ -240,3 +240,8 @@ body.project-page {
 /* Dark mode */
 [data-theme="dark"] .stat-box { background: #2a2820; }
 [data-theme="dark"] .project-process-row { background: #2a2820; }
+
+/* Phones: stack the stat boxes so long numbers never push the page sideways */
+@media (max-width: 600px) {
+  .project-stats { grid-template-columns: 1fr; gap: 12px; }
+}

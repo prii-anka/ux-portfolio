@@ -198,7 +198,7 @@
   // Statement: looping typewriter
   var stmtSection = document.getElementById('rfig-stmt');
   var stmtTyped   = document.getElementById('rfigStmtTyped');
-  var STMT = 'I design experiences rooted in empathy — where every flow feels inevitable and every system is built to last.';
+  var STMT = 'I design experiences rooted in empathy, where every flow feels inevitable and every system is built to last.';
   var stmtIdx = 0, stmtErasing = false, stmtActive = false;
 
   function typeStmt() {
@@ -250,8 +250,8 @@
   function hideLoader() {
     var loader = document.getElementById('siteLoader');
     if (loader) loader.classList.add('hidden');
-    var saved = localStorage.getItem('pv') || 'recruiter';
-    if (saved === 'recruiter') setTimeout(function () { if (window.rLoopStart) window.rLoopStart(); }, 200);
+    try { localStorage.removeItem('pv'); } catch (e) {}
+    setTimeout(function () { if (window.rLoopStart) window.rLoopStart(); }, 200);
   }
 
   function tryHide() {
@@ -380,7 +380,7 @@ function getFollowUps(query) {
 const PROJECTS = {
   product: {
     title: 'Healing Hearts',
-    img: 'assets/project-healinghearts.png',
+    img: 'assets/project-healinghearts.webp',
     tags: ['Mobile App', 'UX Research', 'Prototyping', 'Healthcare'],
     stat: null,
     sections: [
@@ -405,7 +405,7 @@ const PROJECTS = {
   },
   dashboard: {
     title: 'Dashboard Statistics',
-    img: 'assets/project-dashboard.png',
+    img: 'assets/project-dashboard.webp',
     tags: ['SaaS', 'Data Viz', 'Product Design', 'Enterprise'],
     stat: null,
     sections: [
@@ -509,26 +509,6 @@ if (savedTheme === 'light') setTheme(false);
 
 document.getElementById('rThemeBtn')?.addEventListener('click', triggerThemeWipe);
 
-// ── View toggle ─────────────────────────────────────
-function switchView(target) {
-  document.querySelectorAll('.view-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.view === target);
-  });
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById(`view-${target}`)?.classList.add('active');
-  localStorage.setItem('pv', target);
-  if (target === 'recruiter') rActivate();
-}
-
-document.querySelectorAll('.view-btn').forEach(btn => {
-  btn.addEventListener('click', () => switchView(btn.dataset.view));
-});
-
-// Restore last view (default: recruiter)
-(function() {
-  const saved = localStorage.getItem('pv') || 'recruiter';
-  if (saved !== 'recruiter') switchView(saved);
-})();
 
 // ── AI Search ───────────────────────────────────────
 const searchInput = document.getElementById('searchInput');
@@ -539,7 +519,7 @@ const answerText = document.getElementById('answerText');
 const answerChips = document.getElementById('answerChips');
 
 async function askAI(query) {
-  if (!query.trim()) return;
+  if (!query.trim() || !answerPanel || !typingDots || !answerText || !answerChips) return;
 
   // Show answer panel + typing
   answerPanel.classList.add('visible');
@@ -613,15 +593,17 @@ document.querySelectorAll('#chips .chip').forEach(chip => {
 });
 
 // Send button + Enter key
-if (sendBtn) sendBtn.addEventListener('click', () => askAI(searchInput.value));
-searchInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') askAI(searchInput.value);
-});
+if (sendBtn && searchInput) sendBtn.addEventListener('click', () => askAI(searchInput.value));
+if (searchInput) {
+  searchInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') askAI(searchInput.value);
+  });
+}
 
 // Close answer panel when clicking outside search wrap
 document.addEventListener('click', e => {
   const wrap = document.getElementById('searchWrap');
-  if (wrap && !wrap.contains(e.target)) {
+  if (wrap && answerPanel && !wrap.contains(e.target)) {
     answerPanel.style.display = 'none';
     answerPanel.classList.remove('visible');
   }
@@ -641,7 +623,9 @@ function openModal(projectKey) {
     <div class="modal-body">${project.sections.map(s => `<h4>${s.h}</h4><p>${s.p}</p>`).join('')}</div>
   `;
 
-  document.getElementById('modalBg').classList.add('open');
+  const modalBg = document.getElementById('modalBg');
+  if (!modalBg) return;
+  modalBg.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
@@ -1065,6 +1049,8 @@ function cvReframe() {
   cvApply(true);
 }
 
+// Canvas listeners only attach on pages that actually have the artboard
+if (cvViewport && cvSurface && cvBadge && cvBackBtn) {
 // Wheel — zoom centered on cursor
 cvViewport.addEventListener('wheel', e => {
   e.preventDefault();
@@ -1149,6 +1135,7 @@ window.addEventListener('load', () => {
   // Artboard is already viewport-sized at scale 1, so no initial offset needed
   cvApply();
 });
+}
 
 console.log('%c pri.anka - I notice what others walk past.', 'font-family:serif;font-size:14px;color:#f0e040;background:#1a1a1a;padding:8px 16px;border-radius:6px;');
 
@@ -1164,8 +1151,10 @@ function rUpdateTime() {
   const timeStr = `${(h%12)||12}:${m} ${ampm}`;
   const heroLoc = document.getElementById('rHeroLoc');
   const stripTime = document.getElementById('rLocTime');
-  if (heroLoc) heroLoc.textContent = `Tempe, AZ  •  ${timeStr}`;
+  const stripTime2 = document.getElementById('rLocStripTime');
+  if (heroLoc) heroLoc.textContent = `Mountain View, CA  •  ${timeStr}`;
   if (stripTime) stripTime.textContent = timeStr;
+  if (stripTime2) stripTime2.textContent = timeStr;
 }
 rUpdateTime();
 setInterval(rUpdateTime, 30000);
@@ -1220,13 +1209,13 @@ document.getElementById('rHeroWork')?.addEventListener('click', e => {
 // Phone chat bot
 (function() {
   const responses = {
-    'design-process': "I start with the problem, not a wireframe. First I spend time obsessing over what question we're actually answering — then I map the ecosystem before touching a screen. Figma comes later.",
-    'availability': "Open to full-time product design roles right now. Based in Tempe, AZ — totally fine with remote or hybrid. If you're building something people will actually use, I want to talk.",
-    'background': "Architecture → HCI. I spent years designing physical spaces, then switched to digital. The overlap is bigger than you'd think — both are about how people move through & feel inside a space.",
+    'design-process': "I start with the problem, not a wireframe. First I spend time obsessing over what question we're actually answering, then I map the ecosystem before touching a screen. Figma comes later.",
+    'availability': "Open to full-time product design roles right now. Based in Mountain View, CA, and totally fine with remote or hybrid. If you're building something people will actually use, I want to talk.",
+    'background': "Architecture → HCI. I spent years designing physical spaces, then switched to digital. The overlap is bigger than you'd think: both are about how people move through & feel inside a space.",
     'design-systems': "I built Orion, a design system for Mayo Clinic covering 40+ components used across internal tools. Tokens, documentation, the whole thing. Design systems are the most underrated leverage in any org.",
-    'thinking': "I think in constraints. Give me a tight brief over a blank canvas any day — the best solutions I've made came from a wall I wasn't supposed to get past.",
+    'thinking': "I think in constraints. Give me a tight brief over a blank canvas any day. The best solutions I've made came from a wall I wasn't supposed to get past.",
   };
-  const fallback = "Hmm, try one of the chips below — or ask me about my work, process, or background!";
+  const fallback = "Hmm, try one of the chips below, or ask me about my work, process, or background!";
 
   const msgs = document.getElementById('rpchatMessages');
   const input = document.getElementById('rpchatInput') || document.querySelector('.rchat-input');
@@ -1378,15 +1367,6 @@ document.getElementById('rHeroWork')?.addEventListener('click', e => {
   });
 }());
 
-// "Creative View" footer link switches view
-document.getElementById('rSwitchCreative')?.addEventListener('click', e => {
-  e.preventDefault();
-  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector('.view-btn[data-view="creative"]')?.classList.add('active');
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById('view-creative')?.classList.add('active');
-  document.body.style.overflow = 'hidden';
-});
 
 
 // Spotlight moved to inline script in index.html (after DOM elements)
@@ -1401,7 +1381,7 @@ document.getElementById('rSwitchCreative')?.addEventListener('click', e => {
 
   var INDEX = [
     // Sections
-    { label: 'Introduction', sub: 'Hero — Hi, I\'m Priyanka', cat: 'Section', icon: '✦', action: 'scrollTop' },
+    { label: 'Introduction', sub: 'Hero · Hi, I\'m Priyanka', cat: 'Section', icon: '✦', action: 'scrollTop' },
     { label: 'Selected Work', sub: 'Projects & case studies', cat: 'Section', icon: '◈', anchor: 'rct-section' },
     { label: 'Graphic Design & Branding', sub: 'Visual work & brand projects', cat: 'Section', icon: '◉', anchor: 'rgfx-section' },
     { label: 'Say Hello', sub: 'Footer & contact info', cat: 'Section', icon: '◎', anchor: 'rfooter' },
@@ -1525,28 +1505,28 @@ document.getElementById('rSwitchCreative')?.addEventListener('click', e => {
 
 // ── BENTO PANEL ──────────────────────────────────────────────────────
 var GFX_HTML = `<div class="rgfx-track" id="rBentoGfxTrack"><div class="rgfx-strip">
-  <div class="rgfx-card rgfx-card--wide"><div class="rgfx-thumb" style="background:linear-gradient(145deg,#1a0830,#6b21a8)"><img src="assets/gfx-posters.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Poster Series</span><span class="rgfx-name">ASU AI Carnival</span></div></div>
-  <div class="rgfx-card rgfx-card--tall"><div class="rgfx-thumb" style="background:linear-gradient(160deg,#0f1a0f,#2d5a2d)"><img src="assets/gfx-brand.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Brand Identity</span><span class="rgfx-name">Logo &amp; Brand Systems</span></div></div>
-  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(135deg,#1a0a00,#7c3a00)"><img src="assets/gfx-typography.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Typography</span><span class="rgfx-name">Type Experiments</span></div></div>
+  <div class="rgfx-card rgfx-card--wide"><div class="rgfx-thumb" style="background:linear-gradient(145deg,#1a0830,#6b21a8)"><img src="assets/gfx-posters.webp" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Poster Series</span><span class="rgfx-name">ASU AI Carnival</span></div></div>
+  <div class="rgfx-card rgfx-card--tall"><div class="rgfx-thumb" style="background:linear-gradient(160deg,#0f1a0f,#2d5a2d)"><img src="assets/gfx-brand.webp" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Brand Identity</span><span class="rgfx-name">Logo &amp; Brand Systems</span></div></div>
+  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(135deg,#1a0a00,#7c3a00)"><img src="assets/gfx-typography.webp" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Typography</span><span class="rgfx-name">Type Experiments</span></div></div>
   <div class="rgfx-card rgfx-card--wide"><div class="rgfx-thumb" style="background:linear-gradient(120deg,#001a2e,#005fa3)"><img src="assets/gfx-social-1.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Social &amp; Digital</span><span class="rgfx-name">Social Media Carousel</span></div></div>
   <div class="rgfx-card rgfx-card--tall"><div class="rgfx-thumb" style="background:linear-gradient(150deg,#1a001a,#700070)"><video src="assets/gfx-brochureominterior.mp4" class="rgfx-img" autoplay muted loop playsinline style="object-fit:cover;"></video><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Brochure Design</span><span class="rgfx-name">Om Interiors</span></div></div>
-  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(140deg,#001a1a,#006666)"><img src="assets/gfx-packaging.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Packaging</span><span class="rgfx-name">Packaging Design</span></div></div>
+  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(140deg,#001a1a,#006666)"><img src="assets/gfx-packaging.webp" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Packaging</span><span class="rgfx-name">Packaging Design</span></div></div>
   <div class="rgfx-card rgfx-card--wide"><div class="rgfx-thumb" style="background:linear-gradient(130deg,#1a0a00,#c87941)"><img src="assets/gfx-pattern-1.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Miscellaneous</span><span class="rgfx-name">Illustrations &amp; Explorations</span></div></div>
 </div></div>`;
 
-var ARCH_HTML = `<div style="padding:0 0 32px"><p style="font-family:'Space Grotesk',sans-serif;color:rgba(255,255,255,0.5);font-size:0.85rem;margin-bottom:24px;">B.Arch portfolio — <a href="https://www.behance.net/gallery/244318419/Architecture_Portfolio_Priyanka" target="_blank" style="color:#f0ede8;text-decoration:underline;">Full collection on Behance ↗</a></p></div>
+var ARCH_HTML = `<div style="padding:0 0 32px"><p style="font-family:'Space Grotesk',sans-serif;color:rgba(255,255,255,0.5);font-size:0.85rem;margin-bottom:24px;">B.Arch portfolio: <a href="https://www.behance.net/gallery/244318419/Architecture_Portfolio_Priyanka" target="_blank" style="color:#f0ede8;text-decoration:underline;">Full collection on Behance ↗</a></p></div>
 <div class="rgfx-track" id="rBentoArchTrack"><div class="rgfx-strip">
-  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(135deg,#1a1208,#7a5a28)"><img src="assets/arch-housing.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Residential</span><span class="rgfx-name">Housing Project</span></div></div>
-  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(135deg,#0e1618,#2e4a58)"><img src="assets/arch-interior.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Interior</span><span class="rgfx-name">Interior Space Design</span></div></div>
-  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(135deg,#120818,#4a1870)"><img src="assets/arch-urban.png" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Urban Design</span><span class="rgfx-name">Urban Planning Study</span></div></div>
+  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(135deg,#1a1208,#7a5a28)"><img src="assets/arch-housing.webp" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Residential</span><span class="rgfx-name">Housing Project</span></div></div>
+  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(135deg,#0e1618,#2e4a58)"><img src="assets/arch-interior.webp" class="rgfx-img" onerror="this.style.display='none'"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Interior</span><span class="rgfx-name">Interior Space Design</span></div></div>
+  <div class="rgfx-card"><div class="rgfx-thumb" style="background:linear-gradient(135deg,#120818,#4a1870)"><div class="rgfx-overlay"><span class="rgfx-arrow">↗</span></div></div><div class="rgfx-foot"><span class="rgfx-cat">Urban Design</span><span class="rgfx-name">Urban Planning Study</span></div></div>
 </div></div>`;
 
 var PAINT_HTML = `<div class="rpaint-grid">
   <div class="rpaint-tile"><img src="assets/painting-1.jpeg" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
-  <div class="rpaint-tile"><img src="assets/painting-2.jpeg" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
+  <div class="rpaint-tile"><img src="assets/painting-2.webp" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
   <div class="rpaint-tile"><img src="assets/painting-3.jpeg" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
-  <div class="rpaint-tile rpaint-tile--bookmark"><img src="assets/painting-4.jpeg" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
-  <div class="rpaint-tile"><img src="assets/painting-5.jpeg" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
+  <div class="rpaint-tile rpaint-tile--bookmark"><img src="assets/painting-4.webp" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
+  <div class="rpaint-tile"><img src="assets/painting-5.webp" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
   <div class="rpaint-tile"><img src="assets/painting-6.jpeg" alt="" onerror="this.parentElement.classList.add('rpaint-empty')"/></div>
 </div>`;
 

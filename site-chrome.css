@@ -1,0 +1,100 @@
+/* Shared header bar + footer used on every case study page.
+   Matches the homepage chrome (.rmac-bar / .rfooter in style.css). */
+
+.sc-bar {
+  position: sticky; top: 0; z-index: 900;
+  display: flex; align-items: center; gap: 20px;
+  height: 28px; padding: 0 16px;
+  background: #1c1c1e; border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+}
+.sc-dots { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.sc-dots span { width: 12px; height: 12px; border-radius: 50%; display: block; opacity: 0.85; }
+.sc-brand {
+  font-size: 11px; letter-spacing: 0.02em; margin-left: 4px;
+  color: rgba(255,255,255,0.45); text-decoration: none; white-space: nowrap;
+  transition: color 0.15s;
+}
+.sc-brand:hover { color: rgba(255,255,255,0.9); }
+.sc-tabs {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: flex-end; height: 28px;
+}
+.sc-tab {
+  font-size: 11px; padding: 0 36px; height: 100%;
+  display: flex; align-items: center; white-space: nowrap;
+  color: rgba(255,255,255,0.38); text-decoration: none;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  border-radius: 6px 6px 0 0;
+  transition: background 0.15s, color 0.15s;
+}
+.sc-tab:first-child { border-left: 1px solid rgba(255,255,255,0.07); }
+.sc-tab:hover { color: rgba(255,255,255,0.65); background: rgba(255,255,255,0.04); }
+.sc-tab.is-active { background: #1e1e20; color: rgba(255,255,255,0.9); }
+.sc-right { margin-left: auto; display: flex; align-items: center; gap: 20px; }
+.sc-resume {
+  font-size: 10px; color: rgba(255,255,255,0.5); text-decoration: none; white-space: nowrap;
+  padding: 2px 10px; border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06);
+  transition: color 0.2s, background 0.2s;
+}
+.sc-resume:hover { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.12); }
+.sc-loc { display: flex; align-items: center; gap: 6px; font-size: 10px; color: rgba(255,255,255,0.85); flex-shrink: 0; white-space: nowrap; }
+.sc-loc .sc-sep { opacity: 0.35; }
+.sc-bar a:focus-visible { outline: 2px solid #F08DB5; outline-offset: 2px; border-radius: 4px; }
+
+/* ── Footer ── */
+.sc-footer {
+  background: #1a1a1a; color: #fff;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+}
+.sc-footer-body {
+  padding: 68px 52px 52px;
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 48px;
+}
+.sc-footer-cta { display: flex; flex-direction: column; gap: 12px; }
+.sc-footer-heading {
+  margin: 0; font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.4rem, 4.5vw, 4rem); font-weight: 600;
+  letter-spacing: -0.03em; line-height: 1; color: #fff;
+}
+.sc-footer-sub { margin: 0; font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.5; }
+.sc-footer-contacts { display: flex; flex-direction: column; align-items: flex-start; }
+.sc-footer-email { display: flex; flex-direction: column; gap: 6px; text-decoration: none; transition: opacity 0.2s; }
+.sc-footer-email:hover { opacity: 0.65; }
+.sc-footer-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8a8a; }
+.sc-footer-addr { font-size: clamp(1rem, 1.6vw, 1.35rem); font-weight: 500; letter-spacing: -0.02em; color: #fff; }
+.sc-footer-note { font-family: 'Caveat', cursive; font-size: 1.1rem; color: rgba(255,255,255,0.4); }
+.sc-footer-socials { display: flex; gap: 20px; align-items: center; margin-top: 14px; }
+.sc-footer-socials a {
+  display: flex; align-items: center; gap: 8px; text-decoration: none;
+  color: rgba(255,255,255,0.55); font-size: 0.82rem; font-weight: 500; transition: color 0.2s;
+}
+.sc-footer-socials a:hover { color: #fff; }
+.sc-footer-socials svg { width: 18px; height: 18px; flex-shrink: 0; }
+.sc-footer-bar {
+  padding: 18px 52px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.sc-footer-copy { font-size: 0.62rem; color: #8a8a8a; }
+.sc-footer-links { display: flex; align-items: center; gap: 12px; }
+.sc-footer-links a { font-size: 0.66rem; letter-spacing: 0.03em; color: #9a9a9a; text-decoration: none; transition: color 0.18s; }
+.sc-footer-links a:hover { color: #fff; }
+.sc-footer-links span { color: #555; font-size: 0.6rem; }
+.sc-footer a:focus-visible { outline: 2px solid #F08DB5; outline-offset: 3px; border-radius: 4px; }
+
+@media (max-width: 768px) {
+  .sc-bar { height: 36px; padding: 0 10px; gap: 8px; }
+  .sc-tabs { height: 36px; }
+  .sc-tab { padding: 0 20px; }
+  .sc-loc, .sc-resume { display: none; }
+  .sc-footer-body { flex-direction: column; gap: 32px; padding: 44px 24px 32px; }
+  .sc-footer-heading { font-size: clamp(2rem, 10vw, 3rem); }
+  .sc-footer-addr { font-size: clamp(0.95rem, 4vw, 1.2rem); }
+  .sc-footer-bar { padding: 16px 24px; flex-direction: column; gap: 8px; text-align: center; }
+}
+@media (max-width: 420px) {
+  .sc-brand { font-size: 10px; }
+  .sc-tab { padding: 0 14px; font-size: 10px; }
+}

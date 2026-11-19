@@ -3,9 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Encore Case Study</title>
-<meta name="description" content="Encore: a self-initiated product design case study by Priyanka Uttarkar.">
-<link rel="icon" href="assets/favicon.svg">
+  <title>Encore · Priyanka Uttarkar</title>
+  <meta name="description" content="Encore: a music app feature that turns a road trip's group listening session into a saved, shareable playlist. A product design case study by Priyanka Uttarkar." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Priyanka Uttarkar" />
+  <meta property="og:title" content="Encore · Priyanka Uttarkar" />
+  <meta property="og:description" content="Encore: a music app feature that turns a road trip's group listening session into a saved, shareable playlist. A product design case study by Priyanka Uttarkar." />
+  <meta property="og:url" content="https://prianka.design/encore.html" />
+  <meta property="og:image" content="https://prianka.design/assets/og/og-encore.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Encore · Priyanka Uttarkar" />
+  <meta name="twitter:description" content="Encore: a music app feature that turns a road trip's group listening session into a saved, shareable playlist. A product design case study by Priyanka Uttarkar." />
+  <meta name="twitter:image" content="https://prianka.design/assets/og/og-encore.jpg" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate icon" href="/assets/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
 <style>
@@ -332,6 +346,8 @@ footer ul{margin:12px 0 0;padding-left:18px;font-size:14px;display:flex;flex-dir
 @media (max-width:480px){.beats{grid-template-columns:1fr}}
 @media (max-width:360px){.phone{transform:scale(.9);transform-origin:top center}}
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Caveat:wght@600&display=swap">
+<link rel="stylesheet" href="/site-chrome.css">
 </head>
 <body>
 
@@ -417,10 +433,18 @@ footer ul{margin:12px 0 0;padding-left:18px;font-size:14px;display:flex;flex-dir
 </defs>
 </svg>
 
-<header class="top"><div class="wrap">
-  <a class="back" href="index.html" aria-label="Back to pri.anka portfolio" title="Back to portfolio"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em">pri.anka</span></a>
-  <nav aria-label="Case study sections"><a href="#context">Context</a><a href="#research">Research</a><a href="#explore">Exploration</a><a href="#loop">The loop</a><a href="#design">Design</a><a href="#measure">Impact</a></nav>
-</div></header>
+<header class="sc-bar">
+  <div class="sc-dots" aria-hidden="true"><span style="background:#ff5f57"></span><span style="background:#ffbd2e"></span><span style="background:#28ca41"></span></div>
+  <a class="sc-brand" href="/index.html#rct-section" aria-label="Back to all work">← pri.anka</a>
+  <nav class="sc-tabs" aria-label="Portfolio sections">
+    <a class="sc-tab is-active" href="/index.html#rct-section" aria-current="page">product</a>
+    <a class="sc-tab" href="/graphic/index.html#work">graphic</a>
+  </nav>
+  <div class="sc-right">
+    <a class="sc-resume" href="/resume.pdf" download>Resume Download</a>
+    <div class="sc-loc"><span>Mountain View, CA</span><span class="sc-sep">·</span><span data-sc-time></span></div>
+  </div>
+</header>
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="top"><div class="wrap">
@@ -964,7 +988,7 @@ footer ul{margin:12px 0 0;padding-left:18px;font-size:14px;display:flex;flex-dir
 </div></section>
 
 <footer><div class="wrap">
-  <div style="flex:1 1 260px"><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:32px;letter-spacing:-.02em">Encore</div><p style="margin-top:8px;font-size:14px;color:var(--mute)">Self-initiated concept. Not affiliated with any streaming service. Song and artist names in mockups are fictional.</p><p style="margin-top:16px"><a href="index.html" style="font-weight:600;font-size:14px">Back to all work</a></p></div>
+  <div style="flex:1 1 260px"><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:32px;letter-spacing:-.02em">Encore</div><p style="margin-top:8px;font-size:14px;color:var(--mute)">Self-initiated concept. Not affiliated with any streaming service. Song and artist names in mockups are fictional.</p></div>
   <div style="flex:2 1 480px"><div class="label" style="color:var(--mute)">Sources</div><ul>
     <li><a href="https://newsroom.spotify.com/2025-08-25/jam-reaches-100-million-monthly-listening-hours/">Spotify Newsroom: Jam reaches 100 million monthly listening hours</a></li>
     <li><a href="https://www.ubergizmo.com/2026/10/spotify-launches-phone-free-app-for-cars/">Ubergizmo: Spotify launches phone-free app for cars</a></li>
@@ -974,6 +998,34 @@ footer ul{margin:12px 0 0;padding-left:18px;font-size:14px;display:flex;flex-dir
     <li><a href="https://community.spotify.com/t5/Content-Questions/Music-listened-to-during-Jams-not-showing-in-Listening-History/m-p/6205922/highlight/true">Spotify Community: Jam tracks missing from history</a></li>
   </ul></div>
 </div></footer>
+
+<footer class="sc-footer">
+  <div class="sc-footer-body">
+    <div class="sc-footer-cta">
+      <h2 class="sc-footer-heading">say hello.</h2>
+      <p class="sc-footer-sub">open to work. email's fastest. linkedin works too.</p>
+    </div>
+    <div class="sc-footer-contacts">
+      <a href="mailto:pri.anka256@gmail.com" class="sc-footer-email">
+        <span class="sc-footer-label">Email</span>
+        <span class="sc-footer-addr">pri.anka256@gmail.com</span>
+        <span class="sc-footer-note">I reply like a human (promise).</span>
+      </a>
+      <div class="sc-footer-socials">
+        <a href="https://www.behance.net/priyankautkarkar" target="_blank" rel="noopener" title="Behance: Architecture Portfolio"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029H23.726zm-7.726-3h3.543c-.135-1.514-1.271-2.159-1.621-2.159-1.315 0-1.743.743-1.922 2.159zM9.848 7.116c.436.153.93.402 1.388.791.645.548 1.109 1.41 1.109 2.609 0 2.916-2.255 3.84-4.854 3.84H2V5h5.465c1.308 0 2.387.338 2.383 2.116zm-2.51 5.24c1.143 0 1.987-.365 1.987-1.445 0-1.174-.949-1.45-1.987-1.45H5v2.895h2.338zm-.395-4.24c.972 0 1.704-.287 1.704-1.226 0-.994-.792-1.164-1.704-1.164H5v2.39h1.943z"/></svg><span>Behance</span></a>
+        <a href="https://instagram.com/pri.anka" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a>
+        <a href="https://linkedin.com/in/priyanka-uttarkar" target="_blank" rel="noopener" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="4"/><path fill="#1a1a1a" d="M7 10h2v7H7zm1-3a1.1 1.1 0 110 2.2A1.1 1.1 0 018 7zm4 3h1.8v1h.03c.26-.48.9-1 1.87-1C17.6 10 18 11.37 18 13v4h-2v-3.5c0-.84-.02-1.9-1.17-1.9-1.17 0-1.35.91-1.35 1.85V17H12v-7z"/></svg><span>LinkedIn</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="sc-footer-bar">
+    <span class="sc-footer-copy">© 2026 Priyanka Uttarkar · built with too many tiny iterations (and a good playlist).</span>
+    <nav class="sc-footer-links" aria-label="Footer">
+      <a href="/index.html#rct-section">Product work</a><span>·</span><a href="/graphic/index.html#work">Graphic work</a><span>·</span><a href="#" data-sc-top>Back to top ↑</a>
+    </nav>
+  </div>
+</footer>
+<script src="/site-chrome.js" defer></script>
 
 </body>
 </html>
