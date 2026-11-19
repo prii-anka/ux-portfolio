@@ -483,6 +483,14 @@
       .gx-lb-nav.prev { left:8px; } .gx-lb-nav.next { right:8px; }
     }
     body.gx-lb-open #ready-badge { display:none; }
+    .gx-enter { position:fixed; right:36px; bottom:84px; z-index:60; display:inline-flex; align-items:center; gap:10px; min-height:48px; padding:0 22px; border:0; border-radius:999px; background:#0a4a23; color:#FFF0F5; font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:600; cursor:pointer; box-shadow:0 10px 24px -8px rgba(10,74,35,.55); transition:opacity .3s, transform .2s; }
+    .gx-enter:hover { transform:translateY(-2px); }
+    .gx-enter:focus-visible { outline:2px solid #fff; outline-offset:3px; }
+    .gx-enter span { display:inline-block; animation:gxBob 1.6s ease-in-out infinite; }
+    @keyframes gxBob { 0%,100% { transform:translateY(-1px); } 50% { transform:translateY(3px); } }
+    body.curtain-open .gx-enter { opacity:0; pointer-events:none; }
+    @media (prefers-reduced-motion:reduce) { .gx-enter span { animation:none; } }
+    @media (max-width:768px) { .gx-enter { right:auto; left:50%; transform:translateX(-50%); bottom:190px; } .gx-enter:hover { transform:translateX(-50%); } }
     @media (max-width:640px) {
       body.curtain-open #ready-badge { opacity:0; transition:opacity .3s; }
       .gx { padding:36px 16px 56px; }
@@ -878,6 +886,8 @@
   <span class="hero-bl-line1">Hi, I'm Priyanka</span>
   <span class="hero-bl-role">Graphic Designer</span>
 </div>
+
+<button type="button" class="gx-enter" id="gxEnter">View my work <span aria-hidden="true">↓</span></button>
 
 
 <!-- Toasts -->
@@ -1351,6 +1361,19 @@
     document.body.classList.remove('curtain-open');
     setTimeout(function() { curtainCooldown = false; }, 1100);
   }
+
+  function openCurtain() {
+    if (curtainOpen) return;
+    curtainOpen = true;
+    curtainCooldown = true;
+    hideToasts();
+    document.body.classList.add('curtain-open');
+    setTimeout(function() { curtainCooldown = false; }, 1100);
+  }
+  var gxEnter = document.getElementById('gxEnter');
+  if (gxEnter) gxEnter.addEventListener('click', function(e) { e.stopPropagation(); openCurtain(); });
+  // Arriving from a case study (#work) opens the projects straight away
+  if (location.hash === '#work') { setTimeout(openCurtain, 250); }
 
   // ── Touch swipe support (mobile) ──
   var touchStartY = 0;
