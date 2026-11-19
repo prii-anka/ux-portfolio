@@ -295,6 +295,27 @@ footer ul{margin:12px 0 0;padding-left:18px;font-size:14px;display:flex;flex-dir
   .tag{font-size:24px}
   .hmw{padding:32px 24px}.hmw .t{font-size:28px}
   .beats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .curve{padding:16px 0 4px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .curve svg{min-width:640px;padding:0 12px}
+  .curve::after{content:"Swipe to see the full trip →";display:block;font:500 12px 'JetBrains Mono',monospace;color:var(--mute);padding:8px 16px 4px;position:sticky;left:0}
+  .pipe{flex-direction:column}
+  .pstep{flex:none}
+  .parrow{flex:none;height:24px;transform:rotate(90deg)}
+  .tbl.stack thead{display:none}
+  .tbl.stack, .tbl.stack tbody, .tbl.stack tr, .tbl.stack td{display:block;width:100%}
+  .tbl.stack tr{padding:14px 8px;border-bottom:1px solid var(--line)}
+  .tbl.stack tr:last-child{border-bottom:0}
+  .tbl.stack td{border:0;padding:3px 8px}
+  .tbl.stack td:first-child{font-size:16px;padding-bottom:6px}
+  .tbl.stack td:not(:first-child)::before{display:block;font:600 11px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+  .tbl.dec td:nth-child(2)::before{content:"Chose"}
+  .tbl.dec td:nth-child(3)::before{content:"Over"}
+  .tbl.dec td:nth-child(4)::before{content:"Why, and the trade-off"}
+  .tbl.crit td:nth-child(2)::before{content:"A · Button"}
+  .tbl.crit td:nth-child(3)::before{content:"B · History"}
+  .tbl.crit td:nth-child(4)::before{content:"C · Encore"}
+  .tbl.cmp td:nth-child(2)::before{content:"Helps"}
+  .tbl.cmp td:nth-child(3)::before{content:"Breaks down"}
   .flow{grid-template-columns:1fr;gap:26px}
   .fstep{flex-direction:row;align-items:center}
   .fstep:not(:last-child)::after{display:block!important;right:auto;left:26px;top:auto;bottom:-23px;transform:rotate(90deg)}
@@ -308,6 +329,7 @@ footer ul{margin:12px 0 0;padding-left:18px;font-size:14px;display:flex;flex-dir
   .dot.enc b{font-size:15px}
   .top nav{display:none}
 }
+@media (max-width:480px){.beats{grid-template-columns:1fr}}
 @media (max-width:360px){.phone{transform:scale(.9);transform-origin:top center}}
 </style>
 </head>
@@ -538,7 +560,7 @@ footer ul{margin:12px 0 0;padding-left:18px;font-size:14px;display:flex;flex-dir
       <p class="small">Everything that keeps the music asks for work upfront. Everything effortless forgets it. Nobody sits in the corner where it is kept with no effort, so that is where Encore aims.</p>
       <details>
         <summary>See the full comparison</summary>
-        <div class="tscroll" style="margin-top:14px"><table class="tbl"><thead><tr><th>Option</th><th>Helps</th><th>Breaks down</th></tr></thead><tbody>
+        <div class="tscroll" style="margin-top:14px"><table class="tbl stack cmp"><thead><tr><th>Option</th><th>Helps</th><th>Breaks down</th></tr></thead><tbody>
           <tr><td>Group Jam</td><td>Everyone queues from their own phone</td><td>The shared queue is gone when it ends</td></tr>
           <tr><td>Recently Played</td><td>Logs some history</td><td>Not grouped by session, misses autoplay</td></tr>
           <tr><td>Collaborative playlist</td><td>Saves by design</td><td>Must be set up before the trip</td></tr>
@@ -641,7 +663,7 @@ footer ul{margin:12px 0 0;padding-left:18px;font-size:14px;display:flex;flex-dir
       <div class="verdict">Chosen</div>
     </div>
   </div>
-  <div class="tscroll" style="margin-top:24px"><table class="tbl"><thead><tr><th>Criteria</th><th>A · Button</th><th>B · History</th><th>C · Encore</th></tr></thead><tbody>
+  <div class="tscroll" style="margin-top:24px"><table class="tbl stack crit"><thead><tr><th>Criteria</th><th>A · Button</th><th>B · History</th><th>C · Encore</th></tr></thead><tbody>
     <tr><td>Effort during the trip</td><td><span class="pill p-bad">High</span></td><td><span class="pill p-good">None</span></td><td><span class="pill p-good">None</span></td></tr>
     <tr><td>Chance people notice it</td><td><span class="pill p-bad">Low</span></td><td><span class="pill p-bad">Low</span></td><td><span class="pill p-good">High</span></td></tr>
     <tr><td>Risk of feeling noisy</td><td><span class="pill p-good">None</span></td><td><span class="pill p-good">None</span></td><td><span class="pill p-mid">Medium</span> the risk to design for</td></tr>
@@ -851,7 +873,7 @@ footer ul{margin:12px 0 0;padding-left:18px;font-size:14px;display:flex;flex-dir
     <div class="eyebrow">09 · Decision log</div>
     <h2 class="h2">The calls I made, and what I gave up.</h2>
   </div>
-  <div class="tscroll"><table class="tbl"><thead><tr><th>Decision</th><th>Chose</th><th>Over</th><th>Why, and the trade-off</th></tr></thead><tbody>
+  <div class="tscroll"><table class="tbl stack dec"><thead><tr><th>Decision</th><th>Chose</th><th>Over</th><th>Why, and the trade-off</th></tr></thead><tbody>
     <tr><td>Where to ask</td><td>Home card</td><td>Push notification</td><td>Safer near driving and calmer. Some people will open the app too late, and we accept that.</td></tr>
     <tr><td>Minimum session</td><td>10+ songs</td><td>Any length</td><td>Protects trust on short commutes. Small sessions still go to history.</td></tr>
     <tr><td>Song order</td><td>As played</td><td>Re-sorted by mood</td><td>The order is part of the memory. A smart reorder can come later as an option.</td></tr>

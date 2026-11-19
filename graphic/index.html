@@ -482,9 +482,11 @@
       .gx-lb-nav { width:40px; height:40px; font-size:22px; }
       .gx-lb-nav.prev { left:8px; } .gx-lb-nav.next { right:8px; }
     }
+    body.gx-lb-open #ready-badge { display:none; }
     @media (max-width:640px) {
+      body.curtain-open #ready-badge { opacity:0; transition:opacity .3s; }
       .gx { padding:36px 16px 56px; }
-      .gx-filters { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; width:100%; }
+      .gx-filters { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; width:100%; padding-right:28px; -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent); mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent); }
       .gx-filters::-webkit-scrollbar { display:none; }
       .gx-chip { flex:none; }
       .gx-feature-body { padding:24px 20px; }
