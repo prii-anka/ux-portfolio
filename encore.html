@@ -1,0 +1,957 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Encore Case Study</title>
+<meta name="description" content="Encore: a self-initiated product design case study by Priyanka Uttarkar.">
+<link rel="icon" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --paper:#FAFAF8;--sand:#F1EFEA;--white:#FFFFFF;
+  --ink:#121317;--ink2:#3A3D45;--mute:#5A5D66;--line:#E3E1DB;
+  --sun:#FF6A3D;--sunText:#B4380F;--ember:#1A0B05;--peach:#FFD8C7;--glow:#FFF4EC;
+  --dusk:#7B6CF6;--duskSoft:#B9B0FF;--night:#0F1220;--night2:#15171F;--slate:#2A2E44;--slate2:#3A3F57;
+  --fog:#A9ADBB;--fog2:#C9CCD8;--mint:#8EE3B0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 'Inter',system-ui,sans-serif;color-scheme:light;-webkit-font-smoothing:antialiased}
+a{color:var(--sunText)}a:hover{color:#7E260A}
+img,svg{display:block}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;font-family:'Bricolage Grotesque',sans-serif}
+p{margin:0}
+
+/* ---------- top bar ---------- */
+.top{position:sticky;top:0;z-index:20;background:rgba(250,250,248,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;flex-wrap:wrap}
+.back{font-weight:600;font-size:14px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px}
+.back:hover{color:var(--sunText)}
+.top nav{display:flex;flex-wrap:wrap;gap:22px;font-size:14px;font-weight:500}
+.top nav a{color:var(--ink2);text-decoration:none}
+.top nav a:hover{color:var(--sunText)}
+
+/* ---------- sections ---------- */
+.sec{padding:112px 0}
+.sand{background:var(--sand)}
+.dark{background:var(--night);color:#F4F2EE}
+.eyebrow{font:600 12.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--sunText)}
+.dark .eyebrow{color:#FFB49B}
+.head{display:flex;flex-direction:column;gap:16px;max-width:780px;margin-bottom:56px}
+.h2{font-weight:800;font-size:52px;line-height:1.02;letter-spacing:-.03em}
+.lead{font-size:19px;color:var(--ink2);max-width:700px}
+.dark .lead{color:var(--fog)}
+.mono{font:500 12px 'JetBrains Mono',monospace;color:var(--mute);letter-spacing:.02em}
+.dark .mono{color:var(--fog)}
+.label{font:600 11.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--fog)}
+.card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:24px}
+.sand .card{background:var(--paper);border-color:transparent}
+.grid{display:grid;gap:16px}
+.g-auto{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.small{font-size:15px;color:var(--ink2)}
+.dark .small{color:var(--fog2)}
+.ttl{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:21px;line-height:1.2}
+.icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--glow);flex:none}
+.icon svg{width:20px;height:20px;stroke:var(--sunText);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.icon.d{background:#ECEAFF}.icon.d svg{stroke:#4B3FC0}
+.dark .icon{background:#1A1C36}.dark .icon svg{stroke:var(--duskSoft)}
+
+/* ---------- phone ---------- */
+.phone{position:relative;width:300px;height:620px;border-radius:46px;background:#05060A;padding:10px;flex:none;box-shadow:0 30px 60px -20px rgba(15,18,32,.45),inset 0 0 0 1.5px #2A2E44}
+.scr{position:relative;width:100%;height:100%;border-radius:37px;background:var(--night2);overflow:hidden;color:#F4F2EE;display:flex;flex-direction:column;gap:14px;padding:50px 16px 16px}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:88px;height:25px;border-radius:14px;background:#05060A;z-index:3}
+.sbar{position:absolute;top:14px;left:24px;right:22px;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:600}
+.sbar span:last-child{display:flex;gap:5px;align-items:center}
+.art{display:block;width:100%;aspect-ratio:1;border-radius:8px;overflow:hidden}
+.greet{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px}
+.ecard{background:var(--sun);border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:11px;color:var(--ember)}
+.ecard .lab{display:flex;justify-content:space-between;align-items:center;font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.12em}
+.ecard .big{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;line-height:1.04;letter-spacing:-.02em}
+.ecard .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.ecard .meta{font-size:12.5px;font-weight:600}
+.ecard .btns{display:flex;gap:6px}
+.btn1{flex:1;min-height:42px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:var(--ember);color:var(--glow);font-size:13px;font-weight:600;text-decoration:none}
+.btn2{min-height:42px;padding:0 13px;display:flex;align-items:center;border-radius:999px;border:1.5px solid var(--ember);color:var(--ember);font-size:13px;font-weight:600;text-decoration:none}
+.sub{font-size:13px;font-weight:700}
+.rowlist{display:flex;flex-direction:column;gap:9px}
+.ri{display:flex;gap:10px;align-items:center;font-size:12.5px}
+.ri .art{width:40px;flex:none;border-radius:7px}
+.ri small{display:block;font-size:11px;color:var(--fog)}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.trio small{display:block;font-size:11px;color:var(--fog2);margin-top:5px}
+.mini{margin-top:auto;display:flex;align-items:center;gap:10px;background:#1D2030;border-radius:14px;padding:8px}
+.mini .art{width:38px;flex:none;border-radius:7px}
+.mini b{display:block;font-size:12px}.mini small{font-size:11px;color:var(--fog)}
+.mini .pp{margin-left:auto;width:30px;height:30px;border-radius:50%;background:#F4F2EE;display:flex;align-items:center;justify-content:center;flex:none}
+.prog{height:2px;background:#2A2E44;border-radius:2px;overflow:hidden;margin-top:-6px}
+.prog i{display:block;height:100%;width:38%;background:#F4F2EE}
+
+/* ---------- hero ---------- */
+.hero{background:var(--night);color:#F4F2EE;overflow:hidden}
+.hero .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:56px;padding-top:96px;padding-bottom:104px}
+.hero-copy{flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:28px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:500 12px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border:1px solid var(--slate2);border-radius:999px;color:var(--fog2)}
+.h1{font-weight:800;font-size:112px;line-height:.9;letter-spacing:-.04em}
+.tag{font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:32px;line-height:1.2;letter-spacing:-.01em;max-width:620px}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 32px;padding-top:24px;border-top:1px solid var(--slate);max-width:560px}
+.facts div div:last-child{font-weight:600}
+.hero-art{flex:1 1 320px;display:flex;justify-content:center;position:relative}
+.hero-art::before{content:"";position:absolute;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(255,106,61,.35),rgba(123,108,246,.18) 45%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
+.hero-art .phone{box-shadow:0 40px 80px -20px rgba(0,0,0,.6),inset 0 0 0 1.5px #2A2E44}
+
+/* ---------- at a glance ---------- */
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px}
+.glance > div{border-top:2px solid var(--ink);padding-top:20px;display:flex;flex-direction:column;gap:10px}
+.glance > div.hl{border-top-color:var(--sun)}
+
+/* ---------- stats ---------- */
+.stat{display:flex;flex-direction:column;gap:6px}
+.stat .n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:56px;line-height:1;letter-spacing:-.03em}
+.stat.inv{background:var(--night);color:#F4F2EE}
+.stat.inv .n{color:var(--sun)}
+.stat .src{font-size:13.5px;color:var(--mute)}
+.stat.inv .src{color:var(--fog)}
+.stat.inv a{color:#FFB49B}
+.memory{display:flex;flex-wrap:wrap;gap:32px;align-items:center;margin-top:16px}
+.memory .ttl{flex:1 1 260px;font-size:26px}
+.memory p{flex:2 1 420px;color:var(--ink2)}
+
+/* ---------- emotion curve ---------- */
+.curve{padding:28px 28px 8px}
+.curve svg{width:100%;height:auto}
+.beats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:16px}
+.beat{display:flex;flex-direction:column;gap:6px;padding:18px;border-radius:16px;background:var(--paper)}
+.beat .k{display:flex;align-items:center;gap:8px}
+.num{width:24px;height:24px;border-radius:50%;background:var(--dusk);color:#fff;font:700 12px Inter;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.beat.gap{background:var(--glow);outline:2px solid var(--sun)}
+.beat.gap .num{background:var(--sunText)}
+
+/* ---------- quotes / avatars ---------- */
+.av{width:56px;height:56px;border-radius:50%;flex:none}
+.quote{display:flex;gap:16px;align-items:flex-start}
+.quote p{font-size:16px;color:var(--ink2)}
+.quote .who{font-weight:700;font-size:14px;margin-bottom:4px;color:var(--ink)}
+.bubble{position:relative;background:var(--sand);border-radius:4px 18px 18px 18px;padding:14px 16px}
+.sand .card.quote{background:var(--white)}
+.quotes{grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))}
+.quote .av{width:64px;height:64px}
+
+/* ---------- 2x2 map ---------- */
+.mapwrap{display:flex;flex-wrap:wrap;gap:40px;align-items:center}
+.mapbox{flex:1 1 440px;min-width:0;display:grid;grid-template-columns:28px 1fr;grid-template-rows:1fr 32px;gap:6px}
+.ylab{writing-mode:vertical-rl;transform:rotate(180deg);font:600 11.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);text-align:center}
+.xlab{grid-column:2;font:600 11.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);text-align:center;padding-top:6px}
+.map{position:relative;aspect-ratio:1/.82;border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);background:var(--white);border-radius:0 16px 0 0}
+.map::before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:1.5px dashed var(--line)}
+.map::after{content:"";position:absolute;top:50%;left:0;right:0;border-top:1.5px dashed var(--line)}
+.q-hl{position:absolute;left:0;top:0;width:50%;height:50%;background:var(--glow);border-radius:0 0 16px 0}
+.q-hl span{position:absolute;left:14px;top:12px;font:600 11px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--sunText)}
+.ax{position:absolute;font:500 11px 'JetBrains Mono',monospace;color:var(--fog)}
+.dot{position:absolute;transform:translate(-50%,50%);display:flex;align-items:center;gap:8px;z-index:2;white-space:nowrap}
+.dot i{width:14px;height:14px;border-radius:50%;background:var(--slate2);flex:none;box-shadow:0 0 0 4px var(--white)}
+.dot b{font-size:13px;font-weight:600;color:var(--ink2)}
+.dot.left{flex-direction:row-reverse}
+.dot.enc i{width:22px;height:22px;background:var(--sun)}
+.dot.enc b{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;color:var(--ink)}
+.mapside{flex:1 1 300px;display:flex;flex-direction:column;gap:16px}
+details{border-top:1px solid #D6D3CB;padding-top:14px}
+summary{cursor:pointer;font-weight:600;font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
+.tbl th{text-align:left;font:600 12px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);padding:12px 16px;border-bottom:1.5px solid var(--ink)}
+.tbl td{padding:15px 16px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink2)}
+.tbl td:first-child{font-weight:600;color:var(--ink)}
+.tscroll{overflow-x:auto;background:var(--white);border-radius:20px;padding:8px;border:1px solid var(--line)}
+.sand .tscroll{background:var(--paper);border-color:transparent}
+
+/* ---------- insights ---------- */
+.ins{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));border-top:1.5px solid var(--ink)}
+.ins > div{padding:28px 24px 28px 0;border-bottom:1px solid var(--line);display:flex;gap:16px}
+.ins .bn{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:40px;line-height:1;color:var(--sun)}
+.hmw{background:var(--sun);color:var(--ember);border-radius:24px;padding:48px 40px;margin-top:40px}
+.hmw .t{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:40px;line-height:1.1;letter-spacing:-.02em;margin-top:12px;max-width:900px}
+
+/* ---------- sketches ---------- */
+.sketch{display:flex;flex-direction:column;gap:12px}
+.paper{border-radius:14px;background:#FFFDF6 radial-gradient(circle,#E6E1D3 1px,transparent 1.2px) 0 0/14px 14px;border:1px solid #ECE6D6;padding:8px}
+.paper svg{width:100%;height:auto}
+.verdict{font-size:14px;font-weight:600;color:var(--mute)}
+.sketch.win{outline:2px solid var(--sun)}
+.sketch.win .verdict{color:var(--sunText)}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:600}
+.p-good{background:#DDF5E7;color:#1D6B43}.p-mid{background:#FFF0D6;color:#8A5A00}.p-bad{background:#FFE2DC;color:#9C2A10}
+
+/* ---------- pipeline (dark) ---------- */
+.pipe{display:flex;flex-wrap:wrap;align-items:stretch;gap:12px}
+.pstep{flex:1 1 200px;border:1px solid var(--slate2);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.pstep b{font-size:16px}
+.pstep p{font-size:14px;color:var(--fog2)}
+.pstep.gate{border-color:var(--dusk);background:#1A1C36}
+.pstep.out{border:2px solid var(--sun)}
+.parrow{display:flex;align-items:center;justify-content:center;flex:0 0 24px}
+
+/* ---------- loop flow ---------- */
+.flow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:30px}
+.fstep{position:relative;display:flex;flex-direction:column;gap:10px;background:var(--paper);border-radius:18px;padding:18px 16px}
+.fstep .i2{width:40px;height:40px;border-radius:50%;background:var(--night);display:flex;align-items:center;justify-content:center}
+.fstep .i2 svg{width:19px;height:19px;stroke:#F4F2EE;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fstep.key{background:var(--sun);color:var(--ember)}
+.fstep.key .i2{background:var(--ember)}
+.fstep b{font-size:15px;line-height:1.25}
+.fstep small{font-size:13px;color:var(--mute);line-height:1.4}
+.fstep.key small{color:#5A2410}
+.fstep:not(:last-child)::after{content:"";position:absolute;right:-24px;top:38px;width:18px;height:18px;background:no-repeat center/18px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237B6CF6' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E")}
+.loopback{display:flex;align-items:center;gap:10px;margin-top:18px;font-size:14px;font-weight:600;color:#4B3FC0}
+.loopback svg{width:20px;height:20px;stroke:#4B3FC0;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.branches{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:24px}
+.branch{border:1.5px dashed #BDB8AC;border-radius:16px;padding:18px 20px;display:flex;gap:14px}
+.branch .from{font:600 11.5px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+
+/* ---------- final design ---------- */
+.fd{display:flex;flex-wrap:wrap;align-items:center;gap:64px;padding:56px 0;border-top:1px solid var(--line)}
+.head + .fd{border-top:0;padding-top:0}
+.fd.rev{flex-direction:row-reverse}
+.fd .stage{flex:0 0 auto;margin:0 auto;position:relative;padding:0 20px}
+.fd .notes{flex:1 1 380px;display:flex;flex-direction:column;gap:20px}
+.fd .step{font:600 12.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--sunText)}
+.fd h3{font-weight:800;font-size:36px;line-height:1.05;letter-spacing:-.02em}
+.callouts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.callouts li{display:flex;gap:14px;align-items:flex-start;font-size:16px;color:var(--ink2)}
+.callouts li b{color:var(--ink)}
+.cn{width:28px;height:28px;border-radius:50%;background:var(--sun);color:var(--ember);font:700 13px Inter;display:inline-flex;align-items:center;justify-content:center;flex:none;margin-top:-1px}
+.pin{position:absolute;right:-4px;width:28px;height:28px;border-radius:50%;background:var(--sun);color:var(--ember);font:700 13px Inter;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px var(--paper);z-index:5}
+.pin::before{content:"";position:absolute;right:100%;top:50%;width:30px;height:2px;background:var(--sun)}
+.pin.l{right:auto;left:-4px}
+.pin.l::before{right:auto;left:100%}
+.motion{display:flex;gap:12px;align-items:center;background:#ECEAFF;color:#2B2563;border-radius:14px;padding:12px 16px;font-size:14.5px}
+.motion .live{font:600 11px 'JetBrains Mono',monospace;letter-spacing:.08em;background:var(--dusk);color:#fff;border-radius:999px;padding:4px 9px;display:flex;align-items:center;gap:6px;flex:none}
+.motion .live::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.25}}
+.anim{animation:cardIn 6s cubic-bezier(.2,.8,.2,1) infinite;transform-origin:50% 0}
+@keyframes cardIn{0%,8%{opacity:0;transform:translateY(-18px) scale(.96)}20%,86%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-18px) scale(.96)}}
+@media (prefers-reduced-motion:reduce){.anim,.motion .live::before{animation:none}}
+
+/* ---------- edge cases ---------- */
+.edge{display:flex;gap:14px;align-items:flex-start}
+
+/* ---------- visual language ---------- */
+.sw{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--white)}
+.sw > div:first-child{height:120px}
+.sw > div:last-child{padding:14px}
+.typebox{flex:2 1 440px;border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:18px;background:var(--white)}
+.trow{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.compbox{flex:1 1 280px;background:var(--night);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;color:#F4F2EE}
+
+/* ---------- metric tree ---------- */
+.tree{display:flex;flex-direction:column;align-items:center}
+.ns{max-width:560px;width:100%;border:2px solid var(--sun);border-radius:20px;padding:26px 28px;text-align:center;display:flex;flex-direction:column;gap:8px;background:#161A2E}
+.ns .t{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:30px;line-height:1.1}
+.stem{width:2px;height:36px;background:var(--slate2)}
+.tier{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;position:relative;padding-top:34px}
+.tier::before{content:"";position:absolute;top:0;left:16.66%;right:16.66%;height:2px;background:var(--slate2)}
+.tier > div{position:relative;border:1px solid var(--slate2);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px}
+.tier > div::before{content:"";position:absolute;top:-34px;left:50%;width:2px;height:34px;background:var(--slate2)}
+.tier .v{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:28px;line-height:1;color:#FFB49B}
+.tier b{font-size:16px}
+.tier p{font-size:14px;color:var(--fog2)}
+.tier.guard > div{border-style:dashed;border-color:#5C4A6E}
+.tier.guard::before,.tier.guard > div::before{display:none}
+.tier.guard .v{color:var(--duskSoft)}
+.tierlab{width:100%;display:flex;justify-content:center;margin-top:28px}
+.tierlab span{font:600 11.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--fog);background:var(--night);padding:0 12px}
+.road{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:64px;position:relative}
+.road::before{content:"";position:absolute;top:7px;left:0;right:0;height:2px;background:var(--slate2)}
+.road > div{position:relative;padding-top:30px;display:flex;flex-direction:column;gap:6px}
+.road > div::before{content:"";position:absolute;top:0;left:0;width:16px;height:16px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 5px var(--night)}
+.road > div:nth-child(2)::before{background:var(--dusk)}
+.road > div:nth-child(3)::before{background:var(--slate2)}
+.road .mono{color:#FFB49B}
+.road p{font-size:15px;color:var(--fog2)}
+
+/* ---------- reflection ---------- */
+.refl{display:flex;flex-wrap:wrap;gap:48px}
+.refl > div:first-child{flex:1 1 300px;display:flex;flex-direction:column;gap:16px}
+.refl > div:last-child{flex:2 1 480px;display:flex;flex-direction:column;gap:22px}
+.refl .item{border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:6px}
+.refl .item p{color:var(--ink2)}
+
+footer{background:var(--sand);border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:40px;padding-top:56px;padding-bottom:56px}
+footer ul{margin:12px 0 0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:6px}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .flow{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .fstep:nth-child(4)::after{display:none}
+}
+@media (max-width:760px){
+  .wrap{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+  .sec{padding:76px 0}
+  .h1{font-size:68px}
+  .h2{font-size:36px}
+  .tag{font-size:24px}
+  .hmw{padding:32px 24px}.hmw .t{font-size:28px}
+  .beats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow{grid-template-columns:1fr;gap:26px}
+  .fstep{flex-direction:row;align-items:center}
+  .fstep:not(:last-child)::after{display:block!important;right:auto;left:26px;top:auto;bottom:-23px;transform:rotate(90deg)}
+  .tier{grid-template-columns:1fr;padding-top:16px}
+  .tier::before,.tier > div::before{display:none}
+  .road{grid-template-columns:1fr}
+  .road::before{display:none}
+  .fd{gap:40px}
+  .fd h3{font-size:28px}
+  .dot b{font-size:12px}
+  .dot.enc b{font-size:15px}
+  .top nav{display:none}
+}
+@media (max-width:360px){.phone{transform:scale(.9);transform-origin:top center}}
+</style>
+</head>
+<body>
+
+<!-- ===== shared art: album covers + avatars ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="g-sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC371"/><stop offset=".55" stop-color="#FF6A3D"/><stop offset="1" stop-color="#8E2D6E"/></linearGradient>
+  <linearGradient id="g-dusk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#231D55"/><stop offset="1" stop-color="#7B6CF6"/></linearGradient>
+  <linearGradient id="g-desert" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE7CC"/><stop offset="1" stop-color="#FFB49B"/></linearGradient>
+  <linearGradient id="g-sea" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0B4F4C"/><stop offset="1" stop-color="#3FBF9A"/></linearGradient>
+  <linearGradient id="g-night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0F1220"/><stop offset="1" stop-color="#3A3F57"/></linearGradient>
+  <linearGradient id="g-pink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF9BB3"/><stop offset="1" stop-color="#7B6CF6"/></linearGradient>
+  <clipPath id="av-clip"><circle cx="32" cy="32" r="32"/></clipPath>
+
+  <symbol id="a-sun" viewBox="0 0 100 100"><rect width="100" height="100" fill="url(#g-sun)"/><circle cx="50" cy="62" r="22" fill="#FFE8B0"/><rect y="62" width="100" height="38" fill="#3B1240"/><rect y="68" width="100" height="3" fill="#FF6A3D" opacity=".75"/><rect y="76" width="100" height="2" fill="#FF6A3D" opacity=".55"/><rect y="84" width="100" height="1.5" fill="#FF6A3D" opacity=".4"/></symbol>
+  <symbol id="a-dusk" viewBox="0 0 100 100"><rect width="100" height="100" fill="url(#g-dusk)"/><circle cx="72" cy="28" r="9" fill="#FFF4EC"/><g fill="none" stroke="#B9B0FF" stroke-width="3" stroke-linecap="round"><path d="M-5 62 Q20 48 45 62 T95 62 T145 62"/><path d="M-5 74 Q20 60 45 74 T95 74" opacity=".7"/><path d="M-5 86 Q20 72 45 86 T95 86" opacity=".45"/></g></symbol>
+  <symbol id="a-desert" viewBox="0 0 100 100"><rect width="100" height="100" fill="url(#g-desert)"/><circle cx="70" cy="32" r="11" fill="#FF6A3D"/><path d="M0 76 L26 48 L46 68 L70 40 L100 70 V100 H0Z" fill="#C2643C"/><path d="M0 86 L40 72 L100 88 V100 H0Z" fill="#8A3F22"/><rect x="18" y="70" width="5" height="22" rx="2.5" fill="#2E5E3E"/><rect x="13" y="76" width="4" height="9" rx="2" fill="#2E5E3E"/><rect x="24" y="73" width="4" height="8" rx="2" fill="#2E5E3E"/></symbol>
+  <symbol id="a-sea" viewBox="0 0 100 100"><rect width="100" height="100" fill="url(#g-sea)"/><g fill="none" stroke="#DDF5E7" stroke-width="2"><circle cx="50" cy="50" r="10" opacity=".9"/><circle cx="50" cy="50" r="20" opacity=".65"/><circle cx="50" cy="50" r="30" opacity=".45"/><circle cx="50" cy="50" r="40" opacity=".25"/></g><circle cx="50" cy="50" r="4" fill="#FFF4EC"/></symbol>
+  <symbol id="a-road" viewBox="0 0 100 100"><rect width="100" height="100" fill="url(#g-night)"/><g fill="#F4F2EE"><circle cx="18" cy="16" r="1.2"/><circle cx="40" cy="10" r=".9"/><circle cx="66" cy="20" r="1.3"/><circle cx="84" cy="9" r="1"/><circle cx="90" cy="30" r=".8"/></g><path d="M38 52 H62 L92 100 H8Z" fill="#2A2E44"/><path d="M50 56 V64 M50 70 V80 M50 86 V100" stroke="#FFB49B" stroke-width="2.5"/><rect y="50" width="100" height="3" fill="#7B6CF6" opacity=".7"/></symbol>
+  <symbol id="a-pink" viewBox="0 0 100 100"><rect width="100" height="100" fill="url(#g-pink)"/><circle cx="36" cy="40" r="20" fill="#FFF4EC" opacity=".9"/><circle cx="62" cy="62" r="24" fill="#1A0B05" opacity=".85"/><circle cx="62" cy="62" r="5" fill="#FF9BB3"/></symbol>
+
+  <!-- avatars (Memoji style) -->
+  <symbol id="m-dad" viewBox="0 0 64 64"><g clip-path="url(#av-clip)">
+    <rect width="64" height="64" fill="#FFD8C7"/>
+    <path d="M9 68c2-13 11-18 23-18s21 5 23 18z" fill="#7B6CF6"/>
+    <rect x="27" y="40" width="10" height="12" rx="4" fill="#D49A72"/>
+    <circle cx="19.5" cy="32" r="3.2" fill="#E8B48C"/><circle cx="44.5" cy="32" r="3.2" fill="#E8B48C"/>
+    <ellipse cx="32" cy="30" rx="12.5" ry="14" fill="#E8B48C"/>
+    <path d="M19.4 29.5c-1-10.5 5-16.5 12.6-16.5s13.6 6 12.6 16.5c-2-5.5-6.2-8.5-12.6-8.5s-10.6 3-12.6 8.5z" fill="#3B2A20"/>
+    <path d="M20 32c0 9.5 5 14 12 14s12-4.5 12-14c-2 3-4 4.6-6 4.6-1.5-1.5-3.5-2.1-6-2.1s-4.5.6-6 2.1c-2 0-4-1.6-6-4.6z" fill="#3B2A20"/>
+    <path d="M24.5 25.6h4.4M35.1 25.6h4.4" stroke="#3B2A20" stroke-width="1.7" stroke-linecap="round"/>
+    <circle cx="27" cy="29.6" r="1.8" fill="#1A1A1A"/><circle cx="37" cy="29.6" r="1.8" fill="#1A1A1A"/>
+    <path d="M28.4 38.4q3.6 2.8 7.2 0" stroke="#F4F2EE" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+  </g></symbol>
+  <symbol id="m-kid" viewBox="0 0 64 64"><g clip-path="url(#av-clip)">
+    <rect width="64" height="64" fill="#CFEBDD"/>
+    <path d="M17 32c0-13 7-19.5 15-19.5s15 6.5 15 19.5v16c-3 3-7 3-9 0V33H26v15c-2 3-6 3-9 0z" fill="#6B3E26"/>
+    <path d="M10 68c2-12 11-17 22-17s20 5 22 17z" fill="#FF6A3D"/>
+    <rect x="27.5" y="40" width="9" height="12" rx="4" fill="#DDA982"/>
+    <ellipse cx="32" cy="31" rx="12" ry="13.5" fill="#F2C6A0"/>
+    <path d="M19.8 30c0-9.5 5.5-14.5 12.2-14.5S44.2 20.5 44.2 30c-4.5-1-8.2-4.4-10.2-8.4-2 4.2-7.6 7.4-14.2 8.4z" fill="#6B3E26"/>
+    <circle cx="27" cy="31" r="1.8" fill="#1A1A1A"/><circle cx="37" cy="31" r="1.8" fill="#1A1A1A"/>
+    <circle cx="23.6" cy="35.4" r="2.4" fill="#FF8A80" opacity=".45"/><circle cx="40.4" cy="35.4" r="2.4" fill="#FF8A80" opacity=".45"/>
+    <path d="M28 37q4 3.6 8 0" stroke="#1A1A1A" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+  </g></symbol>
+  <symbol id="m-trip" viewBox="0 0 64 64"><g clip-path="url(#av-clip)">
+    <rect width="64" height="64" fill="#FFE3A3"/>
+    <path d="M10 68c2-12 11-17 22-17s20 5 22 17z" fill="#0E6E6A"/>
+    <rect x="27.5" y="40" width="9" height="12" rx="4" fill="#8E5638"/>
+    <ellipse cx="32" cy="31.5" rx="12.5" ry="13.5" fill="#A86B48"/>
+    <g fill="#1F1410"><circle cx="21" cy="23" r="7"/><circle cx="29" cy="17.5" r="7.5"/><circle cx="38" cy="17.5" r="7"/><circle cx="44.5" cy="24" r="6.2"/><circle cx="18" cy="30" r="5"/><circle cx="46.5" cy="31" r="4.6"/></g>
+    <rect x="21.6" y="27.6" width="9" height="6.4" rx="2.6" fill="#1A1A1A"/><rect x="33.4" y="27.6" width="9" height="6.4" rx="2.6" fill="#1A1A1A"/>
+    <path d="M30.6 30h2.8" stroke="#1A1A1A" stroke-width="1.6"/>
+    <path d="M27.6 37.6q4.4 4.4 8.8 0z" fill="#FFF" stroke="#1A1A1A" stroke-width="1.2" stroke-linejoin="round"/>
+  </g></symbol>
+  <symbol id="m-host" viewBox="0 0 64 64"><g clip-path="url(#av-clip)">
+    <rect width="64" height="64" fill="#D9D4FF"/>
+    <path d="M10 68c2-12 11-17 22-17s20 5 22 17z" fill="#1A0B05"/>
+    <rect x="27.5" y="40" width="9" height="12" rx="4" fill="#D9A47E"/>
+    <ellipse cx="32" cy="31" rx="12.5" ry="13.5" fill="#F0C29E"/>
+    <path d="M19.6 28c0-9 5.6-14 12.6-14 7.4 0 12.6 5 12.4 13-3-4-8-6.5-14-6-4 .4-7.6 2.6-11 7z" fill="#C9772E"/>
+    <path d="M17.6 32a14.4 14.4 0 0 1 28.8 0" stroke="#121317" stroke-width="3.4" fill="none"/>
+    <rect x="14.4" y="28.4" width="7" height="11" rx="3" fill="#FF6A3D"/><rect x="42.6" y="28.4" width="7" height="11" rx="3" fill="#FF6A3D"/>
+    <path d="M25 31q2-2.2 4 0M35 31q2-2.2 4 0" stroke="#1A1A1A" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+    <path d="M28 36.6q4 3.8 8 0" stroke="#1A1A1A" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+  </g></symbol>
+  <symbol id="m-build" viewBox="0 0 64 64"><g clip-path="url(#av-clip)">
+    <rect width="64" height="64" fill="#C9DCF5"/>
+    <path d="M10 68c2-12 11-17 22-17s20 5 22 17z" fill="#3A3F57"/>
+    <rect x="27.5" y="40" width="9" height="12" rx="4" fill="#A86E4C"/>
+    <ellipse cx="32" cy="31.5" rx="12.5" ry="13.5" fill="#C68863"/>
+    <path d="M19 27.5c0-9.5 6-14.5 13-14.5s13 5 13 14.5z" fill="#FF6A3D"/>
+    <rect x="18" y="24" width="28" height="6.4" rx="3.2" fill="#E0552C"/>
+    <circle cx="32" cy="12.6" r="3.4" fill="#FFD8C7"/>
+    <circle cx="27" cy="33" r="4.2" fill="none" stroke="#121317" stroke-width="1.6"/><circle cx="37" cy="33" r="4.2" fill="none" stroke="#121317" stroke-width="1.6"/>
+    <path d="M31.2 33h1.6" stroke="#121317" stroke-width="1.6"/>
+    <circle cx="27" cy="33" r="1.5" fill="#1A1A1A"/><circle cx="37" cy="33" r="1.5" fill="#1A1A1A"/>
+    <path d="M28.6 39.4q3.4 2 6.8-.6" stroke="#1A1A1A" stroke-width="1.7" fill="none" stroke-linecap="round"/>
+  </g></symbol>
+
+  <symbol id="i-sig" viewBox="0 0 18 12"><g fill="#F4F2EE"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></g></symbol>
+  <symbol id="i-bat" viewBox="0 0 26 12"><rect x=".75" y=".75" width="21.5" height="10.5" rx="3" fill="none" stroke="#F4F2EE" stroke-opacity=".5" stroke-width="1.5"/><rect x="2.6" y="2.6" width="15" height="6.8" rx="1.6" fill="#F4F2EE"/><rect x="23.4" y="4" width="2" height="4" rx="1" fill="#F4F2EE" fill-opacity=".5"/></symbol>
+</defs>
+</svg>
+
+<header class="top"><div class="wrap">
+  <a class="back" href="index.html" aria-label="Back to pri.anka portfolio" title="Back to portfolio"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em">pri.anka</span></a>
+  <nav aria-label="Case study sections"><a href="#context">Context</a><a href="#research">Research</a><a href="#explore">Exploration</a><a href="#loop">The loop</a><a href="#design">Design</a><a href="#measure">Impact</a></nav>
+</div></header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top"><div class="wrap">
+  <div class="hero-copy">
+    <div class="chips"><span class="chip">Feature concept</span><span class="chip">Music streaming</span><span class="chip">0 to 1</span></div>
+    <h1 class="h1">Encore</h1>
+    <p class="tag">Every road trip writes its own playlist. Encore makes sure you get to keep it.</p>
+    <p style="font-size:18px;color:var(--fog);max-width:560px">A music app feature that notices when a group listening session ends and turns every song you played into a saved, shareable playlist in one tap.</p>
+    <div class="facts">
+      <div><div class="label">Role</div><div>Product designer, solo</div></div>
+      <div><div class="label">Scope</div><div>Research to test plan</div></div>
+      <div><div class="label">Type</div><div>Self-initiated concept</div></div>
+      <div><div class="label">Platform</div><div>iOS and Android</div></div>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="phone"><div class="island"></div><div class="scr">
+      <div class="sbar"><span>9:41</span><span><svg width="17" height="11"><use href="#i-sig"/></svg><svg width="24" height="11"><use href="#i-bat"/></svg></span></div>
+      <div class="greet">Good evening</div>
+      <div class="ecard">
+        <div class="lab"><span>ENCORE</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A0B05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <div class="big">That drive had a vibe.</div>
+        <div class="tiles"><svg class="art"><use href="#a-desert"/></svg><svg class="art"><use href="#a-sun"/></svg><svg class="art"><use href="#a-dusk"/></svg><svg class="art"><use href="#a-road"/></svg></div>
+        <div class="meta">36 songs · 2 hr 14 min · Today</div>
+        <div class="btns"><a class="btn1" href="#design">Save as playlist</a><a class="btn2" href="#design">Not now</a></div>
+      </div>
+      <div class="sub">Recently played</div>
+      <div class="trio">
+        <div><svg class="art"><use href="#a-sea"/></svg><small>Focus mix</small></div>
+        <div><svg class="art"><use href="#a-pink"/></svg><small>Weekend chill</small></div>
+        <div><svg class="art"><use href="#a-road"/></svg><small>Night drive</small></div>
+      </div>
+      <div class="mini"><svg class="art"><use href="#a-desert"/></svg><div><b>Saguaro Static</b><small>Desert Radio Club</small></div><div class="pp"><svg width="12" height="12" viewBox="0 0 24 24" fill="#15171F"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></div></div>
+      <div class="prog"><i></i></div>
+    </div></div>
+  </div>
+</div></section>
+
+<!-- ===== AT A GLANCE ===== -->
+<section class="sec"><div class="wrap">
+  <div class="eyebrow" style="margin-bottom:28px">At a glance</div>
+  <div class="glance">
+    <div><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg></div><div class="ttl">The problem</div><p class="small">The best playlists get built live, one shouted request at a time. When the trip ends, the app forgets all of it.</p></div>
+    <div><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div><div class="ttl">The bet</div><p class="small">Offer to save a session at the right moment, and people will keep it and play it again next trip.</p></div>
+    <div><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 17l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></div><div class="ttl">The solution</div><p class="small">Zero effort during the trip, one quiet card after it, and a playlist that comes back next time you get in the car.</p></div>
+    <div class="hl"><div class="icon"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><div class="ttl">Success looks like</div><p class="small">25% of cards saved, and half of those replayed within 30 days. Pilot targets, not results.</p></div>
+  </div>
+</div></section>
+
+<!-- ===== 01 CONTEXT ===== -->
+<section id="context" class="sec sand"><div class="wrap">
+  <div class="head">
+    <div class="eyebrow">01 · Context</div>
+    <h2 class="h2">Group listening is growing, and the car is where it happens.</h2>
+    <p class="lead">Before designing anything, I checked if this was my road trip problem or a real one. The numbers said real, and they pointed straight at the car.</p>
+  </div>
+  <div class="grid g-auto">
+    <div class="card stat"><div class="n">100M</div><b>monthly listening hours in Spotify Jam</b><div class="src">Group sessions, Aug 2025. <a href="https://newsroom.spotify.com/2025-08-25/jam-reaches-100-million-monthly-listening-hours/">Spotify Newsroom</a></div></div>
+    <div class="card stat inv"><div class="n">#1</div><b>Cars are the top device for Jam sessions</b><div class="src">Ahead of speakers, phones and TVs. <a href="https://newsroom.spotify.com/2025-08-25/jam-reaches-100-million-monthly-listening-hours/">Spotify Newsroom</a></div></div>
+    <div class="card stat"><div class="n">77%</div><b>of Premium subscribers listen in the car</b><div class="src">34% of all monthly users. <a href="https://www.ubergizmo.com/2026/10/spotify-launches-phone-free-app-for-cars/">Ubergizmo, Oct 2026</a></div></div>
+    <div class="card stat"><div class="n">~9B</div><b>playlists made by users</b><div class="src">People already love making them. <a href="https://interspacemusic.com/blog/spotify-q3-2025-earnings-growth-innovation-and-a-vision-for-the-future-of-music/">Q3 2025 recap</a></div></div>
+  </div>
+  <div class="card memory">
+    <div class="ttl">Why it matters beyond engagement</div>
+    <p>Music is one of our strongest memory triggers. In a UC Davis study, students recognized about 17 of 30 song clips, and about 13 of those brought back a specific memory (<a href="https://www.ucdavis.edu/news/study-finds-brain-hub-links-music-memory-and-emotion">Janata, 2009</a>). A trip playlist is a souvenir, and that shaped how Encore names, dresses and returns your sessions.</p>
+  </div>
+</div></section>
+
+<!-- ===== 02 THE MOMENT ===== -->
+<section class="sec"><div class="wrap">
+  <div class="head">
+    <div class="eyebrow">02 · The moment</div>
+    <h2 class="h2">Five friends, one car, thirty-six songs, zero saved.</h2>
+    <p class="lead">I mapped the mood of one real trip. The emotional peak and the product failure land in the same five minutes.</p>
+  </div>
+  <div class="card curve">
+    <svg viewBox="0 0 1000 330" role="img" aria-label="Mood rises from curious to peak during the trip, then drops to deflated on the next trip because the playlist was lost.">
+      <defs>
+        <linearGradient id="g-curve" x1="0" x2="1"><stop offset="0" stop-color="#7B6CF6"/><stop offset="1" stop-color="#FF6A3D"/></linearGradient>
+        <linearGradient id="g-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7B6CF6" stop-opacity=".18"/><stop offset="1" stop-color="#7B6CF6" stop-opacity="0"/></linearGradient>
+      </defs>
+      <g stroke="#E3E1DB" stroke-width="1"><path d="M70 50H990M70 130H990M70 210H990M70 290H990"/></g>
+      <g font-family="JetBrains Mono, monospace" font-size="13" fill="#A9ADBB"><text x="0" y="55">PEAK</text><text x="0" y="135">HIGH</text><text x="0" y="215">OK</text><text x="0" y="295">LOW</text></g>
+      <rect x="660" y="20" width="250" height="290" rx="16" fill="#FFF4EC"/>
+      <text x="785" y="44" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#B4380F" letter-spacing="1.5">THE GAP</text>
+      <text x="785" y="300" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#8A2A0C">The app forgets the session</text>
+      <path d="M100 250 C 200 240, 240 140, 360 130 S 560 60, 640 55 L 640 330 L 100 330 Z" fill="url(#g-area)"/>
+      <path d="M100 250 C 200 240, 240 140, 360 130 S 560 60, 640 55" fill="none" stroke="url(#g-curve)" stroke-width="5" stroke-linecap="round"/>
+      <path d="M640 55 C 720 55, 760 270, 880 275" fill="none" stroke="#B4380F" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round"/>
+      <g font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">
+        <circle cx="100" cy="250" r="15" fill="#7B6CF6"/><text x="100" y="255">1</text>
+        <circle cx="360" cy="130" r="15" fill="#7B6CF6"/><text x="360" y="135">2</text>
+        <circle cx="640" cy="55" r="15" fill="#FF6A3D"/><text x="640" y="60">3</text>
+        <circle cx="880" cy="275" r="15" fill="#B4380F"/><text x="880" y="280">4</text>
+      </g>
+    </svg>
+  </div>
+  <div class="beats">
+    <div class="beat"><div class="k"><span class="num">1</span><span class="mono">Sat · 10:02 AM</span></div><div class="ttl" style="font-size:18px">Who has the aux?</div><p class="small">Everyone has different taste, so the queue becomes a round of requests.</p></div>
+    <div class="beat"><div class="k"><span class="num">2</span><span class="mono">Sat · 11:30 AM</span></div><div class="ttl" style="font-size:18px">The queue finds its groove</div><p class="small">Throwbacks, a surprise discovery, one song everybody screams along to.</p></div>
+    <div class="beat"><div class="k"><span class="num" style="background:var(--sun)">3</span><span class="mono">Sat · 12:16 PM</span></div><div class="ttl" style="font-size:18px">Peak vibe, engine off</div><p class="small">They arrive. The phone disconnects. The best playlist of the year now lives only in five memories.</p></div>
+    <div class="beat gap"><div class="k"><span class="num">4</span><span class="mono" style="color:#8A2A0C">Next trip · 9:45 AM</span></div><div class="ttl" style="font-size:18px">"Okay, what do we play?"</div><p class="small">Back to zero. Nobody remembers that song from last time.</p></div>
+  </div>
+</div></section>
+
+<!-- ===== 03 RESEARCH ===== -->
+<section id="research" class="sec sand"><div class="wrap">
+  <div class="head">
+    <div class="eyebrow">03 · Research</div>
+    <h2 class="h2">Users had been asking for this for years.</h2>
+    <p class="lead">I started with what people already say in public, then mapped what exists today, then planned the research I could not do from forums.</p>
+  </div>
+
+  <div class="mono" style="margin-bottom:16px">What people are saying · paraphrased from Spotify Community threads</div>
+  <div class="grid quotes" style="margin-bottom:72px">
+    <div class="card quote"><svg class="av" role="img" aria-label="Avatar of a dad"><use href="#m-dad"/></svg><div><div class="who">The dad</div><div class="bubble"><p>"My daughter and I jammed all night. The next morning we wanted every song we played as a playlist."</p></div></div></div>
+    <div class="card quote"><svg class="av" role="img" aria-label="Avatar of a road tripper"><use href="#m-trip"/></svg><div><div class="who">The road trippers</div><div class="bubble"><p>"Two hours of trading songs on a road trip. We wanted that playlist as a memory of it."</p></div></div></div>
+    <div class="card quote"><svg class="av" role="img" aria-label="Avatar of a Jam host with headphones"><use href="#m-host"/></svg><div><div class="who">The Jam host</div><div class="bubble"><p>"Autoplayed songs in a Jam never show up in my history. The best surprises vanish first."</p></div></div></div>
+    <div class="card quote"><svg class="av" role="img" aria-label="Avatar of a developer with glasses and a beanie"><use href="#m-build"/></svg><div><div class="who">The builder</div><div class="bubble"><p>"I got tired of waiting and built my own Jam Saver web tool."</p></div></div></div>
+  </div>
+
+  <div class="mapwrap">
+    <div class="mapbox">
+      <div class="ylab">Session kept afterwards →</div>
+      <div class="map" role="img" aria-label="Positioning map. Options that keep the session need effort upfront. Options with no effort forget the session. Encore sits alone in the low effort, kept corner.">
+        <div class="q-hl"><span>Empty until now</span></div>
+        <div class="dot enc" style="left:20%;bottom:78%"><i></i><b>Encore</b></div>
+        <div class="dot left" style="left:82%;bottom:80%"><i></i><b>Collaborative playlist</b></div>
+        <div class="dot left" style="left:76%;bottom:60%"><i></i><b>Third-party savers</b></div>
+        <div class="dot" style="left:24%;bottom:33%"><i></i><b>Recently Played</b></div>
+        <div class="dot" style="left:14%;bottom:12%"><i></i><b>Group Jam</b></div>
+      </div>
+      <div class="xlab">Effort while the music plays →</div>
+    </div>
+    <div class="mapside">
+      <div class="ttl" style="font-size:26px">What exists today</div>
+      <p class="small">Everything that keeps the music asks for work upfront. Everything effortless forgets it. Nobody sits in the corner where it is kept with no effort, so that is where Encore aims.</p>
+      <details>
+        <summary>See the full comparison</summary>
+        <div class="tscroll" style="margin-top:14px"><table class="tbl"><thead><tr><th>Option</th><th>Helps</th><th>Breaks down</th></tr></thead><tbody>
+          <tr><td>Group Jam</td><td>Everyone queues from their own phone</td><td>The shared queue is gone when it ends</td></tr>
+          <tr><td>Recently Played</td><td>Logs some history</td><td>Not grouped by session, misses autoplay</td></tr>
+          <tr><td>Collaborative playlist</td><td>Saves by design</td><td>Must be set up before the trip</td></tr>
+          <tr><td>Third-party savers</td><td>Records a session</td><td>Outside the app, needs setup and login</td></tr>
+        </tbody></table></div>
+      </details>
+    </div>
+  </div>
+
+  <div style="border-top:1px solid #D6D3CB;margin-top:72px;padding-top:40px;display:flex;flex-wrap:wrap;gap:32px">
+    <div style="flex:1 1 280px;display:flex;flex-direction:column;gap:8px"><div class="ttl" style="font-size:24px">What I would validate next</div><p class="small" style="color:var(--mute)">Forums show demand, not behavior. Before building, I would run these with 6 to 8 frequent group travelers.</p></div>
+    <div style="flex:2 1 480px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))" class="grid">
+      <div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="icon d"><svg viewBox="0 0 24 24"><path d="M5 16H3.5a1 1 0 0 1-1-1v-3.2a1.5 1.5 0 0 1 1-1.4l2.2-.8 2.1-3.5A2 2 0 0 1 9.5 5h5a2 2 0 0 1 1.7 1.1l2.1 3.5 2.2.8a1.5 1.5 0 0 1 1 1.4V15a1 1 0 0 1-1 1H19M9 16h6"/><circle cx="7" cy="16" r="2"/><circle cx="17" cy="16" r="2"/></svg></div><b>Ride-along interviews</b><p class="small">Join a real trip. When does the group notice a song worth keeping?</p></div>
+      <div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="icon d"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><b>Two week diary study</b><p class="small">Log every session that felt worth saving. How often does it happen?</p></div>
+      <div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="icon d"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><b>Log analysis</b><p class="small">With data science: how many car sessions run 10+ songs? That sizes the opportunity.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== 04 INSIGHTS ===== -->
+<section class="sec"><div class="wrap">
+  <div class="head">
+    <div class="eyebrow">04 · Insights</div>
+    <h2 class="h2">The problem is not saving. It is timing.</h2>
+  </div>
+  <div class="ins">
+    <div><div class="bn">1</div><div><b style="font-size:19px">Nobody curates while vibing</b><p class="small" style="margin-top:6px">Singing, driving, talking. Tapping "add to playlist" 36 times is not happening.</p></div></div>
+    <div><div class="bn">2</div><div><b style="font-size:19px">Value shows up afterwards</b><p class="small" style="margin-top:6px">You realize a session was special right when the app forgets it.</p></div></div>
+    <div><div class="bn">3</div><div><b style="font-size:19px">It is a memory, not a list</b><p class="small" style="margin-top:6px">People describe these playlists as souvenirs. Name and cover matter.</p></div></div>
+    <div><div class="bn">4</div><div><b style="font-size:19px">The next trip starts cold</b><p class="small" style="margin-top:6px">The real payoff is pressing play next time without asking.</p></div></div>
+  </div>
+  <div class="hmw">
+    <div class="eyebrow" style="color:var(--ember)">How might we</div>
+    <div class="t">help people keep the soundtrack of a moment, without asking them to do anything while it is happening?</div>
+  </div>
+</div></section>
+
+<!-- ===== 05 EXPLORATION ===== -->
+<section id="explore" class="sec sand"><div class="wrap">
+  <div class="head">
+    <div class="eyebrow">05 · Exploration</div>
+    <h2 class="h2">Three directions, judged on effort in the moment.</h2>
+    <p class="lead">The obvious answer was a "Save queue" button. I sketched it next to two alternatives and scored all three against the insights, not my taste.</p>
+  </div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+    <div class="card sketch">
+      <div class="paper"><svg viewBox="0 0 240 170" aria-label="Sketch: queue screen with a Save queue button at the bottom" role="img">
+        <g fill="none" stroke="#121317" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="78" y="10" width="84" height="152" rx="13" transform="rotate(-1.5 120 86)"/>
+          <path d="M90 30h44M90 46h58M90 60h50M90 74h56M90 88h46M90 102h54"/>
+          <rect x="94" y="128" width="52" height="16" rx="8" fill="#121317"/>
+          <path d="M196 120 C 186 128, 172 133, 152 136"/><path d="M158 130l-7 6 9 2"/>
+        </g>
+        <text x="174" y="92" font-family="Caveat, cursive" font-size="16" fill="#B4380F">tap it</text>
+        <text x="168" y="108" font-family="Caveat, cursive" font-size="16" fill="#B4380F">mid-trip?</text>
+        <text x="98" y="140" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="#FAFAF8">Save queue</text>
+      </svg></div>
+      <div class="mono">Direction A</div>
+      <div class="ttl">Save queue button</div>
+      <p class="small">Simple, but only works if someone remembers to tap it mid-trip.</p>
+      <div class="verdict">Rejected: fails insight 1</div>
+    </div>
+    <div class="card sketch">
+      <div class="paper"><svg viewBox="0 0 240 170" aria-label="Sketch: library with a Sessions tab listing past sessions" role="img">
+        <g fill="none" stroke="#121317" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="78" y="10" width="84" height="152" rx="13" transform="rotate(1 120 86)"/>
+          <path d="M90 30h26M124 30h28"/><path d="M124 36h28" stroke="#7B6CF6" stroke-width="3"/>
+          <rect x="90" y="48" width="16" height="16" rx="3"/><path d="M112 52h36M112 60h24"/>
+          <rect x="90" y="74" width="16" height="16" rx="3"/><path d="M112 78h36M112 86h24"/>
+          <rect x="90" y="100" width="16" height="16" rx="3"/><path d="M112 104h36M112 112h24"/>
+          <path d="M40 86 C 46 64, 60 44, 86 34"/><path d="M78 31l8 3-5 7"/>
+        </g>
+        <text x="14" y="104" font-family="Caveat, cursive" font-size="16" fill="#B4380F">must</text>
+        <text x="8" y="120" font-family="Caveat, cursive" font-size="16" fill="#B4380F">remember</text>
+        <text x="12" y="136" font-family="Caveat, cursive" font-size="16" fill="#B4380F">to look</text>
+        <text x="126" y="27" font-family="Inter, sans-serif" font-size="7.5" font-weight="700" fill="#121317">Sessions</text>
+      </svg></div>
+      <div class="mono">Direction B</div>
+      <div class="ttl">Sessions history tab</div>
+      <p class="small">Every session logged in Library. Powerful, but a place you must think to visit.</p>
+      <div class="verdict">Kept as the fallback surface</div>
+    </div>
+    <div class="card sketch win">
+      <div class="paper"><svg viewBox="0 0 240 170" aria-label="Sketch: home screen with an Encore card that asks once after the trip" role="img">
+        <g fill="none" stroke="#121317" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="78" y="10" width="84" height="152" rx="13" transform="rotate(-1 120 86)"/>
+          <path d="M90 28h40"/>
+          <rect x="88" y="38" width="64" height="58" rx="9" fill="#FF6A3D"/>
+          <path d="M96 52h40M96 62h30"/>
+          <rect x="96" y="76" width="28" height="11" rx="5.5" fill="#121317"/><rect x="128" y="76" width="18" height="11" rx="5.5"/>
+          <path d="M90 108h30M90 120h48M90 132h40"/>
+          <path d="M188 98 C 180 86, 170 76, 156 70"/><path d="M163 66l-7 4 8 4"/>
+        </g>
+        <text x="170" y="114" font-family="Caveat, cursive" font-size="16" fill="#B4380F">asks once,</text>
+        <text x="176" y="130" font-family="Caveat, cursive" font-size="16" fill="#B4380F">after</text>
+      </svg></div>
+      <div class="mono" style="color:var(--sunText)">Direction C</div>
+      <div class="ttl">Encore: ask once, afterwards</div>
+      <p class="small">The app spots the end of the session and offers the save on Home.</p>
+      <div class="verdict">Chosen</div>
+    </div>
+  </div>
+  <div class="tscroll" style="margin-top:24px"><table class="tbl"><thead><tr><th>Criteria</th><th>A · Button</th><th>B · History</th><th>C · Encore</th></tr></thead><tbody>
+    <tr><td>Effort during the trip</td><td><span class="pill p-bad">High</span></td><td><span class="pill p-good">None</span></td><td><span class="pill p-good">None</span></td></tr>
+    <tr><td>Chance people notice it</td><td><span class="pill p-bad">Low</span></td><td><span class="pill p-bad">Low</span></td><td><span class="pill p-good">High</span></td></tr>
+    <tr><td>Risk of feeling noisy</td><td><span class="pill p-good">None</span></td><td><span class="pill p-good">None</span></td><td><span class="pill p-mid">Medium</span> the risk to design for</td></tr>
+    <tr><td>Engineering cost</td><td><span class="pill p-good">Low</span></td><td><span class="pill p-mid">Medium</span></td><td><span class="pill p-mid">Medium</span> needs session detection</td></tr>
+  </tbody></table></div>
+</div></section>
+
+<!-- ===== 06 THE HARD PART ===== -->
+<section class="sec dark"><div class="wrap">
+  <div class="head">
+    <div class="eyebrow">06 · The hard part</div>
+    <h2 class="h2">Knowing when a session is over.</h2>
+    <p class="lead">The screens were the easy part. One false prompt after a boring commute and people turn the feature off forever, so I designed the session model before any screens.</p>
+  </div>
+  <div class="pipe">
+    <div class="pstep"><div class="icon"><svg viewBox="0 0 24 24"><path d="M5 16H3.5a1 1 0 0 1-1-1v-3.2a1.5 1.5 0 0 1 1-1.4l2.2-.8 2.1-3.5A2 2 0 0 1 9.5 5h5a2 2 0 0 1 1.7 1.1l2.1 3.5 2.2.8a1.5 1.5 0 0 1 1 1.4V15a1 1 0 0 1-1 1H19M9 16h6"/><circle cx="7" cy="16" r="2"/><circle cx="17" cy="16" r="2"/></svg></div><div class="mono">1 · Signals</div><b>Something ends</b><p>Car audio disconnects, a 30+ minute pause, or the phone leaves a speaker.</p></div>
+    <div class="parrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7B6CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+    <div class="pstep"><div class="icon"><svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg></div><div class="mono">2 · Session engine</div><b>Clean the list</b><p>Keep play order, drop skips under 10 seconds, remove duplicates, include Jam and autoplay tracks.</p></div>
+    <div class="parrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7B6CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+    <div class="pstep gate"><div class="icon"><svg viewBox="0 0 24 24"><path d="M3 4h18l-7 9v6l-4 2v-8z"/></svg></div><div class="mono" style="color:var(--duskSoft)">3 · Worth asking?</div><b>Quality gate</b><p>10+ songs, not mostly one existing playlist, not a private session.</p></div>
+    <div class="parrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7B6CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+    <div class="pstep out"><div class="icon" style="background:var(--sun)"><svg viewBox="0 0 24 24" style="stroke:#1A0B05"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="mono" style="color:#FFB49B">4 · Encore card</div><b>Ask once, quietly</b><p>A card on Home at next app open. Waits 7 days, then moves to session history.</p></div>
+  </div>
+  <p style="margin-top:24px;font-size:15px;color:var(--fog)">Sessions that fail the gate still land in session history, so nothing is ever lost. The gate only decides whether we interrupt you.</p>
+</div></section>
+
+<!-- ===== 07 THE LOOP ===== -->
+<section id="loop" class="sec sand"><div class="wrap">
+  <div class="head">
+    <div class="eyebrow">07 · The full loop</div>
+    <h2 class="h2">From the last song to the next drive.</h2>
+    <p class="lead">Encore is not one screen. It is a loop that only pays off when the trip comes back around.</p>
+  </div>
+  <div class="flow">
+    <div class="fstep"><div class="i2"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div><b>Trip plays</b><br><small>Jam or solo. Nothing to do.</small></div></div>
+    <div class="fstep"><div class="i2"><svg viewBox="0 0 24 24"><path d="M5 16H3.5a1 1 0 0 1-1-1v-3.2a1.5 1.5 0 0 1 1-1.4l2.2-.8 2.1-3.5A2 2 0 0 1 9.5 5h5a2 2 0 0 1 1.7 1.1l2.1 3.5 2.2.8a1.5 1.5 0 0 1 1 1.4V15a1 1 0 0 1-1 1H19M9 16h6"/><circle cx="7" cy="16" r="2"/><circle cx="17" cy="16" r="2"/></svg></div><div><b>Car disconnects</b><br><small>The session closes.</small></div></div>
+    <div class="fstep"><div class="i2"><svg viewBox="0 0 24 24"><path d="M3 4h18l-7 9v6l-4 2v-8z"/></svg></div><div><b>Quality gate</b><br><small>10+ songs, not private.</small></div></div>
+    <div class="fstep key"><div class="i2"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></div><div><b>Encore card</b><br><small>On Home, next app open.</small></div></div>
+    <div class="fstep"><div class="i2"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></div><div><b>Review and save</b><br><small>Name, skips, song count.</small></div></div>
+    <div class="fstep"><div class="i2"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.3-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.8"/><path d="M17 14.5c2.6 0 4.2 1.8 4.6 4.5"/></svg></div><div><b>Share</b><br><small>The crew is suggested.</small></div></div>
+    <div class="fstep key"><div class="i2"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div><b>Next trip</b><br><small>Offered first on connect.</small></div></div>
+  </div>
+  <div class="loopback"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>The loop closes when the trip comes back to the car.</div>
+  <div class="branches">
+    <div class="branch"><div class="icon d"><svg viewBox="0 0 24 24"><path d="M4 4v6a4 4 0 0 0 4 4h12M16 10l4 4-4 4"/></svg></div><div><div class="from">If step 3 fails</div><b>Goes straight to session history</b><p class="small">No interruption, and nothing is lost.</p></div></div>
+    <div class="branch"><div class="icon d"><svg viewBox="0 0 24 24"><path d="M4 4v6a4 4 0 0 0 4 4h12M16 10l4 4-4 4"/></svg></div><div><div class="from">If step 4 is ignored</div><b>Moves to history after 7 days</b><p class="small">After 3 ignored cards, Encore pauses and asks once if you still want it.</p></div></div>
+  </div>
+</div></section>
+
+<!-- ===== 08 FINAL DESIGN ===== -->
+<section id="design" class="sec"><div class="wrap">
+  <div class="head">
+    <div class="eyebrow">08 · Final design</div>
+    <h2 class="h2">Four screens. One loop that closes on the next trip.</h2>
+    <p class="lead">Shown in a neutral music app shell so the feature, not the brand, is the hero. Song and artist names are fictional.</p>
+  </div>
+
+  <!-- screen 1 -->
+  <div class="fd">
+    <div class="stage">
+      <div class="phone"><div class="island"></div><div class="scr">
+        <div class="sbar"><span>4:12</span><span><svg width="17" height="11"><use href="#i-sig"/></svg><svg width="24" height="11"><use href="#i-bat"/></svg></span></div>
+        <div class="greet">Good afternoon</div>
+        <div class="ecard anim">
+          <div class="lab"><span>ENCORE</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A0B05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <div class="big">That drive had a vibe.</div>
+          <div class="tiles"><svg class="art"><use href="#a-desert"/></svg><svg class="art"><use href="#a-sun"/></svg><svg class="art"><use href="#a-dusk"/></svg><svg class="art"><use href="#a-road"/></svg></div>
+          <div class="meta">36 songs · 2 hr 14 min · Today</div>
+          <div class="btns"><span class="btn1">Save as playlist</span><span class="btn2">Not now</span></div>
+        </div>
+        <div class="sub">Jump back in</div>
+        <div class="rowlist">
+          <div class="ri"><svg class="art"><use href="#a-sea"/></svg><div>Focus mix<small>Playlist · 48 songs</small></div></div>
+          <div class="ri"><svg class="art"><use href="#a-pink"/></svg><div>Weekend chill<small>Playlist · 31 songs</small></div></div>
+        </div>
+      </div></div>
+      <span class="pin" style="top:120px">1</span>
+      <span class="pin" style="top:160px">2</span>
+      <span class="pin" style="top:300px">3</span>
+    </div>
+    <div class="notes">
+      <div class="step">Screen 1</div>
+      <h3>The ask</h3>
+      <ol class="callouts">
+        <li><span class="cn">1</span><span><b>Arrives on Home, never as a push.</b> It shows up the next time you open the app, so nothing pings you near the wheel.</span></li>
+        <li><span class="cn">2</span><span><b>Feeling first, facts second.</b> "That drive had a vibe" lands before the song count. The art is from the trip itself.</span></li>
+        <li><span class="cn">3</span><span><b>"Not now" sits right beside "Save".</b> Equal reach, no guilt. Saying no should feel as easy as saying yes.</span></li>
+      </ol>
+      <div class="motion"><span class="live">LIVE</span><span>The card eases in 400 ms after Home settles, so it never jumps under your thumb.</span></div>
+    </div>
+  </div>
+
+  <!-- screen 2 -->
+  <div class="fd rev">
+    <div class="stage">
+      <div class="phone"><div class="island"></div><div class="scr" style="background:#0A0B10;padding:0;justify-content:flex-end">
+        <div class="sbar"><span>4:13</span><span><svg width="17" height="11"><use href="#i-sig"/></svg><svg width="24" height="11"><use href="#i-bat"/></svg></span></div>
+        <div style="background:#1D2030;border-radius:26px 26px 0 0;padding:14px 16px 16px;display:flex;flex-direction:column;gap:13px;height:86%">
+          <div style="width:36px;height:4px;border-radius:2px;background:var(--slate2);align-self:center"></div>
+          <div style="display:flex;gap:12px;align-items:center">
+            <div style="width:70px;height:70px;border-radius:12px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;flex:none"><svg class="art" style="border-radius:0"><use href="#a-desert"/></svg><svg class="art" style="border-radius:0"><use href="#a-sun"/></svg><svg class="art" style="border-radius:0"><use href="#a-dusk"/></svg><svg class="art" style="border-radius:0"><use href="#a-road"/></svg></div>
+            <div><div class="label" style="font-size:10px">Name</div><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:19px;border-bottom:1.5px solid var(--sun);padding-bottom:2px">Sedona Road Trip</div></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;background:var(--night2);border-radius:12px;padding:10px 12px">
+            <div style="font-size:12.5px">Leave out quick skips<div style="font-size:11px;color:var(--fog)">4 songs removed</div></div>
+            <div style="width:40px;height:24px;border-radius:12px;background:var(--sun);position:relative;flex:none"><div style="position:absolute;right:3px;top:3px;width:18px;height:18px;border-radius:50%;background:var(--glow)"></div></div>
+          </div>
+          <div class="rowlist">
+            <div class="ri"><span style="width:12px;color:var(--fog);font-size:11px">1</span><svg class="art" style="width:36px"><use href="#a-sun"/></svg><div>Golden Hour Highway<small>The Mileposts</small></div></div>
+            <div class="ri"><span style="width:12px;color:var(--fog);font-size:11px">2</span><svg class="art" style="width:36px"><use href="#a-pink"/></svg><div>Windows Down<small>Lark and Lumen</small></div></div>
+            <div class="ri"><span style="width:12px;color:var(--fog);font-size:11px">3</span><svg class="art" style="width:36px"><use href="#a-desert"/></svg><div>Saguaro Static<small>Desert Radio Club</small></div></div>
+            <div class="ri"><span style="width:12px;color:var(--fog);font-size:11px">4</span><svg class="art" style="width:36px"><use href="#a-dusk"/></svg><div>Mile Marker Moon<small>Hollow Pines</small></div></div>
+            <div style="font-size:11.5px;color:var(--fog);padding-left:22px">+ 28 more, in the order you played them</div>
+          </div>
+          <div style="margin-top:auto;min-height:46px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:var(--sun);color:var(--ember);font-size:14px;font-weight:700">Save 32 songs</div>
+        </div>
+      </div></div>
+      <span class="pin l" style="top:150px">1</span>
+      <span class="pin l" style="top:220px">2</span>
+      <span class="pin l" style="top:300px">3</span>
+      <span class="pin l" style="top:578px">4</span>
+    </div>
+    <div class="notes">
+      <div class="step">Screen 2</div>
+      <h3>The review</h3>
+      <ol class="callouts">
+        <li><span class="cn">1</span><span><b>Named from place and day.</b> "Sedona Road Trip" beats "Playlist #47". One tap to rename.</span></li>
+        <li><span class="cn">2</span><span><b>Quick skips are shown, not hidden.</b> A toggle reveals the 4 songs it left out, so the cleanup is never a mystery.</span></li>
+        <li><span class="cn">3</span><span><b>Order as played.</b> The sequence is part of the memory, so it stays untouched.</span></li>
+        <li><span class="cn">4</span><span><b>The button states the count.</b> No surprises in your library later.</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- screen 3 -->
+  <div class="fd">
+    <div class="stage">
+      <div class="phone"><div class="island"></div><div class="scr" style="align-items:center;text-align:center;gap:16px;padding-top:64px">
+        <div class="sbar"><span>4:13</span><span><svg width="17" height="11"><use href="#i-sig"/></svg><svg width="24" height="11"><use href="#i-bat"/></svg></span></div>
+        <div style="width:160px;height:160px;border-radius:20px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 20px 40px -10px rgba(255,106,61,.45)"><svg class="art" style="border-radius:0"><use href="#a-desert"/></svg><svg class="art" style="border-radius:0"><use href="#a-sun"/></svg><svg class="art" style="border-radius:0"><use href="#a-dusk"/></svg><svg class="art" style="border-radius:0"><use href="#a-road"/></svg></div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--mint)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8EE3B0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Saved to your library</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:25px;line-height:1.1">Sedona Road Trip</div>
+        <div style="font-size:12.5px;color:var(--fog)">Send it to the people who were in the car</div>
+        <div style="display:flex">
+          <svg class="av" style="width:40px;height:40px;box-shadow:0 0 0 3px #15171F"><use href="#m-host"/></svg>
+          <svg class="av" style="width:40px;height:40px;margin-left:-9px;box-shadow:0 0 0 3px #15171F"><use href="#m-kid"/></svg>
+          <svg class="av" style="width:40px;height:40px;margin-left:-9px;box-shadow:0 0 0 3px #15171F"><use href="#m-trip"/></svg>
+          <svg class="av" style="width:40px;height:40px;margin-left:-9px;box-shadow:0 0 0 3px #15171F"><use href="#m-build"/></svg>
+        </div>
+        <div style="width:100%;min-height:46px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:var(--sun);color:var(--ember);font-size:14px;font-weight:700">Share with the crew</div>
+        <div style="font-size:13px;font-weight:600">Open playlist</div>
+      </div></div>
+      <span class="pin" style="top:150px">1</span>
+      <span class="pin" style="top:246px">2</span>
+      <span class="pin" style="top:372px">3</span>
+    </div>
+    <div class="notes">
+      <div class="step">Screen 3</div>
+      <h3>The share</h3>
+      <ol class="callouts">
+        <li><span class="cn">1</span><span><b>Cover art built from the trip's own songs.</b> It looks like yours, not like a template.</span></li>
+        <li><span class="cn">2</span><span><b>A small celebration, earned.</b> This is the memory moment, so it gets a moment of delight. Nowhere else does.</span></li>
+        <li><span class="cn">3</span><span><b>The crew is already suggested.</b> If it was a group Jam, the people in it show up here, one tap to share.</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- screen 4 -->
+  <div class="fd rev">
+    <div class="stage">
+      <div class="phone"><div class="island"></div><div class="scr">
+        <div class="sbar"><span>9:45</span><span><svg width="17" height="11"><use href="#i-sig"/></svg><svg width="24" height="11"><use href="#i-bat"/></svg></span></div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--duskSoft);background:#1A1C36;border-radius:999px;padding:8px 12px;align-self:flex-start"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B9B0FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16H3.5a1 1 0 0 1-1-1v-3.2a1.5 1.5 0 0 1 1-1.4l2.2-.8 2.1-3.5A2 2 0 0 1 9.5 5h5a2 2 0 0 1 1.7 1.1l2.1 3.5 2.2.8a1.5 1.5 0 0 1 1 1.4V15a1 1 0 0 1-1 1H19M9 16h6"/><circle cx="7" cy="16" r="2"/><circle cx="17" cy="16" r="2"/></svg>Connected to car audio</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:25px;line-height:1.08">Heading out again?</div>
+        <div style="background:#1D2030;border-radius:20px;padding:12px;display:flex;gap:12px;align-items:center">
+          <div style="width:62px;height:62px;border-radius:12px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;flex:none"><svg class="art" style="border-radius:0"><use href="#a-desert"/></svg><svg class="art" style="border-radius:0"><use href="#a-sun"/></svg><svg class="art" style="border-radius:0"><use href="#a-dusk"/></svg><svg class="art" style="border-radius:0"><use href="#a-road"/></svg></div>
+          <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Sedona Road Trip</div><div style="font-size:12px;color:var(--fog)">Your last trip · 32 songs</div></div>
+          <div style="width:46px;height:46px;flex:none;border-radius:50%;background:var(--sun);display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="#1A0B05" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="sub">Your trips</div>
+        <div class="trio">
+          <div><svg class="art" style="border-radius:10px"><use href="#a-desert"/></svg><small>Sedona</small></div>
+          <div><svg class="art" style="border-radius:10px"><use href="#a-sea"/></svg><small>Big Sur</small></div>
+          <div><svg class="art" style="border-radius:10px"><use href="#a-road"/></svg><small>Tahoe</small></div>
+        </div>
+        <div class="mini"><svg class="art"><use href="#a-sun"/></svg><div><b>Golden Hour Highway</b><small>Sedona Road Trip · 1 of 32</small></div><div class="pp"><svg width="12" height="12" viewBox="0 0 24 24" fill="#15171F"><path d="M8 5v14l11-7z"/></svg></div></div>
+      </div></div>
+      <span class="pin l" style="top:66px">1</span>
+      <span class="pin l" style="top:168px">2</span>
+      <span class="pin l" style="top:290px">3</span>
+    </div>
+    <div class="notes">
+      <div class="step">Screen 4</div>
+      <h3>The return</h3>
+      <ol class="callouts">
+        <li><span class="cn">1</span><span><b>Triggered by the car, not the clock.</b> When the phone connects to car audio again, Home changes.</span></li>
+        <li><span class="cn">2</span><span><b>One big play button.</b> The last trip is offered first, with nothing else to decide.</span></li>
+        <li><span class="cn">3</span><span><b>"Your trips" becomes a collection.</b> Saved sessions grow into something worth coming back to.</span></li>
+      </ol>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== 09 DECISION LOG ===== -->
+<section class="sec sand"><div class="wrap">
+  <div class="head">
+    <div class="eyebrow">09 · Decision log</div>
+    <h2 class="h2">The calls I made, and what I gave up.</h2>
+  </div>
+  <div class="tscroll"><table class="tbl"><thead><tr><th>Decision</th><th>Chose</th><th>Over</th><th>Why, and the trade-off</th></tr></thead><tbody>
+    <tr><td>Where to ask</td><td>Home card</td><td>Push notification</td><td>Safer near driving and calmer. Some people will open the app too late, and we accept that.</td></tr>
+    <tr><td>Minimum session</td><td>10+ songs</td><td>Any length</td><td>Protects trust on short commutes. Small sessions still go to history.</td></tr>
+    <tr><td>Song order</td><td>As played</td><td>Re-sorted by mood</td><td>The order is part of the memory. A smart reorder can come later as an option.</td></tr>
+    <tr><td>Card lifetime</td><td>7 days</td><td>Until dismissed</td><td>A stale card is clutter. Seven days covers a long weekend plus the drive home.</td></tr>
+    <tr><td>Ignoring the card</td><td>Back off after 3 misses</td><td>Keep asking</td><td>Three ignored cards pause Encore and ask once. Less reach, more respect.</td></tr>
+  </tbody></table></div>
+  <div class="grid g-auto" style="margin-top:16px">
+    <div class="card edge"><div class="icon d"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><div><b>Private sessions</b><p class="small">Never trigger Encore. Guilty pleasures stay guilty.</p></div></div>
+    <div class="card edge"><div class="icon d"><svg viewBox="0 0 24 24"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg></div><div><b>Two drives, one day</b><p class="small">Offer to merge the drive there and back into one trip.</p></div></div>
+    <div class="card edge"><div class="icon d"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div><div><b>Already saved this vibe</b><p class="small">Offer to add only the new songs to that trip.</p></div></div>
+    <div class="card edge"><div class="icon d"><svg viewBox="0 0 24 24"><path d="M2 8.5a15 15 0 0 1 20 0M5.5 12a10 10 0 0 1 13 0M9 15.5a5 5 0 0 1 6 0M3 3l18 18"/></svg></div><div><b>Offline in the desert</b><p class="small">The session logs locally. The card appears once you are back online.</p></div></div>
+  </div>
+</div></section>
+
+<!-- ===== 10 VISUAL LANGUAGE ===== -->
+<section class="sec"><div class="wrap">
+  <div class="head">
+    <div class="eyebrow">10 · Visual language</div>
+    <h2 class="h2">Sunset on a dark dashboard.</h2>
+    <p class="lead">Encore had to stand out on a dark Home feed for exactly one moment, then get out of the way. The palette borrows from the end of a drive: tail lights and dusk.</p>
+  </div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px">
+    <div class="sw"><div style="background:#FF6A3D"></div><div><b>Sunset</b><div class="mono">#FF6A3D · the ask</div></div></div>
+    <div class="sw"><div style="background:#1A0B05"></div><div><b>Ember</b><div class="mono">#1A0B05 · text on sunset</div></div></div>
+    <div class="sw"><div style="background:#7B6CF6"></div><div><b>Dusk</b><div class="mono">#7B6CF6 · system, car</div></div></div>
+    <div class="sw"><div style="background:#0F1220"></div><div><b>Night</b><div class="mono">#0F1220 · ground</div></div></div>
+    <div class="sw"><div style="background:#FFF4EC"></div><div><b>Glow</b><div class="mono">#FFF4EC · highlights</div></div></div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;margin-top:24px">
+    <div class="typebox">
+      <div class="label" style="color:var(--mute)">Type</div>
+      <div class="trow"><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:44px;line-height:1;letter-spacing:-.02em">That drive had a vibe.</span><span class="mono">Bricolage Grotesque 800 · moments</span></div>
+      <div class="trow"><span style="font-size:18px;font-weight:600">36 songs · 2 hr 14 min · Today</span><span class="mono">Inter 600 · facts</span></div>
+      <div class="trow"><span style="font:600 13px 'JetBrains Mono',monospace;letter-spacing:.1em">ENCORE</span><span class="mono">JetBrains Mono 600 · labels</span></div>
+      <p class="small">A characterful face for the emotional line, a quiet workhorse for data. The contrast in type mirrors the contrast in the moment.</p>
+    </div>
+    <div class="compbox">
+      <div class="label">Components</div>
+      <div style="min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:var(--sun);color:var(--ember);font-size:14px;font-weight:700">Primary · Save</div>
+      <div style="min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:999px;border:1.5px solid #F4F2EE;font-size:14px;font-weight:600">Secondary · Not now</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><span style="font-size:12px;padding:6px 12px;border-radius:999px;background:#1A1C36;color:var(--duskSoft)">Connected to car</span><span style="font-size:12px;padding:6px 12px;border-radius:999px;background:var(--slate);color:var(--fog2)">4 skips removed</span></div>
+      <div style="font-size:13px;color:var(--fog)">Ember on Sunset passes 4.5:1. Every touch target is 44 px or larger.</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== 11 MEASURING ===== -->
+<section id="measure" class="sec dark"><div class="wrap">
+  <div class="head">
+    <div class="eyebrow">11 · Measuring it</div>
+    <h2 class="h2">Saved is nice. Played again is the point.</h2>
+    <p class="lead">Pilot targets I would agree with the PM before launch, plus the number that tells us to stop.</p>
+  </div>
+  <div class="tree">
+    <div class="ns">
+      <div class="label" style="color:#FFB49B">North star</div>
+      <div class="t">Saved sessions replayed within 30 days</div>
+      <div style="font-size:15px;color:var(--fog2)">Target: 50% of saves. Proves Encore creates lasting value, not library clutter.</div>
+    </div>
+    <div class="stem"></div>
+    <div class="tier">
+      <div><div class="label">Input</div><div class="v">25%</div><b>Save rate</b><p>of cards shown</p></div>
+      <div><div class="label">Input</div><div class="v">Share</div><b>Share rate</b><p>the group memory signal</p></div>
+      <div><div class="label">Input</div><div class="v">Edit</div><b>Rename rate</b><p>is auto-naming good enough?</p></div>
+    </div>
+    <div class="tierlab"><span>Guardrails · what must not break</span></div>
+    <div class="tier guard" style="padding-top:20px">
+      <div><div class="v">Opt-out</div><b>Opt-out rate</b><p>are we annoying people?</p></div>
+      <div><div class="v">Home</div><b>Home engagement</b><p>must not drop</p></div>
+      <div style="border-color:var(--sun)"><div class="v" style="color:var(--sun)">&lt;10%</div><b>Kill switch</b><p>save rate after 4 weeks</p></div>
+    </div>
+  </div>
+  <div class="road">
+    <div><div class="mono">Phase 1 · 4 weeks</div><b>A/B test</b><p>Premium users with frequent car sessions, 50/50 split, copy variants inside the test arm.</p></div>
+    <div><div class="mono">Phase 2</div><b>Add the return</b><p>Ship screen 4 only if replay data shows people come back to trips.</p></div>
+    <div><div class="mono">Phase 3</div><b>Beyond the car</b><p>House parties and speaker sessions. Same engine, new signals.</p></div>
+  </div>
+</div></section>
+
+<!-- ===== 12 REFLECTION ===== -->
+<section class="sec"><div class="wrap refl">
+  <div><div class="eyebrow">12 · Reflection</div><h2 class="h2">The smallest detail did the most work.</h2></div>
+  <div>
+    <div class="item"><b style="font-size:19px">What surprised me</b><p>I expected the save button to be the hero. Walking through the flow, the auto-generated name carried more of the feeling than anything else. "Sedona Road Trip" turns a list into a memory, so naming moved into the first release.</p></div>
+    <div class="item"><b style="font-size:19px">What I would do differently</b><p>Bring data science in on day one. I sized the opportunity from public numbers. Real session logs would show the true share of 10+ song car sessions.</p></div>
+    <div class="item"><b style="font-size:19px">What is next</b><p>Run the ride-along interviews, prototype the card in a real car, and test two copy variants before writing production code.</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div style="flex:1 1 260px"><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:32px;letter-spacing:-.02em">Encore</div><p style="margin-top:8px;font-size:14px;color:var(--mute)">Self-initiated concept. Not affiliated with any streaming service. Song and artist names in mockups are fictional.</p><p style="margin-top:16px"><a href="index.html" style="font-weight:600;font-size:14px">Back to all work</a></p></div>
+  <div style="flex:2 1 480px"><div class="label" style="color:var(--mute)">Sources</div><ul>
+    <li><a href="https://newsroom.spotify.com/2025-08-25/jam-reaches-100-million-monthly-listening-hours/">Spotify Newsroom: Jam reaches 100 million monthly listening hours</a></li>
+    <li><a href="https://www.ubergizmo.com/2026/10/spotify-launches-phone-free-app-for-cars/">Ubergizmo: Spotify launches phone-free app for cars</a></li>
+    <li><a href="https://interspacemusic.com/blog/spotify-q3-2025-earnings-growth-innovation-and-a-vision-for-the-future-of-music/">Spotify Q3 2025 earnings recap</a></li>
+    <li><a href="https://www.ucdavis.edu/news/study-finds-brain-hub-links-music-memory-and-emotion">UC Davis: brain hub that links music, memory and emotion</a></li>
+    <li><a href="https://community.spotify.com/t5/Live-Ideas/Spotify-after-Jam-session-automatic-playlist/idi-p/5644315">Spotify Community: automatic playlist after a Jam</a></li>
+    <li><a href="https://community.spotify.com/t5/Content-Questions/Music-listened-to-during-Jams-not-showing-in-Listening-History/m-p/6205922/highlight/true">Spotify Community: Jam tracks missing from history</a></li>
+  </ul></div>
+</div></footer>
+
+</body>
+</html>

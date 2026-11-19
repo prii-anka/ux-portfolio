@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pri.anka — Portfolio</title>
+  <title>Graphic Design · pri.anka</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Molle:ital@1&family=Caveat:wght@400;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
@@ -360,6 +360,142 @@
     }
 
     /* ══ RCT — project tiles ══ */
+    /* ══ GX: graphic projects gallery ══ */
+    #projects-overlay, .gx-lb { --gx-bg:#141113; --gx-ink:#F6EFF2; --gx-mute:rgba(246,239,242,.62); --gx-line:rgba(246,239,242,.12); --gx-pink:#F08DB5; }
+    #projects-overlay { background: var(--gx-bg); }
+    body.gx-lb-open #projects-overlay { overflow: hidden; }
+    .gx { color:var(--gx-ink); max-width:1360px; margin:0 auto; padding:64px 52px 72px; }
+    .gx-head { display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:28px; margin-bottom:40px; }
+    .gx-eyebrow { font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--gx-pink); margin-bottom:16px; }
+    .gx-title { font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(2.2rem,4.6vw,3.9rem); line-height:1; letter-spacing:-.04em; }
+    .gx-title em { font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:var(--gx-pink); }
+    .gx-intro { margin-top:16px; max-width:520px; font-size:16px; line-height:1.55; color:var(--gx-mute); }
+    .gx-filters { display:flex; flex-wrap:wrap; gap:8px; }
+    .gx-chip { font-family:'Space Grotesk',sans-serif; font-size:13.5px; font-weight:500; color:var(--gx-ink); background:transparent; border:1px solid var(--gx-line); border-radius:999px; padding:0 16px; min-height:40px; cursor:pointer; transition:background .2s,color .2s,border-color .2s; }
+    .gx-chip span { opacity:.55; margin-left:3px; }
+    .gx-chip:hover { border-color:rgba(246,239,242,.42); }
+    .gx-chip.on { background:var(--gx-ink); color:var(--gx-bg); border-color:var(--gx-ink); }
+    .gx-chip:focus-visible, .gx-btn:focus-visible, .gx-hit:focus-visible, .gx-feature-art:focus-visible, .gx-foot a:focus-visible, .gx-lb button:focus-visible { outline:2px solid var(--gx-pink); outline-offset:3px; }
+
+    .gx-feature { display:grid; grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); border-radius:24px; overflow:hidden; background:#FFF8E6; color:#121212; margin-bottom:56px; }
+    .gx-feature-art { display:block; overflow:hidden; position:relative; background:#DCD600; }
+    .gx-feature-art img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .9s cubic-bezier(.2,.8,.2,1); }
+    .gx-feature:hover .gx-feature-art img { transform:scale(1.03); }
+    .gx-feature-body { padding:32px 34px 30px; display:flex; flex-direction:column; gap:18px; }
+    .gx-feature-top { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .gx-badge { background:#E50024; color:#fff; font-size:10.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:6px 10px; border-radius:999px; }
+    .gx-fmeta { font-size:12.5px; font-weight:500; color:#5a5a4a; }
+    .gx-feature-logo { width:min(300px,92%); height:auto; display:block; }
+    .gx-feature-pitch { font-size:16.5px; line-height:1.5; color:#2a2a26; }
+    .gx-facts { display:grid; grid-template-columns:1fr 1fr; gap:14px 18px; margin:0; }
+    .gx-facts .wide { grid-column:1 / -1; }
+    .gx-facts dt { font-size:10.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#B0001C; }
+    .gx-facts dd { margin:4px 0 0; font-size:14.5px; line-height:1.4; }
+    .gx-swatches { display:flex; gap:6px; }
+    .gx-swatches i { width:26px; height:26px; border-radius:50%; box-shadow:inset 0 0 0 1px rgba(0,0,0,.18); }
+    .gx-ctas { display:flex; flex-wrap:wrap; gap:10px; margin-top:auto; padding-top:6px; }
+    .gx-btn { display:inline-flex; align-items:center; min-height:44px; padding:0 18px; border-radius:999px; background:#121212; color:#FFDD00; font-weight:600; font-size:14px; text-decoration:none; transition:transform .2s; }
+    .gx-btn:hover { transform:translateY(-2px); }
+    .gx-btn.ghost { background:transparent; color:#121212; box-shadow:inset 0 0 0 1.5px #121212; }
+
+    .gx-grid { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:44px 24px; }
+    .gx-card { position:relative; display:flex; flex-direction:column; gap:16px; }
+    .gx-card.span-6 { grid-column:span 6; }
+    .gx-card.span-4 { grid-column:span 4; }
+    .gx-frame { position:relative; aspect-ratio:4/3; border-radius:20px; background:var(--mat); overflow:hidden; isolation:isolate; }
+    .gx-card.short .gx-frame { aspect-ratio:16/10; }
+    .gx-frame::after { content:""; position:absolute; inset:0; border-radius:inherit; box-shadow:inset 0 0 0 1px rgba(255,255,255,.06); pointer-events:none; }
+    .gx-single { position:absolute; inset:9%; display:flex; align-items:center; justify-content:center; }
+    .gx-single img { display:block; max-width:100%; max-height:100%; width:auto; height:auto; border-radius:4px; box-shadow:0 24px 48px -14px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.18); transition:transform .6s cubic-bezier(.2,.8,.2,1); }
+    .gx-card:hover .gx-single img { transform:translateY(-6px) scale(1.02); }
+    .gx-stack { position:absolute; inset:0; }
+    .gx-stack img { position:absolute; left:50%; top:52%; height:76%; width:auto; border-radius:4px; box-shadow:0 22px 44px -14px rgba(0,0,0,.6),0 2px 6px rgba(0,0,0,.2); transition:transform .6s cubic-bezier(.2,.8,.2,1); }
+    .gx-stack.sq img { height:62%; }
+    .gx-stack img:nth-child(1) { transform:translate(-50%,-50%) translateX(-32%) rotate(-7deg); }
+    .gx-stack img:nth-child(2) { transform:translate(-50%,-50%) translateX(32%) rotate(7deg); }
+    .gx-stack img:nth-child(3) { transform:translate(-50%,-50%); z-index:2; }
+    .gx-card:hover .gx-stack img:nth-child(1) { transform:translate(-50%,-50%) translateX(-44%) rotate(-10deg); }
+    .gx-card:hover .gx-stack img:nth-child(2) { transform:translate(-50%,-50%) translateX(44%) rotate(10deg); }
+    .gx-card:hover .gx-stack img:nth-child(3) { transform:translate(-50%,-53%) scale(1.03); }
+    .gx-stack.land img { height:auto; width:66%; }
+    .gx-stack.land img:nth-child(1) { transform:translate(-50%,-50%) translate(-10%,-12%) rotate(-4deg); }
+    .gx-stack.land img:nth-child(2) { transform:translate(-50%,-50%) translate(10%,10%) rotate(3deg); z-index:2; }
+    .gx-card:hover .gx-stack.land img:nth-child(1) { transform:translate(-50%,-50%) translate(-16%,-16%) rotate(-6deg); }
+    .gx-card:hover .gx-stack.land img:nth-child(2) { transform:translate(-50%,-50%) translate(14%,13%) rotate(4deg); }
+    .gx-open { position:absolute; right:14px; bottom:14px; z-index:3; font-size:12px; font-weight:600; background:rgba(20,17,19,.82); color:#fff; padding:8px 12px; border-radius:999px; opacity:0; transform:translateY(6px); transition:opacity .25s,transform .25s; }
+    .gx-card:hover .gx-open, .gx-hit:focus-visible ~ .gx-frame .gx-open { opacity:1; transform:none; }
+    .gx-cap-row { display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+    .gx-cap h3 { font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:22px; letter-spacing:-.02em; line-height:1.15; transition:color .2s; }
+    .gx-card:hover .gx-cap h3 { color:var(--gx-pink); }
+    .gx-count { font-size:12.5px; color:var(--gx-mute); white-space:nowrap; }
+    .gx-cat { font-size:13.5px; color:var(--gx-mute); margin-top:5px; }
+    .gx-hit { position:absolute; inset:0; z-index:4; background:none; border:0; cursor:pointer; border-radius:20px; }
+    .gx-sub { grid-column:1 / -1; display:flex; align-items:baseline; flex-wrap:wrap; gap:6px 16px; padding-top:28px; border-top:1px solid var(--gx-line); margin-top:8px; margin-bottom:-16px; }
+    .gx-sub h4 { font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; font-size:32px; line-height:1; }
+    .gx-sub p { font-size:14px; color:var(--gx-mute); }
+    .gx-grid.filtered .gx-card { grid-column:span 4; }
+    .gx-grid.filtered .gx-card.short .gx-frame { aspect-ratio:4/3; }
+    .gx-grid.filtered .gx-sub, .gx-card.is-hidden, .gx-feature.is-hidden { display:none; }
+    .gx-foot { margin-top:80px; padding-top:26px; border-top:1px solid var(--gx-line); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; color:var(--gx-mute); font-size:15px; }
+    .gx-foot a { color:var(--gx-ink); font-weight:600; text-decoration:none; }
+    .gx-foot a:hover { color:var(--gx-pink); }
+
+    .gx-lb { position:fixed; inset:28px 0 0 0; z-index:300; background:rgba(12,10,12,.95); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); display:grid; grid-template-columns:minmax(0,1fr) 380px; color:var(--gx-ink); font-family:'Space Grotesk',sans-serif; }
+    .gx-lb[hidden] { display:none; }
+    .gx-lb-stage { position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px 84px 24px; min-width:0; min-height:0; }
+    .gx-lb-media { flex:1; min-height:0; width:100%; display:flex; align-items:center; justify-content:center; }
+    .gx-lb-media img, .gx-lb-media video { display:block; max-width:100%; max-height:calc(100vh - 200px); border-radius:6px; box-shadow:0 30px 80px rgba(0,0,0,.6); animation:gxIn .35s ease; }
+    @keyframes gxIn { from { opacity:0; transform:scale(.985); } to { opacity:1; transform:none; } }
+    .gx-lb-thumbs { display:flex; gap:8px; margin-top:18px; max-width:100%; overflow-x:auto; scrollbar-width:none; padding:4px; }
+    .gx-lb-thumbs::-webkit-scrollbar { display:none; }
+    .gx-lb-thumbs button { flex:none; width:56px; height:56px; border-radius:10px; overflow:hidden; border:0; padding:0; cursor:pointer; opacity:.45; background:#2a2529; color:#fff; font-size:12px; transition:opacity .2s; }
+    .gx-lb-thumbs button img { width:100%; height:100%; object-fit:cover; display:block; }
+    .gx-lb-thumbs button.on { opacity:1; box-shadow:0 0 0 2px var(--gx-pink); }
+    .gx-lb-nav { position:absolute; top:46%; transform:translateY(-50%); width:48px; height:48px; border-radius:50%; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.06); color:#fff; font-size:26px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s; }
+    .gx-lb-nav:hover { background:rgba(255,255,255,.16); }
+    .gx-lb-nav.prev { left:18px; } .gx-lb-nav.next { right:18px; }
+    .gx-lb-nav[hidden] { display:none; }
+    .gx-lb-info { position:relative; background:#1B171A; border-left:1px solid var(--gx-line); padding:72px 32px 28px; display:flex; flex-direction:column; gap:16px; overflow-y:auto; }
+    .gx-lb-close { position:absolute; top:18px; right:18px; width:40px; height:40px; border-radius:50%; border:1px solid var(--gx-line); background:transparent; color:var(--gx-ink); font-size:15px; cursor:pointer; }
+    .gx-lb-close:hover { background:rgba(255,255,255,.08); }
+    .gx-lb-cat { font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--gx-pink); }
+    .gx-lb-info h3 { font-weight:600; font-size:32px; letter-spacing:-.03em; line-height:1.05; }
+    .gx-lb-info p { font-size:15.5px; line-height:1.6; color:var(--gx-mute); }
+    .gx-lb-info .gx-facts dt { color:var(--gx-pink); }
+    .gx-lb-info .gx-facts dd { color:var(--gx-ink); }
+    .gx-lb-count { margin-top:auto; font-size:13px; color:var(--gx-mute); }
+    .gx-lb-next { border-top:1px solid var(--gx-line); padding-top:16px; display:flex; flex-direction:column; gap:6px; }
+    .gx-lb-next span { font-size:12px; color:var(--gx-mute); }
+    .gx-lb-next button { all:unset; cursor:pointer; font-size:19px; font-weight:600; color:var(--gx-ink); }
+    .gx-lb-next button:hover { color:var(--gx-pink); }
+
+    @media (max-width:1000px) {
+      .gx { padding:48px 28px 64px; }
+      .gx-feature { grid-template-columns:1fr; }
+      .gx-feature-art { aspect-ratio:1279/619; }
+      .gx-card.span-4 { grid-column:span 6; }
+      .gx-lb { grid-template-columns:1fr; grid-template-rows:minmax(0,1fr) auto; }
+      .gx-lb-info { border-left:0; border-top:1px solid var(--gx-line); max-height:40vh; padding:22px 20px 20px; }
+      .gx-lb-close { position:fixed; top:14px; right:14px; z-index:2; background:rgba(20,17,19,.8); }
+      .gx-lb-stage { padding:56px 12px 12px; }
+      .gx-lb-media img, .gx-lb-media video { max-height:calc(60vh - 120px); }
+      .gx-lb-nav { width:40px; height:40px; font-size:22px; }
+      .gx-lb-nav.prev { left:8px; } .gx-lb-nav.next { right:8px; }
+    }
+    @media (max-width:640px) {
+      .gx { padding:36px 16px 56px; }
+      .gx-filters { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; width:100%; }
+      .gx-filters::-webkit-scrollbar { display:none; }
+      .gx-chip { flex:none; }
+      .gx-feature-body { padding:24px 20px; }
+      .gx-card.span-6, .gx-card.span-4, .gx-grid.filtered .gx-card { grid-column:1 / -1; }
+      .gx-grid { gap:36px 16px; }
+      .gx-lb-info h3 { font-size:26px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .gx-stack img, .gx-single img, .gx-feature-art img, .gx-lb-media img, .gx-lb-media video { transition:none; animation:none; }
+    }
+
     .rct-section { padding: 52px 52px 60px; border-top: 1px solid rgba(255,255,255,0.08); }
     .rct-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px; }
     .rct-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(2rem,4vw,3.4rem); font-weight:600; letter-spacing:-0.04em; line-height:1; color:#fff; }
@@ -374,6 +510,9 @@
     .rct:hover .rct-overlay { background:rgba(0,0,0,0.35); }
     .rct-view { width:76px; height:76px; border-radius:50%; background:var(--rta,#fff); color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700; letter-spacing:0.04em; opacity:0; transform:scale(0.6); transition:opacity 0.28s,transform 0.32s cubic-bezier(0.34,1.45,0.64,1); pointer-events:none; }
     .rct:hover .rct-view { opacity:1; transform:scale(1); }
+    .rct--feature { grid-column:1 / -1; }
+    .rct--feature .rct-img { aspect-ratio:1279/619; }
+    .rct--feature .rct-img img { object-position:center; }
     .rct-label { padding:20px 4px 0; }
     .rct-meta { font-size:0.52rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#555; margin-bottom:7px; display:flex; align-items:center; gap:8px; }
     .rct-dot { width:3px; height:3px; border-radius:50%; background:#555; display:inline-block; }
@@ -464,6 +603,8 @@
       #curtain-top  { top: 36px; height: calc(50vh - 18px); }
       #curtain-bottom { top: calc(36px + 50vh - 18px); }
       #projects-overlay { top: 36px; }
+      .gx-lb { top: 36px; }
+      .gx-lb-close { top: 50px; }
       .stage { top: 36px; }
       #screen-frame { top: 36px; border-width: 2px; }
 
@@ -530,44 +671,103 @@
 
 <!-- Projects overlay — revealed after split -->
 <div id="projects-overlay">
-  <section class="rct-section">
-    <div class="rct-header">
-      <h2 class="rct-title">Graphic Design <em>&amp; Branding.</em></h2>
+  <section class="gx" aria-label="Graphic design and branding projects">
+    <header class="gx-head">
+      <div>
+        <div class="gx-eyebrow">Branding · Packaging · Print · Campaigns</div>
+        <h2 class="gx-title">Graphic Design <em>&amp; Branding.</em></h2>
+        <p class="gx-intro">Every piece here is built as a system: one idea, carried across every format it has to live in.</p>
+      </div>
+      <div class="gx-filters" role="group" aria-label="Filter projects">
+        <button type="button" class="gx-chip on" data-f="all" aria-pressed="true">All <span>8</span></button>
+        <button type="button" class="gx-chip" data-f="brand" aria-pressed="false">Branding</button>
+        <button type="button" class="gx-chip" data-f="print" aria-pressed="false">Print</button>
+        <button type="button" class="gx-chip" data-f="digital" aria-pressed="false">Digital</button>
+        <button type="button" class="gx-chip" data-f="play" aria-pressed="false">Playground</button>
+      </div>
+    </header>
+
+    <article class="gx-feature" data-tags="brand digital">
+      <a class="gx-feature-art" href="../jiggermaster.html" target="_blank" aria-label="Open the Jiggermaster case study">
+        <img src="../assets/gfx-jiggermaster-wide.jpg" alt="Jiggermaster key visual: a blackletter wordmark on yellow with a martini hand, pink dice, a lime, a disco ball and a red boot">
+      </a>
+      <div class="gx-feature-body">
+        <div class="gx-feature-top"><span class="gx-badge">Featured case study</span><span class="gx-fmeta">Brand identity + app</span></div>
+        <img class="gx-feature-logo" src="../assets/gfx/jigger-logo.png" alt="Jiggermaster">
+        <p class="gx-feature-pitch">A cocktail app that gives you the exact pour, wrapped in a brand parody that tests one thing: does an identity survive being slammed onto a totally different format?</p>
+        <dl class="gx-facts">
+          <div><dt>Role</dt><dd>Brand and product design lead</dd></div>
+          <div><dt>Timeline</dt><dd>6 weeks</dd></div>
+          <div class="wide"><dt>Scope</dt><dd>Identity, moodboards, design system, mobile and watch app</dd></div>
+        </dl>
+        <div class="gx-swatches" aria-label="Brand palette: forest green, red, electric blue, yellow, black"><i style="background:#094125"></i><i style="background:#E60023"></i><i style="background:#1500FF"></i><i style="background:#FFDD00"></i><i style="background:#000"></i></div>
+        <div class="gx-ctas"><a class="gx-btn" href="../jiggermaster.html" target="_blank">Read the case study ↗</a><a class="gx-btn ghost" href="../jiggermaster.html#prototype" target="_blank">Try the prototype ↗</a></div>
+      </div>
+    </article>
+
+    <div class="gx-grid" id="gxGrid">
+      <article class="gx-card span-6" data-tags="print">
+        <div class="gx-frame" style="--mat:#3A2C25"><div class="gx-stack land"><img src="../assets/gfx/om-2.jpg" alt="" loading="lazy"><img src="../assets/gfx/om-1.jpg" alt="Om Interiors brochure spreads" loading="lazy"></div><span class="gx-open">View brochure</span></div>
+        <div class="gx-cap"><div class="gx-cap-row"><h3>Om Interiors</h3><span class="gx-count">2 spreads + motion</span></div><p class="gx-cat">Brochure · Interior studio</p></div>
+        <button type="button" class="gx-hit" data-p="om" aria-label="Open Om Interiors"></button>
+      </article>
+      <article class="gx-card span-6" data-tags="print">
+        <div class="gx-frame" style="--mat:#7A1E3A"><div class="gx-stack"><img src="../assets/gfx/carnival-1.jpg" alt="" loading="lazy"><img src="../assets/gfx/carnival-3.jpg" alt="" loading="lazy"><img src="../assets/gfx/carnival-0.jpg" alt="ASU AI Carnival posters" loading="lazy"></div><span class="gx-open">View 5 posters</span></div>
+        <div class="gx-cap"><div class="gx-cap-row"><h3>ASU AI Carnival</h3><span class="gx-count">5 posters</span></div><p class="gx-cat">Poster series · ASU</p></div>
+        <button type="button" class="gx-hit" data-p="carnival" aria-label="Open ASU AI Carnival"></button>
+      </article>
+
+      <article class="gx-card span-4" data-tags="brand">
+        <div class="gx-frame" style="--mat:#3B2A22"><div class="gx-single"><img src="../assets/gfx/baker-board.jpg" alt="Baker Joy Maker brand board" loading="lazy"></div><span class="gx-open">View project</span></div>
+        <div class="gx-cap"><div class="gx-cap-row"><h3>Baker Joy Maker</h3><span class="gx-count">Brand board</span></div><p class="gx-cat">Brand identity · Bakery</p></div>
+        <button type="button" class="gx-hit" data-p="baker" aria-label="Open Baker Joy Maker"></button>
+      </article>
+      <article class="gx-card span-4" data-tags="brand print">
+        <div class="gx-frame" style="--mat:#EADFD2"><div class="gx-single"><img src="../assets/gfx/cafecito.jpg" alt="Cafecito coffee bags, cups and illustrations" loading="lazy"></div><span class="gx-open">View project</span></div>
+        <div class="gx-cap"><div class="gx-cap-row"><h3>Cafecito</h3><span class="gx-count">Packaging set</span></div><p class="gx-cat">Packaging · Coffee brand</p></div>
+        <button type="button" class="gx-hit" data-p="cafecito" aria-label="Open Cafecito"></button>
+      </article>
+      <article class="gx-card span-4" data-tags="digital">
+        <div class="gx-frame" style="--mat:#CFE0F2"><div class="gx-stack sq"><img src="../assets/gfx/wallet-2.jpg" alt="" loading="lazy"><img src="../assets/gfx/wallet-6.jpg" alt="" loading="lazy"><img src="../assets/gfx/wallet-1.jpg" alt="WalletGyde social posts" loading="lazy"></div><span class="gx-open">View 6 posts</span></div>
+        <div class="gx-cap"><div class="gx-cap-row"><h3>WalletGyde Social</h3><span class="gx-count">6 posts</span></div><p class="gx-cat">Social campaign · Fintech</p></div>
+        <button type="button" class="gx-hit" data-p="wallet" aria-label="Open WalletGyde Social"></button>
+      </article>
+
+      <div class="gx-sub"><h4>Playground</h4><p>Type and pattern studies, made for the joy of it.</p></div>
+
+      <article class="gx-card span-6 short" data-tags="play">
+        <div class="gx-frame" style="--mat:#A8381A"><div class="gx-single"><img src="../assets/gfx/flower.jpg" alt="Flower type study" loading="lazy"></div><span class="gx-open">View study</span></div>
+        <div class="gx-cap"><div class="gx-cap-row"><h3>Flower</h3><span class="gx-count">Type study</span></div><p class="gx-cat">Typography · Playground</p></div>
+        <button type="button" class="gx-hit" data-p="flower" aria-label="Open Flower"></button>
+      </article>
+      <article class="gx-card span-6 short" data-tags="play">
+        <div class="gx-frame" style="--mat:#F3C6DA"><div class="gx-stack sq"><img src="../assets/gfx/pattern-1.jpg" alt="" loading="lazy"><img src="../assets/gfx/pattern-3.jpg" alt="" loading="lazy"><img src="../assets/gfx/pattern-2.jpg" alt="Stamp and floral pattern studies" loading="lazy"></div><span class="gx-open">View 3 studies</span></div>
+        <div class="gx-cap"><div class="gx-cap-row"><h3>Stamps &amp; Florals</h3><span class="gx-count">3 studies</span></div><p class="gx-cat">Pattern and illustration · Playground</p></div>
+        <button type="button" class="gx-hit" data-p="patterns" aria-label="Open Stamps and Florals"></button>
+      </article>
     </div>
-    <div class="rct-grid">
-      <div class="rct" style="--rtb:#1a0830;--rta:#6b21a8;">
-        <div class="rct-img"><img src="../assets/gfx-posters.png" alt="ASU AI Carnival"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
-        <div class="rct-label"><div class="rct-meta">Poster Series <span class="rct-dot"></span> ASU</div><div class="rct-name">ASU AI Carnival</div></div>
-      </div>
-      <div class="rct" style="--rtb:#0f1a0f;--rta:#2d5a2d;">
-        <div class="rct-img"><img src="../assets/gfx-brand.png" alt="Brand Identity"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
-        <div class="rct-label"><div class="rct-meta">Brand Identity <span class="rct-dot"></span> Logo Systems</div><div class="rct-name">Logo &amp; Brand Systems</div></div>
-      </div>
-      <div class="rct" style="--rtb:#1a0a00;--rta:#7c3a00;">
-        <div class="rct-img"><img src="../assets/gfx-typography.png" alt="Typography"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
-        <div class="rct-label"><div class="rct-meta">Typography <span class="rct-dot"></span> Experiments</div><div class="rct-name">Type Experiments</div></div>
-      </div>
-      <div class="rct" style="--rtb:#001a2e;--rta:#005fa3;">
-        <div class="rct-img"><img src="../assets/gfx-social-1.png" alt="Social Media"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
-        <div class="rct-label"><div class="rct-meta">Social &amp; Digital <span class="rct-dot"></span> Carousel</div><div class="rct-name">Social Media Carousel</div></div>
-      </div>
-      <div class="rct" style="--rtb:#1a001a;--rta:#700070;">
-        <div class="rct-img" style="background:#1a001a;">
-          <video src="../assets/gfx-brochureominterior.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" autoplay muted loop playsinline></video>
-          <div class="rct-overlay"><div class="rct-view">View ↗</div></div>
-        </div>
-        <div class="rct-label"><div class="rct-meta">Brochure Design <span class="rct-dot"></span> Print</div><div class="rct-name">Om Interiors</div></div>
-      </div>
-      <div class="rct" style="--rtb:#001a1a;--rta:#006666;">
-        <div class="rct-img"><img src="../assets/gfx-packaging.png" alt="Packaging"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
-        <div class="rct-label"><div class="rct-meta">Packaging <span class="rct-dot"></span> Design</div><div class="rct-name">Packaging Design</div></div>
-      </div>
-      <div class="rct" style="--rtb:#1a0a00;--rta:#c87941;">
-        <div class="rct-img"><img src="../assets/gfx-pattern-1.png" alt="Illustrations"/><div class="rct-overlay"><div class="rct-view">View ↗</div></div></div>
-        <div class="rct-label"><div class="rct-meta">Miscellaneous <span class="rct-dot"></span> Illustrations</div><div class="rct-name">Illustrations &amp; Explorations</div></div>
-      </div>
-    </div>
+
+    <footer class="gx-foot"><p>Looking for product work?</p><a href="../index.html">See product case studies →</a></footer>
   </section>
+</div>
+
+<!-- Graphic project viewer -->
+<div class="gx-lb" id="gxLb" role="dialog" aria-modal="true" aria-labelledby="gxLbName" hidden>
+  <div class="gx-lb-stage" id="gxLbStage">
+    <button type="button" class="gx-lb-nav prev" aria-label="Previous image">‹</button>
+    <div class="gx-lb-media" id="gxLbMedia"></div>
+    <button type="button" class="gx-lb-nav next" aria-label="Next image">›</button>
+    <div class="gx-lb-thumbs" id="gxLbThumbs"></div>
+  </div>
+  <aside class="gx-lb-info">
+    <button type="button" class="gx-lb-close" aria-label="Close project">✕</button>
+    <div class="gx-lb-cat" id="gxLbCat"></div>
+    <h3 id="gxLbName"></h3>
+    <p id="gxLbBrief"></p>
+    <dl class="gx-facts" id="gxLbFacts"></dl>
+    <div class="gx-lb-count" id="gxLbCount"></div>
+    <div class="gx-lb-next"><span>Next project</span><button type="button" id="gxLbNextProj"></button></div>
+  </aside>
 </div>
 
 <!-- Screen border frame -->
@@ -1127,7 +1327,7 @@
   var projOverlay = document.getElementById('projects-overlay');
 
   window.addEventListener('wheel', function(e) {
-    if (curtainCooldown) return;
+    if (curtainCooldown || document.body.classList.contains('gx-lb-open')) return;
     // Open — scroll down on landing
     if (!curtainOpen && e.deltaY > 30) {
       curtainOpen = true;
@@ -1156,7 +1356,7 @@
     touchStartY = e.touches[0].clientY;
   }, { passive: true });
   window.addEventListener('touchend', function(e) {
-    if (curtainCooldown) return;
+    if (curtainCooldown || document.body.classList.contains('gx-lb-open')) return;
     var dy = touchStartY - e.changedTouches[0].clientY;
     if (!curtainOpen && dy > 50) {
       curtainOpen = true; curtainCooldown = true;
@@ -1306,6 +1506,129 @@
     }, { passive: false });
 
   })();
+</script>
+<script>
+/* Graphic projects: filters + viewer */
+(function () {
+  var BASE = '../assets/gfx/';
+  var P = {
+    baker: { name: 'Baker Joy Maker', cat: 'Brand identity · Bakery',
+      brief: 'A warm, character-led identity for an artisan bakery. The mascot logo works on cream and on chocolate, supported by a checkered pattern, a five-color palette and a Tan Songbird and Inter type pairing.',
+      facts: [['Deliverables', 'Logo, palette, type, pattern, brand board']],
+      slides: ['baker-board.jpg'] },
+    cafecito: { name: 'Cafecito', cat: 'Packaging · Coffee brand',
+      brief: 'An illustrated coffee brand carried across bags, cups and a set of playful character drawings, so every touchpoint feels like the same café.',
+      facts: [['Deliverables', 'Mark, bags, cups, illustration set']],
+      slides: ['cafecito.jpg'] },
+    carnival: { name: 'ASU AI Carnival', cat: 'Poster series · ASU',
+      brief: 'An event system for the DCI 691 Education by Design AI showcase at ASU: one overview poster with a QR code to the class site, plus four station posters that share a single layout.',
+      facts: [['Deliverables', '5 posters, one shared system']],
+      slides: ['carnival-0.jpg', 'carnival-1.jpg', 'carnival-2.jpg', 'carnival-3.jpg', 'carnival-4.jpg'] },
+    wallet: { name: 'WalletGyde Social', cat: 'Social campaign · Fintech',
+      brief: 'A six-post Instagram carousel for WalletGyde\'s AI budget coach. It opens on the money stress people already feel, then lands on a three-step answer.',
+      facts: [['Deliverables', '6-post carousel, illustration']],
+      slides: ['wallet-1.jpg', 'wallet-2.jpg', 'wallet-3.jpg', 'wallet-4.jpg', 'wallet-5.jpg', 'wallet-6.jpg'] },
+    om: { name: 'Om Interiors', cat: 'Brochure · Interior studio',
+      brief: 'A tri-fold brochure for an interior design studio in Pune. Calm, photo-led spreads that let the rooms do the talking, plus a motion mockup.',
+      facts: [['Deliverables', 'Tri-fold brochure, motion mockup']],
+      slides: ['om-1.jpg', 'om-2.jpg', { v: 'om-motion.mp4' }] },
+    flower: { name: 'Flower', cat: 'Type study · Playground',
+      brief: 'A type study that repeats one serif word until it turns into a pattern, then breaks the rhythm with a single botanical cut-out.',
+      facts: [],
+      slides: ['flower.jpg'] },
+    patterns: { name: 'Stamps & Florals', cat: 'Pattern studies · Playground',
+      brief: 'Illustration and pattern studies: a botanical stamp sheet, cut-paper florals and a repeating heart stamp.',
+      facts: [],
+      slides: ['pattern-2.jpg', 'pattern-3.jpg', 'pattern-1.jpg'] }
+  };
+  var ORDER = ['om', 'carnival', 'baker', 'cafecito', 'wallet', 'flower', 'patterns'];
+
+  var lb = document.getElementById('gxLb');
+  if (!lb) return;
+  var media = document.getElementById('gxLbMedia'), thumbs = document.getElementById('gxLbThumbs');
+  var nameEl = document.getElementById('gxLbName'), catEl = document.getElementById('gxLbCat');
+  var briefEl = document.getElementById('gxLbBrief'), factsEl = document.getElementById('gxLbFacts');
+  var countEl = document.getElementById('gxLbCount'), nextProj = document.getElementById('gxLbNextProj');
+  var navs = lb.querySelectorAll('.gx-lb-nav');
+  var cur = null, idx = 0, lastFocus = null;
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  function show(i) {
+    var p = P[cur], n = p.slides.length;
+    idx = (i + n) % n;
+    var s = p.slides[idx];
+    media.innerHTML = typeof s === 'string'
+      ? '<img src="' + BASE + s + '" alt="' + esc(p.name) + ', image ' + (idx + 1) + ' of ' + n + '">'
+      : '<video src="' + BASE + s.v + '" autoplay muted loop playsinline controls></video>';
+    Array.prototype.forEach.call(thumbs.children, function (t, j) { t.classList.toggle('on', j === idx); t.setAttribute('aria-current', j === idx ? 'true' : 'false'); });
+    countEl.textContent = n > 1 ? (idx + 1) + ' / ' + n : '';
+    navs.forEach(function (b) { b.hidden = n < 2; });
+    thumbs.hidden = n < 2;
+  }
+
+  function open(id) {
+    cur = id;
+    var p = P[id];
+    nameEl.textContent = p.name;
+    catEl.textContent = p.cat;
+    briefEl.textContent = p.brief;
+    factsEl.innerHTML = (p.facts || []).map(function (f) { return '<div class="wide"><dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join('');
+    factsEl.hidden = !(p.facts && p.facts.length);
+    thumbs.innerHTML = p.slides.map(function (s, j) {
+      return '<button type="button" aria-label="Show image ' + (j + 1) + '">' + (typeof s === 'string' ? '<img src="' + BASE + s + '" alt="">' : '▶ Motion') + '</button>';
+    }).join('');
+    var nx = ORDER[(ORDER.indexOf(id) + 1) % ORDER.length];
+    nextProj.textContent = P[nx].name + ' →';
+    nextProj.dataset.p = nx;
+    show(0);
+    if (lb.hidden) {
+      lastFocus = document.activeElement;
+      lb.hidden = false;
+      document.body.classList.add('gx-lb-open');
+      lb.querySelector('.gx-lb-close').focus();
+    }
+  }
+
+  function close() {
+    lb.hidden = true;
+    media.innerHTML = '';
+    document.body.classList.remove('gx-lb-open');
+    if (lastFocus) lastFocus.focus();
+  }
+
+  document.querySelectorAll('.gx-hit').forEach(function (b) { b.addEventListener('click', function () { open(b.dataset.p); }); });
+  lb.querySelector('.gx-lb-close').addEventListener('click', close);
+  lb.querySelector('.gx-lb-nav.prev').addEventListener('click', function () { show(idx - 1); });
+  lb.querySelector('.gx-lb-nav.next').addEventListener('click', function () { show(idx + 1); });
+  thumbs.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) show(Array.prototype.indexOf.call(thumbs.children, b)); });
+  nextProj.addEventListener('click', function () { open(nextProj.dataset.p); });
+  document.getElementById('gxLbStage').addEventListener('click', function (e) { if (e.target === e.currentTarget || e.target === media) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') { e.preventDefault(); close(); }
+    else if (e.key === 'ArrowLeft') show(idx - 1);
+    else if (e.key === 'ArrowRight') show(idx + 1);
+    else if (e.key === 'Tab') {
+      var f = Array.prototype.filter.call(lb.querySelectorAll('button, video[controls]'), function (el) { return !el.hidden && el.offsetParent !== null; });
+      if (!f.length) return;
+      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+    }
+  });
+
+  // Filters
+  var grid = document.getElementById('gxGrid'), feature = document.querySelector('.gx-feature');
+  document.querySelectorAll('.gx-chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var f = chip.dataset.f;
+      document.querySelectorAll('.gx-chip').forEach(function (c) { var on = c === chip; c.classList.toggle('on', on); c.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+      grid.classList.toggle('filtered', f !== 'all');
+      grid.querySelectorAll('.gx-card').forEach(function (c) { c.classList.toggle('is-hidden', f !== 'all' && c.dataset.tags.split(' ').indexOf(f) < 0); });
+      if (feature) feature.classList.toggle('is-hidden', f !== 'all' && feature.dataset.tags.split(' ').indexOf(f) < 0);
+    });
+  });
+})();
 </script>
 </body>
 </html>
