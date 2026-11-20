@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Extraction System · Priyanka Uttarkar</title>
+<meta name="description" content="Data Extraction System: an AI-assisted interface that frees Mayo Clinic researchers from copying values out of PDFs by hand, with confidence, conflicts and sources visible at every step. A case study by Priyanka Uttarkar.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Priyanka Uttarkar">
+<meta property="og:title" content="Data Extraction System · Priyanka Uttarkar">
+<meta property="og:description" content="An AI-assisted interface that frees Mayo Clinic researchers from copying values out of PDFs by hand. A case study by Priyanka Uttarkar.">
+<meta property="og:url" content="https://prianka.design/data-extraction.html">
+<meta property="og:image" content="https://prianka.design/assets/og/og-dashboard.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Data Extraction System · Priyanka Uttarkar">
+<meta name="twitter:description" content="An AI-assisted interface that frees Mayo Clinic researchers from copying values out of PDFs by hand.">
+<meta name="twitter:image" content="https://prianka.design/assets/og/og-dashboard.jpg">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;0,800;0,900;1,500;1,800&family=Hanken+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&family=Caveat:wght@600&display=swap">
+<link rel="stylesheet" href="/site-chrome.css">
+<style>
+:root{
+  --blue:#2453A6; --blue-d:#1A3F82; --blue-l:#E7EEFA;
+  --navy:#0E1B33; --ink2:#44506A; --mute:#76809A;
+  --bg:#F5F7FA; --bg2:#EAEEF4; --card:#fff; --line:#DDE3EC; --line2:#C9D2DF;
+  --hl:#F6E3A1; --hl-s:#FBF3D6; --deep:#2C4772;
+  --hi:#1E8E5E; --hi-bg:#DDF3E8;
+  --lo:#B7780C; --lo-bg:#FCEFD2;
+  --cf:#C9452F; --cf-bg:#FBE2DC;
+  --head:'Schibsted Grotesk', system-ui, sans-serif;
+  --body:'Hanken Grotesk', system-ui, sans-serif;
+  --mono:'DM Mono', ui-monospace, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--navy);font:17px/1.62 var(--body);-webkit-font-smoothing:antialiased;color-scheme:light}
+img{display:block;max-width:100%;height:auto}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--head);letter-spacing:-.025em}
+.wrap{max-width:1120px;margin:0 auto;padding:0 max(36px,env(safe-area-inset-left,0px))}
+.sec{padding:120px 0}
+.sec.tint{background:var(--bg2)}
+.chap{display:inline-flex;align-items:center;gap:10px;font:500 13px var(--mono);color:var(--blue);background:var(--blue-l);border-radius:999px;padding:6px 12px 6px 6px}
+.chap b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-weight:500;font-size:11px}
+.h2{font-weight:800;font-size:clamp(36px,4.6vw,62px);line-height:1.02;margin-top:20px}
+.h2 .soft{color:var(--mute);font-weight:500}
+.lede{font-size:19px;color:var(--ink2);max-width:640px;margin-top:20px}
+.head{max-width:820px;margin-bottom:60px}
+.hl{background:linear-gradient(transparent 60%,var(--hl) 60%,var(--hl) 90%,transparent 90%) no-repeat;background-size:0 100%;transition:background-size 1s cubic-bezier(.6,0,.2,1)}
+.hl.on{background-size:100% 100%}
+.chip{display:inline-flex;align-items:center;gap:6px;font:500 11.5px var(--mono);padding:3px 8px;border-radius:999px;white-space:nowrap}
+.chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.c-hi{color:var(--hi);background:var(--hi-bg)} .c-lo{color:var(--lo);background:var(--lo-bg)} .c-cf{color:var(--cf);background:var(--cf-bg)}
+
+/* ── chapter rail ── */
+.rail{position:fixed;left:28px;top:50%;transform:translateY(-50%);z-index:50;display:none;flex-direction:column;gap:12px;font:500 12px var(--mono)}
+.rail a{color:var(--mute);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s}
+.rail a::before{content:"";width:14px;height:2px;background:var(--line2);transition:width .25s,background .25s}
+.rail a.on{color:var(--navy)} .rail a.on::before{width:28px;background:var(--blue)}
+.rail.dark a{color:rgba(255,255,255,.55)} .rail.dark a.on{color:#fff} .rail.dark a::before{background:rgba(255,255,255,.35)} .rail.dark a.on::before{background:var(--hl)}
+@media (min-width:1380px){.rail{display:flex}}
+
+/* ── hero ── */
+.hero{background:var(--deep);color:#fff;padding:86px 0 96px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.2px);background-size:22px 22px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 85%);mask-image:linear-gradient(180deg,#000,transparent 85%)}
+.hero .wrap{position:relative}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font:500 13px var(--mono);color:rgba(255,255,255,.75)}
+.hero-top .mayo{display:flex;align-items:center;gap:10px;color:#fff}
+.hero h1{font-weight:900;font-size:clamp(48px,7.4vw,104px);line-height:.94;letter-spacing:-.04em;margin-top:34px;max-width:900px}
+.hero h1 em{font-style:italic;font-weight:500;color:#B3C4DF}
+.hero .thesis{font-size:clamp(20px,2.1vw,25px);line-height:1.4;max-width:720px;margin-top:26px;color:#D5DDEA}
+.hero .thesis mark{background:var(--hl);color:var(--navy);padding:0 4px;border-radius:3px}
+.facts{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.facts span{font:500 13px var(--mono);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:7px 14px}
+.facts span b{font-weight:500;color:rgba(255,255,255,.6);margin-right:8px}
+
+/* hero machine */
+.machine{margin-top:64px;display:grid;grid-template-columns:minmax(0,1fr) 84px minmax(0,1.15fr);align-items:center;gap:0}
+.paper{background:#fff;color:#2a3142;border-radius:10px;padding:26px 28px 30px;box-shadow:0 40px 80px -30px rgba(5,15,40,.6);transform:rotate(-1.4deg);font:15px/1.7 Georgia,serif;position:relative}
+.paper .ptitle{font:700 15px/1.3 var(--body);color:var(--navy);margin-bottom:4px}
+.paper .pmeta{font:12px var(--mono);color:var(--mute);margin-bottom:14px}
+.paper .bar{height:8px;border-radius:2px;background:#EEF1F5;margin:8px 0}
+.paper .bar.s{width:58%}
+.paper .f{border-radius:3px;padding:0 2px;background:linear-gradient(var(--hl),var(--hl)) no-repeat;background-size:0 100%;transition:background-size .6s ease}
+.paper .f.lit{background-size:100% 100%}
+.paper .pdf{position:absolute;top:-12px;right:18px;font:500 11px var(--mono);background:var(--navy);color:#fff;padding:3px 8px;border-radius:4px}
+.flowline{display:flex;flex-direction:column;align-items:center;gap:6px;font:500 11px var(--mono);color:rgba(255,255,255,.7)}
+.flowline svg{width:64px;height:20px}
+.flowline .dot{animation:dash 1.4s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-16}}
+.table{background:#fff;color:var(--navy);border-radius:12px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(5,15,40,.6)}
+.table .th{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);font:600 14px var(--body)}
+.table .th span{font:500 11px var(--mono);color:var(--mute)}
+.trow{display:grid;grid-template-columns:120px 1fr auto;gap:12px;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line);font-size:14px;min-height:50px;transition:background .4s}
+.trow:last-child{border-bottom:0}
+.trow .k{font:500 12px var(--mono);color:var(--mute)}
+.trow .v{font-weight:600;min-height:20px}
+.trow .chip{opacity:0;transform:scale(.8);transition:opacity .3s,transform .3s}
+.trow.done .chip{opacity:1;transform:none}
+.trow.active{background:#FFFBEA}
+.legend{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;margin-top:18px}
+
+/* ── tl;dr ── */
+.tldr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:2px solid var(--navy)}
+.tldr > div{padding:28px 28px 8px 0}
+.tldr > div+div{padding-left:28px;border-left:1px solid var(--line)}
+.tldr .lab{font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--blue)}
+.tldr h3{font-weight:700;font-size:23px;line-height:1.2;margin:10px 0 10px}
+.tldr p{color:var(--ink2);font-size:16px}
+
+/* ── problem: wall of papers ── */
+.wall-wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:56px;align-items:center}
+.wall{display:grid;grid-template-columns:repeat(14,1fr);gap:7px;padding:26px;background:#fff;border:1px solid var(--line);border-radius:16px;position:relative}
+.wall i{aspect-ratio:3/4;border-radius:3px;background:#E9EDF3;position:relative;transition:background .3s}
+.wall i::after{content:"";position:absolute;left:18%;right:18%;top:28%;height:2px;background:#D3DAE5;box-shadow:0 5px 0 #D3DAE5,0 10px 0 #D3DAE5}
+.wall i.done{background:#C9D8F2}
+.wall i.cur{background:var(--hl);box-shadow:0 0 0 1.5px var(--navy)}
+.wall i.err{background:var(--cf-bg);box-shadow:inset 0 0 0 2px var(--cf)}
+.wall i.new{animation:drop .5s ease}
+@keyframes drop{from{transform:translateY(-10px);opacity:0}}
+.wall-cap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;font:500 12.5px var(--mono);color:var(--mute)}
+.wall-cap b{font-weight:500;color:var(--navy)}
+.probs{display:flex;flex-direction:column;gap:30px}
+.prob{display:grid;grid-template-columns:52px 1fr;gap:18px}
+.prob .n{font:900 42px/1 var(--head);color:var(--line2)}
+.prob h3{font-weight:800;font-size:25px;margin-bottom:6px}
+.prob p{color:var(--ink2);font-size:16px}
+.gpt{margin-top:84px;display:grid;grid-template-columns:auto 1fr;align-items:end;gap:20px 48px}
+.gpt q{font:italic 800 clamp(34px,4.6vw,60px)/1 var(--head);letter-spacing:-.03em;quotes:"“" "”"}
+.gpt p{font-size:20px;color:var(--ink2);max-width:420px}
+.gpt p b{color:var(--navy);background:var(--hl-s);box-shadow:inset 0 -.45em 0 var(--hl);padding:0 4px}
+
+/* ── trust ── */
+.trust-sec{background:var(--navy);color:#EEF2FA}
+.trust-sec .chap{background:rgba(255,255,255,.1);color:#BFD3F5}
+.trust-sec .chap b{background:var(--hl);color:var(--navy)}
+.trust-sec .lede{color:#B5C1D8}
+.trust-sec .h2 .soft{color:#7E8BA6}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.pillar{background:#16274A;border:1px solid #24375F;border-radius:16px;padding:22px 22px 26px;display:flex;flex-direction:column;gap:16px}
+.pillar .lab{font:500 12px var(--mono);color:var(--hl)}
+.pillar h3{font-weight:800;font-size:24px;color:#fff}
+.pillar p{font-size:15px;color:#B5C1D8}
+.mini{background:#fff;border-radius:10px;padding:14px;color:var(--navy);font-size:13.5px;min-height:150px;position:relative}
+.mini .cellrow{display:flex;justify-content:space-between;align-items:center;gap:8px;border:1px solid var(--line);border-radius:7px;padding:9px 10px;margin-bottom:8px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.mini .cellrow:hover,.mini .cellrow:focus-visible{border-color:var(--navy);outline:none}
+.mini .tip{position:absolute;left:14px;right:14px;bottom:10px;background:var(--navy);color:#fff;border-radius:8px;padding:9px 11px;font-size:12.5px;opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s;pointer-events:none}
+.mini .tip b{color:#FF9C8A;display:block;font-size:12px}
+.mini .tip.show{opacity:1;transform:none}
+.mini .src{font:13px/1.6 Georgia,serif;color:#3a4152}
+.mini .src span{transition:background .25s;border-radius:2px}
+.mini .src span.on{background:var(--hl)}
+.mini .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mini .opt{border:1.5px solid var(--line);border-radius:8px;padding:9px 10px;cursor:pointer;transition:border-color .2s,background .2s}
+.mini .opt small{display:block;font:500 11px var(--mono);color:var(--blue);margin-bottom:3px}
+.mini .opt.pick{border-color:var(--hi);background:var(--hi-bg)}
+.mini .opt:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.mini .hint{font:500 11px var(--mono);color:var(--mute);margin-top:8px}
+
+/* full resolver */
+.resolver{margin-top:56px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);background:#fff;color:var(--navy);border-radius:18px;overflow:hidden}
+.rv-l{padding:28px 30px;border-right:1px solid var(--line)}
+.rv-r{padding:24px 26px;background:#F7F9FC}
+.rlab{display:flex;justify-content:space-between;align-items:center;gap:10px;font:500 12px var(--mono);color:var(--mute);margin-bottom:12px}
+.cellbox{border:1px solid var(--line2);border-radius:10px;padding:13px 15px;font-weight:600;margin-bottom:20px;transition:border-color .3s,background .3s}
+.cellbox.ok{border-color:var(--hi);background:var(--hi-bg)}
+.srcdoc{font:15.5px/1.75 Georgia,serif;color:#2a3142}
+.srcdoc p+p{margin-top:12px}
+.srcdoc .mk{background:var(--hl-s);transition:background .3s;border-radius:2px}
+.srcdoc .mk.on{background:var(--hl)}
+.model{border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px;background:#fff;transition:border-color .25s,box-shadow .25s}
+.model.pick{border-color:var(--hi);box-shadow:0 0 0 3px var(--hi-bg)}
+.model .mn{display:flex;justify-content:space-between;font:500 12px var(--mono);color:var(--blue)}
+.model .mv{font-weight:700;margin:7px 0 3px}
+.model .why{font-size:13.5px;color:var(--mute)}
+.btn{all:unset;cursor:pointer;display:inline-block;font:600 13.5px var(--body);padding:8px 13px;border-radius:8px;border:1px solid var(--line2);background:#fff;margin-top:10px;transition:background .2s,border-color .2s,color .2s}
+.btn:hover{border-color:var(--navy)}
+.btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.model.pick .btn{background:var(--hi);border-color:var(--hi);color:#fff}
+.final{border:1.5px dashed var(--line2);border-radius:12px;padding:12px 16px;font-size:14px;color:var(--mute);min-height:54px;transition:all .3s}
+.final.set{border-style:solid;border-color:var(--hi);color:var(--navy);background:var(--hi-bg)}
+.final b{display:block;font:500 11px var(--mono);color:var(--hi);margin-bottom:2px}
+.ract{display:flex;gap:10px;margin-top:14px}
+.ract .go{flex:1;text-align:center;background:var(--navy);color:#fff;border-color:var(--navy);padding:11px}
+.ract .go[aria-disabled="true"]{opacity:.35;cursor:not-allowed}
+.rnote{margin-top:16px;font:500 12px var(--mono);color:#7E8BA6}
+
+/* ── process: affinity ── */
+.affinity{position:relative;height:440px;margin-top:8px}
+.stk{position:absolute;width:250px;padding:14px 16px;border-radius:4px;font:600 15px/1.35 var(--body);color:#2c2a1a;box-shadow:0 10px 22px -12px rgba(14,27,51,.35);transition:transform 1s cubic-bezier(.5,0,.15,1);transform:translate(var(--sx),var(--sy)) rotate(var(--sr))}
+.affinity.go .stk{transform:translate(var(--cx),var(--cy)) rotate(var(--cr))}
+.stk.y{background:#FFE98F}.stk.p{background:#FFD3C9}.stk.b{background:#CFE0FB}
+.cluster-lab{position:absolute;top:0;font:800 22px var(--head);opacity:0;transition:opacity .5s .7s}
+.cluster-lab small{display:block;font:500 12px var(--mono);color:var(--mute);letter-spacing:0}
+.affinity.go .cluster-lab{opacity:1}
+.aff-cap{font:500 12.5px var(--mono);color:var(--mute);margin-top:18px}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:64px}
+.step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 20px 22px}
+.step .ic{width:44px;height:44px;border-radius:10px;background:var(--blue-l);display:grid;place-items:center;margin-bottom:14px}
+.step .ic svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.step h3{font-weight:700;font-size:19px;margin-bottom:6px}
+.step p{font-size:15px;color:var(--ink2)}
+.principle{margin-top:56px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding:26px 30px;border-radius:16px;background:#FBF3D6;border:1px solid #EDDCA0}
+.principle q{font:800 clamp(22px,2.6vw,32px)/1.15 var(--head);letter-spacing:-.02em;flex:1 1 420px}
+.principle span{font:500 13px var(--mono)}
+
+/* ── task flow diagram ── */
+.flowtop{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:28px}
+.seg{display:inline-flex;background:#fff;border:1px solid var(--line2);border-radius:999px;padding:4px;flex:none}
+.seg button{all:unset;cursor:pointer;font:600 14px var(--body);padding:9px 18px;border-radius:999px;color:var(--ink2);transition:background .2s,color .2s}
+.seg button[aria-pressed="true"]{background:var(--navy);color:#fff}
+.seg button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.diagram{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 20px 14px;overflow-x:auto}
+.diagram svg{display:block;width:100%;min-width:880px;height:auto}
+.diagram text{font-family:var(--body)}
+.path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1.1s ease}
+.diagram.v2 .draw{stroke-dashoffset:0}
+.v2only{opacity:0;transition:opacity .4s .5s}
+.diagram.v2 .v2only{opacity:1}
+.v1only{transition:opacity .3s}
+.diagram.v2 .v1only{opacity:0}
+.flowcap{font-size:16px;color:var(--ink2);max-width:660px;min-height:50px;margin-top:18px}
+.flowout{margin-top:28px;font:700 clamp(22px,2.4vw,30px)/1.25 var(--head);letter-spacing:-.02em;max-width:820px}
+
+/* ── product tour ── */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.tabs button{all:unset;cursor:pointer;font:600 14.5px var(--body);padding:10px 16px;border-radius:10px;color:var(--ink2);display:flex;align-items:center;gap:10px;border:1px solid transparent;transition:background .2s,border-color .2s}
+.tabs button span{font:500 12px var(--mono);color:var(--mute)}
+.tabs button[aria-selected="true"]{background:#fff;border-color:var(--line2);color:var(--navy)}
+.tabs button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.tour{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:36px;align-items:start}
+.frame{background:#fff;border:1px solid var(--line2);border-radius:14px;overflow:hidden;box-shadow:0 30px 70px -36px rgba(14,27,51,.45);position:relative}
+.frame .fb{height:34px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#EEF1F6;border-bottom:1px solid var(--line)}
+.frame .fb i{width:10px;height:10px;border-radius:50%;background:#CFD6E1}
+.frame .fb span{margin-left:10px;font:12px var(--mono);color:var(--mute)}
+.stage{position:relative}
+.stage img{transition:opacity .35s}
+.hot{all:unset;cursor:pointer;position:absolute;width:28px;height:28px;border-radius:50%;background:#FFF;color:var(--navy);font:500 12.5px var(--mono);display:grid;place-items:center;transform:translate(-50%,-50%);box-shadow:0 4px 12px rgba(14,27,51,.3);border:1.5px solid var(--navy);transition:transform .2s}
+.hot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px solid rgba(44,71,114,.45);animation:ping 2.6s ease-out infinite}
+@keyframes ping{0%{transform:scale(.7);opacity:1}100%{transform:scale(1.5);opacity:0}}
+.hot.on{transform:translate(-50%,-50%) scale(1.18);background:var(--navy);color:#fff}
+.hot:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+.notes h3{font-weight:800;font-size:clamp(26px,2.6vw,34px);line-height:1.1;margin-bottom:20px}
+.notes ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.notes li{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:12px 14px;border-radius:12px;cursor:pointer;font-size:15.5px;color:var(--ink2);border:1px solid transparent;transition:background .2s,border-color .2s}
+.notes li b{color:var(--navy)}
+.notes li .n{width:26px;height:26px;border-radius:50%;background:var(--hl);font:500 12px var(--mono);display:grid;place-items:center;color:var(--navy)}
+.notes li.on{background:#fff;border-color:var(--line2)}
+
+/* ── video ── */
+.vframe video{display:block;width:100%;height:auto;background:#EDEFF3}
+
+/* ── reflection ── */
+.refl-sec{background:var(--deep);color:#fff}
+.refl-sec .chap{background:rgba(255,255,255,.14);color:#fff}
+.refl-sec .chap b{background:var(--hl);color:var(--navy)}
+.refl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:64px;margin-top:28px}
+.refl h2{font-weight:900;font-size:clamp(34px,4vw,54px);line-height:1}
+.refl .body p{font-size:18px;color:#DCE6F8}
+.refl .body p+p{margin-top:18px}
+.takes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:64px}
+.take{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:22px}
+.take .n{font:500 12px var(--mono);color:var(--hl)}
+.take p{margin-top:10px;font:700 19px/1.3 var(--head)}
+
+.next{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding:52px 0}
+.next .lab{font:500 12px var(--mono);color:var(--mute)}
+.next a{font:800 clamp(28px,3.4vw,44px) var(--head);letter-spacing:-.03em;color:var(--navy);text-decoration:none}
+.next a:hover{color:var(--blue)}
+
+@media (prefers-reduced-motion:reduce){
+  .hl,.paper .f,.trow .chip,.stk,.draw,.v2only,.cluster-lab,.stage img{transition:none}
+  .hot::after,.flowline .dot,.wall i.new{animation:none}
+}
+@media (max-width:980px){
+  .machine{grid-template-columns:1fr;gap:18px}
+  .flowline{flex-direction:row}
+  .flowline svg{transform:rotate(90deg)}
+  .paper{transform:none}
+  .tour{grid-template-columns:1fr}
+  .pillars{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .wrap{padding:0 max(20px,env(safe-area-inset-left,0px))}
+  .sec{padding:84px 0}
+  .tldr{grid-template-columns:1fr}
+  .tldr > div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}
+  .wall-wrap{grid-template-columns:1fr;gap:36px}
+  .wall{grid-template-columns:repeat(10,1fr);padding:16px;gap:5px}
+  .gpt{grid-template-columns:1fr}
+  .resolver{grid-template-columns:1fr}
+  .rv-l{border-right:0;border-bottom:1px solid var(--line)}
+  .affinity{height:auto;display:grid;grid-template-columns:1fr;gap:10px}
+  .affinity .stk{position:static;width:auto;transform:none!important}
+  .cluster-lab{position:static;opacity:1;margin-top:18px}
+  .steps{grid-template-columns:1fr 1fr}
+  .flowtop{flex-direction:column;align-items:flex-start}
+  .refl{grid-template-columns:1fr;gap:24px}
+  .takes{grid-template-columns:1fr}
+  .trow{grid-template-columns:96px 1fr auto;padding:10px 14px}
+}
+@media (max-width:520px){
+  .steps{grid-template-columns:1fr}
+  .hot{width:24px;height:24px;font-size:11px}
+  .mini .pair{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="sc-bar">
+  <div class="sc-dots" aria-hidden="true"><span style="background:#ff5f57"></span><span style="background:#ffbd2e"></span><span style="background:#28ca41"></span></div>
+  <a class="sc-brand" href="/index.html#rct-section" aria-label="Back to all work">← pri.anka</a>
+  <nav class="sc-tabs" aria-label="Portfolio sections">
+    <a class="sc-tab is-active" href="/index.html#rct-section" aria-current="page">product</a>
+    <a class="sc-tab" href="/graphic/index.html#work">graphic</a>
+  </nav>
+  <div class="sc-right">
+    <a class="sc-resume" href="/resume.pdf" download>Resume Download</a>
+    <div class="sc-loc"><span>Mountain View, CA</span><span class="sc-sep">·</span><span data-sc-time></span></div>
+  </div>
+</header>
+
+<nav class="rail" id="rail" aria-label="Chapters">
+  <a href="#problem">Problem</a>
+  <a href="#trust">Trust</a>
+  <a href="#process">Process</a>
+  <a href="#flows">Flows</a>
+  <a href="#product">Product</a>
+  <a href="#reflection">Reflection</a>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" data-dark>
+  <div class="wrap">
+    <div class="hero-top">
+      <span class="mayo">Mayo Clinic · Living Systematic Reviews</span>
+      <span>Product design · AI interface</span>
+    </div>
+    <h1>Data Extraction <em>that researchers can trust.</em></h1>
+    <p class="thesis">LLMs can help automate extraction. But there was <mark>no interface that made it work for researchers</mark>. We built one.</p>
+    <div class="facts"><span><b>Client</b>Mayo Clinic</span><span><b>Timeline</b>4 months</span><span><b>Industry</b>Healthcare research</span><span><b>Work</b>Product design · AI interface</span></div>
+
+    <div class="machine" role="img" aria-label="Animation: values are highlighted in a research paper and land in a structured table, each tagged with how confident the AI is.">
+      <div class="paper">
+        <span class="pdf">study_014.pdf</span>
+        <div class="ptitle">Magnesium Supplementation and Sleep Quality in Older Adults</div>
+        <div class="pmeta">R. Chang, V. Kapoor, D. Stone, M. Ali, and 2 more</div>
+        <div class="bar"></div><div class="bar s"></div>
+        <p>A <span class="f" data-f="0">randomized, double-blind, placebo-controlled trial</span> with an <span class="f" data-f="1">8-week intervention period</span> of <span class="f" data-f="2">500 mg magnesium oxide daily</span> versus placebo. Sleep quality was assessed using the <span class="f" data-f="3">Insomnia Severity Index</span>.</p>
+        <div class="bar"></div><div class="bar s"></div>
+      </div>
+      <div class="flowline" aria-hidden="true"><svg viewBox="0 0 64 20" fill="none"><path class="dot" d="M2 10h52" stroke="#FFE066" stroke-width="2" stroke-dasharray="4 4"/><path d="M48 4l8 6-8 6" stroke="#FFE066" stroke-width="2"/></svg>AI extracts</div>
+      <div>
+        <div class="table">
+          <div class="th">Extraction table<span>study_014</span></div>
+          <div class="trow" data-r="0"><span class="k">Design</span><span class="v"></span><span class="chip c-hi">High</span></div>
+          <div class="trow" data-r="1"><span class="k">Duration</span><span class="v"></span><span class="chip c-hi">High</span></div>
+          <div class="trow" data-r="2"><span class="k">Dose</span><span class="v"></span><span class="chip c-hi">High</span></div>
+          <div class="trow" data-r="3"><span class="k">Outcome</span><span class="v"></span><span class="chip c-lo">Low · check</span></div>
+          <div class="trow" data-r="4"><span class="k">Authors</span><span class="v"></span><span class="chip c-cf">2 answers</span></div>
+        </div>
+        <div class="legend"><span class="chip c-hi">Confident</span><span class="chip c-lo">Needs a look</span><span class="chip c-cf">Models disagree</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TL;DR -->
+<section class="sec" style="padding-bottom:40px">
+  <div class="wrap">
+    <div class="tldr">
+      <div><div class="lab">The problem</div><h3>Copying values from PDFs, by hand, forever.</h3><p>Every new paper restarted the cycle for Mayo Clinic's review teams.</p></div>
+      <div><div class="lab">What we designed</div><h3>An extraction workflow with a human in charge.</h3><p>Upload, let the AI draft the table, then review what it isn't sure about.</p></div>
+      <div><div class="lab">The hard part</div><h3>Making AI output trustworthy enough to use.</h3><p>Confidence, conflicts and sources became the design, not add-ons.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="sec" id="problem">
+  <div class="wrap">
+    <div class="head">
+      <span class="chap"><b>1</b>The problem</span>
+      <h2 class="h2">Manual. Time-consuming. <span class="soft">Prone to error.</span></h2>
+      <p class="lede">Researchers at Mayo Clinic were copying values from PDFs into spreadsheets by hand. Across hundreds of studies. Every time a new paper dropped.</p>
+    </div>
+    <div class="wall-wrap">
+      <div>
+        <div class="wall" id="wall" role="img" aria-label="A grid of research papers being processed one at a time by hand, while new papers keep arriving and some contain errors."></div>
+        <div class="wall-cap"><span><b>One paper at a time.</b> Highlighted is the one being copied.</span><span>New studies keep arriving.</span></div>
+      </div>
+      <div class="probs">
+        <div class="prob"><span class="n">01</span><div><h3>Manual</h3><p>Values are copied from PDFs into spreadsheets by hand. When a new study drops, the cycle starts again.</p></div></div>
+        <div class="prob"><span class="n">02</span><div><h3>Time-consuming</h3><p>A single living systematic review can take months. Existing tools add configuration overhead instead of reducing it.</p></div></div>
+        <div class="prob"><span class="n">03</span><div><h3>Prone to error</h3><p>Manual transcription introduces missed fields and undetected conflicts across large teams.</p></div></div>
+      </div>
+    </div>
+    <div class="gpt">
+      <q>Why not just use ChatGPT?</q>
+      <p>The tools exist, but the interface doesn't. <b>That's the gap we designed for.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="sec trust-sec" id="trust" data-dark>
+  <div class="wrap">
+    <div class="head">
+      <span class="chap"><b>2</b>The core idea</span>
+      <h2 class="h2">The AI can draft. <span class="soft">A researcher has to be able to trust it.</span></h2>
+      <p class="lede">An extraction tool is only useful if people know when to believe it. So three signals sit on every value. Try them.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="lab">Signal 01</span>
+        <h3>Confidence</h3>
+        <div class="mini" id="miniConf">
+          <div class="cellrow" tabindex="0" data-tip="0"><span>Randomized, double-blind trial</span><span class="chip c-hi">High</span></div>
+          <div class="cellrow" tabindex="0" data-tip="1"><span>Placebo-controlled, blinded design</span><span class="chip c-lo">Low</span></div>
+          <div class="tip" id="confTip"></div>
+        </div>
+        <p>Hover a value. A low-confidence answer says so on the cell itself.</p>
+      </div>
+      <div class="pillar">
+        <span class="lab">Signal 02</span>
+        <h3>Source</h3>
+        <div class="mini" id="miniSrc">
+          <div class="cellrow" tabindex="0" data-s="a"><span>Safety profile</span><span class="chip c-hi">Found</span></div>
+          <div class="cellrow" tabindex="0" data-s="b"><span>Common adverse events</span><span class="chip c-hi">Found</span></div>
+          <p class="src"><span data-src="a">Pembrolizumab has a manageable and consistent safety profile.</span> <span data-src="b">The most common adverse events include fatigue, rash and cough.</span></p>
+        </div>
+        <p>Every value points back to the exact passage it came from.</p>
+      </div>
+      <div class="pillar">
+        <span class="lab">Signal 03</span>
+        <h3>Conflict</h3>
+        <div class="mini">
+          <div class="pair" id="miniPair">
+            <button type="button" class="opt" aria-pressed="false"><small>ChatGPT 4o</small>E. Saeed, K. Dubois, +3</button>
+            <button type="button" class="opt" aria-pressed="false"><small>Llama 4 Scout</small>E. Saeed, K. Dubois</button>
+          </div>
+          <div class="hint" id="pairHint">Two models disagree. Pick one.</div>
+        </div>
+        <p>When models disagree, a person decides, side by side.</p>
+      </div>
+    </div>
+
+    <div class="resolver" id="resolver">
+      <div class="rv-l">
+        <div class="rlab"><span>Cell C3 · Authors</span><span class="chip c-cf" id="rvStatus">Conflict</span></div>
+        <div class="cellbox" id="rvCell">Two answers, not resolved</div>
+        <div class="rlab"><span>Source document</span></div>
+        <div class="srcdoc">
+          <p><span class="mk" id="rvMk">Clinical trial and surveillance data have demonstrated that pembrolizumab has a manageable and consistent safety profile in patients with advanced or metastatic disease.</span> The most common adverse events reported with pembrolizumab monotherapy include fatigue, musculoskeletal pain, rash, diarrhea, pyrexia, cough and decreased appetite.</p>
+          <p>Although the safety profile of pembrolizumab is well established in the advanced or metastatic setting, it has not been characterized across indications in the adjuvant setting.</p>
+        </div>
+      </div>
+      <div class="rv-r">
+        <div class="rlab"><span>All three, together · resolve the cell</span></div>
+        <div class="model" data-m="a"><div class="mn"><span>ChatGPT 4o</span><span>full list</span></div><div class="mv">E. Saeed, K. Dubois, H. Sharma, M. El-Rami, and 1 more</div><div class="why">Extracted from an explicit mention in the document.</div><button type="button" class="btn">Use this value</button></div>
+        <div class="model" data-m="b"><div class="mn"><span>Llama 4 Scout</span><span>partial</span></div><div class="mv">E. Saeed, K. Dubois</div><div class="why">Extracted from the abstract.</div><button type="button" class="btn">Use this value</button></div>
+        <div class="final" id="rvFinal" aria-live="polite">The final resolution appears here once you choose.</div>
+        <div class="ract"><button type="button" class="btn go" id="rvGo" aria-disabled="true">Mark as resolved</button><button type="button" class="btn" id="rvReset">Reset</button></div>
+      </div>
+    </div>
+    <p class="rnote">Recreated in HTML for this page. Content and labels come from the prototype.</p>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec" id="process">
+  <div class="wrap">
+    <div class="head">
+      <span class="chap"><b>3</b>The process</span>
+      <h2 class="h2">From scattered pain points <span class="soft">to three priorities.</span></h2>
+      <p class="lede">We mapped the full review workflow, then clustered what hurt. Everything fell into the same three buckets.</p>
+    </div>
+    <div class="affinity" id="affinity" aria-label="Affinity diagram: nine pain points move from scattered notes into three clusters, Manual, Time and Error.">
+      <div class="cluster-lab" style="left:0">Manual<small>the work itself</small></div>
+      <div class="cluster-lab" style="left:385px">Time<small>the cost of it</small></div>
+      <div class="cluster-lab" style="left:770px">Error<small>the risk of it</small></div>
+      <div class="stk y" style="--sx:470px;--sy:250px;--sr:-6deg;--cx:0px;--cy:70px;--cr:-1deg">Values copied from PDFs by hand</div>
+      <div class="stk p" style="--sx:40px;--sy:300px;--sr:5deg;--cx:385px;--cy:70px;--cr:1deg">One review can take months</div>
+      <div class="stk b" style="--sx:820px;--sy:40px;--sr:-3deg;--cx:770px;--cy:70px;--cr:-1.5deg">Fields get missed</div>
+      <div class="stk y" style="--sx:600px;--sy:120px;--sr:4deg;--cx:0px;--cy:180px;--cr:1.5deg">A new study restarts the cycle</div>
+      <div class="stk p" style="--sx:180px;--sy:30px;--sr:-5deg;--cx:385px;--cy:180px;--cr:-1deg">Tools add setup instead of saving time</div>
+      <div class="stk b" style="--sx:300px;--sy:170px;--sr:6deg;--cx:770px;--cy:180px;--cr:1deg">Conflicts go unnoticed</div>
+      <div class="stk y" style="--sx:820px;--sy:300px;--sr:-4deg;--cx:0px;--cy:290px;--cr:-1deg">Hundreds of studies per review</div>
+      <div class="stk p" style="--sx:20px;--sy:150px;--sr:3deg;--cx:385px;--cy:290px;--cr:1.5deg">Configuration before any value appears</div>
+      <div class="stk b" style="--sx:560px;--sy:0px;--sr:-2deg;--cx:770px;--cy:290px;--cr:-1.5deg">Large teams, many hands on one table</div>
+    </div>
+    <p class="aff-cap">Pain points paraphrased from the project's research. Scroll in to watch them cluster.</p>
+
+    <div class="steps">
+      <div class="step"><div class="ic"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></div><h3>Brainstorming</h3><p>Mapped the full review workflow and found the highest-friction moments.</p></div>
+      <div class="step"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><h3>Affinity diagramming</h3><p>Clustered pain points into priorities before touching a wireframe.</p></div>
+      <div class="step"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 9v11"/></svg></div><h3>Lo-fi wireframes</h3><p>Rapid layout flows and interaction models. Structure, not visuals.</p></div>
+      <div class="step"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3L12 16.6 6.5 19.5l1-6.3L3 8.9 9 8z"/></svg></div><h3>Hi-fi prototype</h3><p>Real data structure, a component library, every decision justified.</p></div>
+    </div>
+    <div class="principle"><q>Can we make it simpler without losing control? If not, we cut it.</q><span>The test every screen had to pass</span></div>
+  </div>
+</section>
+
+<!-- FLOWS -->
+<section class="sec tint" id="flows">
+  <div class="wrap">
+    <div class="flowtop">
+      <div style="max-width:720px">
+        <span class="chap"><b>4</b>Task flows</span>
+        <h2 class="h2">Version 2 gave <span class="soft">every AI step an exit.</span></h2>
+      </div>
+      <div class="seg" role="group" aria-label="Choose a task flow version">
+        <button type="button" data-v="1" aria-pressed="true">Version 1</button>
+        <button type="button" data-v="2" aria-pressed="false">Version 2</button>
+      </div>
+    </div>
+    <div class="diagram" id="diagram">
+      <svg viewBox="0 0 1080 330" role="img" aria-labelledby="flowTitle">
+        <title id="flowTitle">Task flow diagram. Version 1 is a single line of seven steps. Version 2 splits after AI parsing into three paths by confidence and rejoins at extraction review.</title>
+        <path class="path" d="M60 90H1020" stroke="#C9D2DF" stroke-width="3"/>
+        <!-- v2 branches -->
+        <path class="path draw" style="--len:420" d="M700 90 C 740 90, 740 190, 790 190 H 820 C 850 190, 850 90, 860 90" stroke="#B7780C" stroke-width="3"/>
+        <path class="path draw" style="--len:520" d="M700 90 C 730 90, 730 280, 790 280 H 820 C 865 280, 850 90, 860 90" stroke="#C9452F" stroke-width="3"/>
+        <path class="path draw" style="--len:180" d="M700 90 H 860" stroke="#1E8E5E" stroke-width="4"/>
+        <g class="v2only" font-size="13">
+          <rect x="740" y="170" width="118" height="40" rx="8" fill="#FCEFD2" stroke="#B7780C"/><text x="799" y="195" text-anchor="middle" fill="#7A5008" font-weight="600">Low confidence</text>
+          <rect x="740" y="260" width="118" height="40" rx="8" fill="#FBE2DC" stroke="#C9452F"/><text x="799" y="285" text-anchor="middle" fill="#8F2E1F" font-weight="600">Conflict</text>
+          <text x="780" y="112" text-anchor="middle" fill="#1E8E5E" font-weight="600">High confidence</text>
+          <text x="880" y="195" fill="#76809A" font-size="12">flagged for a person</text>
+          <text x="880" y="285" fill="#76809A" font-size="12">side by side, accept or reject</text>
+        </g>
+        <g id="nodes" font-size="14"></g>
+      </svg>
+    </div>
+    <p class="flowcap" id="flowCap" aria-live="polite"></p>
+    <p class="flowout">Every branch has an exit. Every AI step has a human fallback.</p>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section class="sec" id="product">
+  <div class="wrap">
+    <div class="head">
+      <span class="chap"><b>5</b>The product</span>
+      <h2 class="h2">From a pile of PDFs <span class="soft">to a table you can trust.</span></h2>
+      <p class="lede">Walk through the four screens a researcher meets. Tap the markers.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Product screens">
+      <button type="button" role="tab" data-t="0" aria-selected="true"><span>01</span>Dashboard</button>
+      <button type="button" role="tab" data-t="1" aria-selected="false"><span>02</span>Set up</button>
+      <button type="button" role="tab" data-t="2" aria-selected="false"><span>03</span>Extraction</button>
+      <button type="button" role="tab" data-t="3" aria-selected="false"><span>04</span>Review</button>
+    </div>
+    <div class="tour">
+      <div class="frame">
+        <div class="fb"><i></i><i></i><i></i><span id="tourUrl">Dashboard</span></div>
+        <div class="stage" id="stage"><img id="tourImg" src="assets/de/de-dashboard.webp" width="1440" height="1024" alt="" loading="lazy" decoding="async"></div>
+      </div>
+      <div class="notes" role="tabpanel" aria-live="polite">
+        <h3 id="tourTitle"></h3>
+        <ol id="tourNotes"></ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="sec tint" style="padding-top:96px">
+  <div class="wrap">
+    <div class="head" style="margin-bottom:40px">
+      <span class="chap"><b>6</b>Walkthrough</span>
+      <h2 class="h2">The whole flow, <span class="soft">start to resolved.</span></h2>
+    </div>
+    <div class="frame vframe">
+      <div class="fb"><i></i><i></i><i></i><span>Prototype walkthrough</span></div>
+      <video src="assets/de/de-demo.mp4" poster="assets/de/de-demo-poster.jpg" data-autoplay preload="none" muted loop playsinline controls width="1280" height="910" aria-label="Screen recording of the prototype from the dashboard through setup, table configuration and reviewing a value."></video>
+    </div>
+  </div>
+</section>
+
+<!-- REFLECTION -->
+<section class="sec refl-sec" id="reflection" data-dark>
+  <div class="wrap">
+    <span class="chap"><b>7</b>Reflection</span>
+    <div class="refl">
+      <h2>How did designing for AI change the way I think about UX?</h2>
+      <div class="body">
+        <p>Working on this project pushed me to rethink the role of a designer in systems where AI is not just a tool but a collaborator. I came in assuming AI would simply automate the repetitive work. What I found was more nuanced.</p>
+        <p>Embedding LLM capabilities into a workflow only works when users can understand, trust, and know when to override what the AI produces. That meant designing for transparency at every step. Confidence scores, conflict flags and source traceability were the design, not features bolted on at the end.</p>
+      </div>
+    </div>
+    <div class="takes">
+      <div class="take"><div class="n">01</div><p>A more careful systems thinker.</p></div>
+      <div class="take"><div class="n">02</div><p>A stronger advocate for progressive disclosure.</p></div>
+      <div class="take"><div class="n">03</div><p>Intentional about where human judgment should never be replaced.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<section class="sc-next" aria-label="Next project">
+  <div class="sc-next-in">
+    <div class="sc-next-top"><span>Up next</span><a href="/encore.html">← Previous: Encore</a></div>
+    <a class="sc-next-card" href="/walletgyde.html">
+      <div>
+        <h2>WalletGyde <span class="arr" aria-hidden="true">→</span></h2>
+        <p>Personal finance as a conversation, not a spreadsheet.</p>
+        <span class="tag">B2C fintech · Shipped</span>
+      </div>
+      <div class="thumb"><img loading="eager" src="/assets/project-walletgyde.png" width="1400" height="1400" decoding="async" alt=""></div>
+    </a>
+  </div>
+</section>
+
+<footer class="sc-footer">
+  <div class="sc-footer-body">
+    <div class="sc-footer-cta">
+      <h2 class="sc-footer-heading">say hello.</h2>
+      <p class="sc-footer-sub">open to work. email's fastest. linkedin works too.</p>
+    </div>
+    <div class="sc-footer-contacts">
+      <a href="mailto:pri.anka256@gmail.com" class="sc-footer-email">
+        <span class="sc-footer-label">Email</span>
+        <span class="sc-footer-addr">pri.anka256@gmail.com</span>
+        <span class="sc-footer-note">I reply like a human (promise).</span>
+      </a>
+      <div class="sc-footer-socials">
+        <a href="https://www.behance.net/priyankautkarkar" target="_blank" rel="noopener" title="Behance: Architecture Portfolio"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029H23.726zm-7.726-3h3.543c-.135-1.514-1.271-2.159-1.621-2.159-1.315 0-1.743.743-1.922 2.159zM9.848 7.116c.436.153.93.402 1.388.791.645.548 1.109 1.41 1.109 2.609 0 2.916-2.255 3.84-4.854 3.84H2V5h5.465c1.308 0 2.387.338 2.383 2.116zm-2.51 5.24c1.143 0 1.987-.365 1.987-1.445 0-1.174-.949-1.45-1.987-1.45H5v2.895h2.338zm-.395-4.24c.972 0 1.704-.287 1.704-1.226 0-.994-.792-1.164-1.704-1.164H5v2.39h1.943z"/></svg><span>Behance</span></a>
+        <a href="https://instagram.com/pri.anka" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a>
+        <a href="https://linkedin.com/in/priyanka-uttarkar" target="_blank" rel="noopener" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="4"/><path fill="#1a1a1a" d="M7 10h2v7H7zm1-3a1.1 1.1 0 110 2.2A1.1 1.1 0 018 7zm4 3h1.8v1h.03c.26-.48.9-1 1.87-1C17.6 10 18 11.37 18 13v4h-2v-3.5c0-.84-.02-1.9-1.17-1.9-1.17 0-1.35.91-1.35 1.85V17H12v-7z"/></svg><span>LinkedIn</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="sc-footer-bar">
+    <span class="sc-footer-copy">© 2026 Priyanka Uttarkar · built with too many tiny iterations (and a good playlist).</span>
+    <nav class="sc-footer-links" aria-label="Footer">
+      <a href="/index.html#rct-section">Product work</a><span>·</span><a href="/graphic/index.html#work">Graphic work</a><span>·</span><a href="#" data-sc-top>Back to top ↑</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
+  function onView(el, fn, th) {
+    if (!el) return;
+    if (reduce || !hasIO) { fn(); return; }
+    var o = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { fn(); o.disconnect(); } }, { threshold: th || 0.35 });
+    o.observe(el);
+  }
+
+  /* Highlighter phrases */
+  document.querySelectorAll('.hl').forEach(function (h) { onView(h, function () { h.classList.add('on'); }, 0.8); });
+
+  /* Hero machine: highlight a phrase, fill its row */
+  var fields = document.querySelectorAll('.paper .f'), rows = document.querySelectorAll('.trow');
+  var VALS = ['RCT, double-blind', '8 weeks', '500 mg / day', 'ISI score', 'Saeed, Dubois +3?'];
+  function fillAll() { rows.forEach(function (r, i) { r.querySelector('.v').textContent = VALS[i]; r.classList.add('done'); }); fields.forEach(function (f) { f.classList.add('lit'); }); }
+  if (reduce) fillAll();
+  else {
+    var step = 0;
+    var tick = function () {
+      if (step === 0) { rows.forEach(function (r) { r.classList.remove('done', 'active'); r.querySelector('.v').textContent = ''; }); fields.forEach(function (f) { f.classList.remove('lit'); }); }
+      rows.forEach(function (r) { r.classList.remove('active'); });
+      var r = rows[step], f = fields[Math.min(step, fields.length - 1)];
+      if (step < fields.length) f.classList.add('lit');
+      r.classList.add('active');
+      var v = r.querySelector('.v'), txt = VALS[step], k = 0;
+      var t = setInterval(function () { v.textContent = txt.slice(0, ++k); if (k >= txt.length) { clearInterval(t); r.classList.add('done'); } }, 45);
+      step++;
+      if (step >= rows.length) { step = 0; setTimeout(function () { rows.forEach(function (x) { x.classList.remove('active'); }); }, 900); setTimeout(tick, 4200); }
+      else setTimeout(tick, 1300);
+    };
+    onView(document.querySelector('.machine'), function () { setTimeout(tick, 400); }, 0.2);
+  }
+
+  /* Wall of papers */
+  var wall = document.getElementById('wall');
+  var N = window.innerWidth < 860 ? 60 : 84;
+  for (var i = 0; i < N; i++) wall.appendChild(document.createElement('i'));
+  var papers = wall.children, ERR = [9, 23, 41, 57];
+  if (reduce) { for (var j = 0; j < 30; j++) papers[j].className = ERR.indexOf(j) > -1 ? 'err' : 'done'; }
+  else onView(wall, function () {
+    var c = 0;
+    setInterval(function () {
+      if (c > 0) papers[c - 1].className = ERR.indexOf(c - 1) > -1 ? 'err' : 'done';
+      if (c >= papers.length - 6) { for (var k = 0; k < papers.length; k++) papers[k].className = ''; c = 0; }
+      papers[c].className = 'cur'; c++;
+      if (c % 9 === 0) { var n = document.createElement('i'); n.className = 'new'; wall.appendChild(n); if (wall.children.length > N + 14) wall.removeChild(wall.lastChild); }
+    }, 420);
+  });
+
+  /* Trust minis */
+  var tips = [['High confidence', 'Extracted from an explicit statement in the methods.'], ['Low confidence', 'Answer may not be accurate. Please check sources.']];
+  var tip = document.getElementById('confTip');
+  document.querySelectorAll('#miniConf .cellrow').forEach(function (c) {
+    var show = function () { var d = tips[+c.dataset.tip]; tip.innerHTML = '<b' + (c.dataset.tip === '0' ? ' style="color:#7FE0B1"' : '') + '>' + d[0] + '</b>' + d[1]; tip.classList.add('show'); };
+    c.addEventListener('mouseenter', show); c.addEventListener('focus', show); c.addEventListener('click', show);
+    c.addEventListener('mouseleave', function () { tip.classList.remove('show'); }); c.addEventListener('blur', function () { tip.classList.remove('show'); });
+  });
+  document.querySelectorAll('#miniSrc .cellrow').forEach(function (c) {
+    var s = document.querySelector('#miniSrc [data-src="' + c.dataset.s + '"]');
+    var on = function () { s.classList.add('on'); }, off = function () { s.classList.remove('on'); };
+    c.addEventListener('mouseenter', on); c.addEventListener('focus', on); c.addEventListener('click', on);
+    c.addEventListener('mouseleave', off); c.addEventListener('blur', off);
+  });
+  var opts = document.querySelectorAll('#miniPair .opt');
+  opts.forEach(function (o) { o.addEventListener('click', function () { opts.forEach(function (x) { x.classList.toggle('pick', x === o); x.setAttribute('aria-pressed', String(x === o)); }); document.getElementById('pairHint').textContent = 'Resolved by a person. Logged with the review.'; }); });
+
+  /* Full resolver */
+  var models = document.querySelectorAll('.model'), fin = document.getElementById('rvFinal'), go = document.getElementById('rvGo'),
+      st = document.getElementById('rvStatus'), cell = document.getElementById('rvCell'), mk = document.getElementById('rvMk'), pick = null;
+  var MV = { a: 'E. Saeed, K. Dubois, H. Sharma, M. El-Rami, and 1 more', b: 'E. Saeed, K. Dubois' };
+  models.forEach(function (m) {
+    m.querySelector('.btn').addEventListener('click', function () {
+      pick = m.dataset.m;
+      models.forEach(function (x) { var on = x === m; x.classList.toggle('pick', on); x.querySelector('.btn').textContent = on ? 'Chosen' : 'Use this value instead'; });
+      fin.classList.add('set'); fin.innerHTML = '<b>Final resolution</b>' + MV[pick]; mk.classList.add('on'); go.setAttribute('aria-disabled', 'false');
+    });
+  });
+  go.addEventListener('click', function () {
+    if (!pick || go.getAttribute('aria-disabled') === 'true') return;
+    st.textContent = 'Resolved'; st.className = 'chip c-hi'; cell.textContent = MV[pick]; cell.classList.add('ok'); go.textContent = 'Resolved'; go.setAttribute('aria-disabled', 'true');
+  });
+  document.getElementById('rvReset').addEventListener('click', function () {
+    pick = null; models.forEach(function (x) { x.classList.remove('pick'); x.querySelector('.btn').textContent = 'Use this value'; });
+    fin.classList.remove('set'); fin.textContent = 'The final resolution appears here once you choose.'; mk.classList.remove('on');
+    go.textContent = 'Mark as resolved'; go.setAttribute('aria-disabled', 'true'); st.textContent = 'Conflict'; st.className = 'chip c-cf'; cell.textContent = 'Two answers, not resolved'; cell.classList.remove('ok');
+  });
+
+  /* Affinity clustering */
+  var aff = document.getElementById('affinity');
+  onView(aff, function () { setTimeout(function () { aff.classList.add('go'); }, reduce ? 0 : 500); }, 0.4);
+
+  /* Task flow diagram */
+  var NODES = {
+    1: { cap: 'Version 1 · the first mapping of core paths: dashboard, review creation, extraction setup, AI model selection and table configuration. A straight line, with no plan for when the AI gets it wrong.',
+         n: [['Dashboard', 'Entry point'], ['Create review', 'Name, invite'], ['Settings review', 'Configure'], ['Start extraction', 'AI parses'], ['Tables, figures', 'Form or template'], ['Edit and review', 'Human check'], ['Pass for review', 'AI or human build']] },
+    2: { cap: 'Version 2 · conflict detection, confidence branching and human override paths, then side-by-side accept or reject and a streamlined export.',
+         n: [['Dashboard', 'Entry point'], ['Set up extraction', 'Name, invite, model'], ['Files uploaded', 'Review the setup'], ['Start extraction', 'AI parses'], ['AI parsing', 'Confidence scoring'], ['Extraction review', 'Edit the table'], ['Review, export', 'CSV, JSON, API']] }
+  };
+  var X = [60, 220, 380, 540, 700, 860, 1020];
+  var g = document.getElementById('nodes'), dia = document.getElementById('diagram'), cap = document.getElementById('flowCap');
+  function drawFlow(v) {
+    var prev = Array.prototype.map.call(g.querySelectorAll('.lbl'), function (t) { return t.textContent; });
+    g.innerHTML = NODES[v].n.map(function (n, i) {
+      var changed = v === 2 && prev.length && prev[i] !== n[0];
+      var fill = i === 4 && v === 2 ? '#FFE066' : changed ? '#E7EEFA' : '#fff';
+      var stroke = i === 4 && v === 2 ? '#0E1B33' : changed ? '#2453A6' : '#0E1B33';
+      var ty = 38;
+      var anchor = i === 0 ? 'start' : i === 6 ? 'end' : 'middle';
+      var tx = i === 0 ? X[i] - 14 : i === 6 ? X[i] + 14 : X[i];
+      return '<circle cx="' + X[i] + '" cy="90" r="14" fill="' + fill + '" stroke="' + stroke + '" stroke-width="2.5"/>' +
+             '<text x="' + X[i] + '" y="95" text-anchor="middle" font-size="12" font-family="DM Mono, monospace" fill="#0E1B33">' + (i + 1) + '</text>' +
+             '<text class="lbl" x="' + tx + '" y="' + ty + '" text-anchor="' + anchor + '" font-weight="700" fill="#0E1B33">' + n[0] + '</text>' +
+             '<text x="' + tx + '" y="' + (ty + 18) + '" text-anchor="' + anchor + '" font-size="12.5" fill="#76809A">' + n[1] + '</text>';
+    }).join('');
+    dia.classList.toggle('v2', v === 2);
+    cap.textContent = NODES[v].cap;
+    document.querySelectorAll('.seg button').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.v === v)); });
+  }
+  document.querySelectorAll('.seg button').forEach(function (b) { b.addEventListener('click', function () { drawFlow(+b.dataset.v); }); });
+  drawFlow(1);
+  onView(dia, function () { setTimeout(function () { drawFlow(2); }, reduce ? 0 : 900); }, 0.5);
+
+  /* Product tour */
+  var TOUR = [
+    { img: 'assets/de/de-dashboard.webp', url: 'Dashboard', title: 'All your reviews. One scroll.', alt: 'Dashboard with review counts, an upload area, project folders and recent reviews.',
+      n: [[88, 25, 'Conflicts sit next to the work.', 'Open conflicts are one of the first things a researcher sees.'], [58, 42, 'Upload to start.', 'Dropping files in starts an extraction, no setup screen first.'], [12, 36, 'Projects, grouped.', 'Starred and nested so the active work stays close.'], [86, 76, 'Status at a glance.', 'Every recent review carries its state, so nothing waits unnoticed.']] },
+    { img: 'assets/de/de-setup.webp', url: 'Set up data extraction', title: 'Hundreds of papers, one setup.', alt: 'Set Up Data Extraction with files uploading, collaborators with roles and AI model choices.',
+      n: [[38, 52, 'Every file reports back.', 'A broken PDF is caught at upload, not three steps later.'], [95, 46, 'Roles from the start.', 'Viewer, reviewer or consensus decides who resolves conflicts later.'], [88, 68, 'Choose the AI.', 'General and biomedical models, each with a plain note on what it is good at.']] },
+    { img: 'assets/de/de-table.webp', url: 'Configure table', title: 'The AI drafts. It also says when it is not sure.', alt: 'Configure Table with extracted methodology and a low-confidence warning.',
+      n: [[88, 17, 'Build the table you need.', 'Start from a template or add columns field by field.'], [66, 70, 'Confidence, out loud.', 'Low confidence is flagged on the cell: "Please check sources."'], [70, 11, 'Conflicts one click away.', 'Show Conflicts, switch models or export from one toolbar.']] },
+    { img: 'assets/de/de-resolve.webp', url: 'Review a value', title: 'Every value can show its work.', alt: 'Reviewing one cell with the source passage highlighted, two model answers and comments.',
+      n: [[46, 43, 'Source, highlighted.', 'The original passage opens in the PDF, marked.'], [86, 47, 'Models compared, with reasons.', 'Each model explains where its answer came from.'], [86, 62, 'A person decides.', 'The chosen value becomes the final resolution, on record.'], [86, 73, 'Discussion on the value.', 'Comments live on the exact cell and get marked resolved.']] }
+  ];
+  var stage = document.getElementById('stage'), img = document.getElementById('tourImg'), notes = document.getElementById('tourNotes');
+  function setNote(k) {
+    stage.querySelectorAll('.hot').forEach(function (h, i) { h.classList.toggle('on', i === k); });
+    notes.querySelectorAll('li').forEach(function (l, i) { l.classList.toggle('on', i === k); });
+  }
+  function tour(t) {
+    var d = TOUR[t];
+    document.querySelectorAll('.tabs button').forEach(function (b) { b.setAttribute('aria-selected', String(+b.dataset.t === t)); });
+    if (!reduce) img.style.opacity = 0;
+    setTimeout(function () { img.src = d.img; img.alt = d.alt; img.style.opacity = 1; }, reduce ? 0 : 180);
+    document.getElementById('tourUrl').textContent = d.url;
+    document.getElementById('tourTitle').textContent = d.title;
+    stage.querySelectorAll('.hot').forEach(function (h) { h.remove(); });
+    notes.innerHTML = '';
+    d.n.forEach(function (n, i) {
+      var h = document.createElement('button'); h.type = 'button'; h.className = 'hot'; h.style.left = n[0] + '%'; h.style.top = n[1] + '%'; h.textContent = i + 1; h.setAttribute('aria-label', n[2]);
+      h.addEventListener('click', function () { setNote(i); }); h.addEventListener('mouseenter', function () { setNote(i); }); h.addEventListener('focus', function () { setNote(i); });
+      stage.appendChild(h);
+      var li = document.createElement('li'); li.innerHTML = '<span class="n">' + (i + 1) + '</span><span><b>' + n[2] + '</b> ' + n[3] + '</span>';
+      li.addEventListener('mouseenter', function () { setNote(i); }); li.addEventListener('click', function () { setNote(i); });
+      notes.appendChild(li);
+    });
+    setNote(0);
+  }
+  document.querySelectorAll('.tabs button').forEach(function (b) { b.addEventListener('click', function () { tour(+b.dataset.t); }); });
+  document.querySelector('.tabs').addEventListener('keydown', function (e) {
+    var cur = +document.querySelector('.tabs [aria-selected="true"]').dataset.t, n = null;
+    if (e.key === 'ArrowRight') n = (cur + 1) % 4; if (e.key === 'ArrowLeft') n = (cur + 3) % 4;
+    if (n !== null) { tour(n); document.querySelector('.tabs [data-t="' + n + '"]').focus(); }
+  });
+  tour(0);
+
+  /* Chapter rail */
+  var rail = document.getElementById('rail'), links = rail.querySelectorAll('a');
+  if (hasIO) {
+    var secs = Array.prototype.map.call(links, function (a) { return document.querySelector(a.getAttribute('href')); });
+    var ro = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { var i = secs.indexOf(e.target); links.forEach(function (a, j) { a.classList.toggle('on', j === i); }); } });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    secs.forEach(function (s) { if (s) ro.observe(s); });
+    var darks = document.querySelectorAll('[data-dark]');
+    var dro = new IntersectionObserver(function () {
+      var mid = window.innerHeight / 2, dark = false;
+      darks.forEach(function (d) { var r = d.getBoundingClientRect(); if (r.top < mid && r.bottom > mid) dark = true; });
+      rail.classList.toggle('dark', dark);
+    }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+    darks.forEach(function (d) { dro.observe(d); });
+    window.addEventListener('scroll', function () {
+      var mid = window.innerHeight / 2, dark = false;
+      darks.forEach(function (d) { var r = d.getBoundingClientRect(); if (r.top < mid && r.bottom > mid) dark = true; });
+      rail.classList.toggle('dark', dark);
+    }, { passive: true });
+    window.dispatchEvent(new Event('scroll'));
+  }
+})();
+</script>
+<script src="/video-autoplay.js" defer></script>
+<script src="/site-chrome.js" defer></script>
+</body>
+</html>

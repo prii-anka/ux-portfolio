@@ -136,7 +136,7 @@
       <span class="rmac-dot" style="background:#28ca41;"></span>
     </div>
     <span id="rmac-brand" style="font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:0.02em;margin-left:4px;">pri.anka</span>
-    <!-- Center tabs — macOS style -->
+    <!-- Center tabs - macOS style -->
     <div class="rmac-tabs-inner" style="position:absolute;left:50%;transform:translateX(-50%);">
       <div class="rmac-tab rmac-tab-active">product</div>
       <div class="rmac-tab" id="graphicTabBtn" style="cursor:pointer;">graphic</div>
@@ -172,7 +172,7 @@
   <!-- ── FIGMA-STYLE HERO ── -->
   <section class="rhero rfig-hero" id="rfig-hero">
 
-    <!-- Golden ratio — complete Fibonacci spiral with nested rectangle grid -->
+    <!-- Golden ratio - complete Fibonacci spiral with nested rectangle grid -->
     <svg class="rhero-golden" viewBox="0 0 1618 1000" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <!--
         All arcs CW sweep=1. Fibonacci radii: 1000,618,382,236,146,90,56
@@ -201,7 +201,7 @@
           <line x1="1167" y1="709"  x2="1167" y2="730"/>
         </g>
 
-        <!-- Spiral arcs — ghost, very faint -->
+        <!-- Spiral arcs - ghost, very faint -->
         <g stroke="white" fill="none" stroke-width="0.25" opacity="0.1">
           <path d="M 0    1000 A 1000 1000 0 0 1 1000 0"/>
           <path d="M 1000 0    A 618  618  0 0 1 1618 618"/>
@@ -214,12 +214,12 @@
           <path d="M 1146 730  A 21   21   0 0 1 1167 709"/>
         </g>
 
-        <!-- Drawn spiral — revealed by orb -->
+        <!-- Drawn spiral - revealed by orb -->
         <path id="gr-drawn"
           d="M 0 1000 A 1000 1000 0 0 1 1000 0 A 618 618 0 0 1 1618 618 A 382 382 0 0 1 1236 1000 A 236 236 0 0 1 1000 764 A 146 146 0 0 1 1146 618 A 90 90 0 0 1 1236 708 A 56 56 0 0 1 1180 764 A 34 34 0 0 1 1146 730 A 21 21 0 0 1 1167 709"
           fill="none" stroke="white" stroke-width="0.3" opacity="0.28" stroke-linecap="round"/>
 
-        <!-- Hidden path for orb travel (A1–A10) -->
+        <!-- Hidden path for orb travel (A1-A10) -->
         <path id="gr-spiral"
           d="M 0 1000 A 1000 1000 0 0 1 1000 0 A 618 618 0 0 1 1618 618 A 382 382 0 0 1 1236 1000 A 236 236 0 0 1 1000 764 A 146 146 0 0 1 1146 618 A 90 90 0 0 1 1236 708 A 56 56 0 0 1 1180 764 A 34 34 0 0 1 1146 730 A 21 21 0 0 1 1167 709"
           stroke="none" fill="none"/>
@@ -266,7 +266,7 @@
       (function tick(){
         dist += speed;
         if(dist >= total){
-          // Reset — fade out drawn, restart
+          // Reset - fade out drawn, restart
           dist = 0;
           drawn.style.transition = 'stroke-dashoffset 0.6s ease';
           drawn.style.strokeDashoffset = total;
@@ -290,7 +290,7 @@
     });
     </script>
 
-    <!-- Googly eyes — absolutely positioned in hero -->
+    <!-- Googly eyes - absolutely positioned in hero -->
     <div class="rfig-eyes" id="rEyesWrap">
       <div class="reye-wrap">
         <div class="reye-brow"></div>
@@ -384,7 +384,7 @@
       <span>pri.anka</span>
     </div>
 
-    <!-- Sassy bubble — real chat bubble -->
+    <!-- Sassy bubble - real chat bubble -->
     <div class="rfig-bubble" id="rfigBubble" aria-hidden="true">
       <span class="rfig-bubble-name">pri.anka</span>
       <span class="rfig-bubble-msg" id="rfigBubbleText"></span><span class="rfig-blink-caret">|</span>
@@ -566,7 +566,7 @@
 
     <div class="rct-grid">
 
-      <a href="https://priyenka-dataextraction.framer.website/" target="_blank" rel="noopener"
+      <a href="data-extraction.html"
          class="rct rsr rsr-d3" style="--rtb:#1c2a38; --rta:#3a82c4;">
         <div class="rct-img">
           <img src="assets/project-dashboard.webp" alt="Data Extraction System" loading="lazy" decoding="async" width="1400" height="1400" />
@@ -578,7 +578,7 @@
         </div>
       </a>
 
-      <a href="https://priyenka-walletgyde.framer.website/" target="_blank" rel="noopener"
+      <a href="walletgyde.html"
          class="rct rsr rsr-d4" style="--rtb:#1a2a1e; --rta:#52ac55;">
         <div class="rct-img">
           <img src="assets/project-walletgyde.png" alt="WalletGyde" loading="lazy" decoding="async" width="1400" height="1400" />
@@ -677,7 +677,7 @@
   </section>
 
 
-  <!-- BENTO PANEL — fullscreen overlay for gfx / arch / paint -->
+  <!-- BENTO PANEL - fullscreen overlay for gfx / arch / paint -->
   <div class="rbento-panel" id="rBentoPanel">
     <div class="rbento-panel-bar">
       <span class="rbento-panel-title" id="rBentoPanelTitle">Graphic Design &amp; Branding</span>
@@ -730,7 +730,7 @@
     </div>
   </footer>
 
-  <!-- RIGHT DOCK — vertical macOS-style -->
+  <!-- RIGHT DOCK - vertical macOS-style -->
   <div class="rdock">
     <!-- TOOLS GROUP -->
     <div class="rdock-item" title="Figma">
@@ -798,7 +798,7 @@
     </div>
   </div>
 
-  <!-- Chat popup — outside dock so clicks never conflict -->
+  <!-- Chat popup - outside dock so clicks never conflict -->
   <div class="rchat-popup" id="rchatPopup">
     <div class="rchat-popup-header">
       <div class="rchat-who-avatar">P</div>
@@ -832,7 +832,7 @@
     </div>
   </div>
 
-  <!-- GFX LIGHTBOX — slideshow -->
+  <!-- GFX LIGHTBOX - slideshow -->
   <div class="rgfx-lightbox" id="rgfxLightbox" aria-hidden="true">
     <button class="rgfx-lb-close" id="rgfxLbClose" aria-label="Close">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -867,7 +867,7 @@
   function isOpen()    { return popup && popup.classList.contains('rchat-popup--open'); }
 
   var dot = document.getElementById('rdockChatDot');
-  // Start icon bouncing — staggered
+  // Start icon bouncing - staggered
   var paintBtn = document.getElementById('rdockPaintBtn');
   var photosBtn = document.getElementById('rdockPhotosBtn');
   setTimeout(function(){ if(dockBtn) dockBtn.classList.add('rdock-bounce'); }, 1800);
@@ -916,7 +916,7 @@
     <div class="rpaint-content">
       <div class="rpaint-intro">
         <h2 class="rpaint-heading">painted.</h2>
-        <p class="rpaint-sub">acrylic, watercolour, sometimes both. i paint when words don't cut it.</p>
+        <p class="rpaint-sub">acrylic, watercolor, sometimes both. i paint when words don't cut it.</p>
       </div>
       <div class="rpaint-grid">
         <div class="rpaint-tile"><img data-src="assets/painting-1.jpeg" alt="Painting 1" decoding="async" width="835" height="1143" /></div>
@@ -1245,7 +1245,7 @@
       </div>
     </section>
 
-    <!-- HI-FI PROTOTYPE — 3 VIDEOS -->
+    <!-- HI-FI PROTOTYPE - 3 VIDEOS -->
     <section class="hh-section hh-section--dark hh-section--videos">
       <div class="hh-section-inner hh-section-inner--col">
         <div class="hh-reveal">
@@ -1437,7 +1437,7 @@
 </script>
 <script src="script.js?v=111"></script>
 <script>
-// ── Letter physics — standalone, isolated from script.js ──
+// ── Letter physics - standalone, isolated from script.js ──
 (function() {
   if (window.innerWidth <= 768) return; // skip letter physics on mobile
   var roleEl = document.querySelector('.rfig-role');
@@ -1451,7 +1451,7 @@
   var lastL = -1;
 
   var lMsgsTiers = [
-    // tier 0 — mildly offended (1-3 drags)
+    // tier 0 - mildly offended (1-3 drags)
     [
       'excuse me??',
       'that took 3 iterations to kern',
@@ -1461,7 +1461,7 @@
       'figma would never let this happen',
       'design tokens don\'t cover this',
     ],
-    // tier 1 — properly annoyed (4-7 drags)
+    // tier 1 - properly annoyed (4-7 drags)
     [
       'ok are you seriously doing this',
       'i will component-ize you',
@@ -1472,7 +1472,7 @@
       'undo. UNDO. please.',
       'i\'m logging this as a bug',
     ],
-    // tier 2 — fully done (8+ drags)
+    // tier 2 - fully done (8+ drags)
     [
       'i\'m done. i quit. goodbye.',
       'hiring managers can see this 😭',
@@ -1493,7 +1493,7 @@
     lastL = i; return pool[i];
   }
 
-  // Split text into letter spans — handles two-line layout via rfig-role-l1/l2
+  // Split text into letter spans - handles two-line layout via rfig-role-l1/l2
   var lineEls = roleEl.querySelectorAll('.rfig-role-l1, .rfig-role-l2');
   var spans = [];
   if (lineEls.length >= 2) {
@@ -1671,7 +1671,7 @@
     });
   }
 })();
-// ── Resume file — draggable, snaps back after 2s with sassy bubble ──
+// ── Resume file - draggable, snaps back after 2s with sassy bubble ──
 (function() {
   var el     = document.getElementById('rResumeFile');
   var frame  = document.getElementById('rResumeFrame');
@@ -1756,7 +1756,7 @@
   overlay.addEventListener('click', function(e){ if(e.target===overlay) close(); });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
 
-  // hint bubble — show after 5s, hide after 3s, repeat every 14s
+  // hint bubble - show after 5s, hide after 3s, repeat every 14s
   if(hint){
     function showHint(){ hint.classList.add('rdock-chat-hint--visible'); }
     function hideHint(){ hint.classList.remove('rdock-chat-hint--visible'); }
@@ -1805,7 +1805,7 @@
     {l:'Selected Work',s:'Projects & case studies',c:'Section',a:'rct-section'},
     {l:'Graphic Design & Branding',s:'Visual & brand work',c:'Section',a:'rgfx-section'},
     {l:'Say Hello',s:'Contact & footer',c:'Section',a:'rfooter'},
-    {l:'WalletGyde',s:'Finance app · +32% task completion',c:'Project',a:'rct-section'},
+    {l:'WalletGyde',s:'Finance app · +28% task completion',c:'Project',a:'rct-section'},
     {l:'Mood Ticketing',s:'UX case study',c:'Project',a:'rct-section'},
     {l:'Healing Hearts',s:'Animal rescue website redesign · +40% task completion',c:'Project',a:'rct-section'},
     {l:'Data Extraction System',s:'UX case study',c:'Project',a:'rct-section'},
@@ -1961,7 +1961,7 @@
 </script>
 
 <script>
-// GFX section — card rendering + lightbox slideshow
+// GFX section - card rendering + lightbox slideshow
 (function(){
   var gfxProjects = [
     { cat:'Poster Series',    name:'ASU AI Carnival',       slides:['assets/gfx-posters.webp','assets/gfx-posters-2.png','assets/gfx-posters-3.png','assets/gfx-posters-4.png'], tall:true },
@@ -2156,7 +2156,7 @@
     st.rotV += (Math.random()-0.5)*0.3; st.rotV *= 0.95;
     st.dx += st.vx; st.dy += st.vy;
     st.rot += st.rotV;
-    // Off-screen: keep going (no bounce — fly away freely)
+    // Off-screen: keep going (no bounce - fly away freely)
     st.el.style.transform='translate('+st.dx.toFixed(1)+'px,'+st.dy.toFixed(1)+'px) rotate('+st.rot.toFixed(1)+'deg)';
     st.aid = requestAnimationFrame(function(){ physicsLoop(st); });
   }
@@ -2218,7 +2218,7 @@
 
 
 <!-- Press G hint -->
-<div id="golden-hint" style="position:fixed;bottom:28px;left:28px;z-index:50;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.18em;color:rgba(255,255,255,0.35);pointer-events:none;user-select:none;transition:opacity 0.5s;line-height:1.8;text-transform:uppercase;">nature's favourite ratio<br>is hiding here<br>press G</div>
+<div id="golden-hint" style="position:fixed;bottom:28px;left:28px;z-index:50;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.18em;color:rgba(255,255,255,0.35);pointer-events:none;user-select:none;transition:opacity 0.5s;line-height:1.8;text-transform:uppercase;">nature's favorite ratio<br>is hiding here<br>press G</div>
 <script>
 (function(){
   var hint = document.getElementById('golden-hint');
@@ -2247,7 +2247,7 @@
   var hero = document.getElementById('rfig-hero');
   var mx=0,my=0,showing=false,gOn=false;
 
-  /* G key — toggle full brightness */
+  /* G key - toggle full brightness */
   var hint=document.getElementById('golden-hint');
   document.addEventListener('keydown', function(e){
     if(e.key==='g'||e.key==='G'){

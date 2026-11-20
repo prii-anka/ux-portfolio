@@ -31,7 +31,7 @@
 
     html, body { width:100%; height:100%; background:var(--bg); font-family:'Space Grotesk',sans-serif; overflow:hidden; transition:background 0.35s; }
 
-    /* ══ PROJECTS — deepest layer ══ */
+    /* ══ PROJECTS - deepest layer ══ */
     #projects-overlay {
       position: fixed; inset: 28px 0 0 0; z-index: 10;
       background: #DB3C8A;
@@ -48,7 +48,7 @@
     }
     #proj-close:hover { background: rgba(255,255,255,0.32); }
 
-    /* ══ CURTAINS — above projects, below content ══ */
+    /* ══ CURTAINS - above projects, below content ══ */
     #curtain-top {
       position: fixed; top: 28px; left: 0; right: 0; height: 50vh;
       z-index: 20;
@@ -98,7 +98,7 @@
       opacity: 0;
     }
 
-    /* ══ NOISE — full screen canvas ══ */
+    /* ══ NOISE - full screen canvas ══ */
     #noise-canvas {
       position: fixed; inset: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 55; opacity: 0.28;
@@ -203,7 +203,7 @@
       100%  { -webkit-text-stroke-color: #E8377A; }
     }
 
-    /* ══ TOAST — iMessage-style chat bubble ══ */
+    /* ══ TOAST - iMessage-style chat bubble ══ */
     .toast {
       position: fixed;
       left: 50%; top: calc(50% + 130px);
@@ -223,7 +223,7 @@
     }
     .toast em { font-style:italic; font-weight:600; }
     .toast.visible { opacity:1; transform:translate(-50%, 0px) scale(1); text-align:left; }
-    /* iMessage tail — bottom-left */
+    /* iMessage tail - bottom-left */
     .toast::before {
       content: '';
       position: absolute;
@@ -299,7 +299,7 @@
     #work-card.collapsing {
       transition: clip-path 0.55s cubic-bezier(0.4,0,0.2,1);
     }
-    /* Preview card — retro pastel neo-brutalist */
+    /* Preview card - retro pastel neo-brutalist */
     #wc-preview {
       position: absolute; bottom: 24px; left: 22px;
       width: 230px;
@@ -363,7 +363,7 @@
       scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent;
     }
     #work-card.expanded #wc-full { pointer-events: auto; }
-    /* Content wipe — slides up from below after card opens */
+    /* Content wipe - slides up from below after card opens */
     #wc-inner {
       transform: translateY(48px); opacity: 0;
       transition: transform 0.6s cubic-bezier(0.22,1,0.36,1), opacity 0.5s;
@@ -375,7 +375,7 @@
       opacity: 0.12; mix-blend-mode: screen;
     }
 
-    /* ══ RCT — project tiles ══ */
+    /* ══ RCT - project tiles ══ */
     /* ══ GX: graphic projects gallery ══ */
     #projects-overlay, .gx-lb { --gx-bg:#141113; --gx-ink:#F6EFF2; --gx-mute:rgba(246,239,242,.62); --gx-line:rgba(246,239,242,.12); --gx-pink:#F08DB5; }
     #projects-overlay { background: var(--gx-bg); }
@@ -545,7 +545,7 @@
     .rct-name { font-size:clamp(1.4rem,2.4vw,2.1rem); font-weight:600; letter-spacing:-0.03em; line-height:1.1; transition:color 0.2s; }
     .rct:hover .rct-name { color:var(--rta,rgba(255,255,255,0.5)); }
 
-    /* ══ RGFX — graphic design scroll ══ */
+    /* ══ RGFX - graphic design scroll ══ */
     .rgfx-section { padding:72px 0 80px; border-top:1px solid rgba(255,255,255,0.08); overflow:hidden; }
     .rgfx-header { display:flex; align-items:flex-end; justify-content:space-between; padding:0 52px; margin-bottom:40px; }
     .rgfx-eyebrow { font-size:0.52rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:10px; display:block; }
@@ -696,7 +696,7 @@
 <div id="curtain-top"></div>
 <div id="curtain-bottom"></div>
 
-<!-- Projects overlay — revealed after split -->
+<!-- Projects overlay - revealed after split -->
 <div id="projects-overlay">
   <section class="gx" aria-label="Graphic design and branding projects">
     <header class="gx-head">
@@ -874,13 +874,13 @@
     </div>
   </div>
   <div style="position:relative; line-height:1;">
-    <!-- Portfolio word — letters split by JS, physics on hover -->
+    <!-- Portfolio word - letters split by JS, physics on hover -->
     <div class="portfolio-word" id="portfolioWord"></div>
     <!-- Tagline curved around the o -->
   </div>
 </main>
 
-<!-- Available text — top right, big ghost -->
+<!-- Available text - top right, big ghost -->
 <div id="ready-badge" style="position:fixed;top:36px;right:28px;z-index:200;pointer-events:none;text-align:right;line-height:0.9;">
   <div style="font-family:'Space Grotesk',sans-serif;font-size:clamp(1.4rem,2.8vw,2.8rem);font-weight:700;
     letter-spacing:-0.03em;text-transform:uppercase;
@@ -889,7 +889,7 @@
     letter-spacing:-0.03em;text-transform:uppercase;color:#fff;">WORK</div>
 </div>
 
-<!-- Tagline arc — fixed, always on top of portfolio letters -->
+<!-- Tagline arc - fixed, always on top of portfolio letters -->
 <svg id="taglineSvg" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;opacity:0;transition:opacity 0.6s;z-index:50;" aria-hidden="true">
   <defs>
     <path id="taglinePath1" d=""/>
@@ -906,7 +906,7 @@
 
 
 
-<!-- Collab sticky options — comment/uncomment to try -->
+<!-- Collab sticky options - comment/uncomment to try -->
 
 <!-- A: top right -->
 <!-- <div style="position:fixed;top:46px;right:36px;z-index:10;pointer-events:none;transform:rotate(-2.5deg);">
@@ -941,7 +941,7 @@
 <div class="toast" id="toast5">i promise i'm a real designer</div>
 <div class="toast" id="toast6">chaos is part of the process ok</div>
 
-<!-- Left dock — graphic tools only -->
+<!-- Left dock - graphic tools only -->
 <nav class="rdock">
   <div class="rdock-item" title="Figma">
     <div class="rdock-icon"><img src="../assets/icon-figma.png" alt="Figma" decoding="async" width="48" height="48" /></div>
@@ -1063,7 +1063,7 @@
     function draw(ts) {
       if (!startTime) startTime = ts;
       var prog = ((ts - startTime) % DUR) / DUR; // 0→1 per loop
-      // Detect loop reset — fade out briefly then snap back
+      // Detect loop reset - fade out briefly then snap back
       if (prog < lastProg - 0.5) {
         drawnEl.style.transition = 'opacity 0.4s ease';
         drawnEl.style.opacity    = '0';
@@ -1294,7 +1294,7 @@
     });
   });
 
-  // ── Checkerboard curtain + magnifier — REMOVED ──
+  // ── Checkerboard curtain + magnifier - REMOVED ──
   if (false) (function() {
     var TILE = 55;
     var C1 = '#F08DB5', C2 = '#ffffff';
@@ -1383,7 +1383,7 @@
 
   window.addEventListener('wheel', function(e) {
     if (curtainCooldown || document.body.classList.contains('gx-lb-open')) return;
-    // Open — scroll down on landing
+    // Open - scroll down on landing
     if (!curtainOpen && e.deltaY > 30) {
       curtainOpen = true;
       curtainCooldown = true;
@@ -1391,7 +1391,7 @@
       document.body.classList.add('curtain-open');
       setTimeout(function() { curtainCooldown = false; }, 1100);
     }
-    // Close — scroll up when projects are at the very top
+    // Close - scroll up when projects are at the very top
     if (curtainOpen && e.deltaY < -10 && projOverlay.scrollTop === 0) {
       closeCurtain();
     }
@@ -1465,7 +1465,7 @@
     draw(); window.addEventListener('resize', draw);
   })();
 
-  // ── Work card preview — cycling project tile ──
+  // ── Work card preview - cycling project tile ──
   (function() {
     var slides = document.querySelectorAll('.wc-tile-slide');
     var dots   = document.querySelectorAll('.wc-dot');
@@ -1481,7 +1481,7 @@
     setInterval(function() { goTo(cur + 1); }, 3200);
   })();
 
-  // ── Work card — scroll-driven scale + wipe ──
+  // ── Work card - scroll-driven scale + wipe ──
   (function() {
     var card     = document.getElementById('work-card');
     var preview  = document.getElementById('wc-preview');

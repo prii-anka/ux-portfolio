@@ -98,3 +98,26 @@
   .sc-brand { font-size: 10px; }
   .sc-tab { padding: 0 14px; font-size: 10px; }
 }
+
+/* ── Up next: sits directly above the footer on every case study ── */
+.sc-next{background:#1a1a1a;color:#fff;font-family:'Space Grotesk',system-ui,sans-serif;padding:84px 52px 64px}
+.sc-next-in{max-width:1180px;margin:0 auto}
+.sc-next-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:26px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#8a8a8a}
+.sc-next-top a{color:#9a9a9a;text-decoration:none;letter-spacing:0;text-transform:none;font-size:14px;transition:color .18s}
+.sc-next-top a:hover{color:#fff}
+.sc-next-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:48px;align-items:center;text-decoration:none;color:#fff;border-top:1px solid rgba(255,255,255,.12);padding-top:36px}
+.sc-next-card h2{margin:0;font-weight:600;font-size:clamp(44px,6.4vw,92px);line-height:.95;letter-spacing:-.04em;display:flex;align-items:center;gap:.25em;flex-wrap:wrap}
+.sc-next-card h2 .arr{display:inline-block;color:#F08DB5;font-weight:500;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.sc-next-card p{margin:18px 0 0;font-size:16px;color:#a8a8a8;max-width:440px;line-height:1.5}
+.sc-next-card .tag{display:inline-block;margin-top:18px;font-size:12.5px;color:#cfcfcf;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:5px 12px}
+.sc-next-card .thumb{border-radius:20px;overflow:hidden;aspect-ratio:4/3;background:#2a2a2a}
+.sc-next-card .thumb img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.sc-next-card:hover .thumb img{transform:scale(1.05)}
+.sc-next-card:hover h2 .arr{transform:translateX(12px)}
+.sc-next-card:focus-visible{outline:2px solid #F08DB5;outline-offset:8px;border-radius:12px}
+.sc-next + .sc-footer{border-top:1px solid rgba(255,255,255,.08)}
+@media (max-width:860px){
+  .sc-next{padding:60px 24px 48px}
+  .sc-next-card{grid-template-columns:1fr;gap:26px}
+}
+@media (prefers-reduced-motion:reduce){.sc-next-card .thumb img,.sc-next-card h2 .arr{transition:none}}

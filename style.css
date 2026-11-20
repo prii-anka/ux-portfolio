@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   UX PORTFOLIO — style.css
+   UX PORTFOLIO - style.css
    Fonts: Cormorant Garamond · Space Grotesk · Caveat
    ═══════════════════════════════════════════════════ */
 
@@ -44,7 +44,7 @@
 
 /* ── Theme sphere-rotation transition ── */
 /* A circle larger than the screen diagonal rolls up from below,
-   covers everything, then exits above — like a globe rotating */
+   covers everything, then exits above - like a globe rotating */
 #theme-wipe {
   position: fixed;
   left: 50%;
@@ -195,7 +195,7 @@ a { text-decoration: none; color: inherit; }
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 
-/* ── Arrange button — fixed bottom-right ── */
+/* ── Arrange button - fixed bottom-right ── */
 .arrange-btn {
   position: fixed;
   bottom: 80px;
@@ -267,7 +267,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   position: relative;
 }
 
-/* Base / chin — removed from layout */
+/* Base / chin - removed from layout */
 .macbook-chin {
   display: none;
   width: 100%;
@@ -846,13 +846,13 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 
 /* ── CARD FAN: back cards fan to the LEFT (stack lives on right side of screen) ──
-   Front card = rightmost, cleanest — label aligns with front card's left edge      */
+   Front card = rightmost, cleanest - label aligns with front card's left edge      */
 .cs-back3 { transform: rotate(-11deg) translate(-28px, 8px);  z-index: 1; }
 .cs-back2 { transform: rotate(-6deg)  translate(-15px, 4px);  z-index: 2; }
 .cs-back1 { transform: rotate(-2.5deg) translate(-6px, 1px);  z-index: 3; }
 .cs-front  { transform: rotate(1.5deg);                        z-index: 4; }
 
-/* Fan out on hover — cards spread further */
+/* Fan out on hover - cards spread further */
 .stack-anchor:hover .cs-back3 { transform: rotate(-20deg) translate(-52px, 14px); }
 .stack-anchor:hover .cs-back2 { transform: rotate(-11deg) translate(-28px,  7px); }
 .stack-anchor:hover .cs-back1 { transform: rotate(-5deg)  translate(-13px,  2px); }
@@ -1184,14 +1184,14 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   object-fit: contain;
   filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.15));
 }
-/* Hardcoded sticker sizes — set by user */
+/* Hardcoded sticker sizes - set by user */
 #stk-dog   .sticker-png { width: 142px; }
 #stk-dach  .sticker-png { width: 122px; }
 #stk-plant .sticker-png { width: 158px; }
 #stk-books .sticker-png { width: 167px; }
 #stk-sparkle .sticker-png { width: 90px; }
 
-/* ── Woof speech bubble — appears above dog sticker on hover ── */
+/* ── Woof speech bubble - appears above dog sticker on hover ── */
 .woof-bubble {
   position: absolute;
   bottom: calc(100% + 8px);
@@ -1559,7 +1559,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .rnav-cta:hover { background: #fff; color: #1a1a1a; border-color: #fff; }
 
-/* Golden ratio grid — deep background, parallax on mouse move */
+/* Golden ratio grid - deep background, parallax on mouse move */
 .rhero-golden {
   position: absolute;
   inset: 0;
@@ -1601,7 +1601,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   opacity: 0.07; mix-blend-mode: overlay;
 }
 
-/* Cartoon googly eyes — floating in the open space, right side */
+/* Cartoon googly eyes - floating in the open space, right side */
 .rfig-eyes {
   position: absolute; top: 5vh; left: 2vw; right: auto;
   display: flex; gap: 18px; align-items: flex-end;
@@ -1611,7 +1611,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   display: flex; flex-direction: column; align-items: center;
   gap: 5px;
 }
-/* Eyebrows — curved arc using border-top technique */
+/* Eyebrows - curved arc using border-top technique */
 .reye-brow {
   width: 44px; height: 16px;
   border-top: 6px solid #f0ece5;
@@ -1625,7 +1625,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .reye-brow-r {
   transform: rotate(6deg) scaleX(0.88);
 }
-/* Eye orb — horizontal oval */
+/* Eye orb - horizontal oval */
 .rfig-eyes .reye {
   background: #f0ece5;
   border-radius: 50%;
@@ -1645,7 +1645,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   94%            { transform: scaleY(1); }
 }
 
-/* Single-brow lift — left and right variants preserve base rotation */
+/* Single-brow lift - left and right variants preserve base rotation */
 @keyframes browLiftL {
   0%, 100% { transform: rotate(-6deg) scaleX(0.88) translateY(0); }
   35%       { transform: rotate(-10deg) scaleX(0.88) translateY(-9px); }
@@ -1659,7 +1659,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .reye-brow.lift      { animation: browLiftL 0.55s ease-in-out forwards; }
 .reye-brow-r.lift    { animation: browLiftR 0.55s ease-in-out forwards; }
 
-/* Pupil — absolutely centered so JS translate(-50%+x, -50%+y) works */
+/* Pupil - absolutely centered so JS translate(-50%+x, -50%+y) works */
 .rfig-eyes .reye-pupil {
   width: 18px; height: 18px;
   background: #111;
@@ -1678,7 +1678,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   opacity: 0.9;
 }
 
-/* Stage: full-screen type canvas — everything centered
+/* Stage: full-screen type canvas - everything centered
    padding-right accounts for the fixed right dock (~72px wide + 16px gap) */
 .rfig-stage {
   display: flex; flex-direction: column;
@@ -1730,7 +1730,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   transition: opacity 0.2s;
 }
 
-/* Figma selection frame — boxes removed, open text layout */
+/* Figma selection frame - boxes removed, open text layout */
 .rfig-frame {
   position: relative;
   border: none;
@@ -1757,7 +1757,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rfig-corner--tm { top: -4px; left: calc(50% - 4px); }
 .rfig-corner--bm { bottom: -4px; left: calc(50% - 4px); }
 
-/* "Hi, I'm Priyanka" name line — centered above big role */
+/* "Hi, I'm Priyanka" name line - centered above big role */
 .rfig-name-line {
   display: flex; align-items: baseline; justify-content: center;
   font-family: 'Space Grotesk', sans-serif;
@@ -1780,7 +1780,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   margin-left: 2px;
 }
 
-/* Role line — screen-filling statement type */
+/* Role line - screen-filling statement type */
 .rfig-role {
   font-family: 'Alumni Sans Collegiate One', sans-serif;
   font-size: clamp(4.5rem, 14vw, 20rem);
@@ -1804,7 +1804,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rfig-role-l1 { display: block; text-align: center; }
 .rfig-role-l2 { display: block; text-align: center; position: relative; left: -128px; top: -82px; }
 
-/* Tagline — fixed bottom-left, clear of the center type */
+/* Tagline - fixed bottom-left, clear of the center type */
 .rfig-tagline {
   position: fixed;
   bottom: 201px; left: 554px;
@@ -1842,9 +1842,9 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   box-shadow: 2px 2px 0px #b45309;
 }
 .rfig-sticky-word::before, .rfig-sticky-word::after { display: none; }
-/* Bottom corners — hidden */
+/* Bottom corners - hidden */
 .sw-corners { display: none; }
-/* T label — hidden */
+/* T label - hidden */
 .sw-label {
   display: none;
   position: absolute;
@@ -1971,7 +1971,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .rwild-stage { display: none; }
 }
 
-/* ── Resume file — Figma canvas style ── */
+/* ── Resume file - Figma canvas style ── */
 .rfig-resume-file {
   position: absolute;
   top: 14%; right: 14%;
@@ -2007,7 +2007,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* purple corner handles */
 .rfig-resume-frame .rfloat-corner { border-color: #a855f7; }
 
-/* resize handle — bottom-right */
+/* resize handle - bottom-right */
 .rfig-resize-handle {
   position: absolute; bottom: -6px; right: -6px;
   width: 14px; height: 14px;
@@ -2026,7 +2026,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 @media (max-width: 768px) { .rfig-resume-file { display: none; } }
 
-/* ── Floating Figma-frame thumbnails — right side of hero ── */
+/* ── Floating Figma-frame thumbnails - right side of hero ── */
 .rfloat {
   position: absolute;
   right: 4%;
@@ -2061,7 +2061,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .rfloat:hover .rfloat-frame img { opacity: 0.85; }
 
-/* Corner handles — like Figma selection */
+/* Corner handles - like Figma selection */
 .rfloat-corner {
   position: absolute;
   width: 7px; height: 7px;
@@ -2075,7 +2075,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rfloat-corner--bl { bottom: -4px; left: -4px; }
 .rfloat-corner--br { bottom: -4px; right: -4px; }
 
-/* Stacked positions — right column, no overlap with center text */
+/* Stacked positions - right column, no overlap with center text */
 .rfloat-1 { top: 8%;  animation: rfloatBob1 4.2s ease-in-out infinite; }
 .rfloat-2 { top: 36%; animation: rfloatBob2 5s   ease-in-out infinite 0.9s; }
 .rfloat-3 { top: 63%; animation: rfloatBob3 4.6s ease-in-out infinite 1.7s; }
@@ -2094,7 +2094,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 @media (max-width: 768px) { .rfloat { display: none; } }
 
-/* Quick jump — plain text, sits just above marquee */
+/* Quick jump - plain text, sits just above marquee */
 .rfig-jump-btn {
   position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
   font-family: 'Caveat', cursive;
@@ -2113,7 +2113,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   opacity: 0.7;
 }
 
-/* pri.anka ghost cursor — appears on snap-back click */
+/* pri.anka ghost cursor - appears on snap-back click */
 .rfig-ghost-cursor {
   position: fixed; pointer-events: none; z-index: 999997;
   display: flex; align-items: flex-start; gap: 4px;
@@ -2157,7 +2157,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   margin-left: 12px; white-space: nowrap;
 }
 
-/* Sassy bubble — solid purple */
+/* Sassy bubble - solid purple */
 .rfig-bubble {
   position: fixed; pointer-events: none; z-index: 999996;
   background: #7c3aed;
@@ -2203,11 +2203,11 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .rfig-letter:active { cursor: grabbing; }
 
-/* ── Statement section — hidden (letter hero replaces it) ── */
+/* ── Statement section - hidden (letter hero replaces it) ── */
 .rfig-stmt-section { display: none !important; }
 .rfig-trans-spacer  { display: none; }
 
-/* ── Statement section — fixed overlay, crossfades over hero (no scroll movement) ── */
+/* ── Statement section - fixed overlay, crossfades over hero (no scroll movement) ── */
 .rfig-stmt-section {
   position: fixed; top: 0; left: 0; right: 0; height: 100vh;
   background: #1a1a1a;
@@ -2296,7 +2296,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
     overflow: hidden;
   }
 
-  /* Eyes — smaller, tucked center-right */
+  /* Eyes - smaller, tucked center-right */
   .rfig-eyes {
     top: 22vh; right: 16px; left: auto;
     gap: 10px;
@@ -2304,21 +2304,21 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .rfig-eyes #rEyeLeft, .rfig-eyes #rEyeRight { width: 38px; height: 34px; }
   .reye-brow { width: 30px; height: 12px; border-top-width: 4px; }
 
-  /* Stage — centered on mobile too */
+  /* Stage - centered on mobile too */
   .rfig-stage {
     padding: 0;
     justify-content: center;
     gap: 0;
   }
 
-  /* Name — centered above role */
+  /* Name - centered above role */
   .rfig-name-line {
     font-size: clamp(0.68rem, 2.8vw, 0.88rem);
     white-space: normal;
     justify-content: center;
   }
 
-  /* Role — big but fits mobile */
+  /* Role - big but fits mobile */
   .rfig-role {
     font-size: clamp(3rem, 14vw, 8rem);
     line-height: 0.88;
@@ -2396,7 +2396,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
     justify-content: center !important;
   }
 
-  /* Role — Space Grotesk solid */
+  /* Role - Space Grotesk solid */
   .rfig-role {
     font-family: 'Space Grotesk', sans-serif !important;
     font-size: clamp(2.6rem, 12vw, 3.8rem) !important;
@@ -2435,7 +2435,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .rmob-see-work svg { width: 18px; height: 28px; }
 }
 
-/* ── Recruiter Hero — φ = 1.618 scale ── */
+/* ── Recruiter Hero - φ = 1.618 scale ── */
 /* φ spacing scale: 6 · 10 · 16 · 26 · 42 · 68 · 110 · 178px */
 .rhero {
   min-height: 88vh;
@@ -2446,7 +2446,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   position: relative;
   overflow: hidden;
 }
-/* figma hero — scrolls naturally */
+/* figma hero - scrolls naturally */
 .rhero.rfig-hero {
   position: relative; top: auto;
   height: 100vh; min-height: 100vh;
@@ -2520,7 +2520,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   transform: rotate(8deg); /* slight tilt for hand-drawn feel */
 }
 
-/* ── iPhone Mockup — Dark ── */
+/* ── iPhone Mockup - Dark ── */
 .rphone {
   width: 262px;
   background: linear-gradient(160deg,
@@ -2560,7 +2560,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   border-radius: 2px;
   pointer-events: none; z-index: 10;
 }
-/* Side buttons — left (volume + mute) — slightly darker silver */
+/* Side buttons - left (volume + mute) - slightly darker silver */
 .rphone-btns-left {
   position: absolute;
   left: -4px; top: 108px;
@@ -2573,7 +2573,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .rphone-btn-mute  { width: 5px; height: 20px; }
 .rphone-btn-vol   { width: 5px; height: 34px; }
-/* Side button — right (power) */
+/* Side button - right (power) */
 .rphone-btn-pwr {
   position: absolute;
   right: -4px; top: 148px;
@@ -2582,7 +2582,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   border-radius: 0 3px 3px 0;
   z-index: 20;
 }
-/* Screen area: glass inset — recessed look */
+/* Screen area: glass inset - recessed look */
 .rphone-screen-area {
   border-radius: 40px; /* inner radius = outer - padding (46-7=39, rounded up) */
   overflow: hidden;
@@ -2751,7 +2751,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .rhero-title {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(2.4rem, 6vw, 5.375rem); /* max = φ³·⁵ ≈ 86px — midpoint between φ³ and φ⁴ */
+  font-size: clamp(2.4rem, 6vw, 5.375rem); /* max = φ³·⁵ ≈ 86px - midpoint between φ³ and φ⁴ */
   font-weight: 500; line-height: 1.06; letter-spacing: -0.04em;
   color: #fff; margin-bottom: 16px;        /* φ⁰ = 16px */
 }
@@ -2784,7 +2784,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .rhero-desc {
   font-family: 'Space Grotesk', sans-serif;
-  max-width: 382px;            /* φ⁻¹ × 618 = 382 — minor golden rectangle */
+  max-width: 382px;            /* φ⁻¹ × 618 = 382 - minor golden rectangle */
   font-size: 16px;             /* φ⁰ */
   font-weight: 300;
   line-height: 1.618;          /* exact φ */
@@ -3058,7 +3058,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rloc-bull { color: rgba(0,0,0,0.35); font-size: 0.5rem; }
 .rloc-time { font-variant-numeric: tabular-nums; }
 
-/* ── Recruiter Marquee — macOS Finder tag style ── */
+/* ── Recruiter Marquee - macOS Finder tag style ── */
 /* Marquee pinned to bottom of hero */
 .rfig-hero .rmarquee {
   position: absolute; bottom: 48px; left: 0; right: 0;
@@ -3086,7 +3086,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .rmarquee-track:hover { animation-play-state: paused; }
 
-/* minimal marquee item — plain text */
+/* minimal marquee item - plain text */
 .rmi {
   display: inline-flex; align-items: center;
   flex-shrink: 0;
@@ -3414,12 +3414,12 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 
 /* ══════════════════════════════════════════
-   GRAPHIC DESIGN — horizontal scroll strip
+   GRAPHIC DESIGN - horizontal scroll strip
 ══════════════════════════════════════════ */
 /* (GFX section styles consolidated below at line ~3430) */
 
 /* ══════════════════════════════════════════
-   MORE FROM ME — hanging cards (dave holloway inspired)
+   MORE FROM ME - hanging cards (dave holloway inspired)
 ══════════════════════════════════════════ */
 .rbento-section {
   padding: 56px 52px 80px;
@@ -3881,7 +3881,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   width: 100%; height: 100%;
   object-fit: cover; display: block; border-radius: 10px;
 }
-/* backgrounds now baked into SVG squircles — remove old fills */
+/* backgrounds now baked into SVG squircles - remove old fills */
 .rdock-linkedin, .rdock-gmail, .rdock-folder, .rdock-trash, .rdock-imsg { background: none; }
 
 /* macOS folder stack items */
@@ -3923,7 +3923,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 }
 .rdock-chat-hint.rdock-hint--visible { opacity: 1; }
 
-/* macOS notification dot — static, stays under icon */
+/* macOS notification dot - static, stays under icon */
 .rdock-notif-dot {
   position: absolute;
   bottom: -5px; left: 50%; transform: translateX(-50%);
@@ -3932,7 +3932,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   border-radius: 50%;
 }
 
-/* macOS bounce — applied to the icon itself */
+/* macOS bounce - applied to the icon itself */
 .rdock-bounce .rdock-icon {
   animation: dock-bounce 1.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
 }
@@ -4319,7 +4319,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .rmontage-img { height: 130px; }
 }
 
-/* ── GFX Lightbox — slideshow ── */
+/* ── GFX Lightbox - slideshow ── */
 .rgfx-lightbox {
   position: fixed; inset: 0; z-index: 9999;
   background: rgba(0,0,0,0.94);
@@ -4551,7 +4551,7 @@ video.rgfx-lb-img--active { display: block; }
   color: #aaa;
 }
 
-/* Street section — always light background (architectural drawing style) */
+/* Street section - always light background (architectural drawing style) */
 #view-recruiter.r-light .rstreet-section { border-top-color: rgba(0,0,0,0.05); }
 #view-recruiter.r-light .rstreet-label { color: rgba(42,32,22,0.35); }
 #view-recruiter.r-light .rstreet-label em { color: rgba(42,32,22,0.55); }
@@ -4630,13 +4630,13 @@ video.rgfx-lb-img--active { display: block; }
 
 /* ── Recruiter responsive ── */
 @media (max-width: 900px) {
-  /* Mac chrome bar — strip back to dots + toggle only */
+  /* Mac chrome bar - strip back to dots + toggle only */
   .rmac-loc { display: none; }
   .rmac-url { display: none; }
   .rmac-right { gap: 8px; margin-left: auto; }
   .rmac-bar { gap: 0; padding: 0 12px; }
 
-  /* Hero — reset absolute positioning to flow layout */
+  /* Hero - reset absolute positioning to flow layout */
   .rhero {
     flex-direction: column; align-items: flex-start;
     padding: 36px 24px 48px; min-height: auto;
@@ -4934,7 +4934,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 .arrange-done-btn:hover { background: #01477A; }
 
 /* ═══════════════════════════════════════════
-   RESPONSIVE — TABLET & MOBILE
+   RESPONSIVE - TABLET & MOBILE
 ═══════════════════════════════════════════ */
 
 /* ── Tablet (≤1100px) ── */
@@ -4947,7 +4947,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
   .search-wrap { width: min(420px, 70vw); }
 }
 
-/* ── Mobile (≤768px) — Studio theme ── */
+/* ── Mobile (≤768px) - Studio theme ── */
 @media (max-width: 768px) {
   /* Screen scrolls vertically */
   .macbook-screen {
@@ -5355,7 +5355,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 .hh-back-btn { background: none; border: 1px solid rgba(255,255,255,0.16); color: rgba(255,255,255,0.5); font-family: 'Poppins', sans-serif; font-size: 0.86rem; padding: 11px 24px; border-radius: 24px; cursor: pointer; transition: all 0.25s; }
 .hh-back-btn:hover { background: rgba(255,255,255,0.05); color: #fff; }
 
-/* full-bleed cover — column layout */
+/* full-bleed cover - column layout */
 .hh-hero { flex-direction: column !important; align-items: flex-start !important; padding: 80px 48px 0 !important; gap: 48px !important; min-height: unset !important; }
 .hh-hero-content { max-width: 720px; }
 .hh-hero-img { flex: none !important; width: calc(100% + 96px) !important; margin-left: -48px !important; margin-right: -48px !important; }
@@ -5414,7 +5414,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
   border-left-color: #e07d3f !important;
 }
 
-/* macbook bob animation removed — static stagger only */
+/* macbook bob animation removed - static stagger only */
 
 /* section title clip reveal */
 .hh-section-title-wrap { overflow: hidden; }
@@ -5422,7 +5422,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 .hh-reveal.hh-visible .hh-title-clip { transform: translateY(0); opacity: 1; }
 
 /* ══════════════════════════════════════════
-   HEALING HEARTS — MOBILE RESPONSIVE
+   HEALING HEARTS - MOBILE RESPONSIVE
 ══════════════════════════════════════════ */
 @media (max-width: 600px) {
   .hh-insights { flex-direction: column; gap: 14px; }
@@ -5617,7 +5617,7 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 #view-recruiter.r-light #rfigTypeName { color: rgba(0,0,0,0.75) !important; }
 
 /* ── Project card names: darken accent on light bg ── */
-/* Bright accents like yellow (#ffde59) wash out on cream — mix in black for contrast */
+/* Bright accents like yellow (#ffde59) wash out on cream - mix in black for contrast */
 [data-theme="light"] .rct:not(.rct-wip):hover .rct-name {
   color: color-mix(in srgb, var(--rta, #1a1a1a) 55%, #000);
 }

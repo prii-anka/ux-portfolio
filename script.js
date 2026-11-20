@@ -48,7 +48,7 @@
   }
   updateClock(); setInterval(updateClock, 1000);
 
-  // ── Typewriter LOOP: "Priyanka" — type → pause → erase → pause → repeat
+  // ── Typewriter LOOP: "Priyanka" - type → pause → erase → pause → repeat
   var NAME = 'Priyanka', nameIdx = 0, nameErasing = false;
   function typeLoop() {
     if (!nameErasing) {
@@ -192,7 +192,7 @@
     }, 700);
   });
 
-  // Hero scrolls away naturally — no JS animation needed
+  // Hero scrolls away naturally - no JS animation needed
   var scrollParent = document.getElementById('view-recruiter') || document.body;
 
   // Statement: looping typewriter
@@ -209,7 +209,7 @@
       if (stmtIdx <= STMT.length) {
         var ch = STMT[stmtIdx - 1];
         var d = 32 + Math.random() * 25;
-        if (ch === '—' || ch === '.') d = 200 + Math.random() * 90;
+        if (ch === '\u2014' || ch === '.') d = 200 + Math.random() * 90;
         else if (ch === ' ') d = 18 + Math.random() * 14;
         setTimeout(typeStmt, d);
       } else {
@@ -244,7 +244,7 @@
 // ── LOADER ─────────────────────────────────────────
 (function () {
   var MIN_SHOW = 1800;  // always show loader for at least this long
-  var MAX_WAIT = 5000;  // hard cap — never wait more than 5s
+  var MAX_WAIT = 5000;  // hard cap - never wait more than 5s
   var started = Date.now();
 
   function hideLoader() {
@@ -260,7 +260,7 @@
     setTimeout(hideLoader, wait);
   }
 
-  // Hard fallback — never block more than MAX_WAIT
+  // Hard fallback - never block more than MAX_WAIT
   var fallback = setTimeout(hideLoader, MAX_WAIT);
 
   // Wait for all loader images to load
@@ -292,10 +292,11 @@ const AI_CONFIG = {
   SYSTEM_PROMPT: `You are Priyanka Uttarkar, known online as pri.anka - a Product & UX Designer. You studied architecture, then completed a master's in HCI, and now you design digital products. You are empathetic, observant, detail-oriented, intentional, and curious. You love dogs deeply.
 
 You are open to work. Answer questions about your projects:
-- Healing Hearts: Mobile healthcare app redesign improving appointment booking UX
-- WalletGyde: Personal finance app, +32% task completion through IA restructure and simplified onboarding
+- Healing Hearts: UX research and redesign for an animal rescue nonprofit, making adopt, donate and volunteer obvious
+- WalletGyde: Personal finance app, +28% task completion through IA restructure and simplified onboarding
 - Dashboard Statistics: End-to-end analytics dashboard redesign for enterprise users
-- Orion Design System: 200+ components, full token library, Figma documentation built for scale
+- Data Extraction System: AI-assisted extraction interface for Mayo Clinic researchers, with confidence, conflicts and sources visible
+- Encore: music-app feature concept that turns a road-trip listening session into a saved playlist
 - Brand identity and visual design work
 
 Your design process: Research → Define → Design → Test → Ship. You're currently in the Design phase of your next big project.
@@ -312,8 +313,8 @@ If anyone asks about dogs: you are obsessed. You have two, a golden retriever an
 // ── Pre-written fallback responses ─────────────────
 const SCRIPTED = {
   work: [
-    "I've designed across mobile apps, SaaS dashboards, and design systems. My most impactful project was WalletGyde - I restructured the IA and simplified onboarding, which boosted task completion by 32%. Want to hear about Healing Hearts or the Orion Design System?",
-    "My work spans product design, UX research, and design systems. Healing Hearts was a healthcare app where I redesigned the entire appointment booking flow - it was all about reducing anxiety at a vulnerable moment for users."
+    "I've designed across mobile apps, SaaS dashboards, and design systems. My most impactful project was WalletGyde - I restructured the IA and simplified onboarding, which boosted task completion by 28%. Want to hear about Data Extraction for Mayo Clinic or Healing Hearts?",
+    "My work spans product design, UX research, and design systems. For Mayo Clinic I designed an AI extraction tool researchers can actually trust, and for Healing Hearts, an animal rescue, I made adopting, donating and volunteering obvious."
   ],
   process: [
     "Research → Define → Design → Test → Ship. But honestly, 'Research' isn't a phase for me - it's a constant mindset. I'm always observing, always asking why. The best insights come from noticing things others walk past.",
@@ -328,8 +329,8 @@ const SCRIPTED = {
     "Yes! I'm available and excited about what's next. I'm drawn to teams that care about craft and move with intention. If that sounds like your team, I'd love to chat."
   ],
   systems: [
-    "Orion is a design system I built from scratch - 200+ components, a full token library, and thorough Figma documentation. The goal was to make it so well-structured that any designer could onboard in a day. Systems thinking is really just good empathy at scale.",
-    "I love design systems because they're the infrastructure nobody sees but everyone uses. Orion has 200+ components and a token architecture that makes theming effortless. It's the kind of work that multiplies every other designer's output."
+    "I think in systems. For WalletGyde I set up the brand system: Walletgyde Blue for trust, Growth Green for growth, Montserrat for headings and DM Sans for body. For Data Extraction I built the hi-fi prototype on a shared component library.",
+    "Systems are empathy at scale: decide something once, well, and every screen after it gets better. Ask me about WalletGyde's brand system or the components behind Data Extraction."
   ],
   dogs: [
     "Absolutely obsessed. I have a golden retriever and a dachshund - completely opposite energy, the best combo. My golden is a professional morale booster, and the dachshund is convinced she runs the entire household. She's not wrong.",
@@ -347,7 +348,7 @@ function getScriptedResponse(query) {
   if (q.includes('process') || q.includes('how do you') || q.includes('workflow') || q.includes('design process')) return pick(SCRIPTED.process);
   if (q.includes('background') || q.includes('architecture') || q.includes('hci') || q.includes('education') || q.includes('school')) return pick(SCRIPTED.background);
   if (q.includes('available') || q.includes('hire') || q.includes('job') || q.includes('opportunit') || q.includes('open to')) return pick(SCRIPTED.available);
-  if (q.includes('design system') || q.includes('orion') || q.includes('component') || q.includes('token')) return pick(SCRIPTED.systems);
+  if (q.includes('design system') || q.includes('component') || q.includes('token')) return pick(SCRIPTED.systems);
   if (q.includes('dog') || q.includes('pet') || q.includes('woof') || q.includes('golden')) return pick(SCRIPTED.dogs);
   return pick(SCRIPTED.default);
 }
@@ -371,7 +372,7 @@ function getFollowUps(query) {
   if (q.includes('process') || q.includes('workflow')) return FOLLOW_UPS.process;
   if (q.includes('background') || q.includes('architecture') || q.includes('hci')) return FOLLOW_UPS.background;
   if (q.includes('available') || q.includes('hire') || q.includes('job')) return FOLLOW_UPS.available;
-  if (q.includes('design system') || q.includes('orion')) return FOLLOW_UPS.systems;
+  if (q.includes('design system')) return FOLLOW_UPS.systems;
   if (q.includes('dog') || q.includes('woof')) return FOLLOW_UPS.dogs;
   return FOLLOW_UPS.default;
 }
@@ -394,7 +395,7 @@ const PROJECTS = {
     title: 'WalletGyde',
     img: 'assets/project-walletgyde.png',
     tags: ['Product Design', 'Finance', 'Mobile', 'IA'],
-    stat: '+32%',
+    stat: '+28%',
     statLabel: 'Task Completion',
     sections: [
       { h: 'Overview', p: 'WalletGyde is a personal finance app helping users track spending, set budgets, and understand their financial health. The app had strong features but terrible discoverability - users couldn\'t find what they needed.' },
@@ -409,23 +410,10 @@ const PROJECTS = {
     tags: ['SaaS', 'Data Viz', 'Product Design', 'Enterprise'],
     stat: null,
     sections: [
-      { h: 'Overview', p: 'End-to-end redesign of an analytics dashboard for enterprise B2B users. The existing design was a data dump - everything visible, nothing prioritised, every user overwhelmed.' },
+      { h: 'Overview', p: 'End-to-end redesign of an analytics dashboard for enterprise B2B users. The existing design was a data dump - everything visible, nothing prioritized, every user overwhelmed.' },
       { h: 'Research', p: 'Interviewed 8 power users and 6 occasional users. Key finding: power users needed density; occasional users needed guidance. The same UI was failing both.' },
-      { h: 'Solution', p: 'Designed a progressive disclosure system - a clean summary view with drill-down capability. Introduced saved views, smart defaults, and a customisable layout for power users.' },
-      { h: 'Result', p: 'Time-to-insight reduced significantly in usability testing. Both user groups rated the new design more favourably in post-test questionnaires.' }
-    ]
-  },
-  systems: {
-    title: 'Orion Design System',
-    img: null,
-    tags: ['Design Systems', 'Figma', 'Components', 'Tokens'],
-    stat: '200+',
-    statLabel: 'Components',
-    sections: [
-      { h: 'Overview', p: 'Orion is a design system I built from scratch - a single source of truth for a product team that had accumulated years of design debt and inconsistency.' },
-      { h: 'Scope', p: '200+ components across atoms, molecules, organisms, and templates. Full design token library covering colour, typography, spacing, radius, and motion. Extensive Figma documentation and a component usage guide.' },
-      { h: 'Philosophy', p: 'A design system is a product for your designers and developers. It needs to be well-designed, well-documented, and well-maintained. I treated adoption as a UX problem - if designers don\'t use it, it failed.' },
-      { h: 'Outcome', p: 'Onboarding time for new designers dropped from weeks to days. Design-to-dev handoff became significantly smoother. The system is now actively maintained and extended by the team.' }
+      { h: 'Solution', p: 'Designed a progressive disclosure system - a clean summary view with drill-down capability. Introduced saved views, smart defaults, and a customizable layout for power users.' },
+      { h: 'Result', p: 'Time-to-insight reduced significantly in usability testing. Both user groups rated the new design more favorably in post-test questionnaires.' }
     ]
   }
 };
@@ -451,7 +439,7 @@ function setTheme(dark) {
   const svgSun  = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
   const icon = document.getElementById('rThemeIcon');
   if (icon) icon.innerHTML = dark ? svgMoon : svgSun;
-  // SVG stroke attributes can't be overridden by CSS attr selectors reliably — do it in JS
+  // SVG stroke attributes can't be overridden by CSS attr selectors reliably - do it in JS
   const spiralColor = dark ? 'white' : '#2A2520';
   document.querySelectorAll('.rhero-golden g[stroke]').forEach(g => {
     g.setAttribute('stroke', spiralColor);
@@ -462,7 +450,7 @@ function setTheme(dark) {
 // ── Sphere-rotation theme transition ────────────────
 // A large circle (150vmax, border-radius 50%) rises from below
 // the viewport, rolls over the screen like a globe completing
-// a rotation, then exits above — revealing the new theme.
+// a rotation, then exits above - revealing the new theme.
 let _wipeActive = false;
 function triggerThemeWipe() {
   if (_wipeActive) return;
@@ -478,17 +466,17 @@ function triggerThemeWipe() {
   wipe.style.transition = 'none';
   wipe.style.transform  = 'translateY(120%)';
 
-  // Phase 1 — roll up from below into center (ease-in: gains speed)
+  // Phase 1 - roll up from below into center (ease-in: gains speed)
   requestAnimationFrame(() => requestAnimationFrame(() => {
     wipe.style.transition = 'transform 0.58s cubic-bezier(0.4, 0, 0.6, 1)';
     wipe.style.transform  = 'translateY(0%)';
   }));
 
-  // At peak (circle covers entire screen) — swap theme
+  // At peak (circle covers entire screen) - swap theme
   setTimeout(() => {
     setTheme(goingDark);
 
-    // Phase 2 — continue rotating upward, exiting above (ease-out: loses speed)
+    // Phase 2 - continue rotating upward, exiting above (ease-out: loses speed)
     wipe.style.transition = 'transform 0.58s cubic-bezier(0.4, 0, 0.6, 1)';
     wipe.style.transform  = 'translateY(-120%)';
 
@@ -503,7 +491,7 @@ function triggerThemeWipe() {
 }
 
 // Init theme from localStorage (no animation on load)
-// Default is dark — only switch if user explicitly chose light
+// Default is dark - only switch if user explicitly chose light
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'light') setTheme(false);
 
@@ -923,7 +911,7 @@ document.addEventListener('keydown', e => {
 });
 
 // ── Fun sticker drag for all visitors ───────────────
-// Stickers are freely draggable by anyone — positions reset on refresh.
+// Stickers are freely draggable by anyone - positions reset on refresh.
 let activeStickerDrag = null;
 
 function setupFunStickerDrag() {
@@ -1051,7 +1039,7 @@ function cvReframe() {
 
 // Canvas listeners only attach on pages that actually have the artboard
 if (cvViewport && cvSurface && cvBadge && cvBackBtn) {
-// Wheel — zoom centered on cursor
+// Wheel - zoom centered on cursor
 cvViewport.addEventListener('wheel', e => {
   e.preventDefault();
   const r = cvViewport.getBoundingClientRect();
@@ -1086,7 +1074,7 @@ document.addEventListener('keydown', e => {
     if (!cvSpaceHeld) { cvSpaceHeld = true; cvViewport.classList.add('cv-spaceheld'); }
     e.preventDefault();
   }
-  // Ctrl+0 — reset/fit
+  // Ctrl+0 - reset/fit
   if (e.key === '0' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); cvReframe(); }
   // Ctrl++ / Ctrl+-
   if ((e.key === '=' || e.key === '+') && (e.ctrlKey || e.metaKey)) {
@@ -1130,7 +1118,7 @@ cvViewport.addEventListener('touchmove', e => {
 }, { passive: false });
 cvViewport.addEventListener('touchend', () => { cvLastPinchDist = null; });
 
-// Init — start at scale 1, centered (artboard fills viewport naturally)
+// Init - start at scale 1, centered (artboard fills viewport naturally)
 window.addEventListener('load', () => {
   // Artboard is already viewport-sized at scale 1, so no initial offset needed
   cvApply();
@@ -1193,7 +1181,7 @@ document.getElementById('rHeroWork')?.addEventListener('click', e => {
   document.getElementById('rct-section')?.scrollIntoView({ behavior: 'smooth' });
 });
 
-// Jump-to-work button (hero bottom) — scroll the fixed view-recruiter container
+// Jump-to-work button (hero bottom) - scroll the fixed view-recruiter container
 (function() {
   var btn = document.querySelector('.rfig-jump-btn');
   var view = document.getElementById('view-recruiter');
@@ -1212,7 +1200,7 @@ document.getElementById('rHeroWork')?.addEventListener('click', e => {
     'design-process': "I start with the problem, not a wireframe. First I spend time obsessing over what question we're actually answering, then I map the ecosystem before touching a screen. Figma comes later.",
     'availability': "Open to full-time product design roles right now. Based in Mountain View, CA, and totally fine with remote or hybrid. If you're building something people will actually use, I want to talk.",
     'background': "Architecture → HCI. I spent years designing physical spaces, then switched to digital. The overlap is bigger than you'd think: both are about how people move through & feel inside a space.",
-    'design-systems': "I built Orion, a design system for Mayo Clinic covering 40+ components used across internal tools. Tokens, documentation, the whole thing. Design systems are the most underrated leverage in any org.",
+    'design-systems': "I think in systems: WalletGyde's brand system, and the component library behind the Data Extraction prototype for Mayo Clinic. Decide once, well, and every screen after it gets better.",
     'thinking': "I think in constraints. Give me a tight brief over a blank canvas any day. The best solutions I've made came from a wall I wasn't supposed to get past.",
   };
   const fallback = "Hmm, try one of the chips below, or ask me about my work, process, or background!";
@@ -1266,7 +1254,7 @@ document.getElementById('rHeroWork')?.addEventListener('click', e => {
     if (lc.match(/process|workflow|approach|how.*(work|design)/)) key = 'design-process';
     else if (lc.match(/availab|hire|open|role|job|opportunit/)) key = 'availability';
     else if (lc.match(/background|story|archit|hci|studied|school/)) key = 'background';
-    else if (lc.match(/system|orion|component|token|ds/)) key = 'design-systems';
+    else if (lc.match(/system|component|token|ds/)) key = 'design-systems';
     else if (lc.match(/think|approach|mindset|philosophy/)) key = 'thinking';
     botReply(key);
   }
@@ -1287,7 +1275,7 @@ document.getElementById('rHeroWork')?.addEventListener('click', e => {
   setInterval(updatePhoneClock, 30000);
 })();
 
-// Graphic design strip — drag scroll
+// Graphic design strip - drag scroll
 (function() {
   const track = document.getElementById('rgfxTrack');
   if (!track) return;
@@ -1387,9 +1375,9 @@ document.getElementById('rHeroWork')?.addEventListener('click', e => {
     { label: 'Say Hello', sub: 'Footer & contact info', cat: 'Section', icon: '◎', anchor: 'rfooter' },
     // Projects
     { label: 'Healing Hearts', sub: 'Healthcare UX · mobile redesign', cat: 'Project', icon: '❤', anchor: 'rct-section' },
-    { label: 'WalletGyde', sub: 'Finance app · +32% task completion', cat: 'Project', icon: '◈', anchor: 'rct-section' },
+    { label: 'WalletGyde', sub: 'Finance app · +28% task completion', cat: 'Project', icon: '◈', anchor: 'rct-section' },
     { label: 'Dashboard Statistics', sub: 'Enterprise analytics redesign', cat: 'Project', icon: '◉', anchor: 'rct-section' },
-    { label: 'Orion Design System', sub: '200+ components · Figma tokens', cat: 'Project', icon: '✦', anchor: 'rct-section' },
+    { label: 'Encore', sub: 'Music streaming concept', cat: 'Project', icon: '✦', anchor: 'rct-section' },
     // Actions
     { label: 'Copy Email', sub: 'pri.anka256@gmail.com', cat: 'Action', icon: '@', action: 'copyEmail' },
     { label: 'LinkedIn', sub: 'linkedin.com/in/priyanka-uttarkar', cat: 'Action', icon: 'in', action: 'linkedin' },
