@@ -492,8 +492,8 @@ function triggerThemeWipe() {
 
 // Init theme from localStorage (no animation on load)
 // Default is dark - only switch if user explicitly chose light
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') setTheme(false);
+// Light mode is hidden for now: everyone gets dark, and old saved choices are cleared.
+try { localStorage.removeItem('theme'); } catch (e) {}
 
 document.getElementById('rThemeBtn')?.addEventListener('click', triggerThemeWipe);
 
