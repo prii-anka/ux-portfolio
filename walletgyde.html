@@ -281,7 +281,7 @@ button{font:inherit}
 .alts button{all:unset;cursor:pointer;font:700 13.5px var(--body);padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink2);transition:all .2s}
 .alts button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
 .alts button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
-.dec .inl{display:none}
+.dec .iphone{display:none}
 .metric-tie{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-weight:700;font-size:14px;color:var(--green-d);background:var(--mint);border-radius:999px;padding:6px 12px}
 
 /* phone gallery */
@@ -320,12 +320,14 @@ button{font:inherit}
   .story{grid-template-columns:1fr;gap:0}
   .stick{display:none}
   .dec{min-height:0;padding:44px 0}
-  .dec .inl{display:block;width:min(300px,80%);height:auto;margin:22px auto 0;border-radius:28px;border:7px solid #0E1621;box-shadow:0 20px 40px -24px rgba(16,36,58,.5)}
+  .dec .iphone{display:block;width:min(290px,78%);margin:26px auto 0;border-radius:42px;background:#0E1621;padding:9px;box-shadow:0 24px 48px -26px rgba(16,36,58,.55),inset 0 0 0 2px #2A3646}
+  .iphone .scr{max-height:min(560px,150vw);border-radius:34px;overflow:hidden;background:#fff;scroll-behavior:smooth}
+  .iphone .inl{display:block;width:100%;height:auto;transition:opacity .25s}
   .takes{grid-template-columns:1fr}
   .upnext{grid-template-columns:1fr;padding:22px}
 }
 @media (max-width:560px){ .wt{grid-template-columns:1fr} }
-@media (prefers-reduced-motion:reduce){ .rc,.phone .scr img }
+@media (prefers-reduced-motion:reduce){ .rc,.phone .scr img{transition:none} .iphone .scr{scroll-behavior:auto} }
 
 /* next */
 .next{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding:52px 0}
@@ -562,7 +564,7 @@ button{font:inherit}
           <p class="what">BudgetBuilder opens with suggested questions written the way people talk: <q>How do I pay off my debts?</q>, <q>Create a saving plan for buying a home</q>. After an answer, the suggestions change to follow up: <q>Am I overspending this month?</q></p>
           <div class="wt"><div class="why"><b>Why</b>A blank text box assumes you know what to ask, and the right financial word for it. Suggestions remove both.</div><div class="cost"><b>Trade-off</b>Suggestions steer people toward questions we answer well. Free text stays one tap away.</div></div>
           <div class="alts" role="group" aria-label="Chat screens"><button type="button" data-img="chat-1" aria-pressed="true">Before you ask</button><button type="button" data-img="chat-2" data-pos="100%" aria-pressed="false">After you ask</button></div>
-          <img class="inl" src="assets/wg/m/chat-1.webp" width="393" height="852" loading="lazy" decoding="async" alt="BudgetBuilder chat with welcome messages and suggested questions.">
+          <div class="iphone"><div class="scr"><img class="inl" src="assets/wg/m/chat-1.webp" width="393" height="852" loading="lazy" decoding="async" alt="BudgetBuilder chat with welcome messages and suggested questions."></div></div>
         </article>
         <article class="dec" data-img="profile" data-tag="numbers, in words">
           <span class="dn">02</span>
@@ -570,7 +572,7 @@ button{font:inherit}
           <p class="what">A credit score never appears alone. 750 comes with <q>Excellent</q> and <q>Your credit score is in great shape.</q> Chat answers work the same way: categories, amounts, then one plain observation.</p>
           <div class="wt"><div class="why"><b>Why</b>Jargon overload. People wanted to know if they were OK, not to decode a score.</div><div class="cost"><b>Trade-off</b>More words on screen, so every sentence had to be short enough to scan.</div></div>
           <div class="alts" role="group" aria-label="Screens"><button type="button" data-img="profile" aria-pressed="true">Credit score</button><button type="button" data-img="chat-2" data-pos="100%" aria-pressed="false">Chat answer</button></div>
-          <img class="inl" src="assets/wg/m/profile.webp" width="428" height="1162" loading="lazy" decoding="async" alt="Financial profile with a 750 credit score labeled Excellent.">
+          <div class="iphone"><div class="scr"><img class="inl" src="assets/wg/m/profile.webp" width="428" height="1162" loading="lazy" decoding="async" alt="Financial profile with a 750 credit score labeled Excellent."></div></div>
         </article>
         <article class="dec" data-img="dash-income" data-tag="three numbers first">
           <span class="dn">03</span>
@@ -579,7 +581,7 @@ button{font:inherit}
           <div class="wt"><div class="why"><b>Why</b>Data overwhelm. People needed a starting point before they needed everything.</div><div class="cost"><b>Trade-off</b>Detail costs one extra tap. Knowing where to start mattered more.</div></div>
           <span class="metric-tie">↓ 50% cognitive load, through progressive disclosure and hierarchy</span>
           <div class="alts" role="group" aria-label="Dashboard screens"><button type="button" data-img="dash-income" aria-pressed="true">Income</button><button type="button" data-img="dash-networth" aria-pressed="false">Net worth</button><button type="button" data-img="income" aria-pressed="false">Income detail</button><button type="button" data-img="month" aria-pressed="false">Pick a month</button></div>
-          <img class="inl" src="assets/wg/m/dash-income.webp" width="428" height="926" loading="lazy" decoding="async" alt="Personal economy dashboard: income $8,000, expenses $5,500, leftover $2,500.">
+          <div class="iphone"><div class="scr"><img class="inl" src="assets/wg/m/dash-income.webp" width="428" height="926" loading="lazy" decoding="async" alt="Personal economy dashboard: income $8,000, expenses $5,500, leftover $2,500."></div></div>
         </article>
         <article class="dec" data-img="exp-fixed" data-tag="bills ≠ spending">
           <span class="dn">04</span>
@@ -587,7 +589,7 @@ button{font:inherit}
           <p class="what">Expenses split into Fixed and Flex. Fixed shows each bill with its due date, like rent <q>Due 1st</q>. Flex shows spending against a budget: <q>Food, $1,200 of $1,500</q>.</p>
           <div class="wt"><div class="why"><b>Why</b>You can't change rent this month, but you can change dinner. Splitting them points people at the money they can actually move.</div><div class="cost"><b>Trade-off</b>A second tab to learn, in exchange for a clearer next move.</div></div>
           <div class="alts" role="group" aria-label="Expense screens"><button type="button" data-img="exp-fixed" aria-pressed="true">Fixed</button><button type="button" data-img="exp-flex" aria-pressed="false">Flex</button></div>
-          <img class="inl" src="assets/wg/m/exp-fixed.webp" width="428" height="926" loading="lazy" decoding="async" alt="Expenses sheet with Fixed bills and due dates.">
+          <div class="iphone"><div class="scr"><img class="inl" src="assets/wg/m/exp-fixed.webp" width="428" height="926" loading="lazy" decoding="async" alt="Expenses sheet with Fixed bills and due dates."></div></div>
         </article>
         <article class="dec" data-img="trends" data-pos="100%" data-tag="insight, then action">
           <span class="dn">05</span>
@@ -596,7 +598,7 @@ button{font:inherit}
           <div class="wt"><div class="why"><b>Why</b>No clear next step. Every observation now hands people to a decision.</div><div class="cost"><b>Trade-off</b>Insights must be specific enough to act on, which means fewer of them.</div></div>
           <span class="metric-tie">↓ 22% drop-off, through iterative, data-informed decisions</span>
           <div class="alts" role="group" aria-label="Screens"><button type="button" data-img="trends" data-pos="100%" aria-pressed="true">Spending insight</button><button type="button" data-img="trends" data-pos="0%" aria-pressed="false">Trends overview</button></div>
-          <img class="inl" src="assets/wg/m/trends.webp" width="428" height="1271" loading="lazy" decoding="async" alt="My Trends with spending breakdown, weekly trends, cash flow and a spending insight.">
+          <div class="iphone"><div class="scr"><img class="inl" src="assets/wg/m/trends.webp" width="428" height="1271" loading="lazy" decoding="async" alt="My Trends with spending breakdown, weekly trends, cash flow and a spending insight."></div></div>
         </article>
         <article class="dec" data-img="onb-plaid" data-tag="say it before they ask">
           <span class="dn">06</span>
@@ -604,7 +606,7 @@ button{font:inherit}
           <p class="what">Onboarding says plainly that answers use sample data and no real bank is connected yet. Plaid is named up front, and a <q>Plaid Connected securely</q> badge stays at the top of chat.</p>
           <div class="wt"><div class="why"><b>Why</b>It's a money app. Trust is the product, and surprises break it.</div><div class="cost"><b>Trade-off</b>More reading before the fun part, so each screen gets one line.</div></div>
           <div class="alts" role="group" aria-label="Onboarding screens"><button type="button" data-img="onb-coach" aria-pressed="false">Meet the coach</button><button type="button" data-img="onb-plaid" aria-pressed="true">Link safely</button><button type="button" data-img="chat-1" aria-pressed="false">Badge in chat</button></div>
-          <img class="inl" src="assets/wg/m/onb-plaid.webp" width="393" height="852" loading="lazy" decoding="async" alt="Onboarding: Link accounts safely with Plaid. No real bank connection required.">
+          <div class="iphone"><div class="scr"><img class="inl" src="assets/wg/m/onb-plaid.webp" width="393" height="852" loading="lazy" decoding="async" alt="Onboarding: Link accounts safely with Plaid. No real bank connection required."></div></div>
         </article>
       </div>
     </div>
@@ -874,12 +876,14 @@ button{font:inherit}
   }
   var decs = document.querySelectorAll('.dec');
   decs.forEach(function (d) {
-    var btns = d.querySelectorAll('.alts button'), inl = d.querySelector('.inl');
+    var btns = d.querySelectorAll('.alts button'), inl = d.querySelector('.inl'), box = inl && inl.parentNode;
+    function pan(pos) { if (!box) return; var go = function () { box.scrollTop = pos === '100%' ? box.scrollHeight : 0; }; if (inl.complete) go(); else inl.addEventListener('load', go, { once: true }); }
+    var on0 = d.querySelector('.alts button[aria-pressed="true"]'); pan(on0 ? on0.dataset.pos : d.dataset.pos);
     btns.forEach(function (b) {
       b.addEventListener('click', function () {
         btns.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
         phone(b.dataset.img, b.dataset.pos, d.dataset.tag);
-        if (inl) { inl.src = 'assets/wg/m/' + b.dataset.img + '.webp'; }
+        if (inl) { var nsrc = 'assets/wg/m/' + b.dataset.img + '.webp'; if (inl.getAttribute('src') !== nsrc) inl.src = nsrc; pan(b.dataset.pos); }
       });
     });
   });
