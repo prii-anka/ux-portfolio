@@ -313,6 +313,12 @@ h1,h2,h3{margin:0;font-family:var(--head);letter-spacing:-.025em}
   .mini .pair{grid-template-columns:1fr}
 }
 </style>
+<style>/* Window-zoom page transition (Chrome and Edge; other browsers navigate normally) */
+@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }
+::view-transition-group(*) { animation-duration: .45s; animation-timing-function: cubic-bezier(.2,.75,.2,1); }
+.sc-bar { view-transition-name: menubar; }
+.hero .machine { view-transition-name: vt-dataextraction; }
+</style>
 </head>
 <body>
 

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>try{if(!/[?&]intro\b/.test(location.search)&&(location.hash||sessionStorage.getItem("loaderSeen")))document.documentElement.classList.add("no-loader")}catch(e){}</script>
   <title>Priyanka Uttarkar · Product &amp; UX Designer</title>
   <meta name="description" content="I&#39;m Priyanka, a product designer with roots in architecture and HCI. I&#39;ve designed AI tools for Mayo Clinic researchers, a fintech app and a nonprofit redesign." />
   <meta property="og:type" content="website" />
@@ -34,17 +35,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@300;400;500;600;700&family=Caveat:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="preload" as="image" href="assets/project-dashboard.webp" />
-  <link rel="preload" as="image" href="assets/project-walletgyde.png" />
-  <link rel="preload" as="image" href="assets/project-healinghearts.webp" />
-  <link rel="preload" as="image" href="assets/project-encore.webp" />
-  <link rel="preload" as="image" href="assets/project-moodticketing.webp" />
-  <link rel="preload" as="image" href="assets/project-datum.webp" />
-  <link rel="preload" as="image" href="assets/gfx-jiggermaster.jpg" />
-  <link rel="preload" as="image" href="assets/project-poshaai.webp" />
-  <link rel="preload" as="image" href="assets/project-thegrind.webp" />
-  <link rel="preload" as="image" href="assets/project-deadlineiq.webp" />
-  <link rel="stylesheet" href="style.css?v=204" />
+  <link rel="stylesheet" href="style.css?v=206" />
+<style>/* Window-zoom page transition (Chrome and Edge; other browsers navigate normally) */
+@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }
+::view-transition-group(*) { animation-duration: .45s; animation-timing-function: cubic-bezier(.2,.75,.2,1); }
+.rmac-bar { view-transition-name: menubar; }
+.rct[href="data-extraction.html"] .rct-img { view-transition-name: vt-dataextraction; }
+.rct[href="walletgyde.html"] .rct-img { view-transition-name: vt-walletgyde; }
+.rct[href="healing-hearts.html"] .rct-img { view-transition-name: vt-healinghearts; }
+.rct[href="datum.html"] .rct-img { view-transition-name: vt-datum; }
+.rct[href="encore.html"] .rct-img { view-transition-name: vt-encore; }
+</style>
 </head>
 <body>
 <div id="cursor-dot"></div>
@@ -154,6 +155,7 @@
       <span class="rmac-dot" style="background:#28ca41;"></span>
     </div>
     <span id="rmac-brand" style="font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:0.02em;margin-left:4px;">pri.anka</span>
+    <div class="rmini-eyes" id="rMiniEyes" aria-hidden="true"><span class="rme"><i></i></span><span class="rme"><i></i></span></div>
     <!-- Center tabs - macOS style -->
     <div class="rmac-tabs-inner" style="position:absolute;left:50%;transform:translateX(-50%);">
       <div class="rmac-tab rmac-tab-active">product</div>
@@ -359,7 +361,9 @@
       </div>
 
       <!-- Tagline -->
-      <p class="rfig-tagline">building <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>design systems</span> that feel <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>deeply human</span></p>
+      <p class="rfig-tagline">turning <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>messy problems</span> into <span class="rfig-sticky-word"><span class="sw-corners"></span><span class="sw-label">T</span>clear screens</span></p>
+      <!-- Mobile: visitor city + local time -->
+      <p class="rmob-loc"><span data-visitor-city></span><span class="rmob-sep" aria-hidden="true">·</span><span id="rMobTime"></span></p>
       <!-- Mobile inline CTA -->
       <button class="rmob-see-work" onclick="document.getElementById('rct-section').scrollIntoView({behavior:'smooth'})">
         see my work
@@ -783,19 +787,19 @@
     <!-- Divider -->
     <div class="rdock-sep"></div>
     <!-- CONTACT GROUP -->
-    <a class="rdock-item" href="https://linkedin.com/in/priyanka-uttarkar" target="_blank" rel="noopener" title="LinkedIn">
+    <a class="rdock-item rdock-mob" href="https://linkedin.com/in/priyanka-uttarkar" target="_blank" rel="noopener" title="LinkedIn">
       <div class="rdock-icon rdock-linkedin">
         <img src="assets/icon-linkedin.webp" alt="LinkedIn" decoding="async" width="844" height="844" />
       </div>
       <span class="rdock-label">LinkedIn</span>
     </a>
-    <div class="rdock-item copy-email-btn" title="Copy email" data-email="pri.anka256@gmail.com">
+    <div class="rdock-item rdock-mob copy-email-btn" title="Copy email" data-email="pri.anka256@gmail.com">
       <div class="rdock-icon rdock-gmail">
         <img src="assets/icon-gmail.png" alt="Gmail" decoding="async" width="512" height="512" />
       </div>
       <span class="rdock-label">Copy Email</span>
     </div>
-    <div class="rdock-item" id="rdockChatBtn" title="Chat with prianka.ai">
+    <div class="rdock-item rdock-mob" id="rdockChatBtn" title="Chat with prianka.ai">
       <div class="rdock-icon rdock-imsg">
         <img src="assets/icon-imessage.png" alt="Messages" decoding="async" width="149" height="149" />
       </div>
@@ -805,16 +809,20 @@
     <!-- Divider -->
     <div class="rdock-sep"></div>
     <!-- UTILITIES GROUP -->
-    <div class="rdock-item" title="Paintings" id="rdockPaintBtn">
+    <div class="rdock-item rdock-mob" title="Paintings" id="rdockPaintBtn">
       <div class="rdock-icon"><img src="assets/icon-paint.png" alt="Paintings" decoding="async" width="500" height="500" /></div>
       <span class="rdock-label">Paintings</span>
       <div class="rdock-notif-dot"></div>
     </div>
-    <div class="rdock-item" title="Photos" id="rdockPhotosBtn">
+    <div class="rdock-item rdock-mob" title="Photos" id="rdockPhotosBtn">
       <div class="rdock-icon"><img src="assets/icon-photos.png" alt="Photos" decoding="async" width="149" height="149" /></div>
       <span class="rdock-label">Photos</span>
       <div class="rdock-notif-dot"></div>
     </div>
+    <a class="rdock-item rdock-mob rdock-resume" href="/Priyanka-Prakash-Uttarkar-Resume.pdf" target="_blank" rel="noopener" title="Resume" aria-label="Resume">
+      <div class="rdock-icon"><svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true"><rect width="40" height="40" rx="9" fill="#f4f2ee"/><path d="M13 9h10l5 5v17H13z" fill="#fff" stroke="#9a968d" stroke-width="1.2"/><path d="M23 9v5h5" fill="none" stroke="#9a968d" stroke-width="1.2"/><path d="M16 19h9M16 22.5h9M16 26h6" stroke="#b8b3a8" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+      <span class="rdock-label">Resume</span>
+    </a>
     <div class="rdock-item" id="rdockFinderBtn" title="Search portfolio">
       <div class="rdock-icon rdock-folder"><img src="assets/icon-finder.png" alt="Finder" decoding="async" width="149" height="160" /></div>
       <span class="rdock-label">Finder</span>
@@ -1361,7 +1369,7 @@
 <div id="gfxLightbox" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
   <button id="gfxLightboxClose" style="position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:2rem;line-height:1;opacity:0.7;">×</button>
   <button id="gfxLightboxPrev" style="position:absolute;left:20px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.8rem;width:48px;height:48px;border-radius:50%;display:none;align-items:center;justify-content:center;">‹</button>
-  <img id="gfxLightboxImg" src="" alt="" style="max-width:82vw;max-height:90vh;object-fit:contain;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,0.6);">
+  <img id="gfxLightboxImg" alt="" style="max-width:82vw;max-height:90vh;object-fit:contain;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,0.6);">
   <video id="gfxLightboxVid" controls style="display:none;max-width:82vw;max-height:90vh;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,0.6);"></video>
   <button id="gfxLightboxNext" style="position:absolute;right:20px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.8rem;width:48px;height:48px;border-radius:50%;display:none;align-items:center;justify-content:center;">›</button>
   <div id="gfxLightboxDots" style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:8px;"></div>
@@ -1417,7 +1425,7 @@
     lb.style.display = 'flex';
     document.body.style.overflow = 'hidden';
   }
-  function closeLb(){ lb.style.display = 'none'; lbVid.pause(); lbVid.src = ''; lbImg.src = ''; slides = []; document.body.style.overflow = ''; }
+  function closeLb(){ lb.style.display = 'none'; lbVid.pause(); lbVid.removeAttribute('src'); lbVid.load(); lbImg.removeAttribute('src'); slides = []; document.body.style.overflow = ''; }
 
   document.querySelectorAll('.rgfx-thumb').forEach(function(thumb){
     thumb.style.cursor = 'zoom-in';
@@ -1809,17 +1817,6 @@
   if(closeBtn) closeBtn.addEventListener('click', close);
   gallery.addEventListener('click', function(e){ if(e.target===gallery) close(); });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape'&&gallery.classList.contains('rpaint--open')) close(); });
-})();
-
-// dock hide on scroll into projects
-(function(){
-  var dock = document.querySelector('.rdock');
-  var view = document.getElementById('view-recruiter');
-  var proj = document.getElementById('rct-section');
-  if(!dock||!view||!proj) return;
-  view.addEventListener('scroll', function(){
-    dock.classList.toggle('rdock--hidden', view.scrollTop > proj.offsetTop - 200);
-  }, {passive:true});
 })();
 
 // finder / spotlight

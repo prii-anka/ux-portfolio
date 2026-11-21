@@ -171,6 +171,12 @@ section{padding-block:96px}
 .dark .tl-in .pain{color:#F2937A}
 </style>
 <style>.skip{position:absolute;left:-999px;top:40px;z-index:1000;background:#1C1D1F;color:#fff;padding:10px 16px;font-weight:600}.skip:focus{left:16px}</style>
+<style>/* Window-zoom page transition (Chrome and Edge; other browsers navigate normally) */
+@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }
+::view-transition-group(*) { animation-duration: .45s; animation-timing-function: cubic-bezier(.2,.75,.2,1); }
+.sc-bar { view-transition-name: menubar; }
+#render { view-transition-name: vt-datum; }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>

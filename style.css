@@ -74,10 +74,30 @@
 #siteLoader {
   position: fixed; inset: 0; z-index: 99999;
   background: #0e0e0e;
-  transition: opacity 0.28s ease, visibility 0.28s ease;
+  /* Exit: columns split apart. Columns scrolling up fly up and fade,
+     columns scrolling down fly down and fade, then the dark backdrop clears. */
+  transition: background-color .4s ease .12s, visibility 0s linear .6s;
   overflow: hidden;
 }
-#siteLoader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+#siteLoader.hidden { background-color: transparent; visibility: hidden; pointer-events: none; }
+#siteLoader .lcol { transition: transform .55s cubic-bezier(.7,0,.3,1), opacity .42s cubic-bezier(.55,0,1,.45); will-change: transform, opacity; }
+#siteLoader.hidden .lcol { opacity: 0; }
+#siteLoader.hidden .lcol:nth-child(odd)  { transform: translateY(-38vh); }   /* scrolling up: exits up */
+#siteLoader.hidden .lcol:nth-child(even) { transform: translateY(38vh); }    /* scrolling down: exits down */
+#siteLoader.hidden .lcol:nth-child(2) { transition-delay: .03s; }
+#siteLoader.hidden .lcol:nth-child(3) { transition-delay: .06s; }
+#siteLoader.hidden .lcol:nth-child(4) { transition-delay: .09s; }
+#siteLoader .loverlay { transition: background-color .3s ease; }
+#siteLoader.hidden .loverlay { background-color: transparent; }
+#siteLoader .loverlay > * { transition: opacity .2s ease, transform .3s ease; }
+#siteLoader.hidden .loverlay > * { opacity: 0; transform: scale(.96); }
+@media (prefers-reduced-motion: reduce) {
+  #siteLoader { transition: opacity .2s ease, visibility 0s linear .2s; }
+  #siteLoader.hidden { opacity: 0; }
+  #siteLoader .lcol, #siteLoader .loverlay, #siteLoader .loverlay > * { transition: none; }
+  #siteLoader.hidden .lcol { transform: none; }
+}
+.no-loader #siteLoader { display: none; }
 
 /* columns container */
 .lcols {
@@ -5633,3 +5653,88 @@ body.arranging .desktop > *.dragging-item .arrange-label-tag {
 [data-theme="light"] .rct-dot  { background: rgba(0,0,0,0.35); }
 [data-theme="light"] .rct-name { color: #1a1a1a; }
 [data-theme="light"] #cursor-ring { border-color: rgba(0,0,0,0.35); }
+
+/* ═══════════════════════════════════════
+   POLISH PASS (2026-11-21)
+   ═══════════════════════════════════════ */
+
+/* Menu-bar eyes: appear once the hero scrolls away (desktop only) */
+.rmini-eyes {
+  display: flex; align-items: center; gap: 4px; margin-left: 10px;
+  opacity: 0; transform: translateY(-3px); pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+.rmini-eyes.on { opacity: 1; transform: none; }
+.rme {
+  position: relative; display: block; overflow: hidden;
+  width: 16px; height: 14px; border-radius: 50%; background: #f0ece5;
+  animation: eyeBlink 3.8s ease-in-out infinite;
+}
+.rme + .rme { animation-delay: .07s; }
+.rme i {
+  position: absolute; top: 50%; left: 50%;
+  width: 6px; height: 6px; border-radius: 50%; background: #111;
+  transform: translate(-50%, -50%); transition: transform .12s ease-out;
+}
+@media (max-width: 1023px) { .rmini-eyes { display: none; } }
+
+/* Phone-only pieces are hidden on desktop */
+.rdock-resume, .rmob-loc { display: none; }
+
+/* Phone hero + compact bottom dock */
+@media (max-width: 900px) {
+  .rdock {
+    display: flex !important;
+    position: fixed; top: auto; right: auto; left: 50%;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    transform: translateX(-50%);
+    flex-direction: row; border-radius: 18px;
+    padding: 4px 8px; gap: 2px;
+  }
+  .rdock > .rdock-item:not(.rdock-mob), .rdock > .rdock-sep { display: none !important; }
+  .rdock > .rdock-mob { display: flex; width: 44px; height: 44px; min-width: 44px; min-height: 44px; }
+  .rdock .rdock-icon { width: 32px; height: 32px; }
+  .rdock .rdock-label { display: none; }
+  .rdock-item:hover { transform: none; }
+  .rfooter { padding-bottom: 84px; }
+
+  .rmob-loc {
+    display: flex; justify-content: center; align-items: center; gap: 6px;
+    margin: 14px 0 0;
+    font: 500 12px 'Space Grotesk', sans-serif; letter-spacing: .04em;
+    color: rgba(255,255,255,.5);
+  }
+  .rmob-sep { opacity: .5; }
+
+  /* Eyes sit in the normal flow right above the name, so they never collide at any screen height */
+  .rfig-eyes {
+    display: flex !important;
+    position: relative !important; top: auto !important; left: auto !important; right: auto !important;
+    transform: none !important;
+    align-self: center; margin: 0 auto 22px;
+    gap: 10px;
+  }
+  /* The name block joins the normal flow too, so the hero centers eyes + name as one group */
+  .rfig-hero .rfig-stage {
+    position: relative !important; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+    height: auto !important; width: 100%;
+  }
+  .rhero.rfig-hero { padding-left: 0; padding-right: 0; }
+  /* Desktop-pointer extras never show on narrow screens */
+  #figma-coords, .rfig-cursor-you, .rfig-cursor-ghost { display: none !important; }
+  .rfig-eyes #rEyeLeft, .rfig-eyes #rEyeRight { width: 34px; height: 30px; }
+  .rfig-eyes .reye-pupil { width: 12px; height: 12px; }
+  .rfig-eyes .reye-pupil::after { top: 2px; left: 3px; width: 4px; height: 4px; }
+  .rfig-eyes .reye-brow { width: 26px; height: 10px; border-top-width: 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rme, .rfig-eyes .reye { animation: none; }
+  .rme i, .rmini-eyes { transition: none; }
+}
+
+/* Desktop: the dock stays on the right edge while scrolling, so content keeps clear of it */
+@media (min-width: 901px) {
+  .rct-section, .rexp-section { padding-right: 104px; }
+  .rfooter-body, .rfooter-bar { padding-right: 104px; }
+}

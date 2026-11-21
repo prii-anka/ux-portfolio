@@ -348,6 +348,12 @@ footer ul{margin:12px 0 0;padding-left:18px;font-size:14px;display:flex;flex-dir
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Caveat:wght@600&display=swap">
 <link rel="stylesheet" href="/site-chrome.css">
+<style>/* Window-zoom page transition (Chrome and Edge; other browsers navigate normally) */
+@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }
+::view-transition-group(*) { animation-duration: .45s; animation-timing-function: cubic-bezier(.2,.75,.2,1); }
+.sc-bar { view-transition-name: menubar; }
+.hero-art .phone { view-transition-name: vt-encore; }
+</style>
 </head>
 <body>
 

@@ -245,40 +245,34 @@
 
 })();
 // ── LOADER ─────────────────────────────────────────
+// Shown once per browser session, and never when arriving on a #link.
+// The <head> check adds .no-loader before paint so a skipped loader never flashes.
 (function () {
-  var MIN_SHOW = 1800;  // always show loader for at least this long
-  var MAX_WAIT = 5000;  // hard cap - never wait more than 5s
-  var started = Date.now();
-
-  function hideLoader() {
-    var loader = document.getElementById('siteLoader');
+  var MIN_SHOW = 900;   // shortest time the loader stays up
+  var MAX_WAIT = 4000;  // hard cap
+  var KEY = 'loaderSeen';
+  var loader = document.getElementById('siteLoader');
+  function markSeen() { try { sessionStorage.setItem(KEY, '1'); } catch (e) {} }
+  if (!loader || document.documentElement.classList.contains('no-loader')) {
     if (loader) loader.classList.add('hidden');
-    try { localStorage.removeItem('pv'); } catch (e) {}
-    setTimeout(function () { if (window.rLoopStart) window.rLoopStart(); }, 200);
+    return;
   }
-
-  function tryHide() {
-    var elapsed = Date.now() - started;
-    var wait = Math.max(0, MIN_SHOW - elapsed);
-    setTimeout(hideLoader, wait);
+  var started = Date.now(), done = false;
+  function hideLoader() {
+    if (done) return; done = true;
+    loader.classList.add('hidden');
+    markSeen();
   }
-
-  // Hard fallback - never block more than MAX_WAIT
+  function tryHide() { setTimeout(hideLoader, Math.max(0, MIN_SHOW - (Date.now() - started))); }
   var fallback = setTimeout(hideLoader, MAX_WAIT);
-
-  // Wait for all loader images to load
   window.addEventListener('load', function () {
     clearTimeout(fallback);
     var imgs = document.querySelectorAll('#siteLoader .lframe img');
-    var total = imgs.length;
-    if (total === 0) { tryHide(); return; }
-    var loaded = 0;
-    function onLoad() {
-      loaded++;
-      if (loaded >= Math.min(total, 8)) { tryHide(); } // wait for first 8 images max
-    }
+    var need = Math.min(imgs.length, 8), loaded = 0;
+    if (!need) { tryHide(); return; }
+    function onLoad() { if (++loaded >= need) tryHide(); }
     imgs.forEach(function (img) {
-      if (img.complete) { onLoad(); }
+      if (img.complete) onLoad();
       else { img.addEventListener('load', onLoad); img.addEventListener('error', onLoad); }
     });
   });
@@ -1146,6 +1140,8 @@ function rUpdateTime() {
   if (heroLoc) heroLoc.textContent = `Mountain View, CA  •  ${timeStr}`;
   if (stripTime) stripTime.textContent = timeStr;
   if (stripTime2) stripTime2.textContent = timeStr;
+  const mobTime = document.getElementById('rMobTime');
+  if (mobTime) mobTime.textContent = timeStr;
 }
 rUpdateTime();
 setInterval(rUpdateTime, 30000);
@@ -1552,3 +1548,35 @@ function initBentoScroll(id) {
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeBentoPanel(); });
 
 
+
+
+// ── MENU-BAR EYES (desktop) ─────────────────────────
+// Once the hero scrolls away, a small pair of eyes appears in the menu bar.
+// They follow the pointer, and look at a work card while it is hovered.
+(function () {
+  var mini = document.getElementById('rMiniEyes');
+  var view = document.getElementById('view-recruiter');
+  var hero = document.getElementById('rfig-hero');
+  if (!mini || !view || !hero) return;
+  var pupils = mini.querySelectorAll('i'), eyes = mini.querySelectorAll('.rme');
+  var target = null;
+  function aim(x, y) {
+    eyes.forEach(function (e, k) {
+      var r = e.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      var dx = x - cx, dy = y - cy, d = Math.sqrt(dx * dx + dy * dy) || 1, m = Math.min(d, r.width / 2 - 3) / d;
+      pupils[k].style.transform = 'translate(calc(-50% + ' + (dx * m).toFixed(1) + 'px), calc(-50% + ' + (dy * m).toFixed(1) + 'px))';
+    });
+  }
+  function onScroll() { mini.classList.toggle('on', view.scrollTop > hero.offsetHeight - 60); }
+  view.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  document.addEventListener('mousemove', function (e) {
+    if (!mini.classList.contains('on')) return;
+    if (target) { var r = target.getBoundingClientRect(); aim(r.left + r.width / 2, r.top + r.height / 2); }
+    else aim(e.clientX, e.clientY);
+  });
+  document.querySelectorAll('.rct').forEach(function (card) {
+    card.addEventListener('mouseenter', function () { target = card; var r = card.getBoundingClientRect(); aim(r.left + r.width / 2, r.top + r.height / 2); });
+    card.addEventListener('mouseleave', function () { target = null; });
+  });
+})();

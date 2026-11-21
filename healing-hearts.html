@@ -305,6 +305,12 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
   .mtable td:first-child{white-space:normal;font-size:17px;margin-bottom:4px}
 }
 </style>
+<style>/* Window-zoom page transition (Chrome and Edge; other browsers navigate normally) */
+@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }
+::view-transition-group(*) { animation-duration: .45s; animation-timing-function: cubic-bezier(.2,.75,.2,1); }
+.sc-bar { view-transition-name: menubar; }
+.hshot { view-transition-name: vt-healinghearts; }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>

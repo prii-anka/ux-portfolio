@@ -371,6 +371,12 @@ button{font:inherit}
   .facts{grid-template-columns:1fr}
 }
 </style>
+<style>/* Window-zoom page transition (Chrome and Edge; other browsers navigate normally) */
+@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }
+::view-transition-group(*) { animation-duration: .45s; animation-timing-function: cubic-bezier(.2,.75,.2,1); }
+.sc-bar { view-transition-name: menubar; }
+.hero .compare-wrap { view-transition-name: vt-walletgyde; }
+</style>
 </head>
 <body>
 

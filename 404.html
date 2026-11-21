@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found · Priyanka Uttarkar</title>
+<meta name="description" content="This page does not exist. Head back to Priyanka Uttarkar's product and graphic design work.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:#1a1a1a;background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1px);background-size:28px 28px;color:#f0ece5;font-family:'Inter',system-ui,sans-serif;display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
+.bar{display:flex;align-items:center;gap:20px;height:28px;padding:0 16px;background:#1c1c1e;border-bottom:1px solid rgba(255,255,255,.08);font-size:11px;color:rgba(255,255,255,.55);flex-shrink:0}
+.dots{display:flex;gap:6px}.dots i{width:12px;height:12px;border-radius:50%;display:block;opacity:.85}
+.bar a{color:inherit;text-decoration:none}
+.bar a:hover{color:#fff}
+.bar .right{margin-left:auto}
+main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:48px 20px}
+.eyes{display:flex;gap:18px;align-items:flex-end}
+.ew{display:flex;flex-direction:column;align-items:center;gap:5px}
+.brow{width:44px;height:16px;border-top:6px solid #f0ece5;border-left:3px solid transparent;border-right:3px solid transparent;border-radius:50%;transform:rotate(-6deg) scaleX(.88)}
+.brow.r{transform:rotate(6deg) scaleX(.88)}
+.eye{width:52px;height:46px;background:#f0ece5;border-radius:50%;position:relative;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.5);animation:blink 3.8s ease-in-out infinite}
+.eye.r{animation-delay:.07s}
+.pupil{width:18px;height:18px;background:#111;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.pupil::after{content:"";position:absolute;top:4px;left:5px;width:5px;height:5px;background:#fff;border-radius:50%;opacity:.9}
+@keyframes blink{0%,85%,100%{transform:scaleY(1)}90%{transform:scaleY(.05)}94%{transform:scaleY(1)}}
+.dialog{width:min(100%,400px);background:rgba(44,44,46,.92);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(255,255,255,.1);border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.55),0 1px 0 rgba(255,255,255,.06) inset;padding:24px 22px 18px;text-align:center}
+.dialog img{width:64px;height:64px;display:block;margin:0 auto 12px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.4))}
+.dialog h1{margin:0;font:600 15px/1.35 'Inter',system-ui,sans-serif;color:#fff}
+.dialog p{margin:6px 0 0;font-size:13px;line-height:1.5;color:rgba(255,255,255,.62)}
+.btns{display:flex;gap:10px;margin-top:20px}
+.btns a{flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:8px;font:500 13px 'Inter',system-ui,sans-serif;text-decoration:none;color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.08)}
+.btns a.primary{background:#0a64d8;border-color:#0a64d8}
+.btns a:hover{filter:brightness(1.12)}
+.btns a:focus-visible{outline:3px solid #8ab4ff;outline-offset:2px}
+.code{font:600 11px 'Space Grotesk',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+@media (prefers-reduced-motion:reduce){.eye{animation:none}.pupil{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="dots" aria-hidden="true"><i style="background:#ff5f57"></i><i style="background:#ffbd2e"></i><i style="background:#28ca41"></i></div>
+  <a href="/">← pri.anka</a>
+  <a class="right" href="/Priyanka-Prakash-Uttarkar-Resume.pdf" target="_blank" rel="noopener">Resume</a>
+</header>
+<main>
+  <div class="eyes" aria-hidden="true">
+    <div class="ew"><div class="brow"></div><div class="eye" id="eL"><div class="pupil" id="pL"></div></div></div>
+    <div class="ew"><div class="brow r"></div><div class="eye r" id="eR"><div class="pupil" id="pR"></div></div></div>
+  </div>
+  <div class="dialog" role="alertdialog" aria-labelledby="t" aria-describedby="d">
+    <img src="/assets/icon-trash.png" alt="" width="64" height="64">
+    <h1 id="t">This file got moved to the Trash.</h1>
+    <p id="d">Nice try though.</p>
+    <div class="btns">
+      <a href="/graphic/">Graphic work</a>
+      <a class="primary" href="/">Product work</a>
+    </div>
+  </div>
+  <div class="code">Error 404</div>
+</main>
+<script>
+(function(){
+  var E=[['eL','pL'],['eR','pR']].map(function(p){return [document.getElementById(p[0]),document.getElementById(p[1])]});
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function look(x,y){E.forEach(function(e){var r=e[0].getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,dx=x-cx,dy=y-cy,d=Math.sqrt(dx*dx+dy*dy)||1,m=Math.min(d,r.width/2-6)/d;e[1].style.transform='translate(calc(-50% + '+(dx*m).toFixed(1)+'px),calc(-50% + '+(dy*m).toFixed(1)+'px))'})}
+  document.addEventListener('mousemove',function(e){look(e.clientX,e.clientY)});
+  document.addEventListener('touchstart',function(e){var t=e.touches[0];look(t.clientX,t.clientY)},{passive:true});
+  if(!reduce){var btn=document.querySelector('.btns .primary');setTimeout(function(){var r=btn.getBoundingClientRect();E.forEach(function(e){e[1].style.transition='transform .5s ease'});look(r.left+r.width/2,r.top+r.height/2)},900)}
+})();
+</script>
+<script data-goatcounter="https://priyankaa.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
