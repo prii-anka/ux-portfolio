@@ -294,9 +294,9 @@ const AI_CONFIG = {
 You are open to work. Answer questions about your projects:
 - Healing Hearts: UX research and redesign for an animal rescue nonprofit, making adopt, donate and volunteer obvious
 - WalletGyde: Personal finance app, +28% task completion through IA restructure and simplified onboarding
-- Dashboard Statistics: End-to-end analytics dashboard redesign for enterprise users
 - Data Extraction System: AI-assisted extraction interface for Mayo Clinic researchers, with confidence, conflicts and sources visible
 - Encore: music-app feature concept that turns a road-trip listening session into a saved playlist
+- Datum: physical product concept, a one-handed device to measure, scan and mark up a building site
 - Brand identity and visual design work
 
 Your design process: Research → Define → Design → Test → Ship. You're currently in the Design phase of your next big project.
@@ -1374,10 +1374,11 @@ document.getElementById('rHeroWork')?.addEventListener('click', e => {
     { label: 'Graphic Design & Branding', sub: 'Visual work & brand projects', cat: 'Section', icon: '◉', anchor: 'rgfx-section' },
     { label: 'Say Hello', sub: 'Footer & contact info', cat: 'Section', icon: '◎', anchor: 'rfooter' },
     // Projects
-    { label: 'Healing Hearts', sub: 'Healthcare UX · mobile redesign', cat: 'Project', icon: '❤', anchor: 'rct-section' },
+    { label: 'Data Extraction System', sub: 'Mayo Clinic · AI interface', cat: 'Project', icon: '◉', anchor: 'rct-section' },
+    { label: 'Healing Hearts', sub: 'Nonprofit UX · +40% task completion', cat: 'Project', icon: '❤', anchor: 'rct-section' },
     { label: 'WalletGyde', sub: 'Finance app · +28% task completion', cat: 'Project', icon: '◈', anchor: 'rct-section' },
-    { label: 'Dashboard Statistics', sub: 'Enterprise analytics redesign', cat: 'Project', icon: '◉', anchor: 'rct-section' },
     { label: 'Encore', sub: 'Music streaming concept', cat: 'Project', icon: '✦', anchor: 'rct-section' },
+    { label: 'Datum', sub: 'Physical product concept', cat: 'Project', icon: '▣', anchor: 'rct-section' },
     // Actions
     { label: 'Copy Email', sub: 'pri.anka256@gmail.com', cat: 'Action', icon: '@', action: 'copyEmail' },
     { label: 'LinkedIn', sub: 'linkedin.com/in/priyanka-uttarkar', cat: 'Action', icon: 'in', action: 'linkedin' },

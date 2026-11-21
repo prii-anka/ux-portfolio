@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Healing Hearts · Priyanka Uttarkar</title>
-<meta name="description" content="Healing Hearts Animal Rescue and Refuge: research-led redesign that made adopting, donating and volunteering easy. +40% adoption task completion in before/after usability testing. A case study by Priyanka Uttarkar.">
+<meta name="description" content="Healing Hearts Animal Rescue and Refuge: research-led redesign that made adopting, donating and volunteering easy. +40% task completion in before/after usability testing. A case study by Priyanka Uttarkar.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Priyanka Uttarkar">
 <meta property="og:title" content="Healing Hearts · Priyanka Uttarkar">
-<meta property="og:description" content="Research-led redesign for a farm animal rescue. +40% adoption task completion in before/after usability testing.">
+<meta property="og:description" content="Research-led redesign for a farm animal rescue. +40% task completion in before/after usability testing.">
 <meta property="og:url" content="https://prianka.design/healing-hearts.html">
 <meta property="og:image" content="https://prianka.design/assets/og/og-healinghearts.jpg">
 <meta property="og:image:width" content="1200">
@@ -70,7 +70,8 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
 .hero .meta .wrap{padding-top:0;padding-bottom:0}
 .hero .wrap{padding-top:88px;padding-bottom:72px}
 .hgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:40px;align-items:center}
-.hero h1{font-weight:700;font-size:clamp(40px,4.6vw,66px);line-height:1.05;max-width:14ch;margin-top:22px}
+.hero h1{font-weight:700;font-size:clamp(40px,4.6vw,64px);line-height:1.05;max-width:15ch;margin-top:22px}
+.hero h1 em{font-style:normal;color:#C9D08F}
 .hero .sum{font-size:19px;line-height:1.65;max-width:46ch;margin-top:24px;color:#E7EAE0}
 .hero .metric{display:flex;align-items:baseline;gap:16px;margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,.22);max-width:480px}
 .hero .metric b{font:700 54px/1 var(--head)}
@@ -111,6 +112,8 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
 .legend i{width:14px;height:14px;border-radius:3px}
 .issues{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .issues li{display:grid;grid-template-columns:86px 1fr;gap:16px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line);font-size:17px;line-height:1.55}
+.issues li b{display:block;font-weight:600}
+.issues li small{display:block;font-size:15.5px;color:var(--ink2);margin-top:4px}
 .sev{font:700 12px var(--body);letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:5px;justify-self:start}
 .sev.ma{background:var(--major-l);color:var(--major)}.sev.mi{background:var(--minor-l);color:var(--minor)}
 .hmw{margin-top:56px;padding:34px 36px;border-left:4px solid var(--olive);background:var(--card)}
@@ -125,36 +128,32 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
 .mtable td:last-child{color:var(--ink2)}
 .mwrap{overflow-x:auto}
 
-/* insights */
-.insights{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
-.ins{display:grid;grid-template-columns:240px minmax(0,1fr);gap:40px;padding:36px 0;border-bottom:1px solid var(--line)}
-.ins .ev{display:flex;flex-direction:column;gap:10px}
-.ins .num{font:700 44px/1 var(--head);color:var(--olive)}
-.ins .num small{font:600 15px var(--body);color:var(--mute);margin-left:6px}
-.ins .bar{display:grid;grid-template-columns:repeat(10,1fr);gap:3px}
-.ins .bar i{height:8px;border-radius:2px;background:var(--line)}
-.ins .bar i.on{background:var(--olive-2)}
-.ins h3{font-size:23px;line-height:1.3}
-.ins p{margin-top:10px;color:var(--ink2);max-width:60ch}
-.ins p b{color:var(--ink);font-weight:600}
 .note-s{font-size:15px;color:var(--mute);margin-top:18px;font-style:italic}
 
-/* heuristic scale */
-.scale{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:30px}
-.ticks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
-.tick .b{height:10px;border-radius:5px}
-.tick small{display:block;margin-top:10px;font-size:14px;font-weight:600;text-align:center;color:var(--ink2)}
-.tick:nth-child(1) .b{background:#CFD6C3}.tick:nth-child(2) .b{background:#E2C873}.tick:nth-child(3) .b{background:#D99A5F}.tick:nth-child(4) .b{background:#B8432E}.tick:nth-child(5) .b{background:#6E1F14}
-.pins{position:relative;height:150px;margin-top:4px}
-.hpin{all:unset;cursor:pointer;position:absolute;top:var(--t);left:var(--x);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
-.hpin::before{content:"";width:1.5px;height:14px;background:var(--ink2)}
-.hpin span{white-space:nowrap;font-size:14.5px;font-weight:600;min-height:38px;display:flex;align-items:center;background:var(--paper);border:1px solid var(--line2);border-radius:6px;padding:0 12px;transition:background .2s,color .2s,border-color .2s}
-.hpin:hover span,.hpin.on span{background:var(--ink);color:#fff;border-color:var(--ink)}
-.hpin:focus-visible{outline:none}
-.hpin:focus-visible span{outline:3px solid var(--olive);outline-offset:2px}
-.scale .why{margin-top:14px;min-height:54px;font-size:16.5px;line-height:1.65;color:var(--ink2);border-top:1px solid var(--line);padding-top:16px}
-.scale .why b{color:var(--ink)}
 
+/* insight band */
+.sec.band{background:var(--olive);color:#F3F1E8;border-top:0}
+.band .side .n{color:#E3D9C4}.band .side .t{color:#fff}
+.band .h2{color:#fff;max-width:20ch}.band .lede{color:#E6E2D3}
+.band .note-s{color:#DAD6C4}
+.ibig{display:grid;grid-template-columns:auto minmax(0,1fr);gap:40px;align-items:center}
+.stat{font:700 clamp(96px,13vw,168px)/.85 var(--head);letter-spacing:-.04em;color:#fff}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.substats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px;margin-top:56px;padding-top:32px;border-top:1px solid rgba(255,255,255,.25)}
+.substats b{font:700 46px/1 var(--head);color:#fff;display:block}
+.substats p{margin-top:10px;font-size:16.5px;line-height:1.6;color:#E6E2D3}
+/* strategy doors */
+.doors{display:grid;grid-template-columns:minmax(0,.9fr) auto minmax(0,2fr);gap:24px;align-items:center}
+.home{background:var(--ink);color:#fff;border-radius:12px;padding:26px}
+.home span{font:600 12.5px var(--body);letter-spacing:.1em;text-transform:uppercase;color:#BFC5AE}
+.home h3{font-size:24px;margin-top:8px;line-height:1.2}
+.home p{margin-top:8px;font-size:15px;color:#D9D6CF}
+.arrow{color:var(--olive)}.arrow svg{width:48px;height:48px;display:block}
+.three{display:flex;flex-direction:column;gap:10px}
+.door{background:var(--card);border:2px solid var(--olive);border-radius:12px;padding:16px 20px;display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:16px;align-items:baseline}
+.door h3{font-size:22px;color:var(--olive)}
+.door p{margin:0;font-size:15px;line-height:1.55;color:var(--ink2)}
+.door span{display:block;white-space:nowrap;font-size:13.5px;font-weight:600;color:var(--brown)}
 /* personas */
 .pgrid{display:grid;grid-template-columns:280px minmax(0,1fr);gap:32px;align-items:start}
 .plist{display:flex;flex-direction:column;gap:6px}
@@ -179,7 +178,9 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
 .dec{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:30px 32px;display:grid;grid-template-columns:44px minmax(0,1fr);gap:22px}
 .dec .dn{font:700 15px var(--head);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--olive);color:#fff}
 .dec h3{font-size:23px;line-height:1.3}
-.dec .rows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:18px}
+.dec .rows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.dec .rows h3{font-size:20px;line-height:1.3}
+.dec .rows b.bf{color:var(--major)}.dec .rows b.af{color:var(--olive)}
 .dec .rows div{font-size:15.5px;line-height:1.6;color:var(--ink2)}
 .dec .rows b{display:block;font:700 12px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
 .dec .for{margin-top:16px;font-size:14.5px;color:var(--mute)}
@@ -258,7 +259,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
 .outfix p{margin-top:6px;font-size:15.5px;line-height:1.6;color:var(--ink2)}
 
 /* reflection */
-.refl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.refl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 48px}
 .refl div h3{font-size:19px}
 .refl div p{margin-top:10px;font-size:16.5px;line-height:1.65;color:var(--ink2)}
 .close{margin-top:64px;font:500 clamp(22px,2.4vw,28px)/1.5 var(--head);max-width:44ch;color:var(--ink);border-left:3px solid var(--olive);padding-left:22px}
@@ -272,8 +273,14 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
   .goals,.tldr,.refl{grid-template-columns:1fr}
   .tldr > div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}
   .evid,.pgrid,.proto,.a11y,.vgrid,.out{grid-template-columns:1fr;gap:36px}
-  .ins{grid-template-columns:1fr;gap:16px}
   .dec .rows{grid-template-columns:1fr}
+  .ibig{grid-template-columns:1fr;gap:12px}
+  .substats{grid-template-columns:1fr;gap:28px}
+  .doors{grid-template-columns:1fr}
+  .arrow{justify-self:center;transform:rotate(90deg)}
+  .door{grid-template-columns:1fr;gap:4px}
+  .door span{white-space:normal}
+  .refl{grid-template-columns:1fr}
   .plist{flex-direction:row;overflow-x:auto;padding-bottom:6px}
   .plist button{flex:0 0 auto}
   .wnotes{grid-template-columns:1fr}
@@ -285,9 +292,6 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
   body{font-size:17px}
   .hero .wrap{padding-top:72px}
   .hshot{margin:0 -20px -72px}
-  .pins{height:auto;display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:16px}
-  .hpin{position:static;transform:none}
-  .hpin::before{display:none}
   .pcard{grid-template-columns:1fr;padding:24px}
   .pcard img{width:84px;height:84px}
   .dec{grid-template-columns:1fr;padding:24px}
@@ -326,9 +330,9 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
   <div class="wrap hgrid">
     <div>
       <div class="eyebrow">Healing Hearts · Case study</div>
-      <h1>Making it easy to help a farm animal rescue.</h1>
-      <p class="sum">People arrived ready to adopt, donate or volunteer, and left without doing any of it. I led the research and redesign that turned that intent into action.</p>
-      <div class="metric"><b>+40%</b><span>adoption task completion,<br>measured in before/after usability testing</span></div>
+      <h1>People wanted to help. <em>The website was in the way.</em></h1>
+      <p class="sum">Healing Hearts rescues abused and neglected farm animals. Visitors arrived ready to adopt, donate or volunteer, then left without doing any of it. I found out why and redesigned the paths that matter most.</p>
+      <div class="metric"><b>+40%</b><span>task completion,<br>measured in before/after usability testing</span></div>
     </div>
     <figure class="hshot"><img src="assets/hh-hero.webp" width="1600" height="1034" alt="The redesigned Healing Hearts website on a tablet, with Donate, Adopt and Volunteer in the main navigation." fetchpriority="high"></figure>
   </div>
@@ -350,7 +354,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
     <div class="tldr">
       <div><h3>The challenge</h3><p>A nonprofit with real goodwill and a website that buried the three things people came to do. 4 in 10 donors abandoned the form.</p></div>
       <div><h3>What I did</h3><p>Six research methods to find out why, four design decisions to fix it, and a WCAG 2.1 audit so nobody was shut out.</p></div>
-      <div><h3>The impact</h3><p>A 40% increase in people completing the adoption task, measured against the original site with the same tasks.</p></div>
+      <div><h3>The impact</h3><p>A 40% increase in task completion, measured against the original site with the same tasks.</p></div>
     </div>
   </div>
 </section>
@@ -367,7 +371,6 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
         <div class="goal"><img src="assets/hh-photo-horses.webp" width="1280" height="440" loading="lazy" decoding="async" alt="A mare and her foal grazing." style="object-position:30% 50%"><div><h3>Donate</h3><p>Give money quickly and trust that it landed. The refuge runs on it.</p></div></div>
         <div class="goal"><img src="assets/hh-photo-team.webp" width="1280" height="440" loading="lazy" decoding="async" alt="Healing Hearts volunteers in matching blue shirts."><div><h3>Volunteer</h3><p>Find a role and a schedule that fits, and sign up without hunting.</p></div></div>
       </div>
-      <p class="cap">Photos from the Healing Hearts website.</p>
     </div>
   </div>
 </section>
@@ -388,10 +391,10 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
         </figure>
         <div>
           <ul class="issues">
-            <li><span class="sev ma">Major</span><span>Key pages buried under confusing navigation</span></li>
-            <li><span class="sev ma">Major</span><span>40% of users quit the donation form before finishing</span></li>
-            <li><span class="sev ma">Major</span><span>Animal profiles had no personality traits or medical info</span></li>
-            <li><span class="sev mi">Minor</span><span>Volunteer sign-up was scattered across multiple pages</span></li>
+            <li><span class="sev ma">Major</span><span><b>Key pages buried under confusing navigation</b><small>Adopt and Volunteer were hard to find from the homepage.</small></span></li>
+            <li><span class="sev ma">Major</span><span><b>40% quit the donation form before finishing</b><small>The point where goodwill turns into money was the leakiest step.</small></span></li>
+            <li><span class="sev ma">Major</span><span><b>Animal profiles had no personality or medical info</b><small>Adopters couldn't decide, so they didn't.</small></span></li>
+            <li><span class="sev mi">Minor</span><span><b>Volunteer sign-up scattered across several pages</b><small>Busy volunteers gave up halfway through the hunt.</small></span></li>
           </ul>
         </div>
       </div>
@@ -405,18 +408,18 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
   <div class="wrap grid">
     <div class="side"><div class="k"><span class="n">03</span><span class="t">Research</span></div></div>
     <div>
-      <h2 class="h2">Six methods, each answering a different question.</h2>
-      <p class="lede">Before opening Figma, I needed to know not just what looked broken, but why real people were walking away. I chose each method for the question it could answer that the others couldn't.</p>
+      <h2 class="h2">Six methods, and each one changed something.</h2>
+      <p class="lede">Research only counts if it moves the design. Here's what each method told me, and what I did about it.</p>
       <div class="mwrap block">
         <table class="mtable">
-          <thead><tr><th scope="col">Method</th><th scope="col">The question it answered</th><th scope="col">What came out of it</th></tr></thead>
+          <thead><tr><th scope="col">Method</th><th scope="col">What it told me</th><th scope="col">What it changed</th></tr></thead>
           <tbody>
-            <tr><td>Heuristic evaluation</td><td>Where does the site break known usability principles?</td><td>Every page reviewed against Nielsen's 10, each issue given a severity rating</td></tr>
-            <tr><td>Surveys and conversations</td><td>Why do people come, and what stops them?</td><td>10 respondents across adopters, donors and volunteers</td></tr>
-            <tr><td>Accessibility audit</td><td>Who is the site actively excluding?</td><td>WCAG 2.1 failures: contrast, alt text, form labels</td></tr>
-            <tr><td>Personas</td><td>Whose needs does each decision serve?</td><td>4 personas built from real observations</td></tr>
-            <tr><td>User stories</td><td>How will we know a flow works?</td><td>Acceptance criteria for each key flow</td></tr>
-            <tr><td>Usability testing</td><td>Did the redesign actually fix it?</td><td>3 task scenarios, original site vs redesign</td></tr>
+            <tr><td>Heuristic evaluation</td><td>Every page against Nielsen's 10 principles, each issue rated by severity</td><td>The fix order for the whole project</td></tr>
+            <tr><td>Survey, 10 people</td><td>8 of 10 came to adopt or volunteer, 5 of 10 wanted more animal detail</td><td>Navigation built around three actions, and richer profiles</td></tr>
+            <tr><td>Accessibility audit</td><td>WCAG 2.1 contrast failures, missing alt text, broken form labels</td><td>Accessible color, labels and alt text in every flow</td></tr>
+            <tr><td>Personas</td><td>Four different reasons to show up, one broken experience</td><td>Each flow designed around one person's goal</td></tr>
+            <tr><td>User stories</td><td>Acceptance criteria for every key flow</td><td>A clear test for every design decision</td></tr>
+            <tr><td>Usability testing</td><td>3 task scenarios: where people hesitated, got lost or quit</td><td>Fewer steps and a progress bar in the donation form</td></tr>
           </tbody>
         </table>
       </div>
@@ -425,47 +428,30 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
 </section>
 
 <!-- 04 INSIGHTS -->
-<section class="sec" id="insights">
+<section class="sec band" id="insights">
   <div class="wrap grid">
-    <div class="side"><div class="k"><span class="n">04</span><span class="t">Key insights</span></div></div>
+    <div class="side"><div class="k"><span class="n">04</span><span class="t">Key insight</span></div></div>
     <div>
-      <h2 class="h2">People cared. They couldn't find a way in.</h2>
-      <p class="lede">Three findings shaped every decision that followed. Each one pairs the evidence with what it meant for the design.</p>
-      <div class="insights block">
-        <div class="ins reveal"><div class="ev"><div class="num">8<small>of 10</small></div><div class="bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div><div><h3>Adopting and volunteering were the priority, and the hardest to find.</h3><p>8 of 10 respondents came to adopt or volunteer. <b>Implication:</b> those two paths had to be visible from every page, not buried in the navigation.</p></div></div>
-        <div class="ins reveal"><div class="ev"><div class="num">5<small>of 10</small></div><div class="bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div></div><div><h3>People couldn't decide on an animal they knew nothing about.</h3><p>Half wanted personality, health history and better photos. <b>Implication:</b> profiles had to carry enough to make a real decision about a home.</p></div></div>
-        <div class="ins reveal"><div class="ev"><div class="num">7<small>of 10</small></div><div class="bar" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div><div><h3>The goodwill was already there.</h3><p>7 of 10 would recommend the site anyway. <b>Implication:</b> this wasn't a trust or brand problem. It was a usability problem, so the fix was structure and flow, not a rebrand.</p></div></div>
-      </div>
-      <p class="note-s">With 10 respondents, I treated these as direction rather than proof, and validated the resulting design in usability testing.</p>
-    </div>
-  </div>
-</section>
-
-<!-- 05 HEURISTICS -->
-<section class="sec alt" id="heuristics">
-  <div class="wrap grid">
-    <div class="side"><div class="k"><span class="n">05</span><span class="t">Severity</span></div></div>
-    <div>
-      <h2 class="h2">Fixing what mattered first.</h2>
-      <p class="lede">Each issue from the heuristic evaluation got a severity rating, which set the order of work. Select an issue to see the principle it breaks.</p>
-      <div class="scale block reveal">
-        <div class="ticks" aria-hidden="true"><div class="tick"><div class="b"></div><small>No problem</small></div><div class="tick"><div class="b"></div><small>Minor</small></div><div class="tick"><div class="b"></div><small>Moderate</small></div><div class="tick"><div class="b"></div><small>Major</small></div><div class="tick"><div class="b"></div><small>Catastrophe</small></div></div>
-        <div class="pins" role="group" aria-label="Issues placed on the severity scale">
-          <button type="button" class="hpin" style="--x:70%;--t:0px" aria-label="Buried navigation, major" data-w="<b>Major · Recognition rather than recall.</b> Key pages were buried under confusing navigation, so people had to hunt for them instead of seeing them."><span>Buried navigation</span></button>
-          <button type="button" class="hpin" style="--x:70%;--t:50px" aria-label="Thin animal profiles, major" data-w="<b>Major · Match with the real world.</b> Adopters needed personality and health details to decide. Profiles didn't have them."><span>Thin animal profiles</span></button>
-          <button type="button" class="hpin" style="--x:70%;--t:100px" aria-label="Donation form drop-off, major" data-w="<b>Major · Error prevention and user control.</b> A long form with no sense of progress, at the exact moment someone had decided to give."><span>Donation form drop-off</span></button>
-          <button type="button" class="hpin" style="--x:30%;--t:0px" aria-label="Scattered volunteer info, minor" data-w="<b>Minor · Consistency and standards.</b> Volunteer information lived on several pages. Annoying, but people could still get there."><span>Scattered volunteer info</span></button>
+      <div class="ibig">
+        <div class="stat" aria-hidden="true">80%</div>
+        <div>
+          <h2 class="h2"><span class="sr">80% </span>came to adopt or volunteer. The site made those the hardest things to do.</h2>
+          <p class="lede">That one finding set the strategy: navigation should follow what people come to do, not how the organization is structured.</p>
         </div>
-        <p class="why" id="hwhy" aria-live="polite">Select an issue above.</p>
       </div>
+      <div class="substats">
+        <div><b>50%</b><p>wanted more about the animals: personality, health, better photos. Profiles had to carry enough to decide on a home.</p></div>
+        <div><b>70%</b><p>would recommend the site anyway. The goodwill was already there, so this was a usability problem, not a brand problem.</p></div>
+      </div>
+      <p class="note-s">From a survey of 10 people, so I treated these as direction rather than proof, and validated the design in usability testing.</p>
     </div>
   </div>
 </section>
 
-<!-- 06 PERSONAS -->
+<!-- 05 PERSONAS -->
 <section class="sec" id="personas">
   <div class="wrap grid">
-    <div class="side"><div class="k"><span class="n">06</span><span class="t">Personas</span></div></div>
+    <div class="side"><div class="k"><span class="n">05</span><span class="t">Personas</span></div></div>
     <div>
       <h2 class="h2">Four people, four reasons to show up.</h2>
       <p class="lede">Built from real observations, each persona came with a need, and each need became a specific change. Select a person.</p>
@@ -482,25 +468,45 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
   </div>
 </section>
 
+<!-- 06 STRATEGY -->
+<section class="sec alt" id="strategy">
+  <div class="wrap grid">
+    <div class="side"><div class="k"><span class="n">06</span><span class="t">Strategy</span></div></div>
+    <div>
+      <h2 class="h2">Three doors, visible from every page.</h2>
+      <p class="lede">One principle guided the whole redesign: whoever lands on the site should see their next step within a second.</p>
+      <div class="doors block reveal">
+        <div class="home"><span>Any page</span><h3>Someone who wants to help</h3><p>Arrives from a friend, a post or a search</p></div>
+        <div class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></div>
+        <div class="three">
+          <div class="door"><h3>Adopt</h3><p>Profiles with personality, health and filters</p><span>for Emily</span></div>
+          <div class="door"><h3>Donate</h3><p>Fewer fields, a progress bar and a real confirmation</p><span>for Sarah</span></div>
+          <div class="door"><h3>Volunteer</h3><p>One page with roles, schedules and a one-minute sign-up</p><span>for Michael and David</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 07 DECISIONS -->
-<section class="sec alt" id="decisions">
+<section class="sec" id="decisions">
   <div class="wrap grid">
     <div class="side"><div class="k"><span class="n">07</span><span class="t">Design decisions</span></div></div>
     <div>
-      <h2 class="h2">Four decisions, and what each one cost.</h2>
-      <p class="lede">Each decision traces back to a finding, and each came with a trade-off I chose deliberately.</p>
+      <h2 class="h2">What changed, and why.</h2>
+      <p class="lede">Each decision traces back to a finding from the research.</p>
       <div class="decs block">
-        <article class="dec reveal"><span class="dn">1</span><div><h3>Put the three paths in the main navigation.</h3><div class="rows"><div><b>Evidence</b>Key pages were buried, and 8 of 10 came to adopt or volunteer.</div><div><b>Decision</b>Donate, Adopt and Volunteer as top-level items, with consistent structure on every page.</div><div><b>Trade-off</b>Less room for secondary pages like events and sponsorship, which moved one level down.</div></div><p class="for">Serves <b>everyone</b>, especially David, the community supporter</p></div></article>
-        <article class="dec reveal"><span class="dn">2</span><div><h3>Shorten the donation form and show progress.</h3><div class="rows"><div><b>Evidence</b>4 in 10 people abandoned the form after deciding to give.</div><div><b>Decision</b>Fewer fields, a progress indicator, and a confirmation that the gift landed.</div><div><b>Trade-off</b>Less information collected up front. The refuge can ask for more after the gift, when trust is higher.</div></div><p class="for">Serves <b>Sarah</b>, the donor</p></div></article>
-        <article class="dec reveal"><span class="dn">3</span><div><h3>Give every animal a real profile.</h3><div class="rows"><div><b>Evidence</b>Half of respondents wanted personality, health and better photos to decide.</div><div><b>Decision</b>Personality notes, medical info, real photos and filters by animal, breed and care, ending in "schedule a meetup".</div><div><b>Trade-off</b>More content for the refuge to maintain per animal, so the template keeps each field short.</div></div><p class="for">Serves <b>Emily</b>, the adopter</p></div></article>
-        <article class="dec reveal"><span class="dn">4</span><div><h3>Bring volunteering into one hub.</h3><div class="rows"><div><b>Evidence</b>Volunteer information was scattered across several pages.</div><div><b>Decision</b>One page with role descriptions, available schedules and a sign-up form that takes under a minute.</div><div><b>Trade-off</b>A longer single page, structured so each role can be scanned on its own.</div></div><p class="for">Serves <b>Michael</b>, the volunteer</p></div></article>
+        <article class="dec reveal"><span class="dn">1</span><div><div class="rows"><div><b class="bf">Before</b><h3>Adopt and Volunteer lost in the navigation</h3></div><div><b class="af">After</b>Cleaner navigation with a clear hierarchy and the same structure on every page. The three main actions are always one click away.</div><div><b>Why</b>8 of 10 came for two of those actions. Navigation should follow what people come to do, not how the organization is structured.</div></div><p class="for">Serves <b>everyone</b></p></div></article>
+        <article class="dec reveal"><span class="dn">2</span><div><div class="rows"><div><b class="bf">Before</b><h3>A long donation form that 40% abandoned</h3></div><div><b class="af">After</b>Fewer fields, a progress indicator, and a confirmation that tells donors their gift landed.</div><div><b>Why</b>Donors like Sarah want proof their money matters. Showing progress and confirmation turns a form into a moment of trust.</div></div><p class="for">Serves <b>Sarah, the donor</b></p></div></article>
+        <article class="dec reveal"><span class="dn">3</span><div><div class="rows"><div><b class="bf">Before</b><h3>Animal profiles with a photo and a name</h3></div><div><b class="af">After</b>Real photos, personality notes, medical info, and filters to find the right match for your home.</div><div><b>Why</b>Half of people asked for more detail. Adoption is a big decision, and nobody commits to an animal they know nothing about.</div></div><p class="for">Serves <b>Emily, the adopter</b></p></div></article>
+        <article class="dec reveal"><span class="dn">4</span><div><div class="rows"><div><b class="bf">Before</b><h3>Volunteer info spread across pages</h3></div><div><b class="af">After</b>One volunteer hub with role descriptions, available schedules, and a sign-up that takes under a minute.</div><div><b>Why</b>Volunteers have the least time to spare. Every extra page was a reason to quit.</div></div><p class="for">Serves <b>Michael and David</b></p></div></article>
       </div>
     </div>
   </div>
 </section>
 
 <!-- 08 WIREFRAMES -->
-<section class="sec" id="wireframes">
+<section class="sec alt" id="wireframes">
   <div class="wrap grid">
     <div class="side"><div class="k"><span class="n">08</span><span class="t">Wireframes</span></div></div>
     <div>
@@ -522,7 +528,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
 </section>
 
 <!-- 09 PROTOTYPE -->
-<section class="sec alt" id="prototype">
+<section class="sec" id="prototype">
   <div class="wrap grid">
     <div class="side"><div class="k"><span class="n">09</span><span class="t">Prototype</span></div></div>
     <div>
@@ -544,7 +550,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
 </section>
 
 <!-- 10 ACCESSIBILITY -->
-<section class="sec" id="accessibility">
+<section class="sec alt" id="accessibility">
   <div class="wrap grid">
     <div class="side"><div class="k"><span class="n">10</span><span class="t">Accessibility</span></div></div>
     <div>
@@ -586,7 +592,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
 </section>
 
 <!-- 11 VISUAL -->
-<section class="sec alt" id="visual">
+<section class="sec" id="visual">
   <div class="wrap grid">
     <div class="side"><div class="k"><span class="n">11</span><span class="t">Visual design</span></div></div>
     <div>
@@ -617,13 +623,13 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
 </section>
 
 <!-- 12 OUTCOME -->
-<section class="sec" id="outcome">
+<section class="sec alt" id="outcome">
   <div class="wrap grid">
     <div class="side"><div class="k"><span class="n">12</span><span class="t">Outcome</span></div></div>
     <div>
       <h2 class="h2">How I measured it.</h2>
       <div class="out block">
-        <div><div class="bigm">+40%</div><p>increase in participants completing the adoption task, original site vs redesign.</p></div>
+        <div><div class="bigm">+40%</div><p>increase in task completion across the core flows, original site vs redesign.</p></div>
         <div>
           <ol class="steps">
             <li><span><b>Same tasks.</b> Three task scenarios built around the site's key flows.</span></li>
@@ -645,15 +651,16 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
 </section>
 
 <!-- 13 REFLECTION -->
-<section class="sec alt" id="reflection">
+<section class="sec" id="reflection">
   <div class="wrap grid">
     <div class="side"><div class="k"><span class="n">13</span><span class="t">Reflection</span></div></div>
     <div>
       <h2 class="h2">What I'd carry forward.</h2>
       <div class="refl block">
-        <div><h3>Measure the real thing</h3><p>The next step is tracking donation and adoption completion on the live site, not just in a prototype, to confirm the gains hold.</p></div>
-        <div><h3>A bigger sample</h3><p>Ten respondents gave clear direction. A larger survey would show whether the priorities differ between donors and adopters.</p></div>
+        <div><h3>Measure real gifts</h3><p>Track donation and adoption completion on the live site after launch, not just in testing, to confirm the gains hold.</p></div>
+        <div><h3>Design for phones</h3><p>This was desktop web. Many supporters arrive from a post on their phone, so a mobile version is the obvious next step.</p></div>
         <div><h3>Accessibility from day one</h3><p>Running the WCAG audit early changed the palette before it was set. I'd make that the default on every project.</p></div>
+        <div><h3>Goodwill isn't the problem</h3><p>People already wanted to help. Design's job was to get out of their way.</p></div>
       </div>
       <p class="close">The goal was simple: make it easier for people to connect with the cause, whether they want to adopt, donate, or just learn more.</p>
     </div>
@@ -665,13 +672,13 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
 <section class="sc-next" aria-label="Next project">
   <div class="sc-next-in">
     <div class="sc-next-top"><span>Up next</span><a href="/walletgyde.html">← Previous: WalletGyde</a></div>
-    <a class="sc-next-card" href="/encore.html">
+    <a class="sc-next-card" href="/datum.html">
       <div>
-        <h2>Encore <span class="arr" aria-hidden="true">→</span></h2>
-        <p>Keeping the soundtrack of a road trip, without lifting a finger.</p>
-        <span class="tag">Music streaming · Concept</span>
+        <h2>Datum <span class="arr" aria-hidden="true">→</span></h2>
+        <p>Measure, scan and mark up a building site, one-handed.</p>
+        <span class="tag">Physical product · Concept</span>
       </div>
-      <div class="thumb"><img loading="eager" src="/assets/project-encore.webp" width="1400" height="1400" decoding="async" alt=""></div>
+      <div class="thumb"><img loading="lazy" src="/assets/project-datum.webp" width="1400" height="1400" decoding="async" alt=""></div>
     </a>
   </div>
 </section>
@@ -719,18 +726,12 @@ h1,h2,h3,h4{margin:0;font-family:var(--head);letter-spacing:-.015em}
   for (var i = 0; i < 10; i++) h += '<span class="' + (i < 6 ? 'f' : 'q') + '"><svg viewBox="0 0 20 32" aria-hidden="true"><g class="b"><circle cx="10" cy="6" r="5"/><path d="M2 32V18a8 8 0 0 1 16 0v14z"/></g></svg></span>';
   dn.innerHTML = h;
 
-  var hp = document.querySelectorAll('.hpin'), hw = document.getElementById('hwhy');
-  hp.forEach(function (p) {
-    var show = function () { hp.forEach(function (x) { x.classList.toggle('on', x === p); }); hw.innerHTML = p.dataset.w; };
-    p.addEventListener('click', show); p.addEventListener('mouseenter', show); p.addEventListener('focus', show);
-  });
-  hp[0].classList.add('on'); hw.innerHTML = hp[0].dataset.w;
 
   var PS = [
     { img: 'emily', name: 'Emily Davis', role: 'Adopter', q: 'I need clear details and steps to make the right choice for my home.', needs: ['Detailed profiles', 'Step by step', 'Filters'], fix: 'Animal profiles with personality notes, medical info and real photos, plus filters by animal, breed and care.' },
     { img: 'sarah', name: 'Sarah Mitchell', role: 'Donor', q: 'I want to make sure my donation makes a real difference.', needs: ['Transparency', 'Easy navigation', 'Confirmation'], fix: 'A shorter donation form with a progress indicator and a confirmation that tells her the gift landed.' },
     { img: 'michael', name: 'Michael Turner', role: 'Volunteer', q: 'I need flexible opportunities that fit around my schedule.', needs: ['Updated listings', 'Quick sign-up', 'Schedules'], fix: 'One volunteer hub with role descriptions, available schedules and a sign-up that takes under a minute.' },
-    { img: 'david', name: 'David Johnson', role: 'Community supporter', q: 'I want to contribute more than money. My time and skills matter too.', needs: ['Events', 'Newsletter', 'Campaigns'], fix: 'A clearer navigation with every way to help in one place, so supporting is never more than a click away.' }
+    { img: 'david', name: 'David Johnson', role: 'Community supporter', q: 'I want to contribute more than money. My time and skills matter too.', needs: ['Events', 'Newsletter', 'Campaigns'], fix: 'The volunteer hub, with roles and schedules in one place, so his time and skills have somewhere to go, not just his money.' }
   ];
   var pcard = document.getElementById('pcard'), pt = document.querySelectorAll('.plist button');
   function persona(i, focus) {
