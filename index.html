@@ -4,23 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Priyanka Uttarkar · Product &amp; UX Designer</title>
-  <meta name="description" content="Priyanka Uttarkar, Product &amp; UX Designer. Architecture to HCI to product. I notice what others walk past." />
+  <meta name="description" content="I&#39;m Priyanka, a product designer who trained as an architect. I&#39;ve designed AI tools for Mayo Clinic researchers, a fintech app and a nonprofit redesign." />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Priyanka Uttarkar" />
   <meta property="og:title" content="Priyanka Uttarkar · Product &amp; UX Designer" />
-  <meta property="og:description" content="Priyanka Uttarkar, Product &amp; UX Designer. Architecture to HCI to product. I notice what others walk past." />
+  <meta property="og:description" content="I&#39;m Priyanka, a product designer who trained as an architect. I&#39;ve designed AI tools for Mayo Clinic researchers, a fintech app and a nonprofit redesign." />
   <meta property="og:url" content="https://prianka.design/" />
   <meta property="og:image" content="https://prianka.design/assets/og/og-home.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Priyanka Uttarkar · Product &amp; UX Designer" />
-  <meta name="twitter:description" content="Priyanka Uttarkar, Product &amp; UX Designer. Architecture to HCI to product. I notice what others walk past." />
+  <meta name="twitter:description" content="I&#39;m Priyanka, a product designer who trained as an architect. I&#39;ve designed AI tools for Mayo Clinic researchers, a fintech app and a nonprofit redesign." />
   <meta name="twitter:image" content="https://prianka.design/assets/og/og-home.jpg" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="alternate icon" href="/assets/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
-  <link rel="canonical" href="https://prianka.design" />
+  <link rel="canonical" href="https://prianka.design/" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[
+    {"@type":"WebSite","name":"pri.anka","alternateName":"Priyanka Uttarkar","url":"https://prianka.design/"},
+    {"@type":"Person","name":"Priyanka Uttarkar","alternateName":"pri.anka","jobTitle":"Product Designer","url":"https://prianka.design/","image":"https://prianka.design/assets/og/og-home.jpg",
+     "alumniOf":{"@type":"CollegeOrUniversity","name":"Arizona State University"},
+     "knowsAbout":["Product design","UX research","Interaction design","Design systems","Brand identity"],
+     "sameAs":["https://linkedin.com/in/priyanka-uttarkar","https://www.behance.net/priyankautkarkar","https://instagram.com/pri.anka"]}
+  ]}
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&display=swap" rel="stylesheet" />
@@ -155,7 +164,7 @@
         Resume Download
       </a>
       <div class="rmac-loc">
-        <span>Mountain View, CA</span>
+        <span data-visitor-city></span>
         <span style="opacity:0.35;">·</span>
         <span id="rLocTime"></span>
       </div>
@@ -447,7 +456,7 @@
 
   <!-- LOCATION STRIP -->
   <div class="rloc-strip">
-    <span class="rloc-city">Mountain View, CA</span>
+    <span class="rloc-city" data-visitor-city></span>
     <span class="rloc-bull">•</span>
     <span class="rloc-time" id="rLocStripTime"></span>
   </div>
@@ -2312,5 +2321,6 @@
 
 
 <script src="video-autoplay.js" defer></script>
+<script src="/visitor-loc.js" defer></script>
 </body>
 </html>
