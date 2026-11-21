@@ -1386,7 +1386,7 @@ document.getElementById('rHeroWork')?.addEventListener('click', e => {
     { label: 'Copy Email', sub: 'pri.anka256@gmail.com', cat: 'Action', icon: '@', action: 'copyEmail' },
     { label: 'LinkedIn', sub: 'linkedin.com/in/priyanka-uttarkar', cat: 'Action', icon: 'in', action: 'linkedin' },
     { label: 'Chat with prianka.ai', sub: 'Ask me anything', cat: 'Action', icon: '✦', action: 'chat' },
-    { label: 'Download Resume', sub: 'PDF', cat: 'Action', icon: '↓', action: 'resume' },
+    { label: 'View Resume', sub: 'Opens the PDF', cat: 'Action', icon: '↗', action: 'resume' },
     // Skills
     { label: 'Figma', sub: 'Design tool', cat: 'Skill', icon: '◈', anchor: 'rmarquee-area' },
     { label: 'UX Research', sub: 'User research & testing', cat: 'Skill', icon: '◉', anchor: 'rmarquee-area' },
