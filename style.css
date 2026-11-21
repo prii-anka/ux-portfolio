@@ -191,6 +191,14 @@ a, button, [onclick], input, label, select, textarea { cursor: none; }
 #cursor-dot.hovered {
   width: 20px; height: 20px;
 }
+/* Hero shows the Figma-style arrow with "You"; everywhere else shows only the dot */
+body.cur-hero #cursor-dot { opacity: 0; }
+body:not(.cur-hero) .rfig-cursor-you { opacity: 0; }
+.rfig-cursor-you { transition: opacity .15s ease; }
+/* The custom cursor replaces the system one everywhere on mouse devices; no component may bring the system cursor back */
+@media (hover: hover) and (pointer: fine) {
+  html, html *, html *::before, html *::after { cursor: none !important; }
+}
 a { text-decoration: none; color: inherit; }
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
 

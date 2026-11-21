@@ -31,6 +31,7 @@
   var bubble     = document.getElementById('rfigBubble');
   var bubbleText = document.getElementById('rfigBubbleText');
   var you        = document.getElementById('rfigCursorYou');
+  if (you && you.parentNode !== document.body) document.body.appendChild(you); // fixed positioning must not sit inside a transformed parent
   var clock      = document.getElementById('rfigClock');
   var typeName   = document.getElementById('rfigTypeName');
   var stage      = document.querySelector('.rfig-stage');
@@ -159,6 +160,8 @@
 
   document.addEventListener('mousemove', function(e) {
     if (you) { you.style.left = e.clientX+'px'; you.style.top = e.clientY+'px'; }
+    var heroEl = document.getElementById('rfig-hero');
+    if (heroEl) { var hr = heroEl.getBoundingClientRect(); document.body.classList.toggle('cur-hero', e.clientY >= hr.top && e.clientY <= hr.bottom && e.clientX >= hr.left && e.clientX <= hr.right); }
     if (!dragging || !activeFrame) return;
     var dx = e.clientX - startX, dy = e.clientY - startY;
     offX[activeFrame.id] = curOX + dx;

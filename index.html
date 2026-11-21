@@ -44,7 +44,7 @@
   <link rel="preload" as="image" href="assets/project-poshaai.webp" />
   <link rel="preload" as="image" href="assets/project-thegrind.webp" />
   <link rel="preload" as="image" href="assets/project-deadlineiq.webp" />
-  <link rel="stylesheet" href="style.css?v=202" />
+  <link rel="stylesheet" href="style.css?v=204" />
 </head>
 <body>
 <div id="cursor-dot"></div>
@@ -157,7 +157,7 @@
     <!-- Center tabs - macOS style -->
     <div class="rmac-tabs-inner" style="position:absolute;left:50%;transform:translateX(-50%);">
       <div class="rmac-tab rmac-tab-active">product</div>
-      <div class="rmac-tab" id="graphicTabBtn" style="cursor:pointer;">graphic</div>
+      <div class="rmac-tab" id="graphicTabBtn" style="">graphic</div>
     </div>
     <div class="rmac-right">
       <a id="rmac-resume" href="resume.pdf" download style="
@@ -1359,11 +1359,11 @@
 
 <!-- GFX Lightbox -->
 <div id="gfxLightbox" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
-  <button id="gfxLightboxClose" style="position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1;opacity:0.7;">×</button>
-  <button id="gfxLightboxPrev" style="position:absolute;left:20px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.8rem;width:48px;height:48px;border-radius:50%;cursor:pointer;display:none;align-items:center;justify-content:center;">‹</button>
+  <button id="gfxLightboxClose" style="position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:2rem;line-height:1;opacity:0.7;">×</button>
+  <button id="gfxLightboxPrev" style="position:absolute;left:20px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.8rem;width:48px;height:48px;border-radius:50%;display:none;align-items:center;justify-content:center;">‹</button>
   <img id="gfxLightboxImg" src="" alt="" style="max-width:82vw;max-height:90vh;object-fit:contain;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,0.6);">
   <video id="gfxLightboxVid" controls style="display:none;max-width:82vw;max-height:90vh;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,0.6);"></video>
-  <button id="gfxLightboxNext" style="position:absolute;right:20px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.8rem;width:48px;height:48px;border-radius:50%;cursor:pointer;display:none;align-items:center;justify-content:center;">›</button>
+  <button id="gfxLightboxNext" style="position:absolute;right:20px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.8rem;width:48px;height:48px;border-radius:50%;display:none;align-items:center;justify-content:center;">›</button>
   <div id="gfxLightboxDots" style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:8px;"></div>
 </div>
 <script>
@@ -1399,7 +1399,7 @@
     slides.forEach(function(src,i){
       var d = document.createElement('span');
       var icon = isVideo(src) ? '▶' : '●';
-      d.style.cssText = 'font-size:8px;color:#fff;cursor:pointer;opacity:0.35;transition:opacity 0.2s;line-height:1;';
+      d.style.cssText = 'font-size:8px;color:#fff;opacity:0.35;transition:opacity 0.2s;line-height:1;';
       d.textContent = icon;
       d.addEventListener('click', function(){ showSlide(i); });
       dotsEl.appendChild(d);
@@ -1466,7 +1466,7 @@
     window.location.href = '/graphic';
   });
 </script>
-<script src="script.js?v=113"></script>
+<script src="script.js?v=114"></script>
 <script>
 // ── Letter physics - standalone, isolated from script.js ──
 (function() {
